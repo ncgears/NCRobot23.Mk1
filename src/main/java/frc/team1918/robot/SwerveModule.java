@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 
 //WPILib
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
@@ -263,6 +264,14 @@ public class SwerveModule {
 
     public void defensiveLock(double position) {
         turn.set(ControlMode.Position, position);
+    }
+
+    /**
+     * Returns a SwerveModulePosition object representing the distance and angle of the module
+     * @return SwerveModulePosition object of the distance(meters) and angle(rotation2d)
+     */
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition(getDriveDistanceMeters(), getTurnPositionAsRotation2d());
     }
 
     /**
