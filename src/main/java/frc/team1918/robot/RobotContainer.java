@@ -16,7 +16,7 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.PowerDistribution;
+//import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -54,7 +54,7 @@ import frc.team1918.robot.commandgroups.*;
  */
 public class RobotContainer {
   //subsystems definitions
-    private final PowerDistribution m_pdp = new PowerDistribution();
+    //private final PowerDistribution m_pdp = new PowerDistribution();
     private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final CollectorSubsystem m_collector = new CollectorSubsystem();
@@ -167,64 +167,70 @@ public class RobotContainer {
     
   private void configureButtonBindings() {
     //The buttons here are named based on their functional purpose. This abstracts the purpose from which controller it is attached to.
+    //New for 2023: 
+    //onTrue (replaces whenPressed and whenActive): schedule on rising edge
+    //onFalse (replaces whenReleased and whenInactive): schedule on falling edge
+    //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
+    //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
+
     //These are the operator buttons
-    btn_WhirlyUp.whenPressed(new climber_whirlygigUp(m_climber));
+    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
     if(Constants.Climber.useAutoClimb) {
-      btn_WhirlyFwd.whileHeld(new climber_autoClimb(m_climber));
-      btn_WhirlyRev.whileHeld(new climber_rotateRev(m_climber));
+      btn_WhirlyFwd.whileTrue(new climber_autoClimb(m_climber));
+      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
       //the following release buttons are for testing only. Remove for competition
-      btn_ReleaseHook1.whenPressed(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-      btn_ReleaseHook2.whenPressed(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
     } else {
-      btn_WhirlyFwd.whileHeld(new climber_rotateFwd(m_climber));
-      btn_WhirlyRev.whileHeld(new climber_rotateRev(m_climber));
-      btn_ReleaseHook1.whenPressed(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-      btn_ReleaseHook2.whenPressed(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-      // btn_LockHooks.whenPressed(new climber_lockHook(m_climber, 1).alongWith(new climber_lockHook(m_climber, 2)));
+      btn_WhirlyFwd.whileTrue(new climber_rotateFwd(m_climber));
+      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
+      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+      // btn_LockHooks.onTrue(new climber_lockHook(m_climber, 1).alongWith(new climber_lockHook(m_climber, 2)));
     }
-    // btn_IntakeForward.whenPressed(new feeder_advanceToShooter(m_feeder));
-    t_IntakeForward.whenActive(new cg_collector_intakeAndFeed(m_collector, m_feeder)).whenInactive(new collector_intakeStop(m_collector).andThen(new collector_retractIntake(m_collector)));
-    t_IntakeRetractor.whenActive(new collector_deployRetractor(m_collector,true)).whenInactive(new collector_deployRetractor(m_collector, false));
-    // t_IntakeReverse.whenActive(new collector_intakeReverse(m_collector));
-    btn_IntakeReverse.whileHeld(new collector_intakeReverse(m_collector));
-    btn_ShootDashboard.whenPressed(new shooter_shootNamed(m_shooter, namedShots.DASHBOARD));
-    btn_ShootLow.whenPressed(new shooter_shootNamed(m_shooter, namedShots.LOW));
-    btn_ShootProtected.whenPressed(new shooter_shootNamed(m_shooter, namedShots.PROTECTED));
-    btn_ShootLine.whenPressed(new shooter_shootNamed(m_shooter, namedShots.LINE));
-    btn_ShootDefault.whenPressed(new shooter_shootNamed(m_shooter, namedShots.DEFAULT));
-    btn_ShootWall.whenPressed(new shooter_shootNamed(m_shooter, namedShots.WALL));
-    btn_ShootStop.whenPressed(new shooter_stopShooter(m_shooter));
+    // btn_IntakeForward.onTrue(new feeder_advanceToShooter(m_feeder));
+    t_IntakeForward.onTrue(new cg_collector_intakeAndFeed(m_collector, m_feeder)).onFalse(new collector_intakeStop(m_collector).andThen(new collector_retractIntake(m_collector)));
+    t_IntakeRetractor.onTrue(new collector_deployRetractor(m_collector,true)).onFalse(new collector_deployRetractor(m_collector, false));
+    // t_IntakeReverse.onTrue(new collector_intakeReverse(m_collector));
+    btn_IntakeReverse.whileTrue(new collector_intakeReverse(m_collector));
+    btn_ShootDashboard.onTrue(new shooter_shootNamed(m_shooter, namedShots.DASHBOARD));
+    btn_ShootLow.onTrue(new shooter_shootNamed(m_shooter, namedShots.LOW));
+    btn_ShootProtected.onTrue(new shooter_shootNamed(m_shooter, namedShots.PROTECTED));
+    btn_ShootLine.onTrue(new shooter_shootNamed(m_shooter, namedShots.LINE));
+    btn_ShootDefault.onTrue(new shooter_shootNamed(m_shooter, namedShots.DEFAULT));
+    btn_ShootWall.onTrue(new shooter_shootNamed(m_shooter, namedShots.WALL));
+    btn_ShootStop.onTrue(new shooter_stopShooter(m_shooter));
 
     
     //These are the driver buttons
-    btn_CollectorToggle.whenPressed(new collector_toggleIntake(m_collector));
-    btn_FeederFwd.whenPressed(new feeder_advance(m_feeder)).whenReleased(new feeder_stop(m_feeder));
-    btn_ShooterStop.whenPressed(new shooter_stopShooter(m_shooter));
-    btn_ShooterIncrease.whenPressed(new shooter_increaseThrottle(m_shooter));
-    btn_ShooterDecrease.whenPressed(new shooter_decreaseThrottle(m_shooter));
-    btn_GyroReset.whenPressed(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d()))); //.andThen(new drive_homeSwerves(m_drive))
+    btn_CollectorToggle.onTrue(new collector_toggleIntake(m_collector));
+    btn_FeederFwd.onTrue(new feeder_advance(m_feeder)).onFalse(new feeder_stop(m_feeder));
+    btn_ShooterStop.onTrue(new shooter_stopShooter(m_shooter));
+    btn_ShooterIncrease.onTrue(new shooter_increaseThrottle(m_shooter));
+    btn_ShooterDecrease.onTrue(new shooter_decreaseThrottle(m_shooter));
+    btn_GyroReset.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d()))); //.andThen(new drive_homeSwerves(m_drive))
     // btn_AimSelectShoot.whileHeld(new cg_vision_aimSelectAndShoot(m_drive, m_feeder, m_shooter, m_vision)).whenReleased(new feeder_stop(m_feeder).andThen(new shooter_stopShooter(m_shooter)));
-    btn_AimSelectShoot.whileHeld(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
-    btn_AimSelect.whileHeld(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
-    t_RingLight.whenActive(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).whenInactive(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
-    btn_ResetClimb.whenPressed(new climber_resetClimb(m_climber));
+    btn_AimSelectShoot.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
+    btn_AimSelect.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
+    t_RingLight.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
+    btn_ResetClimb.onTrue(new climber_resetClimb(m_climber));
     //Music Control Buttons
-    // btn_MusicPlay.whenPressed(new orchestra_loadAndPlay(m_orchestra));
-    // btn_MusicStop.whenPressed(new orchestra_stop(m_orchestra));
-    // btn_MusicFwd.whenPressed(new orchestra_increaseSong(m_orchestra));
-    // btn_MusicBack.whenPressed(new orchestra_decreaseSong(m_orchestra));
-    // btn_MusicReady.whenPressed(new orchestra_primeToPlay(m_orchestra));
+    // btn_MusicPlay.onTrue(new orchestra_loadAndPlay(m_orchestra));
+    // btn_MusicStop.onTrue(new orchestra_stop(m_orchestra));
+    // btn_MusicFwd.onTrue(new orchestra_increaseSong(m_orchestra));
+    // btn_MusicBack.onTrue(new orchestra_decreaseSong(m_orchestra));
+    // btn_MusicReady.onTrue(new orchestra_primeToPlay(m_orchestra));
     // t_PlayMusic.whenActive(new orchestra_loadAndPlay(m_orchestra));
     // t_PlayMusic.whenActive(new orchestra_stop(m_orchestra));
 
-    // btn_TOGGLE_DEBUG.whenPressed(new helpers_toggleDebug());
-    // btn_LOCKANGLE.whenPressed(new drive_lockAngle(m_drive));
-    // btn_UNLOCKANGLE.whenPressed(new drive_unlockAngle(m_drive));
+    // btn_TOGGLE_DEBUG.onTrue(new helpers_toggleDebug());
+    // btn_LOCKANGLE.onTrue(new drive_lockAngle(m_drive));
+    // btn_UNLOCKANGLE.onTrue(new drive_unlockAngle(m_drive));
     //bind all 3 up and all 3 down for shooter throttle up/down
-    // orbtn_THROTUP.whenPressed(new shooter_increaseThrottle(m_shooter));
-    // orbtn_THROTDN.whenPressed(new shooter_decreaseThrottle(m_shooter));
+    // orbtn_THROTUP.onTrue(new shooter_increaseThrottle(m_shooter));
+    // orbtn_THROTDN.onTrue(new shooter_decreaseThrottle(m_shooter));
     //bind both buttons requirement
-    // andbtn_MECHZERO.whenPressed(new drive_moveAllToMechZero(m_drive));
+    // andbtn_MECHZERO.onTrue(new drive_moveAllToMechZero(m_drive));
   }
 
   /**
