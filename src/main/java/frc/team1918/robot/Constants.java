@@ -87,8 +87,8 @@ public class Constants {
         public static final boolean SWERVE_SENSOR_NONCONTINUOUS = false;
         public static final int kTimeoutMs = 30; //Timeout for reporting in DS if action fails, set to 0 to skip confirmation
         public static final int PID_PRIMARY = 0;  //Talon PID slot for primary loop
-        public static final int ROBOT_WIDTH = 23; //Width of the robot frame (from the pivot of the wheels)
-        public static final int ROBOT_LENGTH = 26; //Length of the robot frame (from the pivot of the wheels)
+        public static final int ROBOT_WIDTH = 21; //Width of the robot frame (from the pivot of the wheels)
+        public static final int ROBOT_LENGTH = 28; //Length of the robot frame (from the pivot of the wheels)
         public static final boolean DEBUG_ENABLED_DEFAULT = true; //Default starting state of debug mode
         public static final int DEBUG_RECURRING_TICKS = 100; //Periodic cycles for recurring debug messages
         public static final int DASH_RECURRING_TICKS = 50; //Periodic cycles for dashboard updates
