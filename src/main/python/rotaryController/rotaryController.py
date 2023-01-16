@@ -5,38 +5,39 @@ import serial.tools.list_ports
 import struct
 import time
 import keyboard
-
-#from networktables import NetworkTables
+import threading
+from networktables import NetworkTables
 
 controllerPort="COM38" #serial port of usb controller
 desiredHeading = 0 #desired heading of robot in degrees
 # ip='roborio-1918-frc.local' #ip or name of networktables server
 ip='127.0.0.1'
 tableName= "RobotController" #networktables table name to store data
+
+cond = threading.Condition()
+notified = [False]
+
 for port in serial.tools.list_ports.comports():
     print('{0}: {1} (Ser:{2})'.format(port.name, port.description, port.serial_number))
 
 print('')
 
-"""
-print(sys.argv,'sys')
-def connectionListener(connected, info):
+def ntConnectionListener(connected, info):
     print(info, '; Connected=%s' % connected)
     with cond:
         notified[0] = True
         cond.notify()
 
 NetworkTables.initialize(server=ip)
-NetworkTables.addConnectionListener(connectionListener, immediateNotify=True)
-
+NetworkTables.addConnectionListener(ntConnectionListener, immediateNotify=True)
 with cond:
-    print("Waiting")
+    print("Waiting for Network Tables")
     if not notified[0] :
         cond.wait()
 
 table = NetworkTables.getTable(tableName)
-print("Connected!")
-"""
+print("Connected to Network Tables!")
+
 
 def checkHeading(newHeading):
     global desiredHeading
@@ -47,7 +48,7 @@ def checkHeading(newHeading):
     if delta > 0:
         print('Saving new desired heading=%s' % newHeading)
         desiredHeading = newHeading
-        #table.putValue('DesiredHeading',heading)
+        table.putValue('DesiredHeading',newHeading)
 
 def getControllerHeading(heading = desiredHeading):
     global controllerPort
