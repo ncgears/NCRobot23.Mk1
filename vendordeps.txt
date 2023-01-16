@@ -1,0 +1,9 @@
+In VSCode, Install the vendor deps:
+
+1. CTRL-SHIFT-P
+2. WPILib: Manage Vendor Libraries
+3. Install New Libraries (online)
+  a. PhotonLib (Photonvision): https://maven.photonvision.org/repository/internal/org/photonvision/PhotonLib-json/1.0/PhotonLib-json-1.0.json
+  b. NavX: https://www.kauailabs.com/dist/frc/2022/navx_frc.json
+4. Install New Libraries (offline) - Requires CTRE Phoenix Framework to be installed first
+  a. CTRE-Phoenix (v5)
