@@ -339,6 +339,7 @@ public class Constants {
 
         //Forward Positive, Left Positive, Up Positive (NWU Convention)
         public static final SwerveDriveKinematics kDriveKinematics =
+        //TODO 2023: Is the left and right incorrect? should by ++,+-,-+,-- (FL,FR,RL,RR)
         new SwerveDriveKinematics(
             new Translation2d(Units.inchesToMeters(Global.ROBOT_LENGTH / 2), Units.inchesToMeters(-Global.ROBOT_WIDTH / 2)),
             new Translation2d(Units.inchesToMeters(Global.ROBOT_LENGTH / 2), Units.inchesToMeters(Global.ROBOT_WIDTH / 2)),

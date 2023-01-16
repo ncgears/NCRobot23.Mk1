@@ -16,19 +16,22 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
+import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 //import edu.wpi.first.math.geometry.Translation2d;
 
 public class DriveSubsystem extends SubsystemBase {
 
 	private static DriveSubsystem instance;
-	private static double l = Constants.Global.ROBOT_LENGTH, w = Constants.Global.ROBOT_WIDTH, r = Math.sqrt((l * l) + (w * w));
+	//private static double l = Constants.Global.ROBOT_LENGTH, w = Constants.Global.ROBOT_WIDTH, r = Math.sqrt((l * l) + (w * w));
 	private int debug_ticks;
 	private static double desiredAngle; //Used for driveStraight function
 	private static boolean angleLocked = false;
-	private double[] lastDistances;
-	private double lastTime;
-	private final Timer timer;
+	//private double[] lastDistances;
+	private SwerveModulePosition[] swervePositions;
+	private Pose2d robotPose;
+	//private double lastTime;
+	//private final Timer timer;
 	private static double yawOffset = 0.0; //offset to account for different starting positions
 	public boolean visionTargeting = false;
 
@@ -42,8 +45,10 @@ public class DriveSubsystem extends SubsystemBase {
 	//initialize gyro object
 	private static AHRS m_gyro = new AHRS(SPI.Port.kMXP);
 	//intialize odometry class for tracking robot pose
-	static SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(Constants.Swerve.kDriveKinematics, m_gyro.getRotation2d());
-	
+	static SwerveDriveOdometry m_odometry; // = new SwerveDriveOdometry(Constants.Swerve.kDriveKinematics, m_gyro.getRotation2d());
+	//positions(3rd arg) = new SwerveModulePosition(modulePositions[index].distanceMeters, modulePositions[index].angle);
+	//initial pose (4th arg) = Pose2d of position on field
+
 	public static DriveSubsystem getInstance() {
 		if (instance == null)
 			instance = new DriveSubsystem();
@@ -52,15 +57,21 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public DriveSubsystem() { //initialize the class
 		m_gyro.calibrate();
-		m_odometry = new SwerveDriveOdometry(Constants.Swerve.kDriveKinematics, getHeading());
 		for (SwerveModule module: modules) {
 			module.resetDistance();
 			module.syncTurningEncoders();
 		}
 
+		//Get the positions of the swerve modules
+		swervePositions = getSwerveModulePositions();
+
+		//Initialize the odometry object
+		m_odometry = new SwerveDriveOdometry(Constants.Swerve.kDriveKinematics, getHeading(), swervePositions);
+
 		// m_targetPose = m_odometry.getPoseMeters();
 		// m_thetaController.reset();
 		// m_thetaController.enableContinuousInput(-Math.PI, Math.PI);
+/* not needed in 2023
 		lastDistances = new double[]{
 			m_dtFL.getDriveDistanceMeters(),
 			m_dtFR.getDriveDistanceMeters(),
@@ -71,6 +82,7 @@ public class DriveSubsystem extends SubsystemBase {
 		timer.reset();
 		timer.start();
 		lastTime = 0;
+*/
 	}
 
 	@Override
@@ -80,6 +92,15 @@ public class DriveSubsystem extends SubsystemBase {
 		for (SwerveModule module: modules) {
 			// module.updateDashboard();
 		}
+	}
+
+	public SwerveModulePosition[] getSwerveModulePositions() {
+		return new SwerveModulePosition[] {
+            m_dtFL.getPosition(),
+            m_dtFR.getPosition(),
+            m_dtRL.getPosition(),
+            m_dtRR.getPosition()
+		};
 	}
 
 	public void updateDashboard() {
@@ -131,21 +152,11 @@ public class DriveSubsystem extends SubsystemBase {
 	public void resetOdometry(double heading, Pose2d pose) {
 	  zeroHeading();
 	  yawOffset = heading;
-	  m_odometry.resetPosition(pose, Rotation2d.fromDegrees(heading));
+	  m_odometry.resetPosition(Rotation2d.fromDegrees(heading), getSwerveModulePositions(), pose);
 	}
 
 	public void updateOdometry() {
-		//this is the old way
-		/*
-		m_odometry.update(
-			getHeading(),
-			m_dtFL.getState(),
-			m_dtFR.getState(),
-			m_dtRL.getState(),
-			m_dtRR.getState()
-		);
-		*/
-		//this is the new way
+		/*This is the 2022 way
 		double[] distances = new double[] {
 			m_dtFL.getDriveDistanceMeters(),
 			m_dtFR.getDriveDistanceMeters(),
@@ -164,6 +175,21 @@ public class DriveSubsystem extends SubsystemBase {
 			new SwerveModuleState((distances[3] - lastDistances[3]) / dt, m_dtRR.getState().angle)
 		);
 		lastDistances = distances;
+		*/
+		/*This is the 2023 way */
+		robotPose = m_odometry.update(
+			getHeading(),
+			new SwerveModulePosition[] {
+        	    m_dtFL.getPosition(),
+            	m_dtFR.getPosition(),
+            	m_dtRL.getPosition(),
+            	m_dtRR.getPosition()
+			}
+		);
+	}
+
+	public Pose2d getPose2d() {
+		return robotPose;
 	}
 
 	public void lockAngle() {
