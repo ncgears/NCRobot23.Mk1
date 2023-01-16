@@ -1,7 +1,7 @@
 
 package frc.team1918.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.Command;
+//import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.networktables.NetworkTable;
 // import edu.wpi.first.networktables.NetworkTableEntry;
@@ -9,8 +9,8 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
-import frc.team1918.robot.RobotContainer;
-import frc.team1918.robot.commandgroups.cg_djRumble;
+//import frc.team1918.robot.RobotContainer;
+//import frc.team1918.robot.commandgroups.cg_djRumble;
 import frc.team1918.robot.subsystems.ShooterSubsystem.namedShots;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -223,7 +223,7 @@ public class VisionSubsystem extends SubsystemBase {
     final double pitchMaxProtected = 4.2;
     final double pitchMaxWall = 13.0; //11.8
     final double pitchMaxLine = 20; //TBD
-    final double pitchMaxTarmac = 21.5; //TBD
+    //final double pitchMaxTarmac = 21.5; //TBD
     final double pitchMax = 21.8; //TBD
     if(pitch < pitchMin || pitch > pitchMax) {
       Helpers.Debug.debug("Vision: too close/far for auto shot selection");
