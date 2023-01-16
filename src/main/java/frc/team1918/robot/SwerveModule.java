@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
+//import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 
 //WPILib
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -20,7 +20,7 @@ import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 public class SwerveModule {
     private WPI_TalonSRX turn;
     private WPI_TalonFX drive;
-    private final double FULL_ROTATION = Constants.DriveTrain.DT_TURN_ENCODER_FULL_ROTATION;
+    //private final double FULL_ROTATION = Constants.DriveTrain.DT_TURN_ENCODER_FULL_ROTATION;
     private final double TURN_P, TURN_I, TURN_D;
     private final int TURN_IZONE;
     private final int TURN_ALLOWED_ERROR;
