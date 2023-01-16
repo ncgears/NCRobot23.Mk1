@@ -8,13 +8,13 @@ package frc.team1918.robot.utils;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-public class OrPOVButton extends Button {
+public class OrPOVButton extends POVButton {
     private final POVButton button1;
     private final POVButton button2;
     private final POVButton button3;
-
+    
     /**
-     * This function returns a POVButton object that is a combination of two other POVButtons.  The get function returns true if any of the POVButtons is true.
+     * This function returns a POVButton object that is a combination of three other POVButtons.  The get function returns true if any of the POVButtons is true.
      * @param buttonOne The first POVButton object
      * @param buttonTwo The second POVButton object
      * @param buttonThree The third POVButton object
@@ -26,7 +26,7 @@ public class OrPOVButton extends Button {
     }
 
     @Override
-    public boolean get() {
-        return button1.get() || button2.get() || button3.get();
+    public boolean getAsBoolean() {
+        return button1.getAsBoolean() || button2.getAsBoolean() || button3.getAsBoolean();
     }
 }

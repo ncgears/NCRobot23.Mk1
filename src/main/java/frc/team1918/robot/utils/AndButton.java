@@ -25,7 +25,7 @@ public class AndButton extends Button {
     }
 
     @Override
-    public boolean get() {
-        return button1.get() && button2.get();
+    public boolean getAsBoolean() {
+        return button1.getAsBoolean() && button2.getAsBoolean();
     }
 }

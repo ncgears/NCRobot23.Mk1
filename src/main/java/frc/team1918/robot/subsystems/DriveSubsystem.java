@@ -43,7 +43,7 @@ public class DriveSubsystem extends SubsystemBase {
 	private static AHRS m_gyro = new AHRS(SPI.Port.kMXP);
 	//intialize odometry class for tracking robot pose
 	static SwerveDriveOdometry m_odometry = new SwerveDriveOdometry(Constants.Swerve.kDriveKinematics, m_gyro.getRotation2d());
-
+	
 	public static DriveSubsystem getInstance() {
 		if (instance == null)
 			instance = new DriveSubsystem();
