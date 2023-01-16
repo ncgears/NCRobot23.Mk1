@@ -8,11 +8,12 @@ package frc.team1918.robot.utils;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
-public class OrPOVButton extends POVButton {
+@Deprecated(since = "2023")
+public class OrPOVButton extends Button {
     private final POVButton button1;
     private final POVButton button2;
     private final POVButton button3;
-    
+        
     /**
      * This function returns a POVButton object that is a combination of three other POVButtons.  The get function returns true if any of the POVButtons is true.
      * @param buttonOne The first POVButton object
