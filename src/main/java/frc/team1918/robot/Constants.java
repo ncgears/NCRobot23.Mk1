@@ -83,7 +83,7 @@ public class Constants {
      */
     public static final class Global {
         //Global Constants
-        public static final boolean CAMERA_ENABLED = true; //set to false if UsbCamera is removed
+        public static final boolean CAMERA_ENABLED = false; //set to false if UsbCamera is removed
         public static final boolean SWERVE_SENSOR_NONCONTINUOUS = false;
         public static final int kTimeoutMs = 30; //Timeout for reporting in DS if action fails, set to 0 to skip confirmation
         public static final int PID_PRIMARY = 0;  //Talon PID slot for primary loop
