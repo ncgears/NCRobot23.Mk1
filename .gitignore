@@ -160,3 +160,8 @@ bin/
 
 # Simulation GUI and other tools window save file
 *-window.json
+
+#rotaryController build files
+/src/main/python/rotaryController/build/
+/src/main/python/rotaryController/dist/rotaryController.exe
+/src/main/python/rotaryController/rotaryController.spec
