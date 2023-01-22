@@ -1,12 +1,13 @@
 
 package frc.team1918.robot;
+import frc.team1918.robot.utils.SpatulaConstants;
 import frc.team1918.robot.utils.SwerveModuleConstants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
 
 //Sometimes it is useful to comment out the following to see what variables or what controller buttons are not assigned yet
-@SuppressWarnings("unused") //We silence the "unused variables" warnings in VSCode
+//@SuppressWarnings("unused") //We silence the "unused variables" warnings in VSCode
 /**
  * Constants let us quickly define the characteristics of our robot without having to search through code
  */
@@ -43,10 +44,12 @@ public class Constants {
          */
         public static final class Talon {
             public static int swerve_fr_turn = 1;
-            public static int feeder = 6;
             public static int swerve_fl_turn = 7;
             public static int swerve_rl_turn = 8;
             public static int swerve_rr_turn = 11;
+            public static int spatula_left = 20;
+            public static int spatula_right = 21;
+            public static int feeder = 6;
             public static int intake = 16;
 
         }
@@ -296,6 +299,51 @@ public class Constants {
         public static final double kP = 0.2;
         public static final double kI = 0.0;
         public static final double kD = 0.0;
+    }
+
+    /**
+     * Constants for the Spatula Modules
+     */
+    public static final class Spatula {
+        public static final double default_kP = 2.8; //PID P
+        public static final double default_kI = 0.0; //PID I
+        public static final double default_kD = 0.0; //PID D
+        public static final int default_kIZone = 0; //PID IZone
+        public static final int default_positionAllowedError = 5; //PID Allowed Error
+        // current limits
+        // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
+        // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
+        public static final boolean isCurrentLimitEnabled = false;
+        public static final int kCurrentLimitAmps = 25;
+        public static final int kCurrentThresholdAmps = 40;
+        public static final double kCurrentThresholdSecs = 0.1;
+
+        public static final class Left {
+            public static final boolean isDisabled = false;
+            public static final int motorID = ID.Talon.spatula_left; //TalonSRX Motor Controller ID
+            public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final double kP = Swerve.DEFAULT_TURN_P; //PID P (only change to override default)
+            public static final double kI = Swerve.DEFAULT_TURN_I; //PID I (only change to override default)
+            public static final double kD = Swerve.DEFAULT_TURN_D; //PID D (only change to override default)
+            public static final int kIZone = Swerve.DEFAULT_TURN_IZONE; //PID IZONE (only change to override default)
+            public static final int positionHome = 0;
+            public static final int positionAllowedError = Swerve.DEFAULT_TURN_ALLOWED_ERROR; //PID Allowed error  (only change to override default)
+            public static final SpatulaConstants constants = new SpatulaConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+        }
+        public static final class Right {
+            public static final boolean isDisabled = false;
+            public static final int motorID = ID.Talon.spatula_left; //TalonSRX Motor Controller ID
+            public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final double kP = Swerve.DEFAULT_TURN_P; //PID P (only change to override default)
+            public static final double kI = Swerve.DEFAULT_TURN_I; //PID I (only change to override default)
+            public static final double kD = Swerve.DEFAULT_TURN_D; //PID D (only change to override default)
+            public static final int kIZone = Swerve.DEFAULT_TURN_IZONE; //PID IZONE (only change to override default)
+            public static final int positionHome = 0;
+            public static final int positionAllowedError = Swerve.DEFAULT_TURN_ALLOWED_ERROR; //PID Allowed error  (only change to override default)
+            public static final SpatulaConstants constants = new SpatulaConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+        }
     }
 
     /**

@@ -6,6 +6,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This class reads and writes values to/from the SmartDashboard
  */
 public class Dashboard {
+    public static final class Spatula {
+        public static final void setSpatulaPosition(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/", value); }
+    }
     public static final class Climber {
         public static final void setClimberDirection(String direction) { SmartDashboard.putString("Climber/Direction", direction); }
         public static final void setClimberPosition(double position) { SmartDashboard.putNumber("Climber/Position", position); }
