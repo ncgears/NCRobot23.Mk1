@@ -1,8 +1,5 @@
 
-package frc.team1918.robot;
-//1918
-import frc.team1918.robot.utils.SwerveModuleConstants;
-
+package frc.team1918.robot.utils;
 //Talon SRX/Talon FX
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
@@ -16,6 +13,14 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import frc.team1918.robot.Constants;
+import frc.team1918.robot.Dashboard;
+import frc.team1918.robot.Helpers;
+import frc.team1918.robot.Constants.Global;
+import frc.team1918.robot.Constants.Swerve;
+import frc.team1918.robot.Dashboard.DriveTrain;
+import frc.team1918.robot.Helpers.Debug;
+import frc.team1918.robot.Helpers.General;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class SwerveModule {
