@@ -24,7 +24,10 @@ import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-
+/**
+ * The Vision Subsystem handles getting and managing data from the PhotoVision system.
+ * It is responsible for getting target data, selecting appropriate targets, and passing information to other subsystems.
+ */
 public class VisionSubsystem extends SubsystemBase {
   NetworkTable table;
   double t1x, t1y, t1s; //target 1
