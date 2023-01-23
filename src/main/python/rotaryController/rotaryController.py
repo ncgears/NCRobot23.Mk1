@@ -21,7 +21,7 @@ import tkinter as tk
 from tkinter import ttk
 from networktables import NetworkTables
 
-debuglevel=2 #Debugging output level (0 for none, 4 for all)
+debuglevel=0 #Debugging output level (0 for none, 4 for all)
 controllerPort="COM0" #serial port of serial controller
 controllerBaud=9600 #baud rate of serial controller
 controllerAuto=True #connect to controller automatically?
@@ -29,7 +29,6 @@ desiredHeading=0 #desired heading of robot in degrees
 # ip='roborio-1918-frc.local' #ip or name of networktables server
 ip='127.0.0.1'
 tableName= "RobotController" #networktables table name to store data
-samples=3 #number of times to sample data before returning average
 
 #this is just global vars needed later, don't edit them
 serial_data = ''
@@ -69,33 +68,13 @@ def get_uart_data():
             if serial_object is not None and serial_object.is_open:
                 #First, clear the input buffer because we don't care about data since last read
                 serial_object.flushInput()
-                
-                serial_array = np.empty(samples)
-                #read the next line of data, clean it, and store it in filter_data
-                for i in range(samples):
-                    try:
-                        try:
-                            serial_data = serial_object.readline()
-                            #write_debug(4,serial_data)
-                            serial_data = serial_data.decode('utf-8').strip('\r\n')
-                            #serial_array.append(float(serial_data))
-                            serial_array[i] = float(serial_data)
-                            write_debug(3,'sample '+str(i)+'='+str(serial_array[i]))
-                        except:
-                            pass
-                    except ValueError:
-                        pass
+
+                serial_data = serial_object.readline().decode('utf-8').strip('\r\n')
                 try:
-                    #serial_data = serial_object.readline().decode('utf-8').strip('\r\n')
-                    #filter_data = floor(float(serial_data)) #serial_data.decode('utf-8').strip('\r\n')
-                    if np.std(serial_array) > 2:
-                        write_debug(3,'serial samples had an outlier. Discarding result')
-                        filter_data = filter_data_old
-                    else:
-                        filter_data = floor(np.average(serial_array))
+                    filter_data = floor(float(serial_data))
+                    write_debug(3,'serial data: '+str(filter_data))
                 except:
                     pass
-                write_debug(3,'serial data: '+str(filter_data))
                 #time.sleep(0.1)
             else:
                 return
@@ -111,15 +90,25 @@ def monitor_uart_connected():
 
     while True:
         if serial_object is not None and serial_object.is_open:
-                uart_connected = True
-                value_controllerstatus.set("Connected")
-                label_controllerstatus.config(fg='green')
-                write_debug(4,'UART connected')
+                if uart_connected is not True:
+                    uart_connected = True
+                    value_controllerstatus.set("Connected")
+                    label_controllerstatus.config(fg='green')
+                    write_debug(4,'UART connected')
         else:
-                uart_connected = False
-                value_controllerstatus.set("Disconnected")
-                label_controllerstatus.config(fg='red')
+                if uart_connected is not False:
+                    uart_connected = False
+                    value_controllerstatus.set("Disconnected")
+                    label_controllerstatus.config(fg='red')
         time.sleep(0.5)
+
+def init_controller():
+    """
+    This function initializes the controller with default settings
+    """
+    write_output('Initializing controller')
+    send_uart_data(b'd') #Set output to degrees
+    send_uart_data(b'Ffff') #Clear filter level, set to filter level 4
 
 def connect_uart():
     """
@@ -131,6 +120,7 @@ def connect_uart():
 
     if serial_object is not None and serial_object.is_open :
         write_output("Already connected to controller on port "+port)
+        init_controller()
         return
     else:
         write_output("Attempting to connect to controller on "+port)
@@ -139,6 +129,7 @@ def connect_uart():
                 serial_object = serial.Serial(str(port), baud)
                 if serial_object.is_open:
                     write_output("Connected to controller")
+                    init_controller()
             except:
                 write_output("Cannot open specified port")
         except ValueError:
@@ -170,12 +161,18 @@ def update_gui():
             filter_data_old = filter_data
 
 def send_uart_data(send_data):
+    global serial_object
     """
     This function is for sending data from the computer to the controller
     """
     if not send_data:
         write_debug(3,'Nothing to send')
-    serial_object.write(send_data)
+        return
+    if serial_object is not None and serial_object.is_open:
+        write_debug(2,'Sending to controller: '+str(send_data))
+        serial_object.write(send_data)
+    else:
+        write_debug(3,'Controller not connected')
 
 def disconnect_uart():
     """
