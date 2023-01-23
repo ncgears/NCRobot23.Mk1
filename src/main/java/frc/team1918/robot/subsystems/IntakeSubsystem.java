@@ -13,7 +13,7 @@ import frc.team1918.robot.utils.Spatula;
  */
 public class IntakeSubsystem extends SubsystemBase {
 	private static IntakeSubsystem instance;
-	public enum spatulas {ALL, LEFT, RIGHT};
+	public enum spatulas {BOTH, LEFT, RIGHT};
 
 	//initialize spatulas
 	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants); // Left
@@ -35,7 +35,7 @@ public class IntakeSubsystem extends SubsystemBase {
 	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
 	 */
 	public IntakeSubsystem() {
-		stowSpatula(spatulas.ALL); //Make sure all spatulas are initialized to their stowed position
+		stowSpatula(spatulas.BOTH); //Make sure all spatulas are initialized to their stowed position
 	}
 
 	/**
@@ -54,6 +54,7 @@ public class IntakeSubsystem extends SubsystemBase {
 
 	/**
 	 * Moves spatulas to their home positions (starting configuration)
+	 * @param spatula - This is an enum of ALL, LEFT, RIGHT
 	 */
 	public void stowSpatula(spatulas spatula) {
 		switch (spatula) {
@@ -63,7 +64,7 @@ public class IntakeSubsystem extends SubsystemBase {
 			case RIGHT:
 				m_SpatulaRight.stowSpatula();
 				break;
-			case ALL:
+			case BOTH:
 			default:
 				for (Spatula module: modules) {
 					module.stowSpatula();
