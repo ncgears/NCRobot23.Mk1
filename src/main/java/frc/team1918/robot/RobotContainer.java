@@ -29,6 +29,7 @@ import frc.team1918.robot.subsystems.ClimberSubsystem;
 import frc.team1918.robot.subsystems.CollectorSubsystem;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FeederSubsystem;
+import frc.team1918.robot.subsystems.IntakeSubsystem;
 import frc.team1918.robot.subsystems.ShooterSubsystem;
 import frc.team1918.robot.subsystems.ShooterSubsystem.namedShots;
 // import frc.team1918.robot.subsystems.OrchestraSubsystem;
@@ -56,10 +57,7 @@ public class RobotContainer {
   //subsystems definitions
     //private final PowerDistribution m_pdp = new PowerDistribution();
     private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
-    private final ClimberSubsystem m_climber = new ClimberSubsystem();
-    private final CollectorSubsystem m_collector = new CollectorSubsystem();
-    private final FeederSubsystem m_feeder = new FeederSubsystem();
-    private final ShooterSubsystem m_shooter = new ShooterSubsystem();
+    private final IntakeSubsystem m_intake = new IntakeSubsystem();
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
     // private final OrchestraSubsystem m_orchestra = new OrchestraSubsystem();
@@ -174,46 +172,46 @@ public class RobotContainer {
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
 
     //These are the operator buttons
-    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
+//    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
     if(Constants.Climber.useAutoClimb) {
-      btn_WhirlyFwd.whileTrue(new climber_autoClimb(m_climber));
-      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
+//      btn_WhirlyFwd.whileTrue(new climber_autoClimb(m_climber));
+//      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
       //the following release buttons are for testing only. Remove for competition
-      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+//      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+//      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
     } else {
-      btn_WhirlyFwd.whileTrue(new climber_rotateFwd(m_climber));
-      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
-      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+//      btn_WhirlyFwd.whileTrue(new climber_rotateFwd(m_climber));
+//      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
+//      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
+//      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
       // btn_LockHooks.onTrue(new climber_lockHook(m_climber, 1).alongWith(new climber_lockHook(m_climber, 2)));
     }
     // btn_IntakeForward.onTrue(new feeder_advanceToShooter(m_feeder));
-    t_IntakeForward.onTrue(new cg_collector_intakeAndFeed(m_collector, m_feeder)).onFalse(new collector_intakeStop(m_collector).andThen(new collector_retractIntake(m_collector)));
-    t_IntakeRetractor.onTrue(new collector_deployRetractor(m_collector,true)).onFalse(new collector_deployRetractor(m_collector, false));
+//    t_IntakeForward.onTrue(new cg_collector_intakeAndFeed(m_collector, m_feeder)).onFalse(new collector_intakeStop(m_collector).andThen(new collector_retractIntake(m_collector)));
+//    t_IntakeRetractor.onTrue(new collector_deployRetractor(m_collector,true)).onFalse(new collector_deployRetractor(m_collector, false));
     // t_IntakeReverse.onTrue(new collector_intakeReverse(m_collector));
-    btn_IntakeReverse.whileTrue(new collector_intakeReverse(m_collector));
-    btn_ShootDashboard.onTrue(new shooter_shootNamed(m_shooter, namedShots.DASHBOARD));
-    btn_ShootLow.onTrue(new shooter_shootNamed(m_shooter, namedShots.LOW));
-    btn_ShootProtected.onTrue(new shooter_shootNamed(m_shooter, namedShots.PROTECTED));
-    btn_ShootLine.onTrue(new shooter_shootNamed(m_shooter, namedShots.LINE));
-    btn_ShootDefault.onTrue(new shooter_shootNamed(m_shooter, namedShots.DEFAULT));
-    btn_ShootWall.onTrue(new shooter_shootNamed(m_shooter, namedShots.WALL));
-    btn_ShootStop.onTrue(new shooter_stopShooter(m_shooter));
+//    btn_IntakeReverse.whileTrue(new collector_intakeReverse(m_collector));
+//    btn_ShootDashboard.onTrue(new shooter_shootNamed(m_shooter, namedShots.DASHBOARD));
+//    btn_ShootLow.onTrue(new shooter_shootNamed(m_shooter, namedShots.LOW));
+//    btn_ShootProtected.onTrue(new shooter_shootNamed(m_shooter, namedShots.PROTECTED));
+//    btn_ShootLine.onTrue(new shooter_shootNamed(m_shooter, namedShots.LINE));
+//    btn_ShootDefault.onTrue(new shooter_shootNamed(m_shooter, namedShots.DEFAULT));
+//    btn_ShootWall.onTrue(new shooter_shootNamed(m_shooter, namedShots.WALL));
+//    btn_ShootStop.onTrue(new shooter_stopShooter(m_shooter));
 
     
     //These are the driver buttons
-    btn_CollectorToggle.onTrue(new collector_toggleIntake(m_collector));
-    btn_FeederFwd.onTrue(new feeder_advance(m_feeder)).onFalse(new feeder_stop(m_feeder));
-    btn_ShooterStop.onTrue(new shooter_stopShooter(m_shooter));
-    btn_ShooterIncrease.onTrue(new shooter_increaseThrottle(m_shooter));
-    btn_ShooterDecrease.onTrue(new shooter_decreaseThrottle(m_shooter));
+//    btn_CollectorToggle.onTrue(new collector_toggleIntake(m_collector));
+//    btn_FeederFwd.onTrue(new feeder_advance(m_feeder)).onFalse(new feeder_stop(m_feeder));
+//    btn_ShooterStop.onTrue(new shooter_stopShooter(m_shooter));
+//    btn_ShooterIncrease.onTrue(new shooter_increaseThrottle(m_shooter));
+//    btn_ShooterDecrease.onTrue(new shooter_decreaseThrottle(m_shooter));
     btn_GyroReset.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d()))); //.andThen(new drive_homeSwerves(m_drive))
     // btn_AimSelectShoot.whileHeld(new cg_vision_aimSelectAndShoot(m_drive, m_feeder, m_shooter, m_vision)).whenReleased(new feeder_stop(m_feeder).andThen(new shooter_stopShooter(m_shooter)));
-    btn_AimSelectShoot.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
-    btn_AimSelect.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
+//    btn_AimSelectShoot.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
+//    btn_AimSelect.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
     t_RingLight.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
-    btn_ResetClimb.onTrue(new climber_resetClimb(m_climber));
+//    btn_ResetClimb.onTrue(new climber_resetClimb(m_climber));
     //Music Control Buttons
     // btn_MusicPlay.onTrue(new orchestra_loadAndPlay(m_orchestra));
     // btn_MusicStop.onTrue(new orchestra_stop(m_orchestra));
@@ -241,9 +239,10 @@ public class RobotContainer {
     //This selects a command (or command group) to return
     switch (name) {
       case "resetRobot":
-        return new cg_resetRobot(m_collector, m_climber, m_feeder, m_shooter, m_vision);
+//        return new cg_resetRobot(m_collector, m_climber, m_feeder, m_shooter, m_vision);
       case "rumbleNotify":
         return new cg_djRumble(m_vision);
+/*
       case "auton_4BallAuto":
         return new cg_auton_4BallAuto(m_drive, m_collector, m_feeder, m_shooter);
       case "auton_al1TwoBall":
@@ -266,6 +265,7 @@ public class RobotContainer {
         return new cg_auton_BasicShootingAuto(m_drive, m_collector, m_feeder, m_shooter);
       case "auton_BasicDriveAuto":
         return new cg_auton_BasicDriveAuto(m_drive, m_collector, m_feeder, m_shooter);
+*/
       default:
         return null;
     }
