@@ -7,42 +7,67 @@ import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
 import frc.team1918.robot.utils.Spatula;
 
+/**
+ * The Intake Subsystem manages the left and right Spatulas. 
+ * It is responsible for delivering pancakes (cones) and waffles (cubes) to the griddle (primary conveyor)
+ */
 public class IntakeSubsystem extends SubsystemBase {
-
 	private static IntakeSubsystem instance;
+	public enum spatulas {ALL, LEFT, RIGHT};
+
 	//initialize spatulas
 	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants); // Left
 	private static Spatula m_SpatulaRight = new Spatula("SpatulaRight", Constants.Spatula.Right.constants); // Right
 	private Spatula[] modules = {m_SpatulaLeft, m_SpatulaRight};
 
-
+	/**
+	 * Returns the instance of the Intake subsystem.
+	 * The purpose of this is to only create an instance if one does not already exist.
+	 * @return IntakeSubSystem instance
+	 */
 	public static IntakeSubsystem getInstance() {
 		if (instance == null)
 			instance = new IntakeSubsystem();
 		return instance;
 	}
 
-	public IntakeSubsystem() { //initialize the class
-		stowAllSpatula();
+	/**
+	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
+	 */
+	public IntakeSubsystem() {
+		stowSpatula(spatulas.ALL); //Make sure all spatulas are initialized to their stowed position
 	}
 
+	/**
+	 * Handles things that should be done every iteration, such as updating the dashboard or checking the status of things.
+	 */
 	@Override
 	public void periodic() {
 		updateDashboard();
 	}
 
 	public void updateDashboard() {
-		for (Spatula module: modules) {
+		for (Spatula module: modules) { //For each spatula, update the dashboard
 			module.updateDashboard();
 		}
 	}
 
 	/**
-	 * Moves all spatulas to their home positions (starting configuration)
+	 * Moves spatulas to their home positions (starting configuration)
 	 */
-	public void stowAllSpatula() {
-		for (Spatula module: modules) {
-			module.stowSpatula();
+	public void stowSpatula(spatulas spatula) {
+		switch (spatula) {
+			case LEFT:
+				m_SpatulaLeft.stowSpatula();
+				break;
+			case RIGHT:
+				m_SpatulaRight.stowSpatula();
+				break;
+			case ALL:
+			default:
+				for (Spatula module: modules) {
+					module.stowSpatula();
+				}
 		}
 	}
 }
