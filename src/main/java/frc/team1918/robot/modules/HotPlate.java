@@ -12,7 +12,7 @@ import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.modules.HotPlateConstants;
 
-public class Spatula {
+public class HotPlate {
     private WPI_TalonSRX m_motor;
     private double m_kP, m_kI, m_kD;
     private int m_kIZone;
@@ -20,13 +20,13 @@ public class Spatula {
     private String m_moduleName;
 
  	/**
-	 * 1918 Spatula Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to pick up game pieces.
+	 * 1918 HotPlate Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to serve scoring pieces
      * The module uses a Versa-Planetary Encoder Stage for positioning data.
      * There is a high limit and low limit switch, connected to the Talon to limit the mechanical travel
-	 * @param name This is the name of this spatula module (ie. "SpatulaLeft" or "SpatulaRight")
-     * @param moduleConstants This is a SpatulaConstants object containing the data for this module
+	 * @param name This is the name of this spatula module (ie. "HotPlate")
+     * @param moduleConstants This is a HotPlateConstants object containing the data for this module
 	 */
-    public Spatula(String name, HotPlateConstants moduleConstants){
+    public HotPlate(String name, HotPlateConstants moduleConstants){
         m_moduleName = name;
         m_motor = new WPI_TalonSRX(moduleConstants.MotorID);
         m_kP = moduleConstants.kP;

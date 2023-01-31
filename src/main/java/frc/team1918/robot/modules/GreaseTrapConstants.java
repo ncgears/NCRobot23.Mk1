@@ -1,6 +1,6 @@
 package frc.team1918.robot.modules;
 
-public class SpatulaConstants {
+public class GreaseTrapConstants {
     //control
     public final int MotorID;
     public final boolean SensorPhase;
@@ -14,7 +14,7 @@ public class SpatulaConstants {
     public final int kIZone;
 
     /**
-     * Creates a new constants object for initializing a 
+     * Creates a new constants object for initializing a GreaseTrap Module
      * @param MotorID - (int) CAN ID of the Motor (TalonSRX)
      * @param SensorPhase - (bool) true to invert the sensor phase
      * @param SensorRotationTicks - (int) count of encoder ticks in a full rotation
@@ -25,7 +25,7 @@ public class SpatulaConstants {
      * @param kD - (double) Derivative constant for the position control
      * @param kIZone - (int) Integral Zone constant for the position control
      */
-    public SpatulaConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, int kIZone) {
+    public GreaseTrapConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, int kIZone) {
         //turn
         this.MotorID = MotorID;
         this.SensorPhase = SensorPhase;
