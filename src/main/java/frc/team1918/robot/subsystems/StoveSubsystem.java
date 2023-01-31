@@ -7,7 +7,7 @@ import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 
 /**
@@ -20,9 +20,9 @@ public class StoveSubsystem extends SubsystemBase {
 	public enum ramps {BOTH, HOTPLATE, GREASETRAP}
 	
 	//initialize HOTPLATE and GREASETRAP
-	private TalonSRX m_HotPlate; //scoring ramp controller
-	private TalonSRX m_GreaseTrap; //flip ramp controller
-	private TalonSRX[] modules = {m_HotPlate, m_GreaseTrap};
+	private WPI_TalonSRX m_HotPlate; //scoring ramp controller
+	private WPI_TalonSRX m_GreaseTrap; //flip ramp controller
+	private WPI_TalonSRX[] modules = {m_HotPlate, m_GreaseTrap};
 
 	/**
 	 * Returns the instance of the Intake subsystem.
