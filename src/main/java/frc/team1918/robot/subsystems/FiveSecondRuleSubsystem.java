@@ -8,11 +8,12 @@ import frc.team1918.robot.Helpers;
 import frc.team1918.robot.utils.Spatula;
 
 /**
- * The Intake Subsystem manages the left and right Spatulas. 
- * It is responsible for delivering pancakes (cones) and waffles (cubes) to the griddle (primary conveyor)
- */
-public class IntakeSubsystem extends SubsystemBase {
-	private static IntakeSubsystem instance;
+ * The FiveSecondRule (Intake) Subsystem manages the left and right Spatulas. 
+ * It is responsible for getting PANCAKES (cones) and WAFFLES (cubes) from the floor before THE FAMILY DOG (other robots)
+ * and delivering them to the griddle (primary conveyor)
+  */
+public class FiveSecondRuleSubsystem extends SubsystemBase {
+	private static FiveSecondRuleSubsystem instance;
 	public enum spatulas {BOTH, LEFT, RIGHT};
 
 	//initialize spatulas
@@ -25,16 +26,16 @@ public class IntakeSubsystem extends SubsystemBase {
 	 * The purpose of this is to only create an instance if one does not already exist.
 	 * @return IntakeSubSystem instance
 	 */
-	public static IntakeSubsystem getInstance() {
+	public static FiveSecondRuleSubsystem getInstance() {
 		if (instance == null)
-			instance = new IntakeSubsystem();
+			instance = new FiveSecondRuleSubsystem();
 		return instance;
 	}
 
 	/**
 	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
 	 */
-	public IntakeSubsystem() {
+	public FiveSecondRuleSubsystem() {
 		stowSpatula(spatulas.BOTH); //Make sure all spatulas are initialized to their stowed position
 	}
 
