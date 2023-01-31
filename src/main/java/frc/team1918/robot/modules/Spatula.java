@@ -1,5 +1,5 @@
 
-package frc.team1918.robot.utils;
+package frc.team1918.robot.modules;
 //Talon SRX/Talon FX
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -10,6 +10,7 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 //Team 1918
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
+import frc.team1918.robot.modules.SpatulaConstants;
 
 public class Spatula {
     private WPI_TalonSRX m_motor;

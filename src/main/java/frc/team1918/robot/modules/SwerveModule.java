@@ -1,5 +1,5 @@
 
-package frc.team1918.robot.utils;
+package frc.team1918.robot.modules;
 //Talon SRX/Talon FX
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;

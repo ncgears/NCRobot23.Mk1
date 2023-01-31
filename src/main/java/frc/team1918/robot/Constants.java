@@ -1,7 +1,7 @@
 
 package frc.team1918.robot;
-import frc.team1918.robot.utils.SpatulaConstants;
-import frc.team1918.robot.utils.SwerveModuleConstants;
+import frc.team1918.robot.modules.SwerveModuleConstants;
+import frc.team1918.robot.modules.SpatulaConstants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;

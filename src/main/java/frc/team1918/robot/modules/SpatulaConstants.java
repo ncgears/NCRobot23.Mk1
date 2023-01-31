@@ -1,4 +1,4 @@
-package frc.team1918.robot.utils;
+package frc.team1918.robot.modules;
 
 public class SpatulaConstants {
     //control
