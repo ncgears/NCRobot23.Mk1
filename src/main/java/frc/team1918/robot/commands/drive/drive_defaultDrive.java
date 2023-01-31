@@ -6,7 +6,6 @@ import java.util.function.DoubleSupplier;
 //import constants and subsystem
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.subsystems.DriveSubsystem;
-import frc.team1918.robot.subsystems.OrchestraSubsystem;
 
 
 /**
@@ -18,8 +17,6 @@ public class drive_defaultDrive extends CommandBase {
   private final DoubleSupplier m_forward;
   private final DoubleSupplier m_strafe;
   private final DoubleSupplier m_rotation;
-  private final OrchestraSubsystem m_orchestra = new OrchestraSubsystem();
-
 
 
   /**
