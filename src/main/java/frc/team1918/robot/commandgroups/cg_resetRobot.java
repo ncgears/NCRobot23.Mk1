@@ -9,27 +9,14 @@ package frc.team1918.robot.commandgroups;
 
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.team1918.robot.subsystems.ClimberSubsystem;
-import frc.team1918.robot.subsystems.CollectorSubsystem;
-import frc.team1918.robot.subsystems.FeederSubsystem;
-import frc.team1918.robot.subsystems.ShooterSubsystem;
+import frc.team1918.robot.subsystems.StoveSubsystem;
+import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
-import frc.team1918.robot.commands.collector.collector_retractIntake;
-import frc.team1918.robot.commands.feeder.feeder_stop;
-import frc.team1918.robot.commands.shooter.shooter_stopShooter;
 import frc.team1918.robot.commands.vision.vision_setRinglight;
-import frc.team1918.robot.commands.climber.climber_whirlygigDown;
-import frc.team1918.robot.Constants.Feeder;
-import frc.team1918.robot.commands.climber.climber_resetClimb;
-import frc.team1918.robot.commands.collector.collector_deployRetractor;
-import frc.team1918.robot.commands.collector.collector_intakeStop;
-
 
 public class cg_resetRobot extends SequentialCommandGroup {
-  private final CollectorSubsystem m_collector;
-  private final ClimberSubsystem m_climber;
-  private final FeederSubsystem m_feeder;
-  private final ShooterSubsystem m_shooter;
+  private final FiveSecondRuleSubsystem m_fivesecondrule;
+  private final StoveSubsystem m_stove;
   private final VisionSubsystem m_vision;
   
   /**
@@ -39,16 +26,15 @@ public class cg_resetRobot extends SequentialCommandGroup {
    * <li>retract intake</li>
    * </ol>
    * <br>
-   * @param coll Collector Subsystem
-   * @param climb Climber Subsystem
+   * @param stove Stove Subsystem
+   * @param fsr FiveSecondRule Subsystem
+   * @param vision Vision Subsystem
   */
-  public cg_resetRobot(CollectorSubsystem coll, ClimberSubsystem climb, FeederSubsystem feed, ShooterSubsystem shoot, VisionSubsystem vision) {
-    m_collector = coll;
-    m_climber = climb;
-    m_feeder = feed;
-    m_shooter = shoot;
+  public cg_resetRobot(StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+    m_stove = stove;
+    m_fivesecondrule = fsr;
     m_vision = vision;
-    addRequirements(m_collector, m_climber, m_feeder, m_shooter);
+    addRequirements(m_stove, m_fivesecondrule);
 
     /**
      * Creates a sequential command group with the objects to run in sequence.
@@ -56,14 +42,10 @@ public class cg_resetRobot extends SequentialCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
-        new climber_whirlygigDown(m_climber),
         new vision_setRinglight(m_vision, false),
-        new collector_intakeStop(m_collector),
-        new collector_retractIntake(m_collector),
-        new collector_deployRetractor(m_collector, true),
-        new climber_resetClimb(m_climber),
-        new shooter_stopShooter(m_shooter),
-        new feeder_stop(m_feeder)
+        new fivesecondrule_stowSpatulas(m_fivesecondrule),
+        new stove_stowRamps(m_stove),
+        new stove_stop(m_stove)
     );
   }
 }
