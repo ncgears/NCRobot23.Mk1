@@ -61,6 +61,11 @@ public class GreaseTrap {
         m_motor.config_kD(0, m_kD);
         m_motor.config_IntegralZone(0, m_kIZone);
         m_motor.configAllowableClosedloopError(Constants.Global.PID_PRIMARY, m_positionAllowedError); 
+
+        //This should accept Arbitrary Feed Forward to compensate for gravity, etc.
+        //See https://v5.docs.ctr-electronics.com/en/latest/ch16_ClosedLoop.html#arbitrary-feed-forward
+        //it is the "amount needed to break free from gravity, etc."
+
     }
 
     /**
