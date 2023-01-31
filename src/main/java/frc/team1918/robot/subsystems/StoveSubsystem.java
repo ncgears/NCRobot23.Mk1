@@ -5,30 +5,33 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
-import frc.team1918.robot.utils.Spatula;
+
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 
 /**
- * The STOVE Subsystem manages the GRIDDLE (primary conveyor), HOT PLATE (scoring ramp), and GREASE TRAP (flip ramp). 
+ * The STOVE Subsystem manages the GRIDDLE (primary conveyor), HOTPLATE (scoring ramp), and GREASETRAP (flip ramp). 
  * It is responsible for delivering PANCAKES (cones) and WAFFLES (cubes) off the end if the scoring ramp or back to the flip ramp.
  * It manages the angle of the 
 */
 public class StoveSubsystem extends SubsystemBase {
-	private static FiveSecondRuleSubsystem instance;
-	public enum spatulas {BOTH, LEFT, RIGHT};
-
-	//initialize spatulas
-	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants); // Left
-	private static Spatula m_SpatulaRight = new Spatula("SpatulaRight", Constants.Spatula.Right.constants); // Right
-	private Spatula[] modules = {m_SpatulaLeft, m_SpatulaRight};
+	private static StoveSubsystem instance;
+	public enum ramps {BOTH, HOTPLATE, GREASETRAP}
+	
+	//initialize HOTPLATE and GREASETRAP
+	private TalonSRX m_HotPlate; //scoring ramp controller
+	private TalonSRX m_GreaseTrap; //flip ramp controller
+	private TalonSRX[] modules = {m_HotPlate, m_GreaseTrap};
 
 	/**
 	 * Returns the instance of the Intake subsystem.
 	 * The purpose of this is to only create an instance if one does not already exist.
 	 * @return IntakeSubSystem instance
 	 */
-	public static FiveSecondRuleSubsystem getInstance() {
+	public static StoveSubsystem getInstance() {
 		if (instance == null)
-			instance = new FiveSecondRuleSubsystem();
+			instance = new StoveSubsystem();
 		return instance;
 	}
 
@@ -36,7 +39,7 @@ public class StoveSubsystem extends SubsystemBase {
 	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
 	 */
 	public StoveSubsystem() {
-		stowSpatula(spatulas.BOTH); //Make sure all spatulas are initialized to their stowed position
+		stowRamp(ramps.BOTH); //Make sure all spatulas are initialized to their stowed position
 	}
 
 	/**
@@ -48,28 +51,25 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	public void updateDashboard() {
-		for (Spatula module: modules) { //For each spatula, update the dashboard
-			module.updateDashboard();
-		}
+
 	}
 
 	/**
-	 * Moves spatulas to their home positions (starting configuration)
-	 * @param spatula - This is an enum of ALL, LEFT, RIGHT
+	 * Moves ramps to their home positions (starting configuration)
+	 * @param ramp - This is an enum of ALL, HOTPLATE, GREASETRAP
 	 */
-	public void stowSpatula(spatulas spatula) {
-		switch (spatula) {
-			case LEFT:
-				m_SpatulaLeft.stowSpatula();
+	public void stowRamp(ramps ramp) {
+		switch (ramp) {
+			case HOTPLATE:
+				m_HotPlate.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
 				break;
-			case RIGHT:
-				m_SpatulaRight.stowSpatula();
+			case GREASETRAP:
+				m_GreaseTrap.set(ControlMode.Position, Constants.Stove.GreaseTrap.homePosition);
 				break;
 			case BOTH:
 			default:
-				for (Spatula module: modules) {
-					module.stowSpatula();
-				}
+				m_HotPlate.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
+				m_GreaseTrap.set(ControlMode.Position, Constants.Stove.GreaseTrap.homePosition);
 		}
 	}
 }

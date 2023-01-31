@@ -25,23 +25,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 // import frc.team1918.robot.utils.OrPOVButton;
 
 //Subsystems imports
-import frc.team1918.robot.subsystems.ClimberSubsystem;
-import frc.team1918.robot.subsystems.CollectorSubsystem;
 import frc.team1918.robot.subsystems.DriveSubsystem;
-import frc.team1918.robot.subsystems.FeederSubsystem;
-import frc.team1918.robot.subsystems.IntakeSubsystem;
-import frc.team1918.robot.subsystems.ShooterSubsystem;
-import frc.team1918.robot.subsystems.ShooterSubsystem.namedShots;
-// import frc.team1918.robot.subsystems.OrchestraSubsystem;
+import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
+import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
 //Commands imports
 // import frc.team1918.robot.commands.helpers.helpers_debugMessage;
-import frc.team1918.robot.commands.climber.*;
-import frc.team1918.robot.commands.collector.*;
+import frc.team1918.robot.commands.stove.*;
+import frc.team1918.robot.commands.fivesecondrule.*;
 import frc.team1918.robot.commands.drive.*;
-import frc.team1918.robot.commands.feeder.*;
-import frc.team1918.robot.commands.shooter.*;
-// import frc.team1918.robot.commands.orchestra.*;
 import frc.team1918.robot.commands.vision.*;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
@@ -57,7 +49,7 @@ public class RobotContainer {
   //subsystems definitions
     //private final PowerDistribution m_pdp = new PowerDistribution();
     private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
-    private final IntakeSubsystem m_intake = new IntakeSubsystem();
+    private final FiveSecondRuleSubsystem m_intake = new FiveSecondRuleSubsystem();
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
     // private final OrchestraSubsystem m_orchestra = new OrchestraSubsystem();
@@ -173,19 +165,6 @@ public class RobotContainer {
 
     //These are the operator buttons
 //    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
-    if(Constants.Climber.useAutoClimb) {
-//      btn_WhirlyFwd.whileTrue(new climber_autoClimb(m_climber));
-//      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
-      //the following release buttons are for testing only. Remove for competition
-//      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-//      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-    } else {
-//      btn_WhirlyFwd.whileTrue(new climber_rotateFwd(m_climber));
-//      btn_WhirlyRev.whileTrue(new climber_rotateRev(m_climber));
-//      btn_ReleaseHook1.onTrue(new climber_lockHook(m_climber,1).beforeStarting(new climber_unlockHook(m_climber,1).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-//      btn_ReleaseHook2.onTrue(new climber_lockHook(m_climber,2).beforeStarting(new climber_unlockHook(m_climber,2).andThen(new WaitCommand(Constants.Climber.kHookReleaseTime))));
-      // btn_LockHooks.onTrue(new climber_lockHook(m_climber, 1).alongWith(new climber_lockHook(m_climber, 2)));
-    }
     // btn_IntakeForward.onTrue(new feeder_advanceToShooter(m_feeder));
 //    t_IntakeForward.onTrue(new cg_collector_intakeAndFeed(m_collector, m_feeder)).onFalse(new collector_intakeStop(m_collector).andThen(new collector_retractIntake(m_collector)));
 //    t_IntakeRetractor.onTrue(new collector_deployRetractor(m_collector,true)).onFalse(new collector_deployRetractor(m_collector, false));
