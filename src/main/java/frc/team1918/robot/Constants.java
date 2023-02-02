@@ -2,6 +2,8 @@
 package frc.team1918.robot;
 import frc.team1918.robot.modules.SwerveModuleConstants;
 import frc.team1918.robot.modules.HotPlateConstants;
+import frc.team1918.robot.modules.SpatulaConstants;
+import frc.team1918.robot.modules.GriddleConstants;
 import frc.team1918.robot.modules.GreaseTrapConstants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
@@ -107,10 +109,9 @@ public class Constants {
      * Constants for the Stove Subsystem
      */
     public static final class Stove {
-        public static final class HotPlate {
-            public static final double homePosition = 0.0; //position for starting configuration
+        public static final class Griddle {
             public static final boolean isDisabled = false;
-            public static final int motorID = ID.Talon.stove_hotplate; //TalonSRX Motor Controller ID
+            public static final int motorID = ID.Falcon.stove_griddle; //TalonFX Motor Controller ID
             public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final double kP = 2.8; //PID P 
@@ -119,7 +120,7 @@ public class Constants {
             public static final int kIZone = 0; //PID IZONE
             public static final int positionHome = 0;
             public static final int positionAllowedError = 5; //PID Allowed error
-            public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+            public static final GriddleConstants constants = new GriddleConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
         }
         public static final class GreaseTrap {
             public static final boolean isDisabled = false;
@@ -137,6 +138,20 @@ public class Constants {
                 public static final double home = 0.0; //postion for home position
                 public static final double level = 1024.0; //position for level position
             }
+        }
+        public static final class HotPlate {
+            public static final double homePosition = 0.0; //position for starting configuration
+            public static final boolean isDisabled = false;
+            public static final int motorID = ID.Talon.stove_hotplate; //TalonSRX Motor Controller ID
+            public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final double kP = 2.8; //PID P 
+            public static final double kI = 0.0; //PID I
+            public static final double kD = 0.0; //PID D
+            public static final int kIZone = 0; //PID IZONE
+            public static final int positionHome = 0;
+            public static final int positionAllowedError = 5; //PID Allowed error
+            public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
         }
     }
 
@@ -168,7 +183,7 @@ public class Constants {
             public static final int kIZone = Swerve.DEFAULT_TURN_IZONE; //PID IZONE (only change to override default)
             public static final int positionHome = 0;
             public static final int positionAllowedError = Swerve.DEFAULT_TURN_ALLOWED_ERROR; //PID Allowed error  (only change to override default)
-            public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+            public static final SpatulaConstants constants = new SpatulaConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
         }
         public static final class Right {
             public static final boolean isDisabled = false;
@@ -181,7 +196,7 @@ public class Constants {
             public static final int kIZone = Swerve.DEFAULT_TURN_IZONE; //PID IZONE (only change to override default)
             public static final int positionHome = 0;
             public static final int positionAllowedError = Swerve.DEFAULT_TURN_ALLOWED_ERROR; //PID Allowed error  (only change to override default)
-            public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+            public static final SpatulaConstants constants = new SpatulaConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
         }
     }
 

@@ -10,7 +10,6 @@ import com.ctre.phoenix.motorcontrol.NeutralMode;
 //Team 1918
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
-import frc.team1918.robot.modules.HotPlateConstants;
 
 public class HotPlate {
     private WPI_TalonSRX m_motor;
