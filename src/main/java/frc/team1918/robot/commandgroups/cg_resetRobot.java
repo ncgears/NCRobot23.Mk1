@@ -42,10 +42,10 @@ public class cg_resetRobot extends SequentialCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
-        new vision_setRinglight(m_vision, false),
-        new fivesecondrule_stowSpatulas(m_fivesecondrule),
-        new stove_stowRamps(m_stove),
-        new stove_stop(m_stove)
+        new vision_setRinglight(m_vision, false)
+        //new fivesecondrule_stowSpatulas(m_fivesecondrule),
+        //new stove_stowRamps(m_stove),
+        //new stove_stop(m_stove)
     );
   }
 }

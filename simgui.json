@@ -10,6 +10,23 @@
       "RobotController": {
         "open": true
       }
+    },
+    "transitory": {
+      "Shuffleboard": {
+        "open": true
+      },
+      "SmartDashboard": {
+        "SendableChooser[0]": {
+          "open": true
+        },
+        "Spatula": {
+          "open": true
+        },
+        "Vision": {
+          "open": true
+        },
+        "open": true
+      }
     }
   }
 }
