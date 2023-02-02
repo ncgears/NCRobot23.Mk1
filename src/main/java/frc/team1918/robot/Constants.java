@@ -402,5 +402,43 @@ public class Constants {
             static final int DPAD_UPLEFT = 315;
             static final int DPAD_IDLE = -1; 
         }
+
+        /**
+         * This class defines the hardware button and axis IDs for a Stadia Controller.
+         * The buttons array is 1-based, but the axis array is 0-based
+         */
+        public static final class Stadia {
+            //DO NOT EDIT THESE
+            static final int BTN_A = 1; //A Button
+            static final int BTN_B = 2; //B Button
+            static final int BTN_X = 3; //X Button
+            static final int BTN_Y = 4; //Y Button
+            static final int BTN_LB = 5; //Left Bumper (L1)
+            static final int BTN_RB = 6; //Right Bumper (R1)
+            static final int BTN_L = 7; //Left Stick Press (L3)
+            static final int BTN_R = 8; //Right Stick Press (R3)
+            static final int BTN_ELLIPSES = 9; //Ellipsis Button (...)
+            static final int BTN_HAMBURGER = 10; //Hamburger Button
+            static final int BTN_STADIA = 11; //Stadia Button
+            static final int BTN_RT = 12; //Right Trigger (R2)
+            static final int BTN_LT = 13; //Left Trigger (L2)
+            static final int BTN_GOOGLE = 14; //Google Button
+            static final int BTN_FRAME = 15; //Square Frame Button
+            static final int AXIS_LH = 0; //Left Analog Stick horizontal (right +)
+            static final int AXIS_LV = 1; //Left Analog Stick vertical (down +)
+            static final int AXIS_LV2 = 2; //Left Analog Stick vertical (down +) - duplicate
+            static final int AXIS_RH = 3; //Right Analog Stick horizontal (right +)
+            static final int AXIS_RV = 4; //Right Analog Stick vertical (down +)
+            static final int AXIS_RV2 = 5; //Right Analog Stick vertical (down +) - duplicate
+            static final int DPAD_UP = 0;
+            static final int DPAD_UPRIGHT = 45;
+            static final int DPAD_RIGHT = 90;
+            static final int DPAD_DNRIGHT = 135;
+            static final int DPAD_DN = 180;
+            static final int DPAD_DNLEFT = 225;
+            static final int DPAD_LEFT = 270;
+            static final int DPAD_UPLEFT = 315;
+            static final int DPAD_IDLE = -1; 
+        }
     }
 }
