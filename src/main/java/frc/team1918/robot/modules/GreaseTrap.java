@@ -18,6 +18,7 @@ public class GreaseTrap {
     private int m_kIZone;
     private int m_positionAllowedError, m_positionFullRotation;
     private String m_moduleName;
+    public enum GreaseTrapPositions {HOME, LEVEL, DOWN};
 
  	/**
 	 * 1918 GreaseTrap Module v2023.1 - This GreaseTrap module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to unburn pancakes (flip them)
@@ -52,8 +53,8 @@ public class GreaseTrap {
                                             Constants.Global.kTimeoutMs);
 */  
 
-        // turn.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
-        // turn.set(ControlMode.Position, 1024); //set this to some fixed value for testing
+        m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
+        // m_motor.set(ControlMode.Position, 1024); //set this to some fixed value for testing
         m_motor.setSensorPhase(moduleConstants.SensorPhase); //set the sensor phase based on the constants setting for this module
         m_motor.setInverted(moduleConstants.IsInverted); //set the motor direction based on the constants setting for this module
         m_motor.config_kP(0, m_kP); //set the kP for PID Tuning
@@ -79,8 +80,8 @@ public class GreaseTrap {
     /**
      * Moves the spatula to it's home position (starting configuration)
      */
-    public void stowSpatula() {
-        m_motor.set(ControlMode.Position, Constants.Spatula.Left.positionHome);
+    public void stow() {
+        m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.home);
     }
 
     /**
@@ -92,6 +93,17 @@ public class GreaseTrap {
             m_motor.setNeutralMode(NeutralMode.Brake);
         } else {
             m_motor.setNeutralMode(NeutralMode.Coast);
+        }
+    }
+
+    public void moveTo(GreaseTrapPositions position) {
+        switch (position) {
+            case HOME:
+                m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.home);
+                break;
+            case LEVEL:
+                m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.level);
+                break;
         }
     }
 

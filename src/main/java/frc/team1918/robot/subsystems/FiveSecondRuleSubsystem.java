@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
-import frc.team1918.robot.utils.Spatula;
+import frc.team1918.robot.modules.Spatula;
 
 /**
  * The FiveSecondRule (Intake) Subsystem manages the left and right Spatulas. 
@@ -55,7 +55,7 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 
 	/**
 	 * Moves spatulas to their home positions (starting configuration)
-	 * @param spatula - This is an enum of ALL, LEFT, RIGHT
+	 * @param spatula - This is an enum of BOTH, LEFT, RIGHT
 	 */
 	public void stowSpatula(spatulas spatula) {
 		switch (spatula) {

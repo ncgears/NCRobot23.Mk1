@@ -11,7 +11,6 @@ import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
 //import frc.team1918.robot.RobotContainer;
 //import frc.team1918.robot.commandgroups.cg_djRumble;
-import frc.team1918.robot.subsystems.ShooterSubsystem.namedShots;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -218,40 +217,6 @@ public class VisionSubsystem extends SubsystemBase {
 
   public double getVisionPitch() {
     return m_pitch;
-  }
-
-  public namedShots selectShot(double pitch) {
-    Helpers.Debug.debug("Vision: Selecting shot for pitch "+pitch);
-    final double pitchMin = -2.0;
-    final double pitchMaxProtected = 4.2;
-    final double pitchMaxWall = 13.0; //11.8
-    final double pitchMaxLine = 20; //TBD
-    //final double pitchMaxTarmac = 21.5; //TBD
-    final double pitchMax = 21.8; //TBD
-    if(pitch < pitchMin || pitch > pitchMax) {
-      Helpers.Debug.debug("Vision: too close/far for auto shot selection");
-      // Helpers.OI.rumble(true);
-      // m_rumbleCommand.schedule();
-      return namedShots.NONE;
-    }
-
-    // else if (pitch < pitchMaxTarmac) { //Tarmac shot
-    //   Helpers.Debug.debug("Vision: Auto selecting TARMAC shot");
-    //   return namedShots.TARMAC;
-    // } 
-    else if (pitch < pitchMaxProtected) { //Protected shot
-      Helpers.Debug.debug("Vision: Auto selecting PROTECTED shot");
-      return namedShots.PROTECTED;
-    } else if (pitch < pitchMaxWall){ //Wall shot
-      Helpers.Debug.debug("Vision: Auto selecting WALL shot");
-      return namedShots.WALL;
-    } else if (pitch < pitchMaxLine) { //Line shot
-      Helpers.Debug.debug("Vision: Auto selecting LINE shot");
-      // m_rumbleCommand.schedule();
-      return namedShots.LINE;
-    } else {
-      return namedShots.NONE;
-    }
   }
 
 }

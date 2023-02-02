@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
+import frc.team1918.robot.modules.GreaseTrap;
+import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -21,9 +23,8 @@ public class StoveSubsystem extends SubsystemBase {
 	
 	//initialize HOTPLATE and GREASETRAP
 	private WPI_TalonSRX m_HotPlate; //scoring ramp controller
-	private WPI_TalonSRX m_GreaseTrap; //flip ramp controller
-	private WPI_TalonSRX[] modules = {m_HotPlate, m_GreaseTrap};
-
+	private GreaseTrap m_GreaseTrap; //flip ramp controller
+	
 	/**
 	 * Returns the instance of the Intake subsystem.
 	 * The purpose of this is to only create an instance if one does not already exist.
@@ -64,12 +65,12 @@ public class StoveSubsystem extends SubsystemBase {
 				m_HotPlate.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
 				break;
 			case GREASETRAP:
-				m_GreaseTrap.set(ControlMode.Position, Constants.Stove.GreaseTrap.homePosition);
+				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
 				break;
 			case BOTH:
 			default:
 				m_HotPlate.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
-				m_GreaseTrap.set(ControlMode.Position, Constants.Stove.GreaseTrap.homePosition);
+				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
 		}
 	}
 }

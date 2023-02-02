@@ -51,7 +51,7 @@ public class Constants {
             public static int spatula_left = 20;
             public static int spatula_right = 21;
             public static int stove_hotplate = 22; //hotplate is the scoring ramp
-            public static int stove_greasetrap = 23; //greasetrap is the flip ramp
+            public static int stove_greasetrap = 4; //greasetrap is the flip ramp
         }
         /**
          * IDs of Falcons
@@ -122,7 +122,6 @@ public class Constants {
             public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
         }
         public static final class GreaseTrap {
-            public static final double homePosition = 0.0; //position for starting configuration
             public static final boolean isDisabled = false;
             public static final int motorID = ID.Talon.stove_greasetrap; //TalonSRX Motor Controller ID
             public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -134,6 +133,10 @@ public class Constants {
             public static final int positionHome = 0;
             public static final int positionAllowedError = 5; //PID Allowed error
             public static final GreaseTrapConstants constants = new GreaseTrapConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+            public static final class Positions {
+                public static final double home = 0.0; //postion for home position
+                public static final double level = 1024.0; //position for level position
+            }
         }
     }
 
