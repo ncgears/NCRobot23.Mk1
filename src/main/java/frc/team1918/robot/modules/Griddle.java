@@ -76,6 +76,10 @@ public class Griddle {
         return m_motor.getSelectedSensorPosition(Constants.Global.PID_PRIMARY);
     }
 
+    public void setSpeed(double speed) {
+        m_motor.set(ControlMode.PercentOutput, speed);
+    }
+
     /**
      * Moves the spatula to it's home position (starting configuration)
      */

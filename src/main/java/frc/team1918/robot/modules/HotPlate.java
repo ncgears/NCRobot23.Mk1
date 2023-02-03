@@ -17,6 +17,7 @@ public class HotPlate {
     private int m_kIZone;
     private int m_positionAllowedError, m_positionFullRotation;
     private String m_moduleName;
+    public enum HotPlatePositions {HOME, LEVEL, DOWN};
 
  	/**
 	 * 1918 HotPlate Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to serve scoring pieces
@@ -72,10 +73,10 @@ public class HotPlate {
     }
 
     /**
-     * Moves the spatula to it's home position (starting configuration)
+     * Moves the hotplate to it's home position (starting configuration)
      */
-    public void stowSpatula() {
-        m_motor.set(ControlMode.Position, Constants.Spatula.Left.positionHome);
+    public void stow() {
+        m_motor.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
     }
 
     /**
@@ -94,11 +95,22 @@ public class HotPlate {
         return m_moduleName;
     }
 
+    public void moveTo(HotPlatePositions position) {
+        switch (position) {
+            case HOME:
+                m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.home);
+                break;
+            case LEVEL:
+                m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.level);
+                break;
+        }
+    }
+
     /**
      * This function is used to output data to the dashboard for debugging the module, typically done in the {@link DriveSubsystem} periodic.
      */
     public void updateDashboard() {
-        Dashboard.Spatula.setSpatulaPosition(m_moduleName, (int) getPositionAbsolute() & 0x3FF);
+        //Dashboard.HotPlate.setSpatulaPosition(m_moduleName, (int) getPositionAbsolute() & 0x3FF);
     }
 
 }

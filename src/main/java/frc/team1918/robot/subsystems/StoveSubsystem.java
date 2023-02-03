@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
+import frc.team1918.robot.modules.Griddle;
+import frc.team1918.robot.modules.Griddle.GriddleDirections;
 import frc.team1918.robot.modules.GreaseTrap;
 import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
-
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
+import frc.team1918.robot.modules.HotPlate;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 
 /**
  * The STOVE Subsystem manages the GRIDDLE (primary conveyor), HOTPLATE (scoring ramp), and GREASETRAP (flip ramp). 
@@ -21,9 +21,10 @@ public class StoveSubsystem extends SubsystemBase {
 	private static StoveSubsystem instance;
 	public enum ramps {BOTH, HOTPLATE, GREASETRAP}
 	
-	//initialize HOTPLATE and GREASETRAP
-	private WPI_TalonSRX m_HotPlate; //scoring ramp controller
-	private GreaseTrap m_GreaseTrap; //flip ramp controller
+	//initialize modules used in subsystem
+	private Griddle m_Griddle; //conveyor module
+	private GreaseTrap m_GreaseTrap; //flip ramp module
+	private HotPlate m_HotPlate; //scoring ramp controller
 	
 	/**
 	 * Returns the instance of the Intake subsystem.
@@ -55,6 +56,20 @@ public class StoveSubsystem extends SubsystemBase {
 
 	}
 
+	public void setGriddleDirectionAndSpeed(GriddleDirections direction, double speed) {
+		switch (direction) {
+			case STOP:
+				m_Griddle.setSpeed(0);
+				break;
+			case FORWARD:
+				m_Griddle.setSpeed(speed * 1.0);
+				break;
+			case REVERSE:
+				m_Griddle.setSpeed(speed * -1.0);
+				break;
+		}
+	}
+
 	/**
 	 * Moves ramps to their home positions (starting configuration)
 	 * @param ramp - This is an enum of ALL, HOTPLATE, GREASETRAP
@@ -62,14 +77,14 @@ public class StoveSubsystem extends SubsystemBase {
 	public void stowRamp(ramps ramp) {
 		switch (ramp) {
 			case HOTPLATE:
-				m_HotPlate.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
+				m_HotPlate.moveTo(HotPlatePositions.HOME);
 				break;
 			case GREASETRAP:
 				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
 				break;
 			case BOTH:
 			default:
-				m_HotPlate.set(ControlMode.Position, Constants.Stove.HotPlate.homePosition);
+				m_HotPlate.moveTo(HotPlatePositions.HOME);
 				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
 		}
 	}

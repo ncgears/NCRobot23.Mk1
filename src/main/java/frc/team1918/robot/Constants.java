@@ -24,17 +24,13 @@ public class Constants {
          * IDs of RoboRio Digital IO
          */
         public static final class DIO {
-            public static int beambreak_top = 0;
-            public static int beambreak_bottom = 1;
-            public static int feeder_switch = 2;
-            public static int whirly_hook1_capture_left = 4;
-            public static int whirly_hook1_capture_right = 3;
-            public static int whirly_hook2_capture = 5;
+            //public static int some_named_dio = 0;
         }
         /**
          * IDs of RoboRio Analog IO
          */
         public static final class Analog {
+            //public static int some_named_aio = 0;
         }
         /**
          * IDs of RoboRio Relays
@@ -46,24 +42,25 @@ public class Constants {
          * IDs of Talons
          */
         public static final class Talon {
-            public static int swerve_fr_turn = 1;
-            public static int swerve_fl_turn = 7;
-            public static int swerve_rl_turn = 8;
-            public static int swerve_rr_turn = 11;
-            public static int spatula_left = 20;
-            public static int spatula_right = 21;
-            public static int stove_hotplate = 22; //hotplate is the scoring ramp
-            public static int stove_greasetrap = 4; //greasetrap is the flip ramp
+            public static int swerve_fl_turn = 1;
+            public static int swerve_fr_turn = 2;
+            public static int swerve_rl_turn = 3;
+            public static int swerve_rr_turn = 4;
+            public static int spatula_left = 11;
+            public static int spatula_right = 12; 
+            public static int stove_hotplate = 13; //hotplate is the scoring ramp
+            public static int stove_greasetrap = 14; //greasetrap is the flip ramp
+            public static int stove_aimer = 15; //thing to move hotplate left and right
         }
         /**
          * IDs of Falcons
          */
         public static final class Falcon {
-            public static int swerve_fr_drive = 36;
-            public static int swerve_rr_drive = 37;
-            public static int swerve_rl_drive = 38;
-            public static int swerve_fl_drive = 39;
-            public static int stove_griddle = 42; //griddle is the primary conveyor
+            public static int swerve_fl_drive = 31;
+            public static int swerve_fr_drive = 32;
+            public static int swerve_rr_drive = 33;
+            public static int swerve_rl_drive = 34;
+            public static int stove_griddle = 41; //griddle is the primary conveyor
         }
     }
 
