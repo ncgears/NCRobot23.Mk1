@@ -5,12 +5,14 @@ public class GreaseTrapConstants {
     public final int MotorID;
     public final boolean SensorPhase;
     public final int SensorTicks = 4096; //Number of encoder ticks for the encoder
+    public final double kPeakOutput = 1.0; //Max output of controller
     public final boolean SensorNonContinuous = false; //usually, true if within 1 rotation, false if it wraps past 0
     public final boolean IsInverted;
     public final int PositionAllowedError;
     public final double kP;
     public final double kI;
     public final double kD;
+    public final double kF;
     public final int kIZone;
 
     /**
@@ -23,9 +25,10 @@ public class GreaseTrapConstants {
      * @param kP - (double) Proportional constant for the position control
      * @param kI - (double) Integral constant for the position control
      * @param kD - (double) Derivative constant for the position control
+     * @param kF - (double) Feed Forward constant for the position control
      * @param kIZone - (int) Integral Zone constant for the position control
      */
-    public GreaseTrapConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, int kIZone) {
+    public GreaseTrapConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, double kF, int kIZone) {
         //turn
         this.MotorID = MotorID;
         this.SensorPhase = SensorPhase;
@@ -34,6 +37,7 @@ public class GreaseTrapConstants {
         this.kP = kP;
         this.kI = kI;
         this.kD = kD;
+        this.kF = kF;
         this.kIZone = kIZone;
     }
 }

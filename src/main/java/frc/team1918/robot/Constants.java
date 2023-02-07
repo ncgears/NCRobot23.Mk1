@@ -73,7 +73,8 @@ public class Constants {
         public static final boolean CAMERA_ENABLED = false; //set to false if UsbCamera is removed
         public static final boolean SWERVE_SENSOR_NONCONTINUOUS = false;
         public static final int kTimeoutMs = 30; //Timeout for reporting in DS if action fails, set to 0 to skip confirmation
-        public static final int PID_PRIMARY = 0;  //Talon PID slot for primary loop
+        public static final int kPidIndex = 0;  //Talon PID index for primary loop
+        public static final int kPidProfileSlotIndex = 0; //PID Profile gains slot
         public static final int ROBOT_WIDTH = 21; //Width of the robot frame (from the pivot of the wheels)
         public static final int ROBOT_LENGTH = 28; //Length of the robot frame (from the pivot of the wheels)
         public static final boolean DEBUG_ENABLED_DEFAULT = true; //Default starting state of debug mode
@@ -125,31 +126,35 @@ public class Constants {
             public static final int motorID = ID.Talon.stove_greasetrap; //TalonSRX Motor Controller ID
             public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final double kP = 2.8; //PID P 
+            public static final double kP = 0.2; //PID P 
             public static final double kI = 0.0; //PID I
             public static final double kD = 0.0; //PID D
+            public static final double kF = 0.2; //PID F
             public static final int kIZone = 0; //PID IZONE
             public static final int positionHome = 0;
             public static final int positionAllowedError = 5; //PID Allowed error
-            public static final GreaseTrapConstants constants = new GreaseTrapConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+            public static final GreaseTrapConstants constants = new GreaseTrapConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kF, kIZone);
             public static final class Positions {
                 public static final double home = 0.0; //postion for home position
                 public static final double level = 1024.0; //position for level position
             }
         }
         public static final class HotPlate {
-            public static final double homePosition = 0.0; //position for starting configuration
             public static final boolean isDisabled = false;
             public static final int motorID = ID.Talon.stove_hotplate; //TalonSRX Motor Controller ID
             public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final double kP = 2.8; //PID P 
+            public static final double kP = 0.2; //PID P 
             public static final double kI = 0.0; //PID I
             public static final double kD = 0.0; //PID D
+            public static final double kF = 0.2; //PID F
             public static final int kIZone = 0; //PID IZONE
-            public static final int positionHome = 0;
             public static final int positionAllowedError = 5; //PID Allowed error
-            public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kIZone);
+            public static final HotPlateConstants constants = new HotPlateConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kF, kIZone);
+            public static final class Positions {
+                public static final double home = 0.0; //postion for home position
+                public static final double level = 1024.0; //position for level position
+            }
         }
     }
 

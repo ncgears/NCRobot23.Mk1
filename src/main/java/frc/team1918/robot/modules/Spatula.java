@@ -39,7 +39,7 @@ public class Spatula {
         m_motor.set(ControlMode.PercentOutput, 0); //Set controller to disabled
         m_motor.setNeutralMode(NeutralMode.Brake); //Set controller to brake mode
         m_motor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Absolute, // Local Feedback Source
-                                            Constants.Global.PID_PRIMARY,				// PID Slot for Source [0, 1]
+                                            Constants.Global.kPidIndex,				// PID Slot for Source [0, 1]
                                             Constants.Global.kTimeoutMs);				// Configuration Timeout
                                             m_motor.configFeedbackNotContinuous(moduleConstants.SensorNonContinuous, 0); //Disable continuous feedback tracking (so 0 and 1024 are effectively one and the same)
 
@@ -56,11 +56,11 @@ public class Spatula {
         // turn.set(ControlMode.Position, 1024); //set this to some fixed value for testing
         m_motor.setSensorPhase(moduleConstants.SensorPhase); //set the sensor phase based on the constants setting for this module
         m_motor.setInverted(moduleConstants.IsInverted); //set the motor direction based on the constants setting for this module
-        m_motor.config_kP(0, m_kP); //set the kP for PID Tuning
-        m_motor.config_kI(0, m_kI);
-        m_motor.config_kD(0, m_kD);
-        m_motor.config_IntegralZone(0, m_kIZone);
-        m_motor.configAllowableClosedloopError(Constants.Global.PID_PRIMARY, m_positionAllowedError); 
+        m_motor.config_kP(Constants.Global.kPidProfileSlotIndex, m_kP); //set the kP for PID Tuning
+        m_motor.config_kI(Constants.Global.kPidProfileSlotIndex, m_kI);
+        m_motor.config_kD(Constants.Global.kPidProfileSlotIndex, m_kD);
+        m_motor.config_IntegralZone(Constants.Global.kPidProfileSlotIndex, m_kIZone);
+        m_motor.configAllowableClosedloopError(Constants.Global.kPidProfileSlotIndex, m_positionAllowedError); 
     }
 
     /**
@@ -68,7 +68,7 @@ public class Spatula {
      * @return The current encoder position of the spatula
      */
     public double getPositionAbsolute() {
-        return m_motor.getSelectedSensorPosition(Constants.Global.PID_PRIMARY);
+        return m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex);
     }
 
     /**

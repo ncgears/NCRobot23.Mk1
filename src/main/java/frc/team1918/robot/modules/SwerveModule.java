@@ -59,7 +59,7 @@ public class SwerveModule {
         turn.set(ControlMode.PercentOutput, 0); //Set controller to disabled
         turn.setNeutralMode(NeutralMode.Brake); //Set controller to brake mode
         turn.configSelectedFeedbackSensor(  FeedbackDevice.Analog, //  FeedbackDevice.CTRE_MagEncoder_Absolute, // Local Feedback Source
-                                            Constants.Global.PID_PRIMARY,				// PID Slot for Source [0, 1]
+                                            Constants.Global.kPidIndex,				// PID Slot for Source [0, 1]
                                             Constants.Global.kTimeoutMs);				// Configuration Timeout
         turn.configFeedbackNotContinuous(Constants.Global.SWERVE_SENSOR_NONCONTINUOUS, 0); //Disable continuous feedback tracking (so 0 and 1024 are effectively one and the same)
 

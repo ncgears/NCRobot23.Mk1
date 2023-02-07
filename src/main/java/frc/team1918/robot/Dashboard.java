@@ -9,6 +9,11 @@ public class Dashboard {
     public static final class Spatula {
         public static final void setSpatulaPosition(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/", value); }
     }
+    public static final class GreaseTrap {
+        public static final void setPosition(double value) { SmartDashboard.putNumber("GreaseTrap/Position",value); }
+        public static final void setTarget(double value) { SmartDashboard.putNumber("GreaseTrap/Target",value); }
+        public static final void setError(double value) { SmartDashboard.putNumber("GreaseTrap/Error", value); }
+    }
     public static final class Climber {
         public static final void setClimberDirection(String direction) { SmartDashboard.putString("Climber/Direction", direction); }
         public static final void setClimberPosition(double position) { SmartDashboard.putNumber("Climber/Position", position); }
