@@ -50,7 +50,8 @@ public class Constants {
             public static int spatula_right = 12; 
             public static int stove_hotplate = 13; //hotplate is the scoring ramp
             public static int stove_greasetrap = 14; //greasetrap is the flip ramp
-            public static int stove_aimer = 15; //thing to move hotplate left and right
+            public static int stove_burner = 15; //burner is the main conveyor
+            public static int stove_aimer = 16; //thing to move hotplate left and right
         }
         /**
          * IDs of Falcons
@@ -58,8 +59,8 @@ public class Constants {
         public static final class Falcon {
             public static int swerve_fl_drive = 31;
             public static int swerve_fr_drive = 32;
-            public static int swerve_rr_drive = 33;
-            public static int swerve_rl_drive = 34;
+            public static int swerve_rr_drive = 34;
+            public static int swerve_rl_drive = 33;
             public static int stove_griddle = 41; //griddle is the primary conveyor
         }
     }
@@ -254,7 +255,7 @@ public class Constants {
             public static final double DRIVE_wheelDiamMM = 74.0; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_fl_turn; //TalonSRX Motor Controller ID
-            public static final boolean TURN_sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean TURN_isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final double TURN_kP = Swerve.DEFAULT_TURN_P; //PID P (only change to override default)
             public static final double TURN_kI = Swerve.DEFAULT_TURN_I; //PID I (only change to override default)
@@ -272,7 +273,7 @@ public class Constants {
             public static final double DRIVE_wheelDiamMM = 74.0; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_fr_turn; //TalonSRX Motor Controller ID
-            public static final boolean TURN_sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean TURN_isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final double TURN_kP = Swerve.DEFAULT_TURN_P; //PID P (only change to override default)
             public static final double TURN_kI = Swerve.DEFAULT_TURN_I; //PID I (only change to override default)
@@ -290,7 +291,7 @@ public class Constants {
             public static final double DRIVE_wheelDiamMM = 73.0; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_rl_turn; //TalonSRX Motor Controller ID
-            public static final boolean TURN_sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean TURN_isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final double TURN_kP = Swerve.DEFAULT_TURN_P; //PID P (only change to override default)
             public static final double TURN_kI = Swerve.DEFAULT_TURN_I; //PID I (only change to override default)
@@ -306,9 +307,9 @@ public class Constants {
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_rr_drive; //Falcon500 Motor Controller ID
             public static final double DRIVE_wheelDiamMM = 72.0; //actual diameter of larger wheel in mm
-            public static final boolean DRIVE_isInverted = false;
+            public static final boolean DRIVE_isInverted = true;
             public static final int TURN_MC_ID = ID.Talon.swerve_rr_turn; //TalonSRX Motor Controller ID
-            public static final boolean TURN_sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean TURN_isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final double TURN_kP = Swerve.DEFAULT_TURN_P; //PID P (only change to override default)
             public static final double TURN_kI = Swerve.DEFAULT_TURN_I; //PID I (only change to override default)
@@ -335,7 +336,7 @@ public class Constants {
         public static final double DT_TURN_MULT_STATIONARY = 1.3; //Turn speed multiplier while not moving
         public static final double DT_TURN_MULT_MOVING = 1.3; //Turn speed multiplier while moving
         public static final boolean DT_TURN_MULT_BEFORE_DB = true; //Apply turn multiplier before deadband
-        public static final int DT_TURN_ENCODER_FULL_ROTATION = 4095; //This is for the lamprey2, not the integrated SRX mag encoder (lamprey1 is 1023)
+        public static final int DT_TURN_ENCODER_FULL_ROTATION = 1023; //This is for the lamprey2, not the integrated SRX mag encoder (lamprey1 is 1023)
         public static final int kTurnEncoderFullRotation = 4096; //This is for the integrated SRX mag encoder in the gearboxes, not the lamprey
         public static final double kTurnGearRatio = 10.3846154; //The output of the turn gearbox turns 10 times for one module rotation
         ////Drive Tuning
@@ -380,9 +381,9 @@ public class Constants {
          * Constants for the Driver controller
          */
         public static final class Driver {
-            public final static int AXIS_STRAFE = Logitech.AXIS_LH; //Axis that moves the robot side to side on the field
-            public final static int AXIS_FWD = Logitech.AXIS_LV; //Axis that moves the robot up and down the field
-            public final static int AXIS_TURN = Logitech.AXIS_RH; //Axis that controls the rotation of the robot
+            public final static int AXIS_STRAFE = Stadia.AXIS_LH; //Axis that moves the robot side to side on the field
+            public final static int AXIS_FWD = Stadia.AXIS_LV; //Axis that moves the robot up and down the field
+            public final static int AXIS_TURN = Stadia.AXIS_RH; //Axis that controls the rotation of the robot
         }
 
         /**
