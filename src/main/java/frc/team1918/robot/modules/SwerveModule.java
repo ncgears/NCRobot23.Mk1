@@ -63,14 +63,7 @@ public class SwerveModule {
                                             Constants.Global.kTimeoutMs);				// Configuration Timeout
         turn.configFeedbackNotContinuous(Constants.Global.SWERVE_SENSOR_NONCONTINUOUS, 0); //Disable continuous feedback tracking (so 0 and 1024 are effectively one and the same)
 
-/*  CTRE SRX Mag Encoder Setup
-        turn.configSelectedFeedbackSensor ( FeedbackDevice.CTRE_MagEncoder_Relative,
-                                            Constants.Global.PID_PRIMARY,
-                                            Constants.Global.kTimeoutMs);
-        turn.configSelectedFeedbackSensor ( FeedbackDevice.CTRE_MagEncoder_Absolute,
-                                            Constants.Global.PID_AUXILLARY,
-                                            Constants.Global.kTimeoutMs);
-*/  
+//TODO 2023-02-07: Self-test encoder and see if quadrature encoder values are 0-4096 or only analog values returning
 
         // turn.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
         // turn.set(ControlMode.Position, 1024); //set this to some fixed value for testing
