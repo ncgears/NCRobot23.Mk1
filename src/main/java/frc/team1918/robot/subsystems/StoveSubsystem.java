@@ -88,4 +88,13 @@ public class StoveSubsystem extends SubsystemBase {
 				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
 		}
 	}
+
+	/**
+	 * Moves the GreaseTrap to a designated position
+	 * @param position - This is a GreaseTrapPositions enum of {@GreaseTrapPositions}
+	 */
+	public void moveGreaseTrapTo(GreaseTrapPositions position) {
+		m_GreaseTrap.moveTo(position);
+	}
+
 }

@@ -107,6 +107,7 @@ public class GreaseTrap {
     }
 
     public void moveTo(GreaseTrapPositions position) {
+        Dashboard.GreaseTrap.setPositionName(position.toString());
         switch (position) {
             case HOME:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.home);
@@ -114,6 +115,8 @@ public class GreaseTrap {
             case LEVEL:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.level);
                 break;
+            default:
+                Dashboard.GreaseTrap.setPositionName("Unknown");
         }
     }
 

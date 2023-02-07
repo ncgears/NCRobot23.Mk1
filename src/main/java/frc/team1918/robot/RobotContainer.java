@@ -34,6 +34,7 @@ import frc.team1918.robot.subsystems.VisionSubsystem;
 //import frc.team1918.robot.commands.stove.*;
 //import frc.team1918.robot.commands.fivesecondrule.*;
 import frc.team1918.robot.commands.drive.*;
+import frc.team1918.robot.commands.stove.*;
 import frc.team1918.robot.commands.vision.*;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
@@ -50,6 +51,7 @@ public class RobotContainer {
     //private final PowerDistribution m_pdp = new PowerDistribution();
     private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
     private final FiveSecondRuleSubsystem m_intake = new FiveSecondRuleSubsystem();
+    private final StoveSubsystem m_stove = new StoveSubsystem();
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
     // private final OrchestraSubsystem m_orchestra = new OrchestraSubsystem();
@@ -88,17 +90,22 @@ public class RobotContainer {
   //button definitions
     //Driver Controller
       private Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVER);
-      private JoystickButton btn_CollectorToggle = new JoystickButton(dj, Constants.OI.Logitech.BTN_START);
-      private JoystickButton btn_GyroReset = new JoystickButton(dj, Constants.OI.Logitech.BTN_BACK);
-      private POVButton btn_ShooterIncrease = new POVButton(dj, Constants.OI.Logitech.DPAD_UP);
-      private POVButton btn_ShooterDecrease = new POVButton(dj, Constants.OI.Logitech.DPAD_DN);
-      private JoystickButton btn_ShooterStop = new JoystickButton(dj, Constants.OI.Logitech.BTN_A);
-      private JoystickButton btn_FeederFwd = new JoystickButton(dj, Constants.OI.Logitech.BTN_RB);
-      private Trigger t_RingLight = new Trigger(() -> dj.getRawAxis(Constants.OI.Logitech.AXIS_RT)>0.3);
-      private JoystickButton btn_AimSelectShoot = new JoystickButton(dj, Constants.OI.Logitech.BTN_B);
-      private JoystickButton btn_AimSelect = new JoystickButton(dj, Constants.OI.Logitech.BTN_LB);
-      private JoystickButton btn_ShootDashboard = new JoystickButton(dj, Constants.OI.Logitech.BTN_Y);
-      private JoystickButton btn_ResetClimb = new JoystickButton(dj, Constants.OI.Logitech.BTN_X);
+
+      private POVButton btn_GreaseTrapHome = new POVButton(dj, Constants.OI.Stadia.DPAD_UP);
+      private POVButton btn_GreaseTrapLevel = new POVButton(dj, Constants.OI.Stadia.DPAD_RIGHT);
+      private POVButton btn_GreaseTrapDown = new POVButton(dj, Constants.OI.Stadia.DPAD_DN);
+      
+      // private JoystickButton btn_CollectorToggle = new JoystickButton(dj, Constants.OI.Logitech.BTN_START);
+      // private JoystickButton btn_GyroReset = new JoystickButton(dj, Constants.OI.Logitech.BTN_BACK);
+      // private POVButton btn_ShooterIncrease = new POVButton(dj, Constants.OI.Logitech.DPAD_UP);
+      // private POVButton btn_ShooterDecrease = new POVButton(dj, Constants.OI.Logitech.DPAD_DN);
+      // private JoystickButton btn_ShooterStop = new JoystickButton(dj, Constants.OI.Logitech.BTN_A);
+      // private JoystickButton btn_FeederFwd = new JoystickButton(dj, Constants.OI.Logitech.BTN_RB);
+      // private Trigger t_RingLight = new Trigger(() -> dj.getRawAxis(Constants.OI.Logitech.AXIS_RT)>0.3);
+      // private JoystickButton btn_AimSelectShoot = new JoystickButton(dj, Constants.OI.Logitech.BTN_B);
+      // private JoystickButton btn_AimSelect = new JoystickButton(dj, Constants.OI.Logitech.BTN_LB);
+      // private JoystickButton btn_ShootDashboard = new JoystickButton(dj, Constants.OI.Logitech.BTN_Y);
+      // private JoystickButton btn_ResetClimb = new JoystickButton(dj, Constants.OI.Logitech.BTN_X);
       //Music Control
       // private JoystickButton btn_MusicPlay = new JoystickButton(dj, Constants.OI.Logitech.BTN_Y);
       // private JoystickButton btn_MusicStop = new JoystickButton(dj, Constants.OI.Logitech.BTN_R);
@@ -119,27 +126,27 @@ public class RobotContainer {
 
     //Operator Controller
       private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
-      //Whirly
-      private JoystickButton btn_WhirlyUp = new JoystickButton(oj, Constants.OI.Logitech.BTN_START);
-      //private JoystickButton btn_LockHooks = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
-      private POVButton btn_WhirlyRev = new POVButton(oj, Constants.OI.Logitech.DPAD_LEFT);
-      private POVButton btn_WhirlyFwd = new POVButton(oj, Constants.OI.Logitech.DPAD_RIGHT);
-      private JoystickButton btn_ReleaseHook1 = new JoystickButton(oj, Constants.OI.Logitech.BTN_L);
-      private JoystickButton btn_ReleaseHook2 = new JoystickButton(oj, Constants.OI.Logitech.BTN_R);
-      //Intake
-      // private JoystickButton btn_IntakeReverse = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
-      // private JoystickButton btn_IntakeForward = new JoystickButton(oj, Constants.OI.Logitech.BTN_RB);
-      //Shooting
-      private JoystickButton btn_ShootLow = new JoystickButton(oj, Constants.OI.Logitech.BTN_RB);
-      // private JoystickButton btn_ShootDashboard = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
-      private JoystickButton btn_ShootProtected = new JoystickButton(oj, Constants.OI.Logitech.BTN_X);
-      private JoystickButton btn_ShootDefault = new JoystickButton(oj, Constants.OI.Logitech.BTN_Y);
-      private JoystickButton btn_ShootLine = new JoystickButton(oj, Constants.OI.Logitech.BTN_A);
-      private JoystickButton btn_ShootStop = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
-      private JoystickButton btn_ShootWall = new JoystickButton(oj, Constants.OI.Logitech.BTN_B);
-      private Trigger t_IntakeForward = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_RT)>0.3);
-      private Trigger t_IntakeRetractor = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_LT)>0.3);
-      private JoystickButton btn_IntakeReverse = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
+      // //Whirly
+      // private JoystickButton btn_WhirlyUp = new JoystickButton(oj, Constants.OI.Logitech.BTN_START);
+      // //private JoystickButton btn_LockHooks = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
+      // private POVButton btn_WhirlyRev = new POVButton(oj, Constants.OI.Logitech.DPAD_LEFT);
+      // private POVButton btn_WhirlyFwd = new POVButton(oj, Constants.OI.Logitech.DPAD_RIGHT);
+      // private JoystickButton btn_ReleaseHook1 = new JoystickButton(oj, Constants.OI.Logitech.BTN_L);
+      // private JoystickButton btn_ReleaseHook2 = new JoystickButton(oj, Constants.OI.Logitech.BTN_R);
+      // //Intake
+      // // private JoystickButton btn_IntakeReverse = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
+      // // private JoystickButton btn_IntakeForward = new JoystickButton(oj, Constants.OI.Logitech.BTN_RB);
+      // //Shooting
+      // private JoystickButton btn_ShootLow = new JoystickButton(oj, Constants.OI.Logitech.BTN_RB);
+      // // private JoystickButton btn_ShootDashboard = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
+      // private JoystickButton btn_ShootProtected = new JoystickButton(oj, Constants.OI.Logitech.BTN_X);
+      // private JoystickButton btn_ShootDefault = new JoystickButton(oj, Constants.OI.Logitech.BTN_Y);
+      // private JoystickButton btn_ShootLine = new JoystickButton(oj, Constants.OI.Logitech.BTN_A);
+      // private JoystickButton btn_ShootStop = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
+      // private JoystickButton btn_ShootWall = new JoystickButton(oj, Constants.OI.Logitech.BTN_B);
+      // private Trigger t_IntakeForward = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_RT)>0.3);
+      // private Trigger t_IntakeRetractor = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_LT)>0.3);
+      // private JoystickButton btn_IntakeReverse = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
       // private Trigger t_IntakeReverse = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_LT)>0.3);
       // private POVButton btn_COLLECTOR_UP = new POVButton(oj, Constants.OI.Operator.DPAD_COLLECTOR_UP);
       // private POVButton btn_COLLECTOR_DOWN = new POVButton(oj, Constants.OI.Operator.DPAD_COLLECTOR_DOWN);
@@ -163,6 +170,10 @@ public class RobotContainer {
     //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
 
+    btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapDown(m_stove));
+    btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapLevel(m_stove));
+    btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapHome(m_stove));
+
     //These are the operator buttons
 //    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
     // btn_IntakeForward.onTrue(new feeder_advanceToShooter(m_feeder));
@@ -185,11 +196,11 @@ public class RobotContainer {
 //    btn_ShooterStop.onTrue(new shooter_stopShooter(m_shooter));
 //    btn_ShooterIncrease.onTrue(new shooter_increaseThrottle(m_shooter));
 //    btn_ShooterDecrease.onTrue(new shooter_decreaseThrottle(m_shooter));
-    btn_GyroReset.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d()))); //.andThen(new drive_homeSwerves(m_drive))
+    // btn_GyroReset.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d()))); //.andThen(new drive_homeSwerves(m_drive))
     // btn_AimSelectShoot.whileHeld(new cg_vision_aimSelectAndShoot(m_drive, m_feeder, m_shooter, m_vision)).whenReleased(new feeder_stop(m_feeder).andThen(new shooter_stopShooter(m_shooter)));
 //    btn_AimSelectShoot.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
 //    btn_AimSelect.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
-    t_RingLight.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
+    // t_RingLight.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
 //    btn_ResetClimb.onTrue(new climber_resetClimb(m_climber));
     //Music Control Buttons
     // btn_MusicPlay.onTrue(new orchestra_loadAndPlay(m_orchestra));
