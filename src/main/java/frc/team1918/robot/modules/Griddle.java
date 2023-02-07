@@ -106,7 +106,7 @@ public class Griddle {
      * This function is used to output data to the dashboard for debugging the module, typically done in the {@link DriveSubsystem} periodic.
      */
     public void updateDashboard() {
-        Dashboard.Spatula.setSpatulaPosition(m_moduleName, (int) getPositionAbsolute() & 0x3FF);
+        Dashboard.Griddle.setSpeed(m_motor.get());
     }
 
 }

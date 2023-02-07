@@ -144,7 +144,7 @@ public class Helpers {
     //Helpers for the Operator Interface
     public static final class OI {
         private static Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVER);
-        // private static Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
+        private static Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
         //DRIVER CONTROLS
         /**
          * @param useDeadband Boolean value indicating whether to apply deadband to output
@@ -170,9 +170,10 @@ public class Helpers {
             return (useDeadband) ? applyDeadband(dj.getRawAxis(Constants.OI.Driver.AXIS_TURN)) : dj.getRawAxis(Constants.OI.Driver.AXIS_TURN);
         }
 
-        public static void rumble(boolean rumble) {
-            dj.setRumble(RumbleType.kLeftRumble, (rumble)?1.0:0.0);
-            dj.setRumble(RumbleType.kRightRumble, (rumble)?1.0:0.0);
+        public static void rumble(boolean rumble, String stick) {
+            Joystick joy = (stick=="oj") ? oj : dj;
+            joy.setRumble(RumbleType.kLeftRumble, (rumble)?1.0:0.0);
+            joy.setRumble(RumbleType.kRightRumble, (rumble)?1.0:0.0);
         }
 
         //OPERATOR CONTROLS

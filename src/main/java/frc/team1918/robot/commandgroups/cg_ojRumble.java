@@ -14,12 +14,12 @@ import frc.team1918.robot.commands.helpers.helpers_setRumble;
 import frc.team1918.robot.subsystems.VisionSubsystem;
 
 
-public class cg_djRumble extends SequentialCommandGroup {
+public class cg_ojRumble extends SequentialCommandGroup {
   private final VisionSubsystem m_vision;
   
   /**
   */
-  public cg_djRumble(VisionSubsystem vision) {
+  public cg_ojRumble(VisionSubsystem vision) {
     m_vision = vision;
 
     /**
@@ -28,13 +28,13 @@ public class cg_djRumble extends SequentialCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
-        new helpers_setRumble(true, "dj"),
+        new helpers_setRumble(true, "oj"),
         new WaitCommand(0.25),
-        new helpers_setRumble(false, "dj"),
+        new helpers_setRumble(false, "oj"),
         new WaitCommand(0.25),
-        new helpers_setRumble(true, "dj"),
+        new helpers_setRumble(true, "oj"),
         new WaitCommand(0.25),
-        new helpers_setRumble(false, "dj")
+        new helpers_setRumble(false, "oj")
     );
   }
 }

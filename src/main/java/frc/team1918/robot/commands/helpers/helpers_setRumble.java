@@ -1,7 +1,6 @@
 
-package frc.team1918.robot.commands.vision;
+package frc.team1918.robot.commands.helpers;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import constants and subsystem
 import frc.team1918.robot.Helpers;
@@ -10,19 +9,21 @@ import frc.team1918.robot.Helpers;
  * A command that runs the drive actions. This passes the OI inputs on to the appropriate drive system (fieldCentricDrive or humanDrive).
  * fieldCentricDrive is simply a call to humanDrive after gyro corrections are made.
  */
-public class vision_setRumble extends CommandBase {
+public class helpers_setRumble extends CommandBase {
   boolean rumble = false;
+  String stick = "dj";
 
   /**
    * @param rumble true to rumble, false to stop
+   * @param stick dj = driver stick, oj = oper stick
    */
-  public vision_setRumble(boolean rumble) {
+  public helpers_setRumble(boolean rumble, String stick) {
+    this.stick = stick;
     this.rumble = rumble;
   }
 
   public void initialize() {
-    // Helpers.OI.rumble(rumble);
-    SmartDashboard.putBoolean("Vision/TooFar", rumble);
+    Helpers.OI.rumble(rumble, stick);
   }
 
   // Returns true when the command should end.

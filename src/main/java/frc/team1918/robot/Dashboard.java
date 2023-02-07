@@ -7,43 +7,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Dashboard {
     public static final class Spatula {
-        public static final void setSpatulaPosition(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/", value); }
+        public static final void setPosition(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/Position", value); }
+    }
+    public static final class Griddle {
+        public static final void setSpeed(double value) { SmartDashboard.putNumber("Griddle/Speed", value); }
+    }
+    public static final class Burner {
+        public static final void setTemp(String value) { SmartDashboard.putString("Burner/Temp", value); }
     }
     public static final class GreaseTrap {
+        public static final void setPositionName(String value) { SmartDashboard.putString("GreaseTrap/PosName", value); }
         public static final void setPosition(double value) { SmartDashboard.putNumber("GreaseTrap/Position",value); }
         public static final void setTarget(double value) { SmartDashboard.putNumber("GreaseTrap/Target",value); }
         public static final void setError(double value) { SmartDashboard.putNumber("GreaseTrap/Error", value); }
     }
-    public static final class Climber {
-        public static final void setClimberDirection(String direction) { SmartDashboard.putString("Climber/Direction", direction); }
-        public static final void setClimberPosition(double position) { SmartDashboard.putNumber("Climber/Position", position); }
-        // public static final void setWhirlyPosition(String position) { SmartDashboard.putString("Climber/Whirlygig Position", position); }
-        public static final void setWhirlyPosition(String position) { SmartDashboard.putBoolean("Climber/Whirlygig Deployed", (position=="UP")?true:false); }
-        public static final void setHook1Left(Boolean value) { SmartDashboard.putBoolean("Climber/Hook1Left", value); }
-        public static final void setHook1Right(Boolean value) { SmartDashboard.putBoolean("Climber/Hook1Right", value); }
-        public static final void setHook2(Boolean value) { SmartDashboard.putBoolean("Climber/Hook2", value); }
-    }
-    public static final class Shooter {
-        public static final void setCurrentSpeed(double speed) { SmartDashboard.putNumber("Shooter/Shooter Speed",speed); }
-        public static final void setHoodPosition(String value) { SmartDashboard.putString("Shooter/Hood Position", value); }
-        public static final void setTargetSpeed(double speed) { SmartDashboard.putNumber("Shooter/TargetSpeed",speed); }
-        public static final void setShotName(String value) { SmartDashboard.putString("Shooter/Shot Name",value); }
-        public static final double getTargetSpeed(double default_val) { return (double) SmartDashboard.getNumber("Shooter/Target Speed",default_val); }
-    }
-    public static final class Feeder {
-        public static final void setFeederDirection(String value) { SmartDashboard.putString("Feeder/Direction", value); }
-        public static final void setFeederSpeed(double speed) { SmartDashboard.putNumber("Feeder/Speed", speed); }
-        public static final void setFeederBall(boolean value) { SmartDashboard.putBoolean("Feeder/Ball Detected", value); }
+    public static final class HotPlate {
+        public static final void setPositionName(String value) { SmartDashboard.putString("HotPlate/PosName", value); }
+        public static final void setPosition(double value) { SmartDashboard.putNumber("HotPlate/Position",value); }
+        public static final void setTarget(double value) { SmartDashboard.putNumber("HotPlate/Target",value); }
+        public static final void setError(double value) { SmartDashboard.putNumber("HotPlate/Error", value); }
     }
     public static final class Vision {
         public static final void setVisionRinglight(boolean value) { SmartDashboard.putBoolean("Vision/Ring Light", value); }
     }
-    public static final class Collector {
-        public static final void setIntakeDeployed(Boolean value) { SmartDashboard.putBoolean("Collector/Intake Deployed", value); }
-        public static final void setIntakeDirection(String value) { SmartDashboard.putString("Collector/Intake Direction", value); }
-    }
     public static final class Gyro {
-        public static final void setGyroAngle(double angle) { SmartDashboard.putNumber("GyroAngle",angle); }
+        public static final void setGyroAngle(double value) { SmartDashboard.putNumber("GyroAngle",value); }
+        public static final void setGyroPitch(double value) { SmartDashboard.putNumber("GyroPitch", value); }
     }
     public static final class DriveTrain {
         public static final void setTurnPosition(String module, double value) { SmartDashboard.putNumber("Swerve/"+module+"/Position", value); }

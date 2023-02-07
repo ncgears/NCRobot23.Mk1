@@ -16,7 +16,7 @@ public class GreaseTrap {
     private WPI_TalonSRX m_motor;
     private double m_kP, m_kI, m_kD, m_kF, m_kPeakOutput;
     private int m_kIZone;
-    private int m_positionAllowedError, m_positionFullRotation;
+    private int m_positionAllowedError;
     private String m_moduleName;
     public enum GreaseTrapPositions {HOME, LEVEL, DOWN};
 
@@ -36,7 +36,6 @@ public class GreaseTrap {
         m_kF = moduleConstants.kF;
         m_kIZone = moduleConstants.kIZone;
         m_positionAllowedError = moduleConstants.PositionAllowedError;
-        m_positionFullRotation = moduleConstants.SensorTicks;
 
         m_motor.configFactoryDefault(); //Reset controller to factory defaults to avoid wierd stuff from carrying over
         m_motor.set(ControlMode.PercentOutput, 0); //Set controller to stopped
