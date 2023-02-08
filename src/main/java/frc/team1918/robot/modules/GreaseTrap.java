@@ -69,11 +69,11 @@ public class GreaseTrap {
         m_motor.config_kI(Constants.Global.kPidProfileSlotIndex, m_kI, Constants.Global.kTimeoutMs);
         m_motor.config_kD(Constants.Global.kPidProfileSlotIndex, m_kD, Constants.Global.kTimeoutMs);
         //m_motor.config_IntegralZone(0, m_kIZone);
-        //m_motor.configAllowableClosedloopError(Constants.Global.PID_PRIMARY, m_positionAllowedError); 
+        m_motor.configAllowableClosedloopError(Constants.Global.kPidIndex, m_positionAllowedError); 
 
         /* Set acceleration and cruise velocity */
-        m_motor.configMotionCruiseVelocity(3000, Constants.Global.kTimeoutMs);
-        m_motor.configMotionAcceleration(3000, Constants.Global.kTimeoutMs);
+        m_motor.configMotionCruiseVelocity(3500, Constants.Global.kTimeoutMs);
+        m_motor.configMotionAcceleration(4500, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
         m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
@@ -114,6 +114,9 @@ public class GreaseTrap {
                 break;
             case LEVEL:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.level);
+                break;            
+            case DOWN:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.down);
                 break;
             default:
                 Dashboard.GreaseTrap.setPositionName("Unknown");

@@ -124,19 +124,20 @@ public class Constants {
         public static final class GreaseTrap {
             public static final boolean isDisabled = false;
             public static final int motorID = ID.Talon.stove_greasetrap; //TalonSRX Motor Controller ID
-            public static final boolean sensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final double kP = 0.2; //PID P 
+            public static final double kP = 0.4; //PID P 
             public static final double kI = 0.0; //PID I
             public static final double kD = 0.0; //PID D
             public static final double kF = 0.2; //PID F
             public static final int kIZone = 0; //PID IZONE
             public static final int positionHome = 0;
-            public static final int positionAllowedError = 5; //PID Allowed error
+            public static final int positionAllowedError = 20; //PID Allowed error
             public static final GreaseTrapConstants constants = new GreaseTrapConstants(motorID, sensorPhase, isInverted, positionAllowedError, kP, kI, kD, kF, kIZone);
             public static final class Positions {
-                public static final double home = 0.0; //postion for home position
-                public static final double level = 1024.0; //position for level position
+                public static final double home = 0.0; //home/stow/starting config
+                public static final double level = 4400.0; //level
+                public static final double down = 5700.0; //down
             }
         }
         public static final class HotPlate {

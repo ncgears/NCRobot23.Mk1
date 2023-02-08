@@ -41,6 +41,8 @@ public class StoveSubsystem extends SubsystemBase {
 	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
 	 */
 	public StoveSubsystem() {
+		m_GreaseTrap = new GreaseTrap("GreaseTrap", Constants.Stove.GreaseTrap.constants);
+		m_HotPlate = new HotPlate("HotPlate", Constants.Stove.HotPlate.constants);
 		stowRamp(ramps.BOTH); //Make sure all spatulas are initialized to their stowed position
 	}
 
