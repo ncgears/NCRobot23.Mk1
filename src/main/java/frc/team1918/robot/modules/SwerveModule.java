@@ -69,12 +69,12 @@ public class SwerveModule {
         // turn.set(ControlMode.Position, 1024); //set this to some fixed value for testing
         turn.setSensorPhase(moduleConstants.turnSensorPhase); //set the sensor phase based on the constants setting for this module
         turn.setInverted(moduleConstants.turnIsInverted); //set the motor direction based on the constants setting for this module
-        turn.config_kP(0, TURN_P); //set the kP for PID Tuning
-        turn.config_kI(0, TURN_I);
-        turn.config_kD(0, TURN_D);
-        turn.config_IntegralZone(0, TURN_IZONE);
+        turn.config_kP(Constants.Global.kPidProfileSlotIndex, TURN_P); //set the kP for PID Tuning
+        turn.config_kI(Constants.Global.kPidProfileSlotIndex, TURN_I);
+        turn.config_kD(Constants.Global.kPidProfileSlotIndex, TURN_D);
+        turn.config_IntegralZone(Constants.Global.kPidProfileSlotIndex, TURN_IZONE);
         turn.overrideLimitSwitchesEnable(false);
-        turn.configAllowableClosedloopError(0, TURN_ALLOWED_ERROR); 
+        turn.configAllowableClosedloopError(Constants.Global.kPidProfileSlotIndex, TURN_ALLOWED_ERROR); 
         if(Constants.Swerve.homeOnInit) turn.set(ControlMode.Position, getZeroPositionTicks());
         // SupplyCurrentLimitConfiguration(enabled,peak,trigger threshold current,trigger threshold time(s))
         // turn.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(
@@ -87,10 +87,10 @@ public class SwerveModule {
         drive.set(ControlMode.PercentOutput, 0);
         drive.setNeutralMode(NeutralMode.Brake);
         drive.setInverted(moduleConstants.driveIsInverted);
-        drive.config_kP(0, 0.0005);
-        drive.config_kI(0, 0.0);
-        drive.config_kD(0, 0.00005);
-        drive.config_IntegralZone(0, 4740);
+        drive.config_kP(Constants.Global.kPidProfileSlotIndex, 0.0005);
+        drive.config_kI(Constants.Global.kPidProfileSlotIndex, 0.0);
+        drive.config_kD(Constants.Global.kPidProfileSlotIndex, 0.00005);
+        drive.config_IntegralZone(Constants.Global.kPidProfileSlotIndex, 4740);
         // SupplyCurrentLimitConfiguration(enabled,peak,trigger threshold current,trigger threshold time(s))
         // drive.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true,60.0,45.0,1.0));
         // drive.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(

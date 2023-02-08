@@ -163,7 +163,7 @@ public class Constants {
      * Constants for the Spatula Modules
      */
     public static final class Spatula {
-        public static final double default_kP = 2.8; //PID P
+        public static final double default_kP = 0.45; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
         public static final int default_kIZone = 0; //PID IZone
@@ -217,8 +217,8 @@ public class Constants {
         public static final double DEFAULT_TURN_I = 0.0; //PID I
         public static final double DEFAULT_TURN_D = 0.0; //PID D
         public static final int DEFAULT_TURN_IZONE = 0; //PID IZone
-        public static final int DEFAULT_TURN_ALLOWED_ERROR = 5; //PID Allowed Error
-        public static final double DEFAULT_WHEEL_DIAM_MM = 76.2; //Wheel Diameter of 3in colson
+        public static final int DEFAULT_TURN_ALLOWED_ERROR = 3; //PID Allowed Error
+        public static final double DEFAULT_WHEEL_DIAM_MM = 101.6; //Wheel Diameter of 3in colson
         // current limits
         // Swerve current limiting //TODO: Needs tuning, this was borrowed from Team364 example
         // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
@@ -234,7 +234,7 @@ public class Constants {
         public static final double kHomeOffsetRadians = 0.0; //3 * (Math.PI/4); //135 - radians to offset the zero point of the wheels
         public static final double kMaxModuleAngularSpeedRadiansPerSecond = 2 * Math.PI;
         public static final double kMaxModuleAngularAccelerationRadiansPerSecondSquared = 2 * Math.PI;
-        public static final double kMaxSpeedMetersPerSecond = 3.770; //12.0fps calculated; 13.7fps per Mike
+        public static final double kMaxSpeedMetersPerSecond = 4.115; //13.5fps calculated;
         public static final boolean kGyroReversed = false;
         // Drive Motor Characterization
         // See {@link https://first.wpi.edu/FRC/roborio/release/docs/java/edu/wpi/first/wpilibj/controller/SimpleMotorFeedforward.html}
@@ -258,7 +258,7 @@ public class Constants {
         public static final class FL {
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_fl_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = 74.0; //actual diameter of larger wheel in mm
+            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_fl_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -276,7 +276,7 @@ public class Constants {
         public static final class FR {
             public static final boolean isDisabled = false; 
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_fr_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = 74.0; //actual diameter of larger wheel in mm
+            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_fr_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -294,7 +294,7 @@ public class Constants {
         public static final class RL {
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_rl_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = 73.0; //actual diameter of larger wheel in mm
+            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_rl_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -312,7 +312,7 @@ public class Constants {
         public static final class RR { //Rear Right
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_rr_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = 72.0; //actual diameter of larger wheel in mm
+            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = true;
             public static final int TURN_MC_ID = ID.Talon.swerve_rr_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -336,7 +336,7 @@ public class Constants {
         public static final boolean useFieldCentric = true; //use field-centric drive. This should always be true except for testing?
         public static final boolean useDefensiveLock = false; //use defensiveLock strategy when braking putting swerve into X pattern
         public static final double kDriveStraight_P = 0.065; //kP for driveStraight correction
-        public static final double kMaxMetersPerSecond = 3.677; //limit full stick speed meters to 12.0fps
+        public static final double kMaxMetersPerSecond = 4.115; //limit full stick speed meters to 13.5fps
         public static final double kMaxRotationRadiansPerSecond = 3.4; //Multiplier for omega of turning the robot
         ////Turn Tuning
         public static final double DT_TURN_MULT_STATIONARY = 1.3; //Turn speed multiplier while not moving
