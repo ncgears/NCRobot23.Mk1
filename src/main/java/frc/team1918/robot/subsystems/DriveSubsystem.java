@@ -4,10 +4,12 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
+import frc.team1918.robot.Robot;
 import frc.team1918.robot.modules.SwerveModule;
 //kinematics and odometry
 import edu.wpi.first.math.geometry.Pose2d;
@@ -43,6 +45,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	//initialize gyro object
 	private static AHRS m_gyro = new AHRS(SPI.Port.kMXP);
+	private final Field2d m_2dField;
 	//intialize odometry class for tracking robot pose
 	static SwerveDriveOdometry m_odometry; // = new SwerveDriveOdometry(Constants.Swerve.kDriveKinematics, m_gyro.getRotation2d());
 	//positions(3rd arg) = new SwerveModulePosition(modulePositions[index].distanceMeters, modulePositions[index].angle);
@@ -56,6 +59,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public DriveSubsystem() { //initialize the class
 		m_gyro.calibrate();
+		m_2dField = new Field2d();
 		for (SwerveModule module: modules) {
 			module.resetDistance();
 			module.syncTurningEncoders();
@@ -91,6 +95,10 @@ public class DriveSubsystem extends SubsystemBase {
 		for (SwerveModule module: modules) {
 			// module.updateDashboard();
 		}
+		if(Robot.isSimulation()) {
+			//TODO: not working, but if simulated, lets pretend to go somewhere
+			//drive(0.2,0,0.0,true); //drive somewhere for simulation
+		}
 	}
 
 	public SwerveModulePosition[] getSwerveModulePositions() {
@@ -115,7 +123,7 @@ public class DriveSubsystem extends SubsystemBase {
 		visionTargeting = enabled;
 	}
 
-		/**
+	/**
      * Returns the heading of the robot.
      * @return the robot's heading as a Rotation2d
      */
@@ -185,6 +193,7 @@ public class DriveSubsystem extends SubsystemBase {
             	m_dtRR.getPosition()
 			}
 		);
+		m_2dField.setRobotPose(m_odometry.getPoseMeters()); //This updates the Field2d with odometry of robot
 	}
 
 	public Pose2d getPose2d() {
@@ -334,8 +343,12 @@ public class DriveSubsystem extends SubsystemBase {
 		return correction;
 	}
 
+	public Field2d getField() {
+		return m_2dField;
+	}
+
 	//#region GYRO STUFF
-	public static AHRS getm_gyro() {
+	public AHRS getGyro() {
         return m_gyro;
 	}
 	//#endregion GYRO STUFF

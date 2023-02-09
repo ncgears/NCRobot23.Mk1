@@ -7,6 +7,8 @@
 
 package frc.team1918.robot;
 
+import edu.wpi.first.hal.SimDouble;
+import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -17,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 // import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
 // import frc.team1918.robot.subsystems.ClimberSubsystem;
 // import frc.team1918.robot.subsystems.CollectorSubsystem;
 
@@ -32,7 +35,7 @@ public class Robot extends TimedRobot {
   private Command m_disableCommand;
   // private Command m_initOdom;
   // private Command m_resetGyro;
-  private SendableChooser<Command> m_chooser = new SendableChooser<>();
+  
 
   private RobotContainer m_robotContainer;
 
@@ -57,22 +60,6 @@ public class Robot extends TimedRobot {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
-    if(Constants.Auton.isDisabled) {
-      m_chooser.setDefaultOption("Auton Disabled", m_robotContainer.getRobotCommand("auton_disabled"));
-    } else {
-      m_chooser.setDefaultOption("AR1 3 Ball", m_robotContainer.getRobotCommand("auton_ar1ThreeBall"));
-      m_chooser.addOption("AR2 2 Ball", m_robotContainer.getRobotCommand("auton_ar2TwoBall"));
-      // m_chooser.addOption("AR3 4 Ball", m_robotContainer.getRobotCommand("auton_ar3FourBall"));
-      // m_chooser.addOption("AR4 4 Ball #2", m_robotContainer.getRobotCommand("auton_ar4FourBall2"));
-      m_chooser.addOption("AC1 1 Ball", m_robotContainer.getRobotCommand("auton_ac1OneBall"));
-      m_chooser.addOption("AL1 2 Ball", m_robotContainer.getRobotCommand("auton_al1TwoBall"));
-      m_chooser.addOption("AL2 2 Ball #2", m_robotContainer.getRobotCommand("auton_al2TwoBall"));
-      m_chooser.addOption("AL3 2 Ball #3", m_robotContainer.getRobotCommand("auton_al3TwoBall"));
-      // m_chooser.addOption("4 Ball Auto", m_robotContainer.getRobotCommand("auton_4BallAuto"));
-      // m_chooser.addOption("Basic Drive", m_robotContainer.getRobotCommand("auton_BasicDriveAuto"));
-      m_chooser.addOption("Basic Shooting", m_robotContainer.getRobotCommand("auton_BasicShootingAuto"));
-    }
-    SmartDashboard.putData(m_chooser);
   }
 
   /**
@@ -122,7 +109,7 @@ public class Robot extends TimedRobot {
 
     // Helpers.Debug.debug("Getting Auton Command for "+Constants.Auton.autonToRun);
     // m_autonomousCommand = m_robotContainer.getRobotCommand(Constants.Auton.autonToRun);
-    m_autonomousCommand = m_chooser.getSelected();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if (m_autonomousCommand != null && !Constants.Auton.isDisabled) m_autonomousCommand.schedule();
   }
 
@@ -163,6 +150,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
+  }
+
+  @Override
+  public void simulationInit() {
+    int m_simgyro = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
+    SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(m_simgyro,"Yaw"));
+    angle.set(5.0);
+  }
+
+  @Override
+  public void simulationPeriodic() {
+    int m_simgyro = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
+    SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(m_simgyro,"Yaw"));
+    angle.set(angle.get()+0.01);
   }
 
 }

@@ -12,10 +12,18 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.geometry.Pose2d;
+
+import java.util.Map;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -50,11 +58,11 @@ public class RobotContainer {
   //subsystems definitions
     //private final PowerDistribution m_pdp = new PowerDistribution();
     private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
-    private final FiveSecondRuleSubsystem m_intake = new FiveSecondRuleSubsystem();
+    private final FiveSecondRuleSubsystem m_fsr = new FiveSecondRuleSubsystem();
     private final StoveSubsystem m_stove = new StoveSubsystem();
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
-    // private final OrchestraSubsystem m_orchestra = new OrchestraSubsystem();
+    private SendableChooser<Command> m_auto_chooser = new SendableChooser<>();
 
    /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -62,6 +70,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    buildShuffleboard();
 
     // Enable closed loop control of compressor and enable it
     if(Constants.Air.isDisabled) m_air.disable();
@@ -221,43 +230,243 @@ public class RobotContainer {
     // andbtn_MECHZERO.onTrue(new drive_moveAllToMechZero(m_drive));
   }
 
+
   /**
    * Use this to pass the named command to the main Robot class.
+   * @return command
+   */
+  public Command getAutonomousCommand() {
+    return m_auto_chooser.getSelected();
+  }
+
+  /**
+   * This function returns the robot commands used in the auto_chooser. The purpose is to make it easier to build the possible commands
+   * and handle requests for commands that don't exist rather than crashing
    * @return command
    */
   public Command getRobotCommand(String name) {
     //This selects a command (or command group) to return
     switch (name) {
       case "resetRobot":
-//        return new cg_resetRobot(m_collector, m_climber, m_feeder, m_shooter, m_vision);
+        return new cg_resetRobot(m_stove, m_fsr, m_vision);
       case "rumbleNotify":
         return new cg_djRumble(m_vision);
-/*
-      case "auton_4BallAuto":
-        return new cg_auton_4BallAuto(m_drive, m_collector, m_feeder, m_shooter);
-      case "auton_al1TwoBall":
-        return new cg_auton_AL1TwoBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_al2TwoBall":
-        return new cg_auton_AL2TwoBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_al3TwoBall":
-        return new cg_auton_AL3TwoBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_ac1OneBall":
-        return new cg_auton_AC1OneBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_ar1ThreeBall":
-        return new cg_auton_AR1ThreeBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_ar2TwoBall":
-        return new cg_auton_AR2TwoBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_ar3FourBall":
-        return new cg_auton_AR3FourBall(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_ar4FourBall2":
-        return new cg_auton_AR4FourBall2(m_drive, m_collector, m_feeder, m_shooter, m_vision);
-      case "auton_BasicShootingAuto":
-        return new cg_auton_BasicShootingAuto(m_drive, m_collector, m_feeder, m_shooter);
-      case "auton_BasicDriveAuto":
-        return new cg_auton_BasicDriveAuto(m_drive, m_collector, m_feeder, m_shooter);
-*/
       default:
         return null;
     }
   }
+
+
+  //From here down is all used for building the shuffleboard
+
+  public void buildShuffleboard(){
+    buildAutonChooser();
+    buildDriverTab();
+    // buildDriverTestTab();
+    // buildShooterTab();
+    // buildIntakeTestTab();
+    // buildClimberTestTab();
+    // buildVisionTab();
+
+    // Shuffleboard.getTab("Combined Test").add(new TestIntakeIndexerAndShooter(m_indexer, m_intake, m_shooter)).withPosition(0, 1).withSize(2, 1);
+    // Shuffleboard.getTab("Combined Test").add(new SetForwardLimit(m_intake)).withPosition(0, 3).withSize(2, 1);
+    // Shuffleboard.getTab("Arm MM Testing").add("ReSet Intake Arm", new SetArm(m_intake)).withPosition(0, 3).withSize(2, 1);
+    // Shuffleboard.getTab("Intake").add("Extend Intake", new ArmMM(m_intake, Intake.INTAKE_ARM_EXTEND)).withPosition(0, 2).withSize(2,1);
+    // Shuffleboard.getTab("Intake").add("Retract Intake", new ArmMM(m_intake, Intake.INTAKE_ARM_RETRACT)).withPosition(2,2).withSize(2,1);
+    // Shuffleboard.getTab("Arm MM Testing").add(new ResetIntakeArmEncoder(m_intake)).withPosition(0, 2).withSize(2, 1);
+    // Shuffleboard.getTab("ShooterPID").add("Shoot" , new ShooterPIDTuning(m_shooter, m_indexer)).withPosition(0, 3);
+    // Shuffleboard.getTab("Turn MM Testing").add("Turn MM", new TurnToAngle(m_drive, 0)).withPosition(0, 3).withSize(2, 1);
+    // Shuffleboard.getTab("Intake").add(new CollectBalls(m_intake, m_indexer)).withPosition(0, 1).withSize(2, 1);
+    // Shuffleboard.getTab("Intake").add(new DropIntakeAndCollectBalls(m_intake, m_indexer)).withPosition(2, 1).withSize(2, 1);
+    // Shuffleboard.getTab("Intake").add(new EjectBalls(m_indexer, m_shooter)).withPosition(0, 3).withSize(2, 1);
+    
+  }
+
+  public void buildAutonChooser() {
+    //This builds the auton chooser, giving driver friendly names to the commands from above
+    if(Constants.Auton.isDisabled) {
+      m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
+    } else {
+      m_auto_chooser.setDefaultOption("AR1 3 Ball", getRobotCommand("auton_ar1ThreeBall"));
+      m_auto_chooser.addOption("AR2 2 Ball", getRobotCommand("auton_ar2TwoBall"));
+      // m_auto_chooser.addOption("AC1 1 Ball", getRobotCommand("auton_ac1OneBall"));
+      // m_auto_chooser.addOption("AL1 2 Ball", getRobotCommand("auton_al1TwoBall"));
+      // m_auto_chooser.addOption("AL2 2 Ball #2", getRobotCommand("auton_al2TwoBall"));
+      // m_auto_chooser.addOption("AL3 2 Ball #3", getRobotCommand("auton_al3TwoBall"));
+      // m_auto_chooser.addOption("Basic Shooting", getRobotCommand("auton_BasicShootingAuto"));
+    }
+    //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
+  }
+
+  private void buildDriverTab(){
+    ShuffleboardTab driveTab = Shuffleboard.getTab("Primary Display");
+
+    // The drive tab is roughly 9 x 5 (columns x rows)
+    // Camera can be 4 x 4, gyro 
+    // driveTab.add("Cargo Cam", new HttpCamera("Cargo Photon", "http://10.50.24.11:5800"))
+    //                                         .withWidget(BuiltInWidgets.kCameraStream).withPosition(0, 0)
+    //                                         .withSize(4, 4);
+    // Add heading and outputs to the driver views
+    //Auton Chooser
+    driveTab.add("Autonomous Chooser", m_auto_chooser).withWidget(BuiltInWidgets.kComboBoxChooser).withPosition(0, 0).withSize(2, 1);
+
+    driveTab.add("Gyro", m_drive.getGyro()).withPosition(4, 0).withWidget(BuiltInWidgets.kGyro);
+    driveTab.add("Left Output", 0).withSize(1, 1).withPosition(4, 2).withWidget(BuiltInWidgets.kDial)
+                                  .withProperties(Map.of("Min", -1, "Max", 1));
+    driveTab.add("Right Output", 0).withSize(1, 1).withPosition(5, 2).withWidget(BuiltInWidgets.kDial)
+                                  .withProperties(Map.of("Min", -1, "Max", 1));
+
+    // Add vision cues below the camera stream block
+    driveTab.add("HighTarget", false).withSize(1, 1).withPosition(0, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("BallTarget", false).withSize(1, 1).withPosition(1, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Pipeline",0).withSize(1, 1).withPosition(2, 2).withWidget(BuiltInWidgets.kDial)
+                              .withProperties(Map.of("Min", 0, "Max", 2));
+    driveTab.add("Distance", 0).withSize(1, 1).withPosition(3, 2);
+
+    // Add Intake Sensors and Ball Count
+    driveTab.add("Ball Count",0).withSize(1, 1).withPosition(6, 0).withWidget(BuiltInWidgets.kDial)
+                              .withProperties(Map.of("Min", 0, "Max", 2));
+    driveTab.add("ShootBreak", false).withSize(1, 1).withPosition(7, 0).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("MidBreak", false).withSize(1, 1).withPosition(8, 0).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("IntakeBreak", false).withSize(1, 1).withPosition(9, 0).withWidget(BuiltInWidgets.kBooleanBox);
+    // Add Intake Limits
+    driveTab.add("Int. Fwd Hard", false).withSize(1, 1).withPosition(6, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Int. Fwd Soft", false).withSize(1, 1).withPosition(7, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Int. Rev Hard", false).withSize(1, 1).withPosition(8, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Int. Rev Soft", false).withSize(1, 1).withPosition(9, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // // Climber Limits
+    driveTab.add("Clm. Fwd Hard", false).withSize(1, 1).withPosition(6, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Clm. Fwd Soft", false).withSize(1, 1).withPosition(7, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Clm. Rev Hard", false).withSize(1, 1).withPosition(8, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    driveTab.add("Clm. Rev Soft", false).withSize(1, 1).withPosition(9, 2).withWidget(BuiltInWidgets.kBooleanBox);
+
+    // Field
+    driveTab.add("Field", m_drive.getField()).withPosition(0, 4).withSize(4, 2).withWidget(BuiltInWidgets.kField);
+
+  }
+
+  public void buildDriverTestTab(){
+    ShuffleboardTab driveMMTab = Shuffleboard.getTab("Drive Testing");
+    // Configuration Values on row 1
+    driveMMTab.add("kF", 0.1 )              .withPosition(0, 0).getEntry();
+    driveMMTab.add("kP", 0.3 )              .withPosition(1, 0).getEntry();
+    driveMMTab.add("kI", 0 )                .withPosition(2, 0).getEntry();
+    driveMMTab.add("kD", 0 )                .withPosition(3, 0).getEntry();
+    driveMMTab.add("Tgt. Inches", 0)        .withPosition(4, 0).getEntry();
+    driveMMTab.add("Tgt. Degrees", 0)       .withPosition(5, 0).getEntry();
+    driveMMTab.add("Finish Iterations", 5 ) .withPosition(6, 0).getEntry();
+
+    // Result Values on row 2
+    driveMMTab.add("Tgt. Ticks", 0)                                          .withPosition(0, 1);
+    // driveMMTab.addNumber("Left Encoder", m_drive::getLeftEncoderValue)  .withPosition(1, 1);
+    // driveMMTab.addNumber("Right Encoder", m_drive::getRightEncoderValue).withPosition(2, 1);
+    // driveMMTab.addNumber("Gyro Read", m_drive::getRawAngle)             .withPosition(3, 1);
+    driveMMTab.add("Run Time", 0)                                            .withPosition(4, 1);
+    // driveMMTab.addNumber("Left SP", m_drive::getLeftSetPoint).withPosition(5, 1).withSize(1, 1);
+    // driveMMTab.addNumber("Right SP", m_drive::getRightSetPoint).withPosition(6, 1).withSize(1, 1);
+    
+    // Drive limiters on row 3
+    driveMMTab.add("Forward Limiter", 2.5).withPosition(0, 2);
+    driveMMTab.add("Rotation Limiter", 2.5).withPosition(1, 2);
+    driveMMTab.add("Drive Max", .7).withPosition(2, 2);
+    // driveMMTab.add("Update Limits", new UpdateDriveLimiters(m_drive)).withPosition(3, 2).withSize(2, 1);
+
+    // Drive commands on row 4
+    // driveMMTab.add("Drive MM 100", new DriveMM(m_drive, 100))        .withPosition(0, 3).withSize(2, 1);
+    // driveMMTab.add("Drive MM -100", new DriveMM(m_drive, -100))      .withPosition(2, 3).withSize(2, 1);
+    // driveMMTab.add("Drive MM Test", new DriveMMTest(m_drive, 0))     .withPosition(4, 3).withSize(2, 1);
+
+    // Turn commands on row 5
+    // driveMMTab.add("Turn MM 90", new TurnToAngle(m_drive, 90))          .withPosition(0, 4).withSize(2, 1);
+    // driveMMTab.add("Turn MM -90", new TurnToAngle(m_drive, -90))        .withPosition(2, 4).withSize(2, 1);
+    // driveMMTab.add("Turn MM Test", new TurnToAngleTest(m_drive, 0))     .withPosition(4, 4).withSize(2, 1);
+  }
+
+  public void buildShooterTab(){
+    ShuffleboardTab shooterTab = Shuffleboard.getTab("Shooter");
+    // shooterTab.add("SetShotDistanceCloseShot", new SetShooterDistance(m_shooter, ShotDistance.ClosestShot)).withPosition(0, 0).withSize(2, 1);
+    // shooterTab.add("StarShooterWheel", new StartShooterWheel(m_shooter, m_ledsubsystem)).withPosition(2, 0).withSize(2, 1);
+    // shooterTab.add("WaitUntilCommand", new WaitUntilCommand(m_shooter::isUpToSpeed)).withPosition(4, 0).withSize(2, 1);
+    // shooterTab.add("ShootBallsUntilEmpty", new ShootBallsTilEmptyOrThreeSeconds(m_indexer, m_shooter, m_ledsubsystem)).withPosition(6, 0).withSize(2, 1);
+    // shooterTab.add("StopShooter", new StopShooterAndIndexerMotors(m_shooter, m_indexer, m_ledsubsystem)).withPosition(8, 0).withSize(2, 1);
+
+    // shooterTab.addBoolean("Is Up To Speed", m_shooter::isUpToSpeed).withPosition(0, 2).withSize(1, 1);
+    // shooterTab.addNumber("Closed Loop Error", m_shooter::getClosedLoopError).withPosition(1, 2).withSize(1, 1);
+    // shooterTab.add("At Speed", false).withPosition(2, 2).withSize(1, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // shooterTab.addNumber("Shooter Loop Count", m_shooter::getLoopCount).withPosition(3, 2).withSize(1, 1);
+  }
+
+  @SuppressWarnings("unused")
+  private void buildIntakeTestTab(){
+    ShuffleboardTab intakeTab = Shuffleboard.getTab("Intake");
+    intakeTab.add("ResetDriveSpeed", -.5)                  .withPosition(0, 0).withSize(1, 1);
+    // intakeTab.add("Extend Limit", Intake.INTAKE_ARM_EXTEND).withPosition(3, 0).withSize(1, 1);
+
+    // intakeTab.add("Intake Fwd Limit", 1)                            .withPosition(1, 1).withSize(1, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // intakeTab.add("Intake Rev Limit", 0)                            .withPosition(2, 1).withSize(1, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // intakeTab.addNumber("Arm Encoder", m_intake::getRelativeEncoder).withPosition(3, 1).withSize(1, 1);
+    
+    // intakeTab.add("RetractIntakeArm", new ArmMM(m_intake, Intake.INTAKE_ARM_RETRACT)).withPosition(0, 2).withSize(2, 1);
+    // intakeTab.add("ExtendIntakeArm", new ArmMM(m_intake, Intake.INTAKE_ARM_EXTEND))  .withPosition(2, 2).withSize(2, 1);
+    // intakeTab.add("Reset Extend Limit", new SetExtendLimit(m_intake))                .withPosition(4, 2).withSize(2, 1);
+
+    // intakeTab.add("ResetArmLimitAndEncoder", new ResetArmLimitAndEncoder(m_intake)).withPosition(0, 3).withSize(2, 1);
+    // intakeTab.add("TurnOffIntakeArm", new TurnOffIntakeArm(m_intake))              .withPosition(2, 3).withSize(2, 1);
+
+    // intakeTab.add("Move Arm no MM (900)", new ExtendIntakeBangBang(m_intake, 1700)).withPosition(5, 0);
+  }
+
+  @SuppressWarnings("unused")
+  private void buildClimberTestTab(){
+    ShuffleboardTab climberTab = Shuffleboard.getTab("Climber");
+    // Testing Information
+    climberTab.add("ClimberDownSpeed", -.7).withPosition(0, 0).withSize(1, 1);
+    climberTab.add("ClimberUpSpeed", 1)    .withPosition(1, 0).withSize(1, 1);
+
+    // climberTab.addNumber("Encoder", m_climber::getRelativeEncoder)                    .withPosition(1, 1);
+    // climberTab.addBoolean("Forward Limit", m_climber::forwardLimitSwitchTriggered)    .withPosition(2, 1);
+    // climberTab.addBoolean("Reverse Limit", m_climber::reverseLimitSwitchTriggered)    .withPosition(3, 1);
+    // climberTab.addBoolean("Soft Forward Limit", m_climber::getClimberSoftForwardLimit).withPosition(4, 1);
+    // climberTab.addBoolean("Soft Reverse Limit", m_climber::getClimberSoftReverseLimit).withPosition(5, 1);
+    
+    // High bar raise
+    // climberTab.add("Raise to MidRung", new HighBarRaise(m_climber, m_ledsubsystem, m_driver_controller)).withPosition(0, 2).withSize(2, 1);
+    // climberTab.add("Raise to LowBar", new LowBarRaise(m_climber, m_ledsubsystem, m_driver_controller))  .withPosition(2, 2).withSize(2, 1);
+    // climberTab.add("Cancel Climber", new CancelClimber(m_climber, m_ledsubsystem))                      .withPosition(4, 2).withSize(2, 1);
+    // climberTab.add("Lower Climber", new LowerToLimitOrTime(m_climber))                  .withPosition(6, 2).withSize(2, 1);
+    
+    // climberTab.add("TestClimbDown", new TestClimberDown(m_climber))                     .withPosition(0, 3).withSize(2, 1);
+    // climberTab.add("TestClimbUp", new TestClimberUp(m_climber))                         .withPosition(2, 3).withSize(2, 1);
+    // climberTab.add("Reset to LowerLimit", new DriveClimbertoReverseHardLimit(m_climber)).withPosition(4, 3).withSize(2, 1);
+  }
+
+  @SuppressWarnings("unused")
+  private void buildVisionTab() {
+    ShuffleboardTab visionTab = Shuffleboard.getTab("Vision");
+
+    // visionTab.addNumber("Distance to Target", m_vision::getHubTargetRangeIndex0).withPosition(1, 0);
+    // visionTab.addNumber("Target Yaw",         m_vision::getHubTargetRangeIndex1).withPosition(1, 1);
+
+    // visionTab.add("LED on", new LEDon(m_vision))  .withPosition(0, 0);
+    // visionTab.add("LED off", new LEDoff(m_vision)).withPosition(0, 1);
+    // visionTab.add("Condigure Vision Drive", new configureVisionDrivePID(m_drive)).withPosition(0, 2);
+    // visionTab.add("Configure Turn Turn", new configureVisionTurnPID(m_drive))    .withPosition(0, 3);
+    // visionTab.add("Configure Cargo controllre", new configureVisionCargoPID(m_drive)).withPosition(0, 4);
+
+    visionTab.add("forward drive speed", 0);
+    visionTab.add("Turn speed", 0);
+    visionTab.add("Cargo Yaw", 0);
+
+    visionTab.add("Drive kP", 0.4);
+    visionTab.add("Drive kD", 0);
+    visionTab.add("Drive kI", 0);
+    visionTab.add("Drive kF", 0);
+    visionTab.add("Turn kP", 0.02);
+    visionTab.add("Turn kD", 0);
+    visionTab.add("Turn kI", 0);
+    visionTab.add("Turn kF", 0);
+    visionTab.add("Cargo kP,", 0.011);
+  }
+
+
 }

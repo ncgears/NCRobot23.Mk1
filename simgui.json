@@ -1,7 +1,33 @@
 {
+  "HALProvider": {
+    "Other Devices": {
+      "navX-Sensor[0]": {
+        "header": {
+          "open": true
+        }
+      }
+    }
+  },
   "NTProvider": {
     "types": {
       "/FMSInfo": "FMSInfo",
+      "/LiveWindow/Ungrouped/Scheduler": "Scheduler",
+      "/LiveWindow/Ungrouped/Talon FX [31]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [32]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [33]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon FX [34]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [11]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [13]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [14]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [1]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [2]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [3]": "Motor Controller",
+      "/LiveWindow/Ungrouped/Talon SRX [4]": "Motor Controller",
+      "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
+      "/Shuffleboard/Drive/Autonomous Chooser": "String Chooser",
+      "/Shuffleboard/Primary Display/Autonomous Chooser": "String Chooser",
+      "/Shuffleboard/Primary Display/Field": "Field2d",
+      "/Shuffleboard/Primary Display/Gyro": "Gyro",
       "/SmartDashboard/SendableChooser[0]": "String Chooser"
     }
   },
@@ -9,10 +35,25 @@
     "retained": {
       "RobotController": {
         "open": true
+      },
+      "Shuffleboard": {
+        "Primary Display": {
+          "Autonomous Chooser": {
+            "open": true
+          },
+          "open": true
+        },
+        "open": true
       }
     },
     "transitory": {
       "Shuffleboard": {
+        "Primary Display": {
+          "Autonomous Chooser": {
+            "open": true
+          },
+          "open": true
+        },
         "open": true
       },
       "SmartDashboard": {
@@ -24,8 +65,7 @@
         },
         "Vision": {
           "open": true
-        },
-        "open": true
+        }
       }
     }
   }
