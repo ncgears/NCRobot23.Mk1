@@ -15,7 +15,7 @@ import frc.team1918.robot.Dashboard;
 public class Burner {
     private WPI_TalonSRX m_motor;
     private double m_kP, m_kI, m_kD, m_kF, m_kPeakOutput, m_kCruise, m_kAccel;
-    private int m_kIZone;
+    // private int m_kIZone;
     private int m_positionAllowedError;
     private String m_moduleName;
     public enum BurnerPositions {HOME, TOP, BOTTOM};
@@ -37,7 +37,7 @@ public class Burner {
         m_kF = moduleConstants.kF;
         m_kCruise = moduleConstants.kCruise;
         m_kAccel = moduleConstants.kAccel;
-        m_kIZone = moduleConstants.kIZone;
+        // m_kIZone = moduleConstants.kIZone;
         m_positionAllowedError = moduleConstants.PositionAllowedError;
 
         m_motor.configFactoryDefault(); //Reset controller to factory defaults to avoid wierd stuff from carrying over
