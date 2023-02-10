@@ -1,7 +1,6 @@
 package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team1918.robot.Helpers;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
 public class stove_moveGreaseTrapHome extends CommandBase {

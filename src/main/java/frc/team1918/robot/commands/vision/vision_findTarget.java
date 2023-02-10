@@ -3,7 +3,7 @@ package frc.team1918.robot.commands.vision;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import java.util.function.DoubleSupplier;
+
 //import constants and subsystem
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Helpers;
