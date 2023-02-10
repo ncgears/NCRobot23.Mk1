@@ -15,8 +15,8 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 	public enum spatulas {BOTH, LEFT, RIGHT};
 
 	//initialize spatulas
-	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants); // Left
-	private static Spatula m_SpatulaRight = new Spatula("SpatulaRight", Constants.Spatula.Right.constants); // Right
+	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants, Constants.Spatula.Left.gains); // Left
+	private static Spatula m_SpatulaRight = new Spatula("SpatulaRight", Constants.Spatula.Right.constants, Constants.Spatula.Right.gains); // Right
 	private Spatula[] modules = {m_SpatulaLeft, m_SpatulaRight};
 
 	/**

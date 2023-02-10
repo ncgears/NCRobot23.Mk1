@@ -11,12 +11,11 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 //Team 1918
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
+import frc.team1918.robot.utils.PIDGains;
+import frc.team1918.robot.utils.TalonConstants;
 
 public class GreaseTrap {
     private WPI_TalonSRX m_motor;
-    private double m_kP, m_kI, m_kD, m_kF, m_kPeakOutput, m_kCruise, m_kAccel;
-    // private int m_kIZone;
-    private int m_positionAllowedError;
     private String m_moduleName;
     public enum GreaseTrapPositions {HOME, LEVEL, DOWN};
 
@@ -26,18 +25,9 @@ public class GreaseTrap {
      * @param name This is the name of this GreaseTrap module (ie. "GreaseTrap")
      * @param moduleConstants This is a GreaseTrapConstants object containing the data for this module
 	 */
-    public GreaseTrap(String name, GreaseTrapConstants moduleConstants){
+    public GreaseTrap(String name, TalonConstants moduleConstants, PIDGains moduleGains){
         m_moduleName = name;
         m_motor = new WPI_TalonSRX(moduleConstants.MotorID);
-        m_kPeakOutput = moduleConstants.kPeakOutput;
-        m_kP = moduleConstants.kP;
-        m_kI = moduleConstants.kI;
-        m_kD = moduleConstants.kD;
-        m_kF = moduleConstants.kF;
-        m_kCruise = moduleConstants.kCruise;
-        m_kAccel = moduleConstants.kAccel;
-        // m_kIZone = moduleConstants.kIZone;
-        m_positionAllowedError = moduleConstants.PositionAllowedError;
 
         m_motor.configFactoryDefault(); //Reset controller to factory defaults to avoid wierd stuff from carrying over
         m_motor.set(ControlMode.PercentOutput, 0); //Set controller to stopped
@@ -47,7 +37,7 @@ public class GreaseTrap {
             Constants.Global.kTimeoutMs);				// Configuration Timeout
 
         //m_motor.configFeedbackNotContinuous(moduleConstants.SensorNonContinuous, 0); //Disable continuous feedback tracking (so 0 and 1024 are effectively one and the same)
-        m_motor.configNeutralDeadband(0.001, Constants.Global.kTimeoutMs); //Adjust deadband to 0.1% from default of 4%
+        m_motor.configNeutralDeadband(moduleGains.kNeutralDeadband, Constants.Global.kTimeoutMs); //Adjust deadband to 0.1% from default of 4%
 
         //if the sensor phase is wrong, plot will go opposite direction of target, need to fix before setting inverted
         m_motor.setSensorPhase(moduleConstants.SensorPhase); //set the sensor phase based on the constants setting for this module
@@ -61,21 +51,21 @@ public class GreaseTrap {
         /* Set peak and nominal outputs */
         m_motor.configNominalOutputForward(0, Constants.Global.kTimeoutMs);
         m_motor.configNominalOutputReverse(0, Constants.Global.kTimeoutMs);
-        m_motor.configPeakOutputForward(m_kPeakOutput, Constants.Global.kTimeoutMs);
-        m_motor.configPeakOutputReverse(-m_kPeakOutput, Constants.Global.kTimeoutMs);
+        m_motor.configPeakOutputForward(moduleGains.kPeakOutput, Constants.Global.kTimeoutMs);
+        m_motor.configPeakOutputReverse(-moduleGains.kPeakOutput, Constants.Global.kTimeoutMs);
 
         /* Set Motion Magic gains in slot0 */
         m_motor.selectProfileSlot(Constants.Global.kPidProfileSlotIndex, Constants.Global.kPidIndex);
-        m_motor.config_kF(Constants.Global.kPidProfileSlotIndex, m_kF, Constants.Global.kTimeoutMs);
-        m_motor.config_kP(Constants.Global.kPidProfileSlotIndex, m_kP, Constants.Global.kTimeoutMs);
-        m_motor.config_kI(Constants.Global.kPidProfileSlotIndex, m_kI, Constants.Global.kTimeoutMs);
-        m_motor.config_kD(Constants.Global.kPidProfileSlotIndex, m_kD, Constants.Global.kTimeoutMs);
+        m_motor.config_kF(Constants.Global.kPidProfileSlotIndex, moduleGains.kF, Constants.Global.kTimeoutMs);
+        m_motor.config_kP(Constants.Global.kPidProfileSlotIndex, moduleGains.kP, Constants.Global.kTimeoutMs);
+        m_motor.config_kI(Constants.Global.kPidProfileSlotIndex, moduleGains.kI, Constants.Global.kTimeoutMs);
+        m_motor.config_kD(Constants.Global.kPidProfileSlotIndex, moduleGains.kD, Constants.Global.kTimeoutMs);
         //m_motor.config_IntegralZone(0, m_kIZone);
-        m_motor.configAllowableClosedloopError(Constants.Global.kPidIndex, m_positionAllowedError); 
+        m_motor.configAllowableClosedloopError(Constants.Global.kPidIndex, moduleConstants.AllowedError); 
 
         /* Set acceleration and cruise velocity */
-        m_motor.configMotionCruiseVelocity(m_kCruise, Constants.Global.kTimeoutMs);
-        m_motor.configMotionAcceleration(m_kAccel, Constants.Global.kTimeoutMs);
+        m_motor.configMotionCruiseVelocity(moduleGains.kCruise, Constants.Global.kTimeoutMs);
+        m_motor.configMotionAcceleration(moduleGains.kAccel, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
