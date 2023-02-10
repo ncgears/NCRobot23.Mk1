@@ -78,7 +78,9 @@ public class GreaseTrap {
         m_motor.configMotionAcceleration(m_kAccel, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
-        m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
+        m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
+        m_motor.configClearPositionOnLimitR(true, Constants.Global.kTimeoutMs);
+        // m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
     }
 
     /**
@@ -129,6 +131,9 @@ public class GreaseTrap {
         return m_moduleName;
     }
 
+    /**
+     * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
+     */
     public void updateDashboard() {
         Dashboard.GreaseTrap.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
         Dashboard.GreaseTrap.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));

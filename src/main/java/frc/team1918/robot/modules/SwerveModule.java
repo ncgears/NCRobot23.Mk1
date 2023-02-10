@@ -16,11 +16,6 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
-import frc.team1918.robot.Constants.Global;
-import frc.team1918.robot.Constants.Swerve;
-import frc.team1918.robot.Dashboard.DriveTrain;
-import frc.team1918.robot.Helpers.Debug;
-import frc.team1918.robot.Helpers.General;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 
 public class SwerveModule {
@@ -331,20 +326,6 @@ public class SwerveModule {
     }
 
     /**
-     * This function is used to output data to the dashboard for debugging the module, typically done in the {@link DriveSubsystem} periodic.
-     */
-    public void updateDashboard() {
-        Dashboard.DriveTrain.setTurnPosition(moduleName, (int) turn.getSelectedSensorPosition(0) & 0x3FF);
-        Dashboard.DriveTrain.setTurnSetpoint(moduleName, (int) turn.getClosedLoopTarget(0) & 0x3FF);
-        Dashboard.DriveTrain.setTurnPositionError(moduleName, turn.getClosedLoopError(0));
-        Dashboard.DriveTrain.setTurnVelocity(moduleName, turn.getSelectedSensorVelocity(0));
-        Dashboard.DriveTrain.setTurnZeroPosition(moduleName, getZeroPositionTicks()); 
-        // Dashboard.DriveTrain.setTurnPositionErrorChange(moduleName, turn.getErrorDerivative(0));
-        Dashboard.DriveTrain.setDriveVelocity(moduleName, drive.getSelectedSensorVelocity(0));
-        Dashboard.DriveTrain.setDriveDistance(moduleName, getDriveDistanceMeters());
-    }
-
-    /**
      * calculate the turning motor setpoint based on the desired angle and the current angle measurement
      * @param targetAngle desired target in radians
      * @param currentAngle current angle in radians
@@ -369,5 +350,19 @@ public class SwerveModule {
 
     public void syncTurningEncoders() {
         // turn.setSelectedSensorPosition(turn.getSelectedSensorPosition(0),1,0);
+    }
+
+    /**
+     * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
+     */
+    public void updateDashboard() {
+        Dashboard.DriveTrain.setTurnPosition(moduleName, (int) turn.getSelectedSensorPosition(0) & 0x3FF);
+        Dashboard.DriveTrain.setTurnSetpoint(moduleName, (int) turn.getClosedLoopTarget(0) & 0x3FF);
+        Dashboard.DriveTrain.setTurnPositionError(moduleName, turn.getClosedLoopError(0));
+        Dashboard.DriveTrain.setTurnVelocity(moduleName, turn.getSelectedSensorVelocity(0));
+        Dashboard.DriveTrain.setTurnZeroPosition(moduleName, getZeroPositionTicks()); 
+        // Dashboard.DriveTrain.setTurnPositionErrorChange(moduleName, turn.getErrorDerivative(0));
+        Dashboard.DriveTrain.setDriveVelocity(moduleName, drive.getSelectedSensorVelocity(0));
+        Dashboard.DriveTrain.setDriveDistance(moduleName, getDriveDistanceMeters());
     }
 }

@@ -79,6 +79,7 @@ public class Burner {
         m_motor.configMotionAcceleration(m_kAccel, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
+        m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
         m_motor.configClearPositionOnLimitR(true, Constants.Global.kTimeoutMs);
         // m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
     }
@@ -115,6 +116,7 @@ public class Burner {
     }
 
     public void moveTo(BurnerPositions position) {
+        Dashboard.Burner.setPositionName(position.toString());
         switch (position) {
             case HOME:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.home);
@@ -125,16 +127,18 @@ public class Burner {
             case BOTTOM:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.bottom);
                 break;
+            default:
+                Dashboard.Burner.setPositionName("Unknown");
         }
     }
 
     /**
-     * This function is used to output data to the dashboard for debugging the module, typically done in the {@link DriveSubsystem} periodic.
+     * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {
-        // Dashboard.Burner.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
-        // Dashboard.Burner.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
-        // Dashboard.Burner.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        Dashboard.Burner.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
+        Dashboard.Burner.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
+        Dashboard.Burner.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
     }
 
 }

@@ -5,6 +5,7 @@ public class SpatulaConstants {
     public final int MotorID;
     public final boolean SensorPhase;
     public final int SensorTicks = 4096; //Number of encoder ticks for the encoder
+    public final double kPeakOutput = 1.0; //Max output of controller
     public final boolean SensorNonContinuous = false; //usually, true if within 1 rotation, false if it wraps past 0
     public final boolean IsInverted;
     public final int PositionAllowedError;
