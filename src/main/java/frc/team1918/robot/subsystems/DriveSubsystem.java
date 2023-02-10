@@ -3,7 +3,6 @@ package frc.team1918.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
@@ -88,6 +87,7 @@ public class DriveSubsystem extends SubsystemBase {
 */
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public void periodic() {
 		updateOdometry();

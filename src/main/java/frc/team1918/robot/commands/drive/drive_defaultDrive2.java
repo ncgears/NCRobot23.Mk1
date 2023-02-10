@@ -14,6 +14,7 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
  * A command that runs the drive actions. This passes the OI inputs on to the appropriate drive system (fieldCentricDrive or humanDrive).
  * fieldCentricDrive is simply a call to humanDrive after gyro corrections are made.
  */
+@SuppressWarnings("unused")
 public class drive_defaultDrive2 extends CommandBase {
   private final DriveSubsystem m_drive;
   private final Joystick dj;

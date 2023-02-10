@@ -18,7 +18,7 @@ public class Burner {
     // private int m_kIZone;
     private int m_positionAllowedError;
     private String m_moduleName;
-    public enum BurnerPositions {HOME, TOP, BOTTOM};
+    public enum BurnerPositions {HOME, HOT, TOP, COLD, BOTTOM};
 
  	/**
 	 * 1918 HotPlate Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to serve scoring pieces
@@ -122,9 +122,11 @@ public class Burner {
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.home);
                 break;
             case TOP:
+            case HOT:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.top);
                 break;
             case BOTTOM:
+            case COLD:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.bottom);
                 break;
             default:

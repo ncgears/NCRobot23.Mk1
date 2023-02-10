@@ -3,10 +3,8 @@ package frc.team1918.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1918.robot.Constants;
-import frc.team1918.robot.Dashboard;
-import frc.team1918.robot.Helpers;
 import frc.team1918.robot.modules.Burner;
-import frc.team1918.robot.modules.BurnerConstants;
+import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Griddle;
 import frc.team1918.robot.modules.Griddle.GriddleDirections;
 import frc.team1918.robot.modules.GreaseTrap;
@@ -78,7 +76,7 @@ public class StoveSubsystem extends SubsystemBase {
 
 	/**
 	 * Moves ramps to their home positions (starting configuration)
-	 * @param ramp - This is an enum of ALL, HOTPLATE, GREASETRAP
+	 * @param ramp - This is an enum of BOTH, HOTPLATE, GREASETRAP
 	 */
 	public void stowRamp(ramps ramp) {
 		switch (ramp) {
@@ -96,11 +94,34 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Sets burner to its home position (starting configuration)
+	 */
+	public void coolBurner() {
+		m_Burner.moveTo(BurnerPositions.HOME);
+	}
+
+	/**
 	 * Moves the GreaseTrap to a designated position
 	 * @param position - This is a GreaseTrapPositions enum of {@GreaseTrapPositions}
 	 */
 	public void moveGreaseTrapTo(GreaseTrapPositions position) {
 		m_GreaseTrap.moveTo(position);
+	}
+
+	/**
+	 * Moves the HotPlate to a designated position
+	 * @param position - This is a HotPlatePositions enum of {@HotPlatePositions}
+	 */
+	public void moveHotPlateTo(HotPlatePositions position) {
+		m_HotPlate.moveTo(position);
+	}
+
+	/**
+	 * Moves the Burner to a designated position
+	 * @param position - This is a BurnerPositions enum of {@BurnerPositions}
+	 */
+	public void moveBurnerTo(BurnerPositions position) {
+		m_Burner.moveTo(position);
 	}
 
 }

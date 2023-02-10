@@ -2,6 +2,7 @@ package frc.team1918.lib.control;
 
 //From TripleHelix 2363
 
+@SuppressWarnings("unused")
 public class PIDController {
     private double kP, kD, kI;
     private double derivative, integral, lastError;

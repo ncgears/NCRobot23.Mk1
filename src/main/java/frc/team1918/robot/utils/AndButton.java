@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 /**
  * This class creates a Button object that requires 2 buttons to be pressed at the same time.
  */
+@Deprecated(since = "2023")
 public class AndButton extends Button {
     private final Button button1;
     private final Button button2;

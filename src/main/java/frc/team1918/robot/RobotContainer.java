@@ -23,7 +23,6 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import edu.wpi.first.wpilibj.PowerDistribution;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -54,6 +53,7 @@ import frc.team1918.robot.commandgroups.*;
  * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
  * (including subsystems, commands, and button mappings) should be declared here.
  */
+@SuppressWarnings("unused")
 public class RobotContainer {
   //subsystems definitions
     //private final PowerDistribution m_pdp = new PowerDistribution();
@@ -67,6 +67,7 @@ public class RobotContainer {
    /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
+  @SuppressWarnings("unused")
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -250,7 +251,7 @@ public class RobotContainer {
       case "resetRobot":
         return new cg_resetRobot(m_stove, m_fsr, m_vision);
       case "rumbleNotify":
-        return new cg_djRumble(m_vision);
+        return new cg_djRumble();
       default:
         return null;
     }
@@ -298,6 +299,7 @@ public class RobotContainer {
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
   }
 
+  @SuppressWarnings("unused")
   private void buildDriverTab(){
     ShuffleboardTab driveTab = Shuffleboard.getTab("Primary Display");
 
@@ -345,6 +347,7 @@ public class RobotContainer {
 
   }
 
+  @SuppressWarnings("unused")
   public void buildDriverTestTab(){
     ShuffleboardTab driveMMTab = Shuffleboard.getTab("Drive Testing");
     // Configuration Values on row 1
@@ -382,6 +385,7 @@ public class RobotContainer {
     // driveMMTab.add("Turn MM Test", new TurnToAngleTest(m_drive, 0))     .withPosition(4, 4).withSize(2, 1);
   }
 
+  @SuppressWarnings("unused")
   public void buildShooterTab(){
     ShuffleboardTab shooterTab = Shuffleboard.getTab("Shooter");
     // shooterTab.add("SetShotDistanceCloseShot", new SetShooterDistance(m_shooter, ShotDistance.ClosestShot)).withPosition(0, 0).withSize(2, 1);

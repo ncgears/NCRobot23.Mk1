@@ -11,16 +11,13 @@ package frc.team1918.robot.commandgroups;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1918.robot.commands.helpers.helpers_setRumble;
-import frc.team1918.robot.subsystems.VisionSubsystem;
 
 
 public class cg_djRumble extends SequentialCommandGroup {
-  private final VisionSubsystem m_vision;
   
   /**
   */
-  public cg_djRumble(VisionSubsystem vision) {
-    m_vision = vision;
+  public cg_djRumble() {
 
     /**
      * Creates a sequential command group with the objects to run in sequence.
