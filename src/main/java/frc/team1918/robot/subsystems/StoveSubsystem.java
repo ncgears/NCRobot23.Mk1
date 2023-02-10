@@ -5,6 +5,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
+import frc.team1918.robot.modules.Burner;
+import frc.team1918.robot.modules.BurnerConstants;
 import frc.team1918.robot.modules.Griddle;
 import frc.team1918.robot.modules.Griddle.GriddleDirections;
 import frc.team1918.robot.modules.GreaseTrap;
@@ -25,6 +27,7 @@ public class StoveSubsystem extends SubsystemBase {
 	private Griddle m_Griddle; //conveyor module
 	private GreaseTrap m_GreaseTrap; //flip ramp module
 	private HotPlate m_HotPlate; //scoring ramp controller
+	private Burner m_Burner; //elevator controller
 	
 	/**
 	 * Returns the instance of the Intake subsystem.
@@ -43,6 +46,7 @@ public class StoveSubsystem extends SubsystemBase {
 	public StoveSubsystem() {
 		m_GreaseTrap = new GreaseTrap("GreaseTrap", Constants.Stove.GreaseTrap.constants);
 		m_HotPlate = new HotPlate("HotPlate", Constants.Stove.HotPlate.constants);
+		m_Burner = new Burner("Burner", Constants.Stove.Burner.constants);
 		stowRamp(ramps.BOTH); //Make sure all spatulas are initialized to their stowed position
 	}
 

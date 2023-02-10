@@ -13,6 +13,8 @@ public class HotPlateConstants {
     public final double kI;
     public final double kD;
     public final double kF;
+    public final double kCruise;
+    public final double kAccel;
     public final int kIZone;
 
     /**
@@ -26,9 +28,11 @@ public class HotPlateConstants {
      * @param kI - (double) Integral constant for the position control
      * @param kD - (double) Derivative constant for the position control
      * @param kF - (double) Feed Forward constant for the position control
+     * @param kCruise - (double) Cruise constant for motionmagic
+     * @param kAccel - (double) Accelleration constant for motionmagic
      * @param kIZone - (int) Integral Zone constant for the position control
      */
-    public HotPlateConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, double kF, int kIZone) {
+    public HotPlateConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, double kF, double kCruise, double kAccel, int kIZone) {
         //turn
         this.MotorID = MotorID;
         this.SensorPhase = SensorPhase;
@@ -38,6 +42,8 @@ public class HotPlateConstants {
         this.kI = kI;
         this.kD = kD;
         this.kF = kF;
+        this.kCruise = kCruise;
+        this.kAccel = kAccel;
         this.kIZone = kIZone;
     }
 }

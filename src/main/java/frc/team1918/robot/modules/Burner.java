@@ -12,21 +12,22 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 
-public class GreaseTrap {
+public class Burner {
     private WPI_TalonSRX m_motor;
     private double m_kP, m_kI, m_kD, m_kF, m_kPeakOutput, m_kCruise, m_kAccel;
     private int m_kIZone;
     private int m_positionAllowedError;
     private String m_moduleName;
-    public enum GreaseTrapPositions {HOME, LEVEL, DOWN};
+    public enum BurnerPositions {HOME, TOP, BOTTOM};
 
  	/**
-	 * 1918 GreaseTrap Module v2023.1 - This GreaseTrap module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to unburn pancakes (flip them)
+	 * 1918 HotPlate Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to serve scoring pieces
      * The module uses a Versa-Planetary Encoder Stage for positioning data.
-     * @param name This is the name of this GreaseTrap module (ie. "GreaseTrap")
-     * @param moduleConstants This is a GreaseTrapConstants object containing the data for this module
+     * There is a high limit and low limit switch, connected to the Talon to limit the mechanical travel
+	 * @param name This is the name of this spatula module (ie. "HotPlate")
+     * @param moduleConstants This is a HotPlateConstants object containing the data for this module
 	 */
-    public GreaseTrap(String name, GreaseTrapConstants moduleConstants){
+    public Burner(String name, BurnerConstants moduleConstants){
         m_moduleName = name;
         m_motor = new WPI_TalonSRX(moduleConstants.MotorID);
         m_kPeakOutput = moduleConstants.kPeakOutput;
@@ -78,7 +79,8 @@ public class GreaseTrap {
         m_motor.configMotionAcceleration(m_kAccel, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
-        m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
+        m_motor.configClearPositionOnLimitR(true, Constants.Global.kTimeoutMs);
+        // m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
     }
 
     /**
@@ -90,10 +92,10 @@ public class GreaseTrap {
     }
 
     /**
-     * Moves the spatula to it's home position (starting configuration)
+     * Moves the hotplate to it's home position (starting configuration)
      */
     public void stow() {
-        m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.home);
+        m_motor.set(ControlMode.Position, Constants.Stove.HotPlate.Positions.home);
     }
 
     /**
@@ -108,31 +110,31 @@ public class GreaseTrap {
         }
     }
 
-    public void moveTo(GreaseTrapPositions position) {
-        Dashboard.GreaseTrap.setPositionName(position.toString());
-        switch (position) {
-            case HOME:
-                m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.home);
-                break;
-            case LEVEL:
-                m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.level);
-                break;            
-            case DOWN:
-                m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.down);
-                break;
-            default:
-                Dashboard.GreaseTrap.setPositionName("Unknown");
-        }
-    }
-
     public String getModuleName() {
         return m_moduleName;
     }
 
+    public void moveTo(BurnerPositions position) {
+        switch (position) {
+            case HOME:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.home);
+                break;
+            case TOP:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.top);
+                break;
+            case BOTTOM:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.Burner.Positions.bottom);
+                break;
+        }
+    }
+
+    /**
+     * This function is used to output data to the dashboard for debugging the module, typically done in the {@link DriveSubsystem} periodic.
+     */
     public void updateDashboard() {
-        Dashboard.GreaseTrap.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
-        Dashboard.GreaseTrap.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
-        Dashboard.GreaseTrap.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        // Dashboard.Burner.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
+        // Dashboard.Burner.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
+        // Dashboard.Burner.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
     }
 
 }

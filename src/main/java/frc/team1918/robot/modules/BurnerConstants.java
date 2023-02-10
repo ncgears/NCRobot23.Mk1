@@ -1,6 +1,6 @@
 package frc.team1918.robot.modules;
 
-public class GriddleConstants {
+public class BurnerConstants {
     //control
     public final int MotorID;
     public final boolean SensorPhase;
@@ -18,7 +18,7 @@ public class GriddleConstants {
     public final int kIZone;
 
     /**
-     * Creates a new constants object for initializing a GreaseTrap Module
+     * Creates a new constants object for initializing a HotPlate Module
      * @param MotorID - (int) CAN ID of the Motor (TalonSRX)
      * @param SensorPhase - (bool) true to invert the sensor phase
      * @param SensorRotationTicks - (int) count of encoder ticks in a full rotation
@@ -32,7 +32,7 @@ public class GriddleConstants {
      * @param kAccel - (double) Accelleration constant for motionmagic
      * @param kIZone - (int) Integral Zone constant for the position control
      */
-    public GriddleConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, double kF, double kCruise, double kAccel, int kIZone) {
+    public BurnerConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, double kF, double kCruise, double kAccel, int kIZone) {
         //turn
         this.MotorID = MotorID;
         this.SensorPhase = SensorPhase;

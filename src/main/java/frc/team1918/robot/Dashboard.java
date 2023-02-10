@@ -14,6 +14,8 @@ public class Dashboard {
     }
     public static final class Burner {
         public static final void setTemp(String value) { SmartDashboard.putString("Burner/Temp", value); }
+        public static final void setTarget(double value) { SmartDashboard.putNumber("Burner/Target",value); }
+        public static final void setError(double value) { SmartDashboard.putNumber("Burner/Error", value); }
     }
     public static final class GreaseTrap {
         public static final void setPositionName(String value) { SmartDashboard.putString("GreaseTrap/PosName", value); }

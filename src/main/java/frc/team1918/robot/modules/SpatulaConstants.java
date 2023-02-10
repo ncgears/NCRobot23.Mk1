@@ -11,6 +11,9 @@ public class SpatulaConstants {
     public final double kP;
     public final double kI;
     public final double kD;
+    public final double kF;
+    public final double kCruise;
+    public final double kAccel;
     public final int kIZone;
 
     /**
@@ -23,9 +26,12 @@ public class SpatulaConstants {
      * @param kP - (double) Proportional constant for the position control
      * @param kI - (double) Integral constant for the position control
      * @param kD - (double) Derivative constant for the position control
+     * @param kF - (double) Feed Forward constant for the position control
+     * @param kCruise - (double) Cruise constant for motionmagic
+     * @param kAccel - (double) Accelleration constant for motionmagic
      * @param kIZone - (int) Integral Zone constant for the position control
      */
-    public SpatulaConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, int kIZone) {
+    public SpatulaConstants(int MotorID, boolean SensorPhase, boolean IsInverted, int AllowedError, double kP, double kI, double kD, double kF, double kCruise, double kAccel, int kIZone) {
         //turn
         this.MotorID = MotorID;
         this.SensorPhase = SensorPhase;
@@ -34,6 +40,9 @@ public class SpatulaConstants {
         this.kP = kP;
         this.kI = kI;
         this.kD = kD;
+        this.kF = kF;
+        this.kCruise = kCruise;
+        this.kAccel = kAccel;
         this.kIZone = kIZone;
     }
 }
