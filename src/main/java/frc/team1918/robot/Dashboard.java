@@ -11,9 +11,11 @@ public class Dashboard {
     }
     public static final class Griddle {
         public static final void setSpeed(double value) { SmartDashboard.putNumber("Griddle/Speed", value); }
+        public static final void setDirection(String value) { SmartDashboard.putString("Griddle/Direction", value); }
     }
     public static final class Burner {
-        public static final void setTemp(String value) { SmartDashboard.putString("Burner/Temp", value); }
+        public static final void setPositionName(String value) { SmartDashboard.putString("Burner/PosName", value); }
+        public static final void setPosition(double value) { SmartDashboard.putNumber("Burner/Position",value); }
         public static final void setTarget(double value) { SmartDashboard.putNumber("Burner/Target",value); }
         public static final void setError(double value) { SmartDashboard.putNumber("Burner/Error", value); }
     }
