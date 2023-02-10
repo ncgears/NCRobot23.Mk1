@@ -10,6 +10,7 @@ package frc.team1918.robot;
 //Global imports
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.geometry.Pose2d;
 
@@ -21,6 +22,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardComponent;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 //import edu.wpi.first.wpilibj.PowerDistribution;
@@ -267,6 +269,7 @@ public class RobotContainer {
     // buildIntakeTestTab();
     // buildClimberTestTab();
     // buildVisionTab();
+    //Shuffleboard.selectTab("Driver"); //select the driver tab
 
     // Shuffleboard.getTab("Combined Test").add(new TestIntakeIndexerAndShooter(m_indexer, m_intake, m_shooter)).withPosition(0, 1).withSize(2, 1);
     // Shuffleboard.getTab("Combined Test").add(new SetForwardLimit(m_intake)).withPosition(0, 3).withSize(2, 1);
@@ -299,7 +302,7 @@ public class RobotContainer {
   }
 
   private void buildDriverTab(){
-    ShuffleboardTab driveTab = Shuffleboard.getTab("Primary Display");
+    ShuffleboardTab driveTab = Shuffleboard.getTab("Driver");
 
     // The drive tab is roughly 9 x 5 (columns x rows)
     // Camera can be 4 x 4, gyro 
@@ -307,41 +310,67 @@ public class RobotContainer {
     //                                         .withWidget(BuiltInWidgets.kCameraStream).withPosition(0, 0)
     //                                         .withSize(4, 4);
     // Add heading and outputs to the driver views
-    //Auton Chooser
-    driveTab.add("Autonomous Chooser", m_auto_chooser).withWidget(BuiltInWidgets.kComboBoxChooser).withPosition(0, 0).withSize(2, 1);
+    // Auton Chooser
+    driveTab.add("Autonomous Chooser", m_auto_chooser)
+        .withPosition(0, 0)
+        .withSize(2, 1)
+        .withWidget(BuiltInWidgets.kComboBoxChooser);
 
-    driveTab.add("Gyro", m_drive.getGyro()).withPosition(4, 0).withWidget(BuiltInWidgets.kGyro);
-    driveTab.add("Left Output", 0).withSize(1, 1).withPosition(4, 2).withWidget(BuiltInWidgets.kDial)
-                                  .withProperties(Map.of("Min", -1, "Max", 1));
-    driveTab.add("Right Output", 0).withSize(1, 1).withPosition(5, 2).withWidget(BuiltInWidgets.kDial)
-                                  .withProperties(Map.of("Min", -1, "Max", 1));
+    // Gyro
+    driveTab.add("Gyro", m_drive.getGyro())
+        .withPosition(0, 1)
+        .withSize(2,2)
+        .withWidget(BuiltInWidgets.kGyro);
 
-    // Add vision cues below the camera stream block
-    driveTab.add("HighTarget", false).withSize(1, 1).withPosition(0, 2).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("BallTarget", false).withSize(1, 1).withPosition(1, 2).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Pipeline",0).withSize(1, 1).withPosition(2, 2).withWidget(BuiltInWidgets.kDial)
-                              .withProperties(Map.of("Min", 0, "Max", 2));
-    driveTab.add("Distance", 0).withSize(1, 1).withPosition(3, 2);
-
-    // Add Intake Sensors and Ball Count
-    driveTab.add("Ball Count",0).withSize(1, 1).withPosition(6, 0).withWidget(BuiltInWidgets.kDial)
-                              .withProperties(Map.of("Min", 0, "Max", 2));
-    driveTab.add("ShootBreak", false).withSize(1, 1).withPosition(7, 0).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("MidBreak", false).withSize(1, 1).withPosition(8, 0).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("IntakeBreak", false).withSize(1, 1).withPosition(9, 0).withWidget(BuiltInWidgets.kBooleanBox);
-    // Add Intake Limits
-    driveTab.add("Int. Fwd Hard", false).withSize(1, 1).withPosition(6, 1).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Int. Fwd Soft", false).withSize(1, 1).withPosition(7, 1).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Int. Rev Hard", false).withSize(1, 1).withPosition(8, 1).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Int. Rev Soft", false).withSize(1, 1).withPosition(9, 1).withWidget(BuiltInWidgets.kBooleanBox);
-    // // Climber Limits
-    driveTab.add("Clm. Fwd Hard", false).withSize(1, 1).withPosition(6, 2).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Clm. Fwd Soft", false).withSize(1, 1).withPosition(7, 2).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Clm. Rev Hard", false).withSize(1, 1).withPosition(8, 2).withWidget(BuiltInWidgets.kBooleanBox);
-    driveTab.add("Clm. Rev Soft", false).withSize(1, 1).withPosition(9, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    // PhotonCamera
+    driveTab.add("Node Cam", new HttpCamera("Node Photon", "http://10.19.18.11:5800"))
+        .withPosition(2,0)
+        .withSize(3,3)
+        .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#333333","Show controls",false))
+        .withWidget(BuiltInWidgets.kCameraStream);
 
     // Field
-    driveTab.add("Field", m_drive.getField()).withPosition(0, 4).withSize(4, 2).withWidget(BuiltInWidgets.kField);
+    driveTab.add("Field", m_drive.getField())
+        .withPosition(6, 0)
+        .withSize(3, 2)
+        .withProperties(Map.of("Glyph","CODEPEN","Show Glyph",true))
+        .withWidget(BuiltInWidgets.kField);
+
+    //FMS Info -- not possible here?
+    // driveTab.add("FMS Info","sdfsdf")
+    //     .withPosition(6,2)
+    //     .withSize(3,1)
+    //     .withWidget(BuiltInWidgets.kField);
+
+    // driveTab.add("Left Output", 0).withSize(1, 1).withPosition(4, 2).withWidget(BuiltInWidgets.kDial)
+    //                               .withProperties(Map.of("Min", -1, "Max", 1));
+    // driveTab.add("Right Output", 0).withSize(1, 1).withPosition(5, 2).withWidget(BuiltInWidgets.kDial)
+    //                               .withProperties(Map.of("Min", -1, "Max", 1));
+
+    // Add vision cues below the camera stream block
+    // driveTab.add("HighTarget", false).withSize(1, 1).withPosition(0, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("BallTarget", false).withSize(1, 1).withPosition(1, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Pipeline",0).withSize(1, 1).withPosition(2, 2).withWidget(BuiltInWidgets.kDial)
+    //                           .withProperties(Map.of("Min", 0, "Max", 2));
+    // driveTab.add("Distance", 0).withSize(1, 1).withPosition(3, 2);
+
+    // Add Intake Sensors and Ball Count
+    // driveTab.add("Ball Count",0).withSize(1, 1).withPosition(6, 0).withWidget(BuiltInWidgets.kDial)
+    //                           .withProperties(Map.of("Min", 0, "Max", 2));
+    // driveTab.add("ShootBreak", false).withSize(1, 1).withPosition(7, 0).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("MidBreak", false).withSize(1, 1).withPosition(8, 0).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("IntakeBreak", false).withSize(1, 1).withPosition(9, 0).withWidget(BuiltInWidgets.kBooleanBox);
+    // Add Intake Limits
+    // driveTab.add("Int. Fwd Hard", false).withSize(1, 1).withPosition(6, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Int. Fwd Soft", false).withSize(1, 1).withPosition(7, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Int. Rev Hard", false).withSize(1, 1).withPosition(8, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Int. Rev Soft", false).withSize(1, 1).withPosition(9, 1).withWidget(BuiltInWidgets.kBooleanBox);
+    // // Climber Limits
+    // driveTab.add("Clm. Fwd Hard", false).withSize(1, 1).withPosition(6, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Clm. Fwd Soft", false).withSize(1, 1).withPosition(7, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Clm. Rev Hard", false).withSize(1, 1).withPosition(8, 2).withWidget(BuiltInWidgets.kBooleanBox);
+    // driveTab.add("Clm. Rev Soft", false).withSize(1, 1).withPosition(9, 2).withWidget(BuiltInWidgets.kBooleanBox);
+
 
   }
 
