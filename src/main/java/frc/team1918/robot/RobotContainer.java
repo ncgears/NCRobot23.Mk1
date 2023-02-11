@@ -105,6 +105,7 @@ public class RobotContainer {
       private POVButton btn_GreaseTrapHome = new POVButton(dj, Constants.OI.Stadia.DPAD_UP);
       private POVButton btn_GreaseTrapLevel = new POVButton(dj, Constants.OI.Stadia.DPAD_RIGHT);
       private POVButton btn_GreaseTrapDown = new POVButton(dj, Constants.OI.Stadia.DPAD_DN);
+      private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       
       // private JoystickButton btn_CollectorToggle = new JoystickButton(dj, Constants.OI.Logitech.BTN_START);
       // private JoystickButton btn_GyroReset = new JoystickButton(dj, Constants.OI.Logitech.BTN_BACK);
@@ -184,6 +185,7 @@ public class RobotContainer {
     btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapDown(m_stove));
     btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapLevel(m_stove));
     btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapHome(m_stove));
+    btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
 
     //These are the operator buttons
 //    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
@@ -264,12 +266,13 @@ public class RobotContainer {
   public void buildShuffleboard(){
     buildAutonChooser();
     buildDriverTab();
+    buildMaintenanceTab();
     // buildDriverTestTab();
     // buildShooterTab();
     // buildIntakeTestTab();
     // buildClimberTestTab();
     // buildVisionTab();
-    //Shuffleboard.selectTab("Driver"); //select the driver tab
+    // Shuffleboard.selectTab("Driver"); //select the driver tab
 
     // Shuffleboard.getTab("Combined Test").add(new TestIntakeIndexerAndShooter(m_indexer, m_intake, m_shooter)).withPosition(0, 1).withSize(2, 1);
     // Shuffleboard.getTab("Combined Test").add(new SetForwardLimit(m_intake)).withPosition(0, 3).withSize(2, 1);
@@ -335,7 +338,7 @@ public class RobotContainer {
         .withSize(3, 2)
         .withProperties(Map.of("Glyph","CODEPEN","Show Glyph",true))
         .withWidget(BuiltInWidgets.kField);
-
+    
     //FMS Info -- not possible here?
     // driveTab.add("FMS Info","sdfsdf")
     //     .withPosition(6,2)
@@ -370,8 +373,13 @@ public class RobotContainer {
     // driveTab.add("Clm. Fwd Soft", false).withSize(1, 1).withPosition(7, 2).withWidget(BuiltInWidgets.kBooleanBox);
     // driveTab.add("Clm. Rev Hard", false).withSize(1, 1).withPosition(8, 2).withWidget(BuiltInWidgets.kBooleanBox);
     // driveTab.add("Clm. Rev Soft", false).withSize(1, 1).withPosition(9, 2).withWidget(BuiltInWidgets.kBooleanBox);
+  }
 
-
+  private void buildMaintenanceTab(){
+    ShuffleboardTab driveTab = Shuffleboard.getTab("Maintenance");
+    driveTab.add("Reset Robot", new cg_resetRobot(m_stove, m_fsr, m_vision))
+        .withPosition(0, 0)
+        .withSize(1, 1);
   }
 
   public void buildDriverTestTab(){

@@ -10,6 +10,7 @@ package frc.team1918.robot.commandgroups;
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.team1918.robot.commands.helpers.helpers_debugMessage;
 import frc.team1918.robot.commands.helpers.helpers_setRumble;
 
 public class cg_ojRumble extends SequentialCommandGroup {
@@ -23,6 +24,7 @@ public class cg_ojRumble extends SequentialCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
+        new helpers_debugMessage("Running ojRumble"),
         new helpers_setRumble(true, "oj"),
         new WaitCommand(0.25),
         new helpers_setRumble(false, "oj"),

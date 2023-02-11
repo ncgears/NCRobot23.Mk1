@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
+import frc.team1918.robot.commands.helpers.helpers_debugMessage;
 import frc.team1918.robot.commands.vision.vision_setRinglight;
 
 public class cg_resetRobot extends SequentialCommandGroup {
@@ -42,6 +43,7 @@ public class cg_resetRobot extends SequentialCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
+        new helpers_debugMessage("Starting robot reset sequence"),
         new vision_setRinglight(m_vision, false)
         //new fivesecondrule_stowSpatulas(m_fivesecondrule),
         //new stove_stowRamps(m_stove),

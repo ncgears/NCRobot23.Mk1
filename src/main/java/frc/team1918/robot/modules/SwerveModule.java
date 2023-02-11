@@ -148,7 +148,6 @@ public class SwerveModule {
     /**
      * This function takes a desiredState and instructs the motor controllers to move based on the desired state
      * @param desiredState Desired state with speed and angle.
-     * FL = 5570, FR = 5200, RL = 5200, RR = 4740
      */
     public void setDesiredState(SwerveModuleState desiredState) {
         SwerveModuleState state = (Constants.Swerve.USE_OPTIMIZATION) ? optimize(desiredState) : desiredState;

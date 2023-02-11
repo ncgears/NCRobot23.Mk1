@@ -193,7 +193,7 @@ public class DriveSubsystem extends SubsystemBase {
             	m_dtRR.getPosition()
 			}
 		);
-		m_2dField.setRobotPose(m_odometry.getPoseMeters()); //This updates the Field2d with odometry of robot
+		m_2dField.setRobotPose(robotPose); //This updates the Field2d with odometry of robot
 	}
 
 	public Pose2d getPose2d() {
@@ -203,7 +203,7 @@ public class DriveSubsystem extends SubsystemBase {
 	public void lockAngle() {
 		desiredAngle = getHeading().getDegrees(); //Helpers.General.roundDouble(m_gyro.getAngle(), 3);
 		angleLocked = true;
-		Helpers.Debug.debug("Angle Locked to "+desiredAngle);
+		Helpers.Debug.debug("Angle Locked to "+Helpers.General.roundDouble(desiredAngle,3));
 	}
 
 	public void unlockAngle() {
