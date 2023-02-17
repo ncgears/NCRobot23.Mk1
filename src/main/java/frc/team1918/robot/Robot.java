@@ -10,6 +10,7 @@ package frc.team1918.robot;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
 import edu.wpi.first.net.PortForwarder;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
@@ -151,16 +152,21 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationInit() {
+    // NetworkTableInstance nt = NetworkTableInstance.getDefault();
+    // nt.stopServer();
+    // nt.setServer("10.19.18.11");
+    // nt.startClient4("Robot Simulation");
+
     int m_simgyro = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
     SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(m_simgyro,"Yaw"));
-    angle.set(5.0);
+    angle.set(0.0);
   }
 
   @Override
   public void simulationPeriodic() {
     int m_simgyro = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
     SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(m_simgyro,"Yaw"));
-    angle.set(angle.get()+0.01);
+    angle.set(angle.get()+0.05);
   }
 
 }

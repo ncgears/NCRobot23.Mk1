@@ -40,7 +40,7 @@ public class VisionSubsystem extends SubsystemBase {
   double totalPixel =500;
   double FOV = 60;
   Relay m_ringlight = new Relay(Constants.Vision.id_RingLight);
-  PhotonCamera m_camera = new PhotonCamera("gloworm");
+  PhotonCamera m_camera = new PhotonCamera("OV5647");
   double photonLatency = 0.0;
   double m_pitch = -100.0;
   boolean targetAquired = false;
@@ -130,26 +130,6 @@ public class VisionSubsystem extends SubsystemBase {
   public void setRinglight(boolean enabled) {
     // m_ringlight.set((enabled) ? Value.kReverse : Value.kOff);
     m_camera.setLED((enabled) ? VisionLEDMode.kOn : VisionLEDMode.kOff);
-  }
-
-  /**
-   * This sets the desired color for vision tracking
-   * @param color - color of balls to track: "blue", "red", "both", or "none"
-   */
-  public void setDesiredColor(String color) {
-    String desired ;
-
-    switch (color.toLowerCase()) {
-      case "blue":
-      case "red":
-      case "both":
-        desired = color.toLowerCase();
-        break;
-      default:
-        desired = "none";
-    }
-    // desired = "blue";
-    table.getEntry("desiredColor").setString(desired);
   }
 
   public double getVisionTurn() {

@@ -74,6 +74,9 @@
         "Vision": {
           "open": true
         }
+      },
+      "photonvision": {
+        "open": true
       }
     }
   }

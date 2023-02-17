@@ -10,6 +10,7 @@ package frc.team1918.robot;
 //Global imports
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.cscore.AxisCamera;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -79,9 +80,10 @@ public class RobotContainer {
 
     // Enable the camera server and start capture
     if(Constants.Global.CAMERA_ENABLED) {
-      UsbCamera cam = CameraServer.startAutomaticCapture();
-      cam.setResolution(320, 240);
-      cam.setFPS(25);
+      // UsbCamera cam = CameraServer.startAutomaticCapture();
+      // cam.setResolution(320, 240);
+      // cam.setFPS(25);
+
     }
 
     // Set the default command that is run for the robot. Normally, this is the drive command
@@ -106,6 +108,7 @@ public class RobotContainer {
       private POVButton btn_GreaseTrapLevel = new POVButton(dj, Constants.OI.Stadia.DPAD_RIGHT);
       private POVButton btn_GreaseTrapDown = new POVButton(dj, Constants.OI.Stadia.DPAD_DN);
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
+      private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       
       // private JoystickButton btn_CollectorToggle = new JoystickButton(dj, Constants.OI.Logitech.BTN_START);
       // private JoystickButton btn_GyroReset = new JoystickButton(dj, Constants.OI.Logitech.BTN_BACK);
@@ -186,6 +189,7 @@ public class RobotContainer {
     btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapLevel(m_stove));
     btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapHome(m_stove));
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
+    btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
 
     //These are the operator buttons
 //    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
@@ -326,7 +330,7 @@ public class RobotContainer {
         .withWidget(BuiltInWidgets.kGyro);
 
     // PhotonCamera
-    driveTab.add("Node Cam", new HttpCamera("Node Photon", "http://10.19.18.11:5800"))
+    driveTab.add("Node Cam", new HttpCamera("photonvision_Port_1182_MJPEG_Server", "http://10.19.18.11:1182/stream.mjpg"))
         .withPosition(2,0)
         .withSize(3,3)
         .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#333333","Show controls",false))

@@ -108,7 +108,7 @@ def init_controller():
     """
     write_output('Initializing controller')
     send_uart_data(b'd') #Set output to degrees
-    send_uart_data(b'Ffff') #Clear filter level, set to filter level 4
+    send_uart_data(b'Ffff') #Clear filter level, set to filter level 3
 
 def connect_uart():
     """

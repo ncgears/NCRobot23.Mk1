@@ -29,7 +29,7 @@ public class vision_setRinglight extends CommandBase {
   @Override
   public void initialize() {
     String status = (m_enabled)?"On":"Off";
-    Helpers.Debug.debug("Vision: Ringlight " + status);
+    Helpers.Debug.debug("Vision: LEDs " + status);
     m_vision.setRinglight(m_enabled);
   }
 
