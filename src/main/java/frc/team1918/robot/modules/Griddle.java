@@ -18,6 +18,8 @@ public class Griddle {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
     public enum GriddleDirections {STOP, FORWARD, REVERSE};
+    public GriddleDirections currentDirection = GriddleDirections.STOP;
+    public double currentSpeed = 0.0;
 
  	/**
 	 * 1918 GreaseTrap Module v2023.1 - This GreaseTrap module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to unburn pancakes (flip them)
@@ -81,15 +83,26 @@ public class Griddle {
         return m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex);
     }
 
-    public void setSpeed(double speed) {
-        m_motor.set(ControlMode.PercentOutput, speed);
-    }
-
     /**
-     * Moves the spatula to it's home position (starting configuration)
+     * Sets the direction and speed of the griddle.
+     * @param direction ({@GriddleDirections GriddleDirections}) direction of griddle
+     * @param speed (double) speed of griddle from 0.0 to 1.0 (direction will invert)
      */
-    public void stow() {
-        m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.home);
+    public void setDirectionAndSpeed(GriddleDirections direction, double speed) {
+        currentDirection = direction;
+        switch (direction) {
+            case STOP:
+                m_motor.set(ControlMode.PercentOutput, 0.0);
+                currentSpeed = 0.0;
+                break;
+            case FORWARD:
+                m_motor.set(ControlMode.PercentOutput, speed);
+                currentSpeed = speed;
+                break;
+            case REVERSE:
+                m_motor.set(ControlMode.PercentOutput, speed * -1.0);
+                currentSpeed = speed * -1.0;
+        }
     }
 
     /**

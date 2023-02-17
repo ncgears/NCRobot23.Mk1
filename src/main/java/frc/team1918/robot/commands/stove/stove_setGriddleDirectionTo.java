@@ -2,18 +2,19 @@ package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.StoveSubsystem;
-import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
-public class stove_moveGreaseTrapHome extends CommandBase {
+import frc.team1918.robot.modules.Griddle.GriddleDirections;
+public class stove_setGriddleDirectionTo extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final StoveSubsystem m_stove;
+  private final GriddleDirections m_direction;
 
   /**
-   * This command moves the greasetrap to the home position.  
-   * While disabled, this simply sets the position to home so that the robot doesn't attempt to go to other positions when enabled
    * @param subsystem The subsystem used by this command.
+   * @param direction The GriddleDirection to set the griddle to
    */
-  public stove_moveGreaseTrapHome(StoveSubsystem subsystem) {
+  public stove_setGriddleDirectionTo(StoveSubsystem subsystem, GriddleDirections direction) {
     m_stove = subsystem;
+    m_direction = direction;
     // Use addRequirements() here to declare subsystem dependencies.
     //   addRequirements(subsystem);
   }
@@ -28,7 +29,7 @@ public class stove_moveGreaseTrapHome extends CommandBase {
   @Override
   public void initialize() {
     //Helpers.Debug.debug("Vision: Ringlight " + status);
-    m_stove.moveGreaseTrapTo(GreaseTrapPositions.HOME);
+    m_stove.setGriddleDirectionAndSpeed(m_direction, 0.0);
   }
 
   // Called once the command ends or is interrupted.

@@ -18,6 +18,7 @@ public class GreaseTrap {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
     public enum GreaseTrapPositions {HOME, LEVEL, DOWN};
+    public GreaseTrapPositions currentPosition = GreaseTrapPositions.HOME;
 
  	/**
 	 * 1918 GreaseTrap Module v2023.1 - This GreaseTrap module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to unburn pancakes (flip them)
@@ -101,7 +102,8 @@ public class GreaseTrap {
     }
 
     public void moveTo(GreaseTrapPositions position) {
-        Dashboard.GreaseTrap.setPositionName(position.toString());
+        // Dashboard.GreaseTrap.setPositionName(position.toString());
+        currentPosition = position;
         switch (position) {
             case HOME:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.home);
@@ -125,6 +127,7 @@ public class GreaseTrap {
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {
+        Dashboard.GreaseTrap.setPositionName(currentPosition.toString());
         Dashboard.GreaseTrap.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
         Dashboard.GreaseTrap.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
         Dashboard.GreaseTrap.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));

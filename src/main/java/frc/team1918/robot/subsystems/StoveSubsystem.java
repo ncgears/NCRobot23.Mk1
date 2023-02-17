@@ -19,7 +19,6 @@ import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 */
 public class StoveSubsystem extends SubsystemBase {
 	private static StoveSubsystem instance;
-	public enum ramps {BOTH, HOTPLATE, GREASETRAP}
 	
 	//initialize modules used in subsystem
 	private Griddle m_Griddle; //conveyor module
@@ -46,7 +45,12 @@ public class StoveSubsystem extends SubsystemBase {
 		m_HotPlate = new HotPlate("HotPlate", Constants.Stove.HotPlate.constants, Constants.Stove.HotPlate.gains);
 		m_Burner = new Burner("Burner", Constants.Stove.Burner.constants, Constants.Stove.Burner.gains);
 		m_Griddle = new Griddle("Griddle", Constants.Stove.Griddle.constants, Constants.Stove.Griddle.gains);
-		stowRamp(ramps.BOTH); //Make sure all spatulas are initialized to their stowed position
+
+		//make sure we reset things on init
+		m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
+		m_HotPlate.moveTo(HotPlatePositions.HOME);
+		m_Burner.moveTo(BurnerPositions.HOME);
+		m_Griddle.setDirectionAndSpeed(GriddleDirections.STOP, 0.0);
 	}
 
 	/**
@@ -61,44 +65,13 @@ public class StoveSubsystem extends SubsystemBase {
 
 	}
 
+	/**
+	 * Sets the Griddle direction (GriddleDirections) and speed (double)
+	 * @param direction GriddleDirections enum representing the direction of griddle
+	 * @param speed Double representing the percentage for the griddle
+	 */
 	public void setGriddleDirectionAndSpeed(GriddleDirections direction, double speed) {
-		switch (direction) {
-			case STOP:
-				m_Griddle.setSpeed(0);
-				break;
-			case FORWARD:
-				m_Griddle.setSpeed(speed * 1.0);
-				break;
-			case REVERSE:
-				m_Griddle.setSpeed(speed * -1.0);
-				break;
-		}
-	}
-
-	/**
-	 * Moves ramps to their home positions (starting configuration)
-	 * @param ramp - This is an enum of BOTH, HOTPLATE, GREASETRAP
-	 */
-	public void stowRamp(ramps ramp) {
-		switch (ramp) {
-			case HOTPLATE:
-				m_HotPlate.moveTo(HotPlatePositions.HOME);
-				break;
-			case GREASETRAP:
-				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
-				break;
-			case BOTH:
-			default:
-				m_HotPlate.moveTo(HotPlatePositions.HOME);
-				m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
-		}
-	}
-
-	/**
-	 * Sets burner to its home position (starting configuration)
-	 */
-	public void coolBurner() {
-		m_Burner.moveTo(BurnerPositions.HOME);
+		m_Griddle.setDirectionAndSpeed(direction, speed);
 	}
 
 	/**

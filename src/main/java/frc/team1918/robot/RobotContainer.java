@@ -46,6 +46,8 @@ import frc.team1918.robot.subsystems.VisionSubsystem;
 import frc.team1918.robot.commands.drive.*;
 import frc.team1918.robot.commands.stove.*;
 import frc.team1918.robot.commands.vision.*;
+import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
 // import frc.team1918.robot.commandgroups.cg_drive_initOdometry;
@@ -105,8 +107,14 @@ public class RobotContainer {
       private Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVER);
 
       private POVButton btn_GreaseTrapHome = new POVButton(dj, Constants.OI.Stadia.DPAD_UP);
-      private POVButton btn_GreaseTrapLevel = new POVButton(dj, Constants.OI.Stadia.DPAD_RIGHT);
+      private POVButton btn_GreaseTrapLevel = new POVButton(dj, Constants.OI.Stadia.DPAD_LEFT);
       private POVButton btn_GreaseTrapDown = new POVButton(dj, Constants.OI.Stadia.DPAD_DN);
+      private POVButton btn_GreaseTrapFlip = new POVButton(dj, Constants.OI.Stadia.DPAD_RIGHT);
+
+      private POVButton btn_HotPlateHome = new POVButton(dj, Constants.OI.Stadia.BTN_Y);
+      private POVButton btn_HotPlateLevel = new POVButton(dj, Constants.OI.Stadia.BTN_B);
+      private POVButton btn_HotPlateDown = new POVButton(dj, Constants.OI.Stadia.BTN_A);
+
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       
@@ -185,9 +193,16 @@ public class RobotContainer {
     //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
 
-    btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapDown(m_stove));
-    btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapLevel(m_stove));
-    btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapHome(m_stove));
+    btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.DOWN));
+    btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
+    btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME));
+    btn_GreaseTrapFlip.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
+
+    btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
+    btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
+    btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
+
+
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
 

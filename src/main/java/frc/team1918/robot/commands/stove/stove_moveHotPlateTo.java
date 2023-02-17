@@ -2,16 +2,19 @@ package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.StoveSubsystem;
-import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
-public class stove_moveGreaseTrapDown extends CommandBase {
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
+public class stove_moveHotPlateTo extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final StoveSubsystem m_stove;
+  private final HotPlatePositions m_position;
 
   /**
    * @param subsystem The subsystem used by this command.
+   * @param position The GreaseTrapPosition to move to.
    */
-  public stove_moveGreaseTrapDown(StoveSubsystem subsystem) {
+  public stove_moveHotPlateTo(StoveSubsystem subsystem, HotPlatePositions position) {
     m_stove = subsystem;
+    m_position = position;
     // Use addRequirements() here to declare subsystem dependencies.
     //   addRequirements(subsystem);
   }
@@ -25,8 +28,7 @@ public class stove_moveGreaseTrapDown extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Helpers.Debug.debug("Vision: Ringlight " + status);
-    m_stove.moveGreaseTrapTo(GreaseTrapPositions.DOWN);
+    m_stove.moveHotPlateTo(m_position);
   }
 
   // Called once the command ends or is interrupted.

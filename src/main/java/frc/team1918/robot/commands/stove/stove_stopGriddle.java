@@ -8,6 +8,8 @@ public class stove_stopGriddle extends CommandBase {
   private final StoveSubsystem m_stove;
 
   /**
+   * This command stops the griddle.
+   * While disabled, this simply sets the speed to stopped so that the robot doesn't attempt to do things when enabled
    * @param subsystem The subsystem used by this command.
    */
   public stove_stopGriddle(StoveSubsystem subsystem) {

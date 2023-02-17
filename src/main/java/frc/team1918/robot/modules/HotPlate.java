@@ -18,6 +18,7 @@ public class HotPlate {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
     public enum HotPlatePositions {HOME, LEVEL, DOWN};
+    public HotPlatePositions currentPosition = HotPlatePositions.HOME;
 
  	/**
 	 * 1918 HotPlate Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to serve scoring pieces
@@ -106,7 +107,8 @@ public class HotPlate {
     }
 
     public void moveTo(HotPlatePositions position) {
-        Dashboard.HotPlate.setPositionName(position.toString());
+        // Dashboard.HotPlate.setPositionName(position.toString());
+        currentPosition = position;
         switch (position) {
             case HOME:
                 m_motor.set(ControlMode.Position, Constants.Stove.HotPlate.Positions.home);
@@ -123,6 +125,7 @@ public class HotPlate {
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {
+        Dashboard.HotPlate.setPositionName(currentPosition.toString());
         Dashboard.HotPlate.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
         Dashboard.HotPlate.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
         Dashboard.HotPlate.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
