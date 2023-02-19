@@ -84,10 +84,11 @@ public class Burner {
     }
 
     /**
-     * Moves the hotplate to it's home position (starting configuration)
+     * Sets the percent output of the controller to a given speed
+     * @param speed (double) speed of motor controller
      */
-    public void stow() {
-        m_motor.set(ControlMode.Position, Constants.Stove.HotPlate.Positions.home);
+    public void setSpeed(double speed) {
+        m_motor.set(ControlMode.PercentOutput, speed);
     }
 
     /**

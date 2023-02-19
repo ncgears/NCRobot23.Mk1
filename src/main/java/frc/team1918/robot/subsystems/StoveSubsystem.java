@@ -75,6 +75,15 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Sets the GreaseTrap speed manually (for zeroing). 
+	 * This will only set a negative speed, regardless whether positive or negative supplied
+	 * @param speed
+	 */
+	public void setGreaseTrapZeroSpeed(double speed) {
+		m_GreaseTrap.setSpeed(Math.abs(speed) * -1.0);
+	}
+
+	/**
 	 * Moves the GreaseTrap to a designated position
 	 * @param position - This is a GreaseTrapPositions enum of {@GreaseTrapPositions}
 	 */
@@ -83,11 +92,29 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Sets the HotPlate speed manually (for zeroing). 
+	 * This will only set a negative speed, regardless whether positive or negative supplied
+	 * @param speed
+	 */
+	public void setHotPlateZeroSpeed(double speed) {
+		m_HotPlate.setSpeed(Math.abs(speed) * -1.0);
+	}
+
+	/**
 	 * Moves the HotPlate to a designated position
 	 * @param position - This is a HotPlatePositions enum of {@HotPlatePositions}
 	 */
 	public void moveHotPlateTo(HotPlatePositions position) {
 		m_HotPlate.moveTo(position);
+	}
+
+	/**
+	 * Sets the Burner speed manually (for zeroing). 
+	 * This will only set a negative speed, regardless whether positive or negative supplied
+	 * @param speed
+	 */
+	public void setBurnerZeroSpeed(double speed) {
+		m_Burner.setSpeed(Math.abs(speed) * -1.0);
 	}
 
 	/**

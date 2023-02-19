@@ -84,7 +84,15 @@ public class Spatula {
      * Moves the spatula to it's home position (starting configuration)
      */
     public void stowSpatula() {
-        m_motor.set(ControlMode.Position, 0);
+        m_motor.set(ControlMode.Position, 0.0);
+    }
+
+    /**
+     * Sets the percent output of the controller to a given speed
+     * @param speed (double) speed of motor controller
+     */
+    public void setSpeed(double speed) {
+        m_motor.set(ControlMode.PercentOutput, speed);
     }
 
     /**

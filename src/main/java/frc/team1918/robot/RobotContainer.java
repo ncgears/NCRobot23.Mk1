@@ -116,6 +116,7 @@ public class RobotContainer {
       private POVButton btn_HotPlateDown = new POVButton(dj, Constants.OI.Stadia.BTN_A);
 
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
+      private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       
@@ -204,6 +205,7 @@ public class RobotContainer {
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
 
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive));
+    btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
 

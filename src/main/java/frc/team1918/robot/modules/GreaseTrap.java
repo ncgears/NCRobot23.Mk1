@@ -83,10 +83,11 @@ public class GreaseTrap {
     }
 
     /**
-     * Moves the spatula to it's home position (starting configuration)
+     * Sets the percent output of the controller to a given speed
+     * @param speed (double) speed of motor controller
      */
-    public void stow() {
-        m_motor.set(ControlMode.Position, Constants.Stove.GreaseTrap.Positions.home);
+    public void setSpeed(double speed) {
+        m_motor.set(ControlMode.PercentOutput, speed);
     }
 
     /**

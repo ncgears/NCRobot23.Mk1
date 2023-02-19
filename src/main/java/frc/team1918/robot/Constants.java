@@ -108,6 +108,7 @@ public class Constants {
     public static final class Stove {
         public static final class Burner {
             public static final boolean isDisabled = false;
+            public static final double kZeroSpeed = 0.25; //speed for zeroing operations
             //Controller Setup
             public static final int kMotorID = ID.Talon.stove_burner; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -127,6 +128,7 @@ public class Constants {
             public static final double kCruise = 3500; //MotionMagic Cruise
             public static final double kAccel = 4500; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
                 public static final double bottom = 512.0; //position for bottom scoring
@@ -157,6 +159,7 @@ public class Constants {
         }
         public static final class GreaseTrap {
             public static final boolean isDisabled = false;
+            public static final double kZeroSpeed = 0.25; //speed for zeroing operations
             //Controller Setup
             public static final int kMotorID = ID.Talon.stove_greasetrap; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -176,6 +179,7 @@ public class Constants {
             public static final double kCruise = 3500; //MotionMagic Cruise
             public static final double kAccel = 4500; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //home/stow/starting config
                 public static final double level = 4400.0; //level
@@ -184,6 +188,7 @@ public class Constants {
         }
         public static final class HotPlate {
             public static final boolean isDisabled = false;
+            public static final double kZeroSpeed = 0.25; //speed for zeroing operations
             //Controller Setup
             public static final int kMotorID = ID.Talon.stove_hotplate; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -203,6 +208,7 @@ public class Constants {
             public static final double kCruise = 3500; //MotionMagic Cruise
             public static final double kAccel = 4500; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home position
                 public static final double level = 1024.0; //position for level position
@@ -214,6 +220,7 @@ public class Constants {
      * Constants for the Spatula Modules
      */
     public static final class Spatula {
+        public static final double default_kZeroSpeed = 0.25; //speed for zeroing operations
         public static final double default_kP = 0.45; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
@@ -234,6 +241,7 @@ public class Constants {
 
         public static final class Left {
             public static final boolean isDisabled = false;
+            public static final double kZeroSpeed = default_kZeroSpeed;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_left; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -253,9 +261,16 @@ public class Constants {
             public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            //Named positions
+            public static final class Positions {
+                public static final double home = 0.0; //postion for home position
+                public static final double clear = 512.0; //position that clears the griddle for moving burner
+                public static final double floor = 1024.0; //position for floor position
+            }
         }
         public static final class Right {
             public static final boolean isDisabled = false;
+            public static final double kZeroSpeed = default_kZeroSpeed;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_right; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -275,6 +290,12 @@ public class Constants {
             public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            //Named positions
+            public static final class Positions {
+                public static final double home = 0.0; //postion for home position
+                public static final double clear = 512.0; //position that clears the griddle for moving burner
+                public static final double floor = 1024.0; //position for floor position
+            }
         }
     }
 

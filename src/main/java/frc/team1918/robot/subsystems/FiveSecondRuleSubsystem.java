@@ -52,6 +52,28 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Sets the Burner speed manually (for zeroing). 
+	 * This will only set a negative speed, regardless whether positive or negative supplied
+	 * @param speed
+	 * @param spatula
+	 */
+	public void setSpatulaZeroSpeed(double speed, spatulas spatula) {
+		speed = Math.abs(speed) * -1.0;
+		switch (spatula) {
+			case LEFT:
+				m_SpatulaLeft.setSpeed(speed);
+				break;
+			case RIGHT:
+				m_SpatulaRight.setSpeed(speed);
+				break;
+			case BOTH:
+				m_SpatulaLeft.setSpeed(speed);
+				m_SpatulaRight.setSpeed(speed);
+		}
+	}
+
+
+	/**
 	 * Moves spatulas to their home positions (starting configuration)
 	 * @param spatula - This is an enum of BOTH, LEFT, RIGHT
 	 */
