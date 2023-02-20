@@ -270,6 +270,19 @@ public class Constants {
                 768.0,
                 1024.0
             );
+/*  SAVE for later reference on how to store additional data here
+//https://www.baeldung.com/java-enum-values
+            public static enum Pos {
+                HOME(0.0),
+                GRIDDLE(512.0),
+                CLEAR(768.0),
+                FLOOR(1024.0);
+                public final double position;
+                private Pos(double position) {
+                    this.position = position;
+                }
+            }
+*/
         }
         public static final class Right {
             public static final boolean isDisabled = false;
