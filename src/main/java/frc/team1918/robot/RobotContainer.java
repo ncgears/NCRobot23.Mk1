@@ -207,8 +207,8 @@ public class RobotContainer {
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
 
-    btn_BurnerHot.onTrue(new stove_MoveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
-    btn_BurnerCold.onTrue(new stove_MoveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
+    btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
+    btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
 
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
