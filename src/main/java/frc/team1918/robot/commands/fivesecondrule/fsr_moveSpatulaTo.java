@@ -7,7 +7,6 @@ import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
 import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 public class fsr_moveSpatulaTo extends CommandBase {
-  // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final FiveSecondRuleSubsystem m_fsr;
   private final StoveSubsystem m_stove;
   private final spatulas m_spatula;
