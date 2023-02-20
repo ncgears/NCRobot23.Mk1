@@ -13,7 +13,6 @@ import frc.team1918.robot.Constants;
 import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.utils.PIDGains;
 import frc.team1918.robot.utils.TalonConstants;
-import frc.team1918.robot.modules.SpatulaNamedPositions;
 
 public class Spatula {
     private WPI_TalonSRX m_motor;
@@ -122,6 +121,7 @@ public class Spatula {
             case FLOOR:
                 m_motor.set(ControlMode.Position, m_Positions.floor);
                 break;
+            default:
         }
     }
 

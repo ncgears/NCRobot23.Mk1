@@ -2,7 +2,6 @@ package frc.team1918.robot.commands.fivesecondrule;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.Constants;
-import frc.team1918.robot.Helpers;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
