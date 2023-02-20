@@ -116,6 +116,7 @@ public class DriveSubsystem extends SubsystemBase {
 		Dashboard.DriveTrain.setY(getPose().getY());
 		Dashboard.DriveTrain.setCurrentAngle(getPose().getRotation().getDegrees());
 		Dashboard.DriveTrain.setDesiredAngle(desiredAngle);
+		Dashboard.Gyro.setGyroPitch(getGyroPitch());
 		// Dashboard.DriveTrain.setTargetAngle(m_targetPose.getRotation().getRadians());
 	}
 

@@ -14,7 +14,7 @@ public class drive_autoBalance extends CommandBase {
     private final DriveSubsystem m_drive;
     private double m_tolerance = Constants.Auton.Balance.kToleranceDegrees; //degrees
     private final PIDController m_balancePID = new PIDController(Constants.Auton.Balance.kP, Constants.Auton.Balance.kI, Constants.Auton.Balance.kD);
-    private double m_pitchAngle = 0.0;
+    // private double m_pitchAngle = 0.0;
   
     /**
      * Creates a new autoBalance command.
@@ -30,24 +30,24 @@ public class drive_autoBalance extends CommandBase {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        m_balancePID.enableContinuousInput(-180.0,180.0);
-        m_drive.unlockAngle(); //unlock the drive angle PID
+        // m_balancePID.enableContinuousInput(-180.0,180.0);
+        // m_drive.unlockAngle(); //unlock the drive angle PID
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_pitchAngle = m_drive.getGyroPitch();
+        double m_pitchAngle = m_drive.getGyroPitch();
         if (Math.abs(m_pitchAngle) > m_tolerance) {
-            m_drive.drive(m_balancePID.calculate(m_pitchAngle, 0), 0, 0, true);
+            m_drive.drive(m_balancePID.calculate(m_pitchAngle, 0), 0, 0, false);
         }
     }
   
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_drive.lockAngle();
-        m_drive.brake(Constants.Auton.Balance.kUseDefensiveLock);
+        // m_drive.lockAngle();
+        // m_drive.brake(Constants.Auton.Balance.kUseDefensiveLock);
     }
 
     // Returns true when the command should end.

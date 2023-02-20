@@ -125,24 +125,7 @@ public class RobotContainer {
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
-      // private JoystickButton btn_CollectorToggle = new JoystickButton(dj, Constants.OI.Logitech.BTN_START);
-      // private JoystickButton btn_GyroReset = new JoystickButton(dj, Constants.OI.Logitech.BTN_BACK);
-      // private POVButton btn_ShooterIncrease = new POVButton(dj, Constants.OI.Logitech.DPAD_UP);
-      // private POVButton btn_ShooterDecrease = new POVButton(dj, Constants.OI.Logitech.DPAD_DN);
-      // private JoystickButton btn_ShooterStop = new JoystickButton(dj, Constants.OI.Logitech.BTN_A);
-      // private JoystickButton btn_FeederFwd = new JoystickButton(dj, Constants.OI.Logitech.BTN_RB);
-      // private Trigger t_RingLight = new Trigger(() -> dj.getRawAxis(Constants.OI.Logitech.AXIS_RT)>0.3);
-      // private JoystickButton btn_AimSelectShoot = new JoystickButton(dj, Constants.OI.Logitech.BTN_B);
-      // private JoystickButton btn_AimSelect = new JoystickButton(dj, Constants.OI.Logitech.BTN_LB);
-      // private JoystickButton btn_ShootDashboard = new JoystickButton(dj, Constants.OI.Logitech.BTN_Y);
-      // private JoystickButton btn_ResetClimb = new JoystickButton(dj, Constants.OI.Logitech.BTN_X);
       //Music Control
-      // private JoystickButton btn_MusicPlay = new JoystickButton(dj, Constants.OI.Logitech.BTN_Y);
-      // private JoystickButton btn_MusicStop = new JoystickButton(dj, Constants.OI.Logitech.BTN_R);
-      // private JoystickButton btn_MusicFwd = new JoystickButton(dj, Constants.OI.Logitech.BTN_B);
-      // private JoystickButton btn_MusicBack = new JoystickButton(dj, Constants.OI.Logitech.BTN_X);
-      // private JoystickButton btn_MusicReady = new JoystickButton (dj, Constants.OI.Logitech.BTN_A);
-      // private Trigger t_PlayMusic = new Trigger(() -> dj.getRawAxis(Constants.OI.Logitech.AXIS_LT)>0.3);
       // private POVButton btn_THROTUP_UP = new POVButton(dj, Constants.OI.Driver.DPAD_THROTUP_UP);
       //   private POVButton btn_THROTUP_UL = new POVButton(dj, Constants.OI.Driver.DPAD_THROTUP_UL);
       //   private POVButton btn_THROTUP_UR = new POVButton(dj, Constants.OI.Driver.DPAD_THROTUP_UR);
@@ -200,65 +183,27 @@ public class RobotContainer {
     //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
 
+    //GreaseTrap testing
     btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.DOWN));
     btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
     btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME));
     btn_GreaseTrapFlip.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.FLIP)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
-
+    //HotPlate testing
     btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
-
+    //Burner testing
     btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
     btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
 
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
 
+    //Testing buttons
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
 
-    //These are the operator buttons
-//    btn_WhirlyUp.onTrue(new climber_whirlygigUp(m_climber));
-    // btn_IntakeForward.onTrue(new feeder_advanceToShooter(m_feeder));
-//    t_IntakeForward.onTrue(new cg_collector_intakeAndFeed(m_collector, m_feeder)).onFalse(new collector_intakeStop(m_collector).andThen(new collector_retractIntake(m_collector)));
-//    t_IntakeRetractor.onTrue(new collector_deployRetractor(m_collector,true)).onFalse(new collector_deployRetractor(m_collector, false));
-    // t_IntakeReverse.onTrue(new collector_intakeReverse(m_collector));
-//    btn_IntakeReverse.whileTrue(new collector_intakeReverse(m_collector));
-//    btn_ShootDashboard.onTrue(new shooter_shootNamed(m_shooter, namedShots.DASHBOARD));
-//    btn_ShootLow.onTrue(new shooter_shootNamed(m_shooter, namedShots.LOW));
-//    btn_ShootProtected.onTrue(new shooter_shootNamed(m_shooter, namedShots.PROTECTED));
-//    btn_ShootLine.onTrue(new shooter_shootNamed(m_shooter, namedShots.LINE));
-//    btn_ShootDefault.onTrue(new shooter_shootNamed(m_shooter, namedShots.DEFAULT));
-//    btn_ShootWall.onTrue(new shooter_shootNamed(m_shooter, namedShots.WALL));
-//    btn_ShootStop.onTrue(new shooter_stopShooter(m_shooter));
-
-    
-    //These are the driver buttons
-//    btn_CollectorToggle.onTrue(new collector_toggleIntake(m_collector));
-//    btn_FeederFwd.onTrue(new feeder_advance(m_feeder)).onFalse(new feeder_stop(m_feeder));
-//    btn_ShooterStop.onTrue(new shooter_stopShooter(m_shooter));
-//    btn_ShooterIncrease.onTrue(new shooter_increaseThrottle(m_shooter));
-//    btn_ShooterDecrease.onTrue(new shooter_decreaseThrottle(m_shooter));
-    // btn_GyroReset.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d()))); //.andThen(new drive_homeSwerves(m_drive))
-    // btn_AimSelectShoot.whileHeld(new cg_vision_aimSelectAndShoot(m_drive, m_feeder, m_shooter, m_vision)).whenReleased(new feeder_stop(m_feeder).andThen(new shooter_stopShooter(m_shooter)));
-//    btn_AimSelectShoot.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
-//    btn_AimSelect.whileTrue(new vision_findTargetAndShot(m_drive, m_vision, m_shooter));
-    // t_RingLight.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
-//    btn_ResetClimb.onTrue(new climber_resetClimb(m_climber));
-    //Music Control Buttons
-    // btn_MusicPlay.onTrue(new orchestra_loadAndPlay(m_orchestra));
-    // btn_MusicStop.onTrue(new orchestra_stop(m_orchestra));
-    // btn_MusicFwd.onTrue(new orchestra_increaseSong(m_orchestra));
-    // btn_MusicBack.onTrue(new orchestra_decreaseSong(m_orchestra));
-    // btn_MusicReady.onTrue(new orchestra_primeToPlay(m_orchestra));
-    // t_PlayMusic.whenActive(new orchestra_loadAndPlay(m_orchestra));
-    // t_PlayMusic.whenActive(new orchestra_stop(m_orchestra));
-
-    // btn_TOGGLE_DEBUG.onTrue(new helpers_toggleDebug());
-    // btn_LOCKANGLE.onTrue(new drive_lockAngle(m_drive));
-    // btn_UNLOCKANGLE.onTrue(new drive_unlockAngle(m_drive));
     //bind all 3 up and all 3 down for shooter throttle up/down
     // orbtn_THROTUP.onTrue(new shooter_increaseThrottle(m_shooter));
     // orbtn_THROTDN.onTrue(new shooter_decreaseThrottle(m_shooter));
