@@ -3,6 +3,7 @@ package frc.team1918.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1918.robot.Constants;
+import frc.team1918.robot.Helpers;
 import frc.team1918.robot.modules.Spatula;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 
@@ -35,7 +36,7 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
 	 */
 	public FiveSecondRuleSubsystem() {
-		stowSpatula(spatulas.BOTH); //Make sure all spatulas are initialized to their stowed position
+		moveSpatulaTo(spatulas.BOTH, SpatulaPositions.HOME); //Make sure all spatulas are initialized to their stowed position
 	}
 
 	/**
@@ -95,23 +96,4 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 		}
 	}
 
-	/**
-	 * Moves spatulas to their home positions (starting configuration)
-	 * @param spatula - This is an enum of BOTH, LEFT, RIGHT
-	 */
-	public void stowSpatula(spatulas spatula) {
-		switch (spatula) {
-			case LEFT:
-				m_SpatulaLeft.stowSpatula();
-				break;
-			case RIGHT:
-				m_SpatulaRight.stowSpatula();
-				break;
-			case BOTH:
-			default:
-				for (Spatula module: modules) {
-					module.stowSpatula();
-				}
-		}
-	}
 }

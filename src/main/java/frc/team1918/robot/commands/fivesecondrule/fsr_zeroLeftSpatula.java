@@ -28,7 +28,7 @@ public class fsr_zeroLeftSpatula extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Helpers.Debug.debug("zeroLeftSpatula");
+    // Helpers.Debug.debug("zeroLeftSpatula");
     m_fsr.setSpatulaZeroSpeed(Constants.Spatula.Left.kZeroSpeed, spatulas.LEFT);
   }
 

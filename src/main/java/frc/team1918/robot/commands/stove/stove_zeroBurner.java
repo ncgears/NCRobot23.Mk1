@@ -27,7 +27,7 @@ public class stove_zeroBurner extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Helpers.Debug.debug("zeroBurner");
+    // Helpers.Debug.debug("zeroBurner");
     m_stove.setBurnerZeroSpeed(Constants.Stove.GreaseTrap.kZeroSpeed);
   }
 

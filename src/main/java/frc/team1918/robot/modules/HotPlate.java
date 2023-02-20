@@ -126,10 +126,12 @@ public class HotPlate {
      */
     public void updateDashboard() {
         Dashboard.HotPlate.setPositionName(currentPosition.toString());
-        Dashboard.HotPlate.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
-        Dashboard.HotPlate.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
-        Dashboard.HotPlate.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
-        Dashboard.HotPlate.setSpeed(m_motor.get());
+        if(currentPosition != HotPlatePositions.ZERO) {
+            Dashboard.HotPlate.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
+            Dashboard.HotPlate.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
+            Dashboard.HotPlate.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        }
+        Dashboard.HotPlate.setSpeed(m_motor.getMotorOutputPercent());
     }
 
 }

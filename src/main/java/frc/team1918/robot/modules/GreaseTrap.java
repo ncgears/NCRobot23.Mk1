@@ -17,7 +17,7 @@ import frc.team1918.robot.utils.TalonConstants;
 public class GreaseTrap {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
-    public enum GreaseTrapPositions {ZERO, HOME, LEVEL, DOWN};
+    public enum GreaseTrapPositions {ZERO, HOME, FLIP, LEVEL, DOWN};
     public GreaseTrapPositions currentPosition = GreaseTrapPositions.HOME;
 
  	/**
@@ -108,6 +108,9 @@ public class GreaseTrap {
             case HOME:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.home);
                 break;
+            case FLIP:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.flip);
+                break;
             case LEVEL:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.level);
                 break;            
@@ -128,10 +131,12 @@ public class GreaseTrap {
      */
     public void updateDashboard() {
         Dashboard.GreaseTrap.setPositionName(currentPosition.toString());
-        Dashboard.GreaseTrap.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
-        Dashboard.GreaseTrap.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
-        Dashboard.GreaseTrap.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
-        Dashboard.GreaseTrap.setSpeed(m_motor.get());
+        if(currentPosition != GreaseTrapPositions.ZERO) {
+            Dashboard.GreaseTrap.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
+            Dashboard.GreaseTrap.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
+            Dashboard.GreaseTrap.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        }
+        Dashboard.GreaseTrap.setSpeed(m_motor.getMotorOutputPercent());
     }
 
 }

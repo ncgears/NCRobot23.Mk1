@@ -197,7 +197,7 @@ public class RobotContainer {
     btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.DOWN));
     btn_GreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
     btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME));
-    btn_GreaseTrapFlip.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
+    btn_GreaseTrapFlip.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.FLIP)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
 
     btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));

@@ -147,7 +147,7 @@ public class Spatula {
     public void updateDashboard() {
         // Dashboard.Spatula.setPosition(m_moduleName, (int) getPositionAbsolute() & 0x3FF);
         Dashboard.Spatula.setPositionName(m_moduleName, currentPosition.toString());
-        Dashboard.Spatula.setSpeed(m_moduleName, m_motor.get());
+        Dashboard.Spatula.setSpeed(m_moduleName, m_motor.getMotorOutputPercent());
     }
 
 }

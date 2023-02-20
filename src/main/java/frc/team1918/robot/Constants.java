@@ -183,6 +183,7 @@ public class Constants {
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //home/stow/starting config
+                public static final double flip = 0.0; //position to goto for flipping pancakes
                 public static final double level = 4400.0; //level
                 public static final double down = 5700.0; //down
             }

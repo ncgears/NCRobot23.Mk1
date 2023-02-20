@@ -131,10 +131,12 @@ public class Burner {
      */
     public void updateDashboard() {
         Dashboard.Burner.setPositionName(currentPosition.toString());
-        Dashboard.Burner.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
-        Dashboard.Burner.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
-        Dashboard.Burner.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
-        Dashboard.Burner.setSpeed(m_motor.get());
+        if(currentPosition != BurnerPositions.ZERO) {
+            Dashboard.Burner.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
+            Dashboard.Burner.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
+            Dashboard.Burner.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        }
+        Dashboard.Burner.setSpeed(m_motor.getMotorOutputPercent());
     }
 
 }

@@ -27,7 +27,7 @@ public class stove_zeroGreaseTrap extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Helpers.Debug.debug("zeroGreaseTrap");
+    // Helpers.Debug.debug("zeroGreaseTrap");
     m_stove.setGreaseTrapZeroSpeed(Constants.Stove.GreaseTrap.kZeroSpeed);
   }
 

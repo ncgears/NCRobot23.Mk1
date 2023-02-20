@@ -126,7 +126,7 @@ public class Griddle {
      */
     public void updateDashboard() {
         Dashboard.Griddle.setDirection(currentDirection.toString());
-        Dashboard.Griddle.setSpeed(m_motor.get());
+        Dashboard.Griddle.setSpeed(m_motor.getMotorOutputPercent());
     }
 
 }

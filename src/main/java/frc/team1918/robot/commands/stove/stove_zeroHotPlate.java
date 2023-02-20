@@ -27,7 +27,7 @@ public class stove_zeroHotPlate extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Helpers.Debug.debug("zeroHotPlate");
+    // Helpers.Debug.debug("zeroHotPlate");
     m_stove.setHotPlateZeroSpeed(Constants.Stove.HotPlate.kZeroSpeed);
   }
 
