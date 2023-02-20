@@ -45,6 +45,7 @@ import frc.team1918.robot.commands.fivesecondrule.*;
 import frc.team1918.robot.commands.drive.*;
 import frc.team1918.robot.commands.stove.*;
 import frc.team1918.robot.commands.vision.*;
+import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
 import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 //CommandGroup imports
@@ -113,6 +114,9 @@ public class RobotContainer {
       private POVButton btn_HotPlateHome = new POVButton(dj, Constants.OI.Stadia.BTN_Y);
       private POVButton btn_HotPlateLevel = new POVButton(dj, Constants.OI.Stadia.BTN_B);
       private POVButton btn_HotPlateDown = new POVButton(dj, Constants.OI.Stadia.BTN_A);
+
+      private JoystickButton btn_BurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
+      private JoystickButton btn_BurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
 
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
       private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
@@ -202,6 +206,9 @@ public class RobotContainer {
     btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
+
+    btn_BurnerHot.onTrue(new stove_MoveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
+    btn_BurnerCold.onTrue(new stove_MoveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
 
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 

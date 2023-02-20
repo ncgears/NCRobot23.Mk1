@@ -27,9 +27,9 @@ public class StoveSubsystem extends SubsystemBase {
 	private Burner m_Burner; //elevator controller
 	
 	/**
-	 * Returns the instance of the Intake subsystem.
+	 * Returns the instance of the subsystem.
 	 * The purpose of this is to only create an instance if one does not already exist.
-	 * @return IntakeSubSystem instance
+	 * @return StoveSubsystem instance
 	 */
 	public static StoveSubsystem getInstance() {
 		if (instance == null)

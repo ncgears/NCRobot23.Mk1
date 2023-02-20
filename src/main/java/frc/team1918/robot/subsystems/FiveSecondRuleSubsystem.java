@@ -35,7 +35,10 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 	 * Initializes the IntakeSubsystem class, performs setup steps, etc.
 	 */
 	public FiveSecondRuleSubsystem() {
-		moveSpatulaTo(spatulas.BOTH, SpatulaPositions.HOME); //Make sure all spatulas are initialized to their stowed position
+		// moveSpatulaTo(spatulas.BOTH, SpatulaPositions.HOME); //Make sure all spatulas are initialized to their stowed position
+
+		//for testing, init spatulas to GRIDDLE
+		moveSpatulaTo(spatulas.BOTH, SpatulaPositions.GRIDDLE);
 	}
 
 	/**
@@ -95,4 +98,14 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 		}
 	}
 
+	public SpatulaPositions getSpatulaPosition(spatulas spatula) {
+		switch (spatula) {
+			case LEFT:
+				return m_SpatulaLeft.currentPosition;
+			case RIGHT:
+				return m_SpatulaRight.currentPosition;
+			default:
+				return null;
+		}
+	}
 }
