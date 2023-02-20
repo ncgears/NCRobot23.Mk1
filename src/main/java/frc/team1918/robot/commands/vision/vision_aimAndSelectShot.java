@@ -62,7 +62,7 @@ public class vision_aimAndSelectShot extends CommandBase {
   public void end(boolean interrupted) {
     Helpers.Debug.debug("Vision: Stop Target and Shot Assist");
     Helpers.Debug.debug("current pitch"+m_pitch);
-    m_drive.brake();
+    m_drive.brake(false);
     m_drive.setVisionTargeting(false);
     m_vision.setRinglight(false);
   }

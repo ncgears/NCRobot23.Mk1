@@ -49,7 +49,7 @@ public class drive_defaultDrive2 extends CommandBase {
       m_drive.drive(m_forward_adjusted, m_strafe_adjusted, m_rotation_adjusted, Constants.DriveTrain.useFieldCentric);
     } else {
       // if (!m_orchestra.getOrchestraPlaying()){
-         m_drive.brake();
+         m_drive.brake(false);
       // }
     }
   }

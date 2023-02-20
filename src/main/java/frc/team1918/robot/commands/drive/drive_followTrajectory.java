@@ -76,7 +76,7 @@ public class drive_followTrajectory extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     m_timer.stop();
-    m_drive.brake();
+    m_drive.brake(false);
   }
 
   @Override

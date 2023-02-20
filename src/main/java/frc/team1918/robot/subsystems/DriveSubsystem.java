@@ -238,7 +238,7 @@ public class DriveSubsystem extends SubsystemBase {
 		//getHeading was getRot2d which used m_gyro.getAngle()
 		ChassisSpeeds speeds = (fieldRelative) ? ChassisSpeeds.fromFieldRelativeSpeeds(fwdMPS, strMPS, rotRPS, getHeading()) : new ChassisSpeeds(fwdMPS, strMPS, rotRPS);
 		if (speeds.vxMetersPerSecond == 0 && speeds.vyMetersPerSecond == 0 && speeds.omegaRadiansPerSecond == 0) {
-			brake();
+			brake(false);
 			return;
 		}
 		if (Helpers.Debug.debugThrottleMet(debug_ticks)) {
@@ -254,7 +254,7 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 	public void drive(ChassisSpeeds speeds, boolean normalize) {
 		if (speeds.vxMetersPerSecond == 0 && speeds.vyMetersPerSecond == 0 && speeds.omegaRadiansPerSecond == 0) {
-			brake();
+			brake(false);
 			return;
 		}
 		SwerveModuleState[] swerveModuleStates = Constants.Swerve.kDriveKinematics.toSwerveModuleStates(speeds);
@@ -267,8 +267,8 @@ public class DriveSubsystem extends SubsystemBase {
 	}
 
 	//Stops all modules
-	public void brake() {
-		if(Constants.DriveTrain.useDefensiveLock) {
+	public void brake(boolean withDefensiveLock) {
+		if(withDefensiveLock) {
 			m_dtFL.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(315.0)));
 			m_dtFR.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45.0)));
 			m_dtRL.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(225.0)));
@@ -350,6 +350,18 @@ public class DriveSubsystem extends SubsystemBase {
 	//#region GYRO STUFF
 	public AHRS getGyro() {
         return m_gyro;
+	}
+
+	public double getGyroPitch() {
+		return m_gyro.getPitch();
+	}
+
+	public double getGyroYaw() {
+		return m_gyro.getYaw();
+	}
+
+	public double getGyroRoll() {
+		return m_gyro.getRoll();
 	}
 	//#endregion GYRO STUFF
 

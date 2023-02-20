@@ -57,7 +57,7 @@ public class vision_findTarget extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     Helpers.Debug.debug("Vision: Stop Target Assist");
-    m_drive.brake();
+    m_drive.brake(false);
     m_drive.setVisionTargeting(false);
     m_vision.setRinglight(false);
   }

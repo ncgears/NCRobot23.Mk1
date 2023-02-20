@@ -101,6 +101,13 @@ public class Constants {
         public static final double kMaxOmega = (kMaxSpeedMetersPerSecond / Math.hypot(0.584 / 2.0, 0.66 / 2.0));
         public static final double kPTranslationController = 0.0;
         public static final double kPThetaController = 0.0;
+        public static final class Balance {
+            public static final boolean kUseDefensiveLock = true; //lock the drive train into defensive position when finished balancing
+            public static final double kToleranceDegrees = 3.5; //degrees of tolerance for balancing
+            public static final double kP = -0.025;
+            public static final double kI = 0.0;
+            public static final double kD = 0.0;
+        }
     }
 
     /**
