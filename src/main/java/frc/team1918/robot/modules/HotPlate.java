@@ -17,7 +17,7 @@ import frc.team1918.robot.utils.TalonConstants;
 public class HotPlate {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
-    public enum HotPlatePositions {HOME, LEVEL, DOWN};
+    public enum HotPlatePositions {ZERO, HOME, LEVEL, DOWN};
     public HotPlatePositions currentPosition = HotPlatePositions.HOME;
 
  	/**
@@ -108,7 +108,6 @@ public class HotPlate {
     }
 
     public void moveTo(HotPlatePositions position) {
-        // Dashboard.HotPlate.setPositionName(position.toString());
         currentPosition = position;
         switch (position) {
             case HOME:
@@ -130,6 +129,7 @@ public class HotPlate {
         Dashboard.HotPlate.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
         Dashboard.HotPlate.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
         Dashboard.HotPlate.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        Dashboard.HotPlate.setSpeed(m_motor.get());
     }
 
 }

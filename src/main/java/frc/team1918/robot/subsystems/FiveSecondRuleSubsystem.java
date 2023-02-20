@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.modules.Spatula;
+import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 
 /**
  * The FiveSecondRule (Intake) Subsystem manages the left and right Spatulas. 
@@ -15,8 +16,8 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 	public enum spatulas {BOTH, LEFT, RIGHT};
 
 	//initialize spatulas
-	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants, Constants.Spatula.Left.gains); // Left
-	private static Spatula m_SpatulaRight = new Spatula("SpatulaRight", Constants.Spatula.Right.constants, Constants.Spatula.Right.gains); // Right
+	private static Spatula m_SpatulaLeft = new Spatula("SpatulaLeft", Constants.Spatula.Left.constants, Constants.Spatula.Left.gains, Constants.Spatula.Left.positions); // Left
+	private static Spatula m_SpatulaRight = new Spatula("SpatulaRight", Constants.Spatula.Right.constants, Constants.Spatula.Right.gains, Constants.Spatula.Right.positions); // Right
 	private Spatula[] modules = {m_SpatulaLeft, m_SpatulaRight};
 
 	/**
@@ -61,17 +62,38 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 		speed = Math.abs(speed) * -1.0;
 		switch (spatula) {
 			case LEFT:
+				m_SpatulaLeft.currentPosition = SpatulaPositions.ZERO;
 				m_SpatulaLeft.setSpeed(speed);
 				break;
 			case RIGHT:
+				m_SpatulaRight.currentPosition = SpatulaPositions.ZERO;
 				m_SpatulaRight.setSpeed(speed);
 				break;
 			case BOTH:
+				m_SpatulaLeft.currentPosition = SpatulaPositions.ZERO;
+				m_SpatulaRight.currentPosition = SpatulaPositions.ZERO;
 				m_SpatulaLeft.setSpeed(speed);
 				m_SpatulaRight.setSpeed(speed);
 		}
 	}
 
+	/**
+	 * Moves the Spatula to a designated position
+	 * @param position - This is a SpatulaPositions enum of {@SpatulaPositions}
+	 */
+	public void moveSpatulaTo(spatulas spatula, SpatulaPositions position) {
+		switch (spatula) {
+			case LEFT:
+				m_SpatulaLeft.moveTo(position);
+				break;
+			case RIGHT:
+				m_SpatulaRight.moveTo(position);
+				break;
+			case BOTH:
+				m_SpatulaLeft.moveTo(position);
+				m_SpatulaRight.moveTo(position);
+		}
+	}
 
 	/**
 	 * Moves spatulas to their home positions (starting configuration)

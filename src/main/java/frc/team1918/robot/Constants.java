@@ -1,8 +1,9 @@
 
 package frc.team1918.robot;
 import frc.team1918.robot.utils.PIDGains;
-import frc.team1918.robot.utils.TalonConstants;
 import frc.team1918.robot.modules.SwerveModuleConstants;
+import frc.team1918.robot.modules.SpatulaNamedPositions;
+import frc.team1918.robot.utils.TalonConstants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
@@ -262,11 +263,12 @@ public class Constants {
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
-            public static final class Positions {
-                public static final double home = 0.0; //postion for home position
-                public static final double clear = 512.0; //position that clears the griddle for moving burner
-                public static final double floor = 1024.0; //position for floor position
-            }
+            public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
+                0.0,
+                512.0,
+                768.0,
+                1024.0
+            );
         }
         public static final class Right {
             public static final boolean isDisabled = false;
@@ -291,11 +293,12 @@ public class Constants {
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
-            public static final class Positions {
-                public static final double home = 0.0; //postion for home position
-                public static final double clear = 512.0; //position that clears the griddle for moving burner
-                public static final double floor = 1024.0; //position for floor position
-            }
+            public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
+                0.0,
+                512.0,
+                768.0,
+                1024.0
+            );
         }
     }
 

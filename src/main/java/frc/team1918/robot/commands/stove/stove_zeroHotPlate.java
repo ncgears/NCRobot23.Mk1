@@ -2,6 +2,8 @@ package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.Constants;
+import frc.team1918.robot.Helpers;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 public class stove_zeroHotPlate extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
@@ -25,18 +27,20 @@ public class stove_zeroHotPlate extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Helpers.Debug.debug("zeroHotPlate");
     m_stove.setHotPlateZeroSpeed(Constants.Stove.HotPlate.kZeroSpeed);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_stove.setHotPlateZeroSpeed(0.0);
+    // m_stove.setHotPlateZeroSpeed(0.0);
+    m_stove.moveHotPlateTo(HotPlatePositions.HOME);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

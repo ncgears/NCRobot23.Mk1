@@ -11,7 +11,7 @@
         "vgap": 16.0,
         "titleType": 1,
         "tiles": {
-          "0,0": {
+          "4,3": {
             "size": [
               1,
               1
@@ -63,7 +63,7 @@
               "_showGlyph": false
             }
           },
-          "4,0": {
+          "0,0": {
             "size": [
               1,
               1
@@ -76,7 +76,7 @@
               "_showGlyph": false
             }
           },
-          "5,0": {
+          "4,0": {
             "size": [
               1,
               1
@@ -104,7 +104,7 @@
               "Colors/Color when false": "#8B0000FF"
             }
           },
-          "7,0": {
+          "5,0": {
             "size": [
               1,
               1
@@ -117,7 +117,7 @@
               "_showGlyph": false
             }
           },
-          "8,0": {
+          "4,1": {
             "size": [
               1,
               1
@@ -130,46 +130,251 @@
               "_showGlyph": false
             }
           },
-          "4,1": {
+          "0,2": {
             "size": [
-              3,
-              2
+              1,
+              1
             ],
             "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://photonvision_Port_1181_MJPEG_Server",
-              "_title": "photonvision_Port_1181_MJPEG_Server",
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Spatula/SpatulaLeft/Speed",
+              "_title": "Spatula/SpatulaLeft/Speed",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#4D4D4DFF",
-              "Controls/Show controls": false,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "_showGlyph": false
             }
           },
-          "4,3": {
+          "1,2": {
             "size": [
-              3,
-              2
+              1,
+              1
             ],
             "content": {
-              "_type": "Camera Stream",
-              "_source0": "camera_server://photonvision_Port_1182_MJPEG_Server",
-              "_title": "photonvision_Port_1182_MJPEG_Server",
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Spatula/SpatulaRight/Speed",
+              "_title": "Spatula/SpatulaRight/Speed",
               "_glyph": 148,
-              "_showGlyph": false,
-              "Crosshair/Show crosshair": true,
-              "Crosshair/Crosshair color": "#666666FF",
-              "Controls/Show controls": false,
-              "Controls/Rotation": "NONE",
-              "compression": -1.0,
-              "fps": -1,
-              "imageWidth": -1,
-              "imageHeight": -1
+              "_showGlyph": false
+            }
+          },
+          "5,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/HotPlate/Position",
+              "_title": "HotPlate/Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/HotPlate/Target",
+              "_title": "HotPlate/Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/HotPlate/Error",
+              "_title": "HotPlate/Error",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/HotPlate/Speed",
+              "_title": "HotPlate/Speed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Burner/Position",
+              "_title": "Burner/Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "8,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Burner/Target",
+              "_title": "Burner/Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "10,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Burner/Error",
+              "_title": "Burner/Error",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Burner/Speed",
+              "_title": "Burner/Speed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "9,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Griddle/Speed",
+              "_title": "Griddle/Speed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GreaseTrap/Position",
+              "_title": "GreaseTrap/Position",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "4,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GreaseTrap/Target",
+              "_title": "GreaseTrap/Target",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GreaseTrap/Error",
+              "_title": "GreaseTrap/Error",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "5,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GreaseTrap/Speed",
+              "_title": "GreaseTrap/Speed",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "8,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Burner/PosName",
+              "_title": "Burner/PosName",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "8,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Griddle/Direction",
+              "_title": "Griddle/Direction",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "0,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Spatula/SpatulaLeft/PosName",
+              "_title": "Spatula/SpatulaLeft/PosName",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "1,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Spatula/SpatulaRight/PosName",
+              "_title": "Spatula/SpatulaRight/PosName",
+              "_glyph": 148,
+              "_showGlyph": false
             }
           }
         }
@@ -177,9 +382,9 @@
     }
   ],
   "windowGeometry": {
-    "x": 1069.0,
-    "y": 256.0,
-    "width": 1538.0,
+    "x": 64.0,
+    "y": 97.0,
+    "width": 1684.0,
     "height": 933.0
   }
 }

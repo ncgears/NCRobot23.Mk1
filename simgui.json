@@ -1,6 +1,11 @@
 {
   "HALProvider": {
     "Other Devices": {
+      "Talon SRX[13]/Rev Limit": {
+        "header": {
+          "open": true
+        }
+      },
       "navX-Sensor[0]": {
         "header": {
           "open": true

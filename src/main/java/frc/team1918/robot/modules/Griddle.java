@@ -125,6 +125,7 @@ public class Griddle {
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {
+        Dashboard.Griddle.setDirection(currentDirection.toString());
         Dashboard.Griddle.setSpeed(m_motor.get());
     }
 

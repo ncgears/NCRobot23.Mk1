@@ -41,8 +41,7 @@ import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
 //Commands imports
 // import frc.team1918.robot.commands.helpers.helpers_debugMessage;
-//import frc.team1918.robot.commands.stove.*;
-//import frc.team1918.robot.commands.fivesecondrule.*;
+import frc.team1918.robot.commands.fivesecondrule.*;
 import frc.team1918.robot.commands.drive.*;
 import frc.team1918.robot.commands.stove.*;
 import frc.team1918.robot.commands.vision.*;
@@ -118,7 +117,7 @@ public class RobotContainer {
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
       private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
-      private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
+      private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
       // private JoystickButton btn_CollectorToggle = new JoystickButton(dj, Constants.OI.Logitech.BTN_START);
       // private JoystickButton btn_GyroReset = new JoystickButton(dj, Constants.OI.Logitech.BTN_BACK);
@@ -398,11 +397,30 @@ public class RobotContainer {
   }
 
   private void buildMaintenanceTab(){
-    ShuffleboardTab driveTab = Shuffleboard.getTab("Maintenance");
-    driveTab.add("Reset Robot", new cg_resetRobot(m_stove, m_fsr, m_vision))
+    ShuffleboardTab maintTab = Shuffleboard.getTab("Maintenance");
+    maintTab.add("Reset Robot", new cg_resetRobot(m_stove, m_fsr, m_vision))
         .withPosition(0, 0)
         .withSize(1, 1);
-  }
+
+    maintTab.add("Spat Left Speed", 0)
+        .withPosition(0, 1)
+        .withSize(1,1);
+    maintTab.add("Spat Right Speed",0)
+        .withPosition(1,1)
+        .withSize(1,1);
+    maintTab.add("Burner Speed",0)
+        .withPosition(2,1)
+        .withSize(1,1);
+    maintTab.add("HotPlate Speed",0)
+        .withPosition(3,1)
+        .withSize(1,1);
+    maintTab.add("GreaseTrap Speed",0)
+        .withPosition(4,1)
+        .withSize(1,1);
+    maintTab.add("Griddle Speed",0)
+        .withPosition(5,1)
+        .withSize(1,1);
+}
 
   public void buildDriverTestTab(){
     ShuffleboardTab driveMMTab = Shuffleboard.getTab("Drive Testing");

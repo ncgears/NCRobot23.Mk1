@@ -17,7 +17,7 @@ import frc.team1918.robot.utils.TalonConstants;
 public class Burner {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
-    public enum BurnerPositions {HOME, HOT, TOP, COLD, BOTTOM};
+    public enum BurnerPositions {ZERO, HOME, HOT, TOP, COLD, BOTTOM};
     public BurnerPositions currentPosition = BurnerPositions.HOME;
 
  	/**
@@ -108,7 +108,6 @@ public class Burner {
     }
 
     public void moveTo(BurnerPositions position) {
-        // Dashboard.Burner.setPositionName(position.toString());
         currentPosition = position;
         switch (position) {
             case HOME:
@@ -131,9 +130,11 @@ public class Burner {
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {
+        Dashboard.Burner.setPositionName(currentPosition.toString());
         Dashboard.Burner.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
         Dashboard.Burner.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
         Dashboard.Burner.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        Dashboard.Burner.setSpeed(m_motor.get());
     }
 
 }

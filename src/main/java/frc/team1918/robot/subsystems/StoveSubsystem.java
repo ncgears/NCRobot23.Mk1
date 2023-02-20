@@ -62,7 +62,10 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	public void updateDashboard() {
-
+		m_HotPlate.updateDashboard();
+		m_Burner.updateDashboard();
+		m_Griddle.updateDashboard();
+		m_GreaseTrap.updateDashboard();
 	}
 
 	/**
@@ -80,6 +83,7 @@ public class StoveSubsystem extends SubsystemBase {
 	 * @param speed
 	 */
 	public void setGreaseTrapZeroSpeed(double speed) {
+		m_GreaseTrap.currentPosition = GreaseTrapPositions.ZERO;
 		m_GreaseTrap.setSpeed(Math.abs(speed) * -1.0);
 	}
 
@@ -97,6 +101,7 @@ public class StoveSubsystem extends SubsystemBase {
 	 * @param speed
 	 */
 	public void setHotPlateZeroSpeed(double speed) {
+		m_HotPlate.currentPosition = HotPlatePositions.ZERO;
 		m_HotPlate.setSpeed(Math.abs(speed) * -1.0);
 	}
 
@@ -114,6 +119,7 @@ public class StoveSubsystem extends SubsystemBase {
 	 * @param speed
 	 */
 	public void setBurnerZeroSpeed(double speed) {
+		m_Burner.currentPosition = BurnerPositions.ZERO;
 		m_Burner.setSpeed(Math.abs(speed) * -1.0);
 	}
 

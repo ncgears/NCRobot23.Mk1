@@ -10,22 +10,30 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 //Team 1918
 import frc.team1918.robot.Constants;
+import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.utils.PIDGains;
 import frc.team1918.robot.utils.TalonConstants;
+import frc.team1918.robot.modules.SpatulaNamedPositions;
 
 public class Spatula {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
+    private SpatulaNamedPositions m_Positions;
+    public enum SpatulaPositions {ZERO, HOME, GRIDDLE, CLEAR, FLOOR};
+    public SpatulaPositions currentPosition = SpatulaPositions.HOME;
 
- 	/**
+    /**
 	 * 1918 Spatula Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to pick up game pieces.
      * The module uses a Versa-Planetary Encoder Stage for positioning data.
      * There is a high limit and low limit switch, connected to the Talon to limit the mechanical travel
 	 * @param name This is the name of this spatula module (ie. "SpatulaLeft" or "SpatulaRight")
-     * @param moduleConstants This is a SpatulaConstants object containing the data for this module
+     * @param moduleConstants This is a TalonConstants object containing the data for this module
+     * @param moduleGains This is a PIDGains object containins PID control data
+     * @param modulePositions This is a SpatulaNamedPositions object containing position data
 	 */
-    public Spatula(String name, TalonConstants moduleConstants, PIDGains moduleGains){
+    public Spatula(String name, TalonConstants moduleConstants, PIDGains moduleGains, SpatulaNamedPositions modulePositions){
         m_moduleName = name;
+        m_Positions = modulePositions;
         m_motor = new WPI_TalonSRX(moduleConstants.MotorID);
 
         m_motor.configFactoryDefault(); //Reset controller to factory defaults to avoid wierd stuff from carrying over
@@ -96,6 +104,28 @@ public class Spatula {
     }
 
     /**
+     * Sets the percent output of the controller to a given speed
+     * @param speed (double) speed of motor controller
+     */
+    public void moveTo(SpatulaPositions position) {
+        currentPosition = position;
+        switch (position) {
+            case HOME:
+                m_motor.set(ControlMode.Position, m_Positions.home);
+                break;
+            case GRIDDLE:
+                m_motor.set(ControlMode.Position, m_Positions.griddle);
+                break;
+            case CLEAR:
+                m_motor.set(ControlMode.Position, m_Positions.clear);
+                break;
+            case FLOOR:
+                m_motor.set(ControlMode.Position, m_Positions.floor);
+                break;
+        }
+    }
+
+    /**
      * Sets the brake mode for the spatula (to allow it to move freely)
      * @param brake Boolean indicating if the brake mode should be set to brake (true) or coast (false)
      */
@@ -116,6 +146,8 @@ public class Spatula {
      */
     public void updateDashboard() {
         // Dashboard.Spatula.setPosition(m_moduleName, (int) getPositionAbsolute() & 0x3FF);
+        Dashboard.Spatula.setPositionName(m_moduleName, currentPosition.toString());
+        Dashboard.Spatula.setSpeed(m_moduleName, m_motor.get());
     }
 
 }
