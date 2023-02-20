@@ -122,6 +122,22 @@ public class Griddle {
     }
 
     /**
+     * This function is used to return the state of the reverse limit switch
+     * @return (boolean) state of the limit switch
+     */
+    public boolean isRevLimit() {
+        return m_motor.getSensorCollection().isRevLimitSwitchClosed();
+    }
+
+    /**
+     * This function is used to return the state of the forward limit switch
+     * @return (boolean) state of the limit switch
+     */
+    public boolean isFwdLimit() {
+        return m_motor.getSensorCollection().isFwdLimitSwitchClosed();
+    }
+
+    /**
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {

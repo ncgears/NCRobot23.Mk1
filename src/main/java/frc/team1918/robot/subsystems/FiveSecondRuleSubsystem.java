@@ -108,4 +108,15 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 				return null;
 		}
 	}
+
+	public boolean getSpatulaRevLimit(spatulas spatula) {
+		switch (spatula) {
+			case LEFT:
+				return m_SpatulaLeft.isRevLimit();
+			case RIGHT:
+				return m_SpatulaRight.isRevLimit();
+			default:
+				return false;
+		}
+	}
 }

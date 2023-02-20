@@ -2,9 +2,7 @@ package frc.team1918.robot.commands.fivesecondrule;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
-import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
-import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 public class fsr_moveSpatulaTo extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation

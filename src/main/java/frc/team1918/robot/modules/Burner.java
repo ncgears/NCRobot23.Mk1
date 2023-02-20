@@ -3,6 +3,8 @@ package frc.team1918.robot.modules;
 //Talon SRX/Talon FX
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 //import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
@@ -69,9 +71,16 @@ public class Burner {
         m_motor.configMotionCruiseVelocity(moduleGains.kCruise, Constants.Global.kTimeoutMs);
         m_motor.configMotionAcceleration(moduleGains.kAccel, Constants.Global.kTimeoutMs);
 
-        /* Zero the sensor on robot boot */
+        /* Configure limit switches */
+        // NormallyOpen is default, so we really only need to change this when we have connected NC switches
+        // m_motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
+        m_motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, Constants.Global.kTimeoutMs);
+
+        /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
         m_motor.configClearPositionOnLimitR(true, Constants.Global.kTimeoutMs);
+
+        /* Zero the sensor on robot boot */
         // m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
     }
 
@@ -124,6 +133,22 @@ public class Burner {
             default:
                 Dashboard.Burner.setPositionName("Unknown");
         }
+    }
+
+    /**
+     * This function is used to return the state of the reverse limit switch
+     * @return (boolean) state of the limit switch
+     */
+    public boolean isRevLimit() {
+        return m_motor.getSensorCollection().isRevLimitSwitchClosed();
+    }
+
+    /**
+     * This function is used to return the state of the forward limit switch
+     * @return (boolean) state of the limit switch
+     */
+    public boolean isFwdLimit() {
+        return m_motor.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
     /**

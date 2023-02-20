@@ -88,6 +88,14 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Returns whether the module is at its reverse limit
+	 * @return (boolean) limit switch state for reverse limit
+	 */
+	public boolean getGreaseTrapRevLimit() {
+		return m_GreaseTrap.isRevLimit();
+	}
+
+	/**
 	 * Moves the GreaseTrap to a designated position
 	 * @param position - This is a GreaseTrapPositions enum of {@GreaseTrapPositions}
 	 */
@@ -106,6 +114,14 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Returns whether the module is at its reverse limit
+	 * @return (boolean) limit switch state for reverse limit
+	 */
+	public boolean getHotPlateRevLimit() {
+		return m_HotPlate.isRevLimit();
+	}
+
+	/**
 	 * Moves the HotPlate to a designated position
 	 * @param position - This is a HotPlatePositions enum of {@HotPlatePositions}
 	 */
@@ -121,6 +137,14 @@ public class StoveSubsystem extends SubsystemBase {
 	public void setBurnerZeroSpeed(double speed) {
 		m_Burner.currentPosition = BurnerPositions.ZERO;
 		m_Burner.setSpeed(Math.abs(speed) * -1.0);
+	}
+
+	/**
+	 * Returns whether the module is at its reverse limit
+	 * @return (boolean) limit switch state for reverse limit
+	 */
+	public boolean getBurnerRevLimit() {
+		return m_Burner.isRevLimit();
 	}
 
 	/**
