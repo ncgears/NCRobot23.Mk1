@@ -8,8 +8,7 @@
 package frc.team1918.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
-// import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1918.robot.subsystems.DriveSubsystem;
@@ -34,11 +33,17 @@ public class cg_autonAutoBalance extends SequentialCommandGroup {
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
         new helpers_debugMessage("Start robot auto balance sequence"),
-        new ParallelRaceGroup(
-        new ParallelDeadlineGroup(
-          new WaitCommand(0.25),
-          new drive_autoBalance(m_drive)
-        )
+        new helpers_debugMessage("simulate drive to charge station"),
+        new WaitCommand(0.5),
+        new RepeatCommand(
+          new SequentialCommandGroup(
+            new helpers_debugMessage("autoBalance for .5s"),
+            new ParallelDeadlineGroup(
+              new WaitCommand(0.5),
+              new drive_autoBalance(m_drive)
+            ),
+            new WaitCommand(0.5)
+          )
         ),
         new helpers_debugMessage("Finish robot auto balance sequence")
     );

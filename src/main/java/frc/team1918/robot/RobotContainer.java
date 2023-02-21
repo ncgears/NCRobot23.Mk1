@@ -232,6 +232,8 @@ public class RobotContainer {
         return new cg_resetRobot(m_stove, m_fsr, m_vision);
       case "rumbleNotify":
         return new cg_djRumble();
+      case "auton_AutoBalance":
+        return new cg_autonAutoBalance(m_drive);
       default:
         return null;
     }
@@ -270,8 +272,8 @@ public class RobotContainer {
     if(Constants.Auton.isDisabled) {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
-      m_auto_chooser.setDefaultOption("AR1 3 Ball", getRobotCommand("auton_ar1ThreeBall"));
-      m_auto_chooser.addOption("AR2 2 Ball", getRobotCommand("auton_ar2TwoBall"));
+      m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
+      m_auto_chooser.addOption("[TEST] AutoBalance", getRobotCommand("auton_AutoBalance"));
       // m_auto_chooser.addOption("AC1 1 Ball", getRobotCommand("auton_ac1OneBall"));
       // m_auto_chooser.addOption("AL1 2 Ball", getRobotCommand("auton_al1TwoBall"));
       // m_auto_chooser.addOption("AL2 2 Ball #2", getRobotCommand("auton_al2TwoBall"));

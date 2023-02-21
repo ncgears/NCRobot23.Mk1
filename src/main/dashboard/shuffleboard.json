@@ -89,7 +89,7 @@
               "_showGlyph": false
             }
           },
-          "6,0": {
+          "8,0": {
             "size": [
               1,
               1
@@ -409,6 +409,19 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Spatula/SpatulaRight/PosName",
               "_title": "Spatula/SpatulaRight/PosName",
+              "_glyph": 148,
+              "_showGlyph": false
+            }
+          },
+          "6,0": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/GyroPitch",
+              "_title": "GyroPitch",
               "_glyph": 148,
               "_showGlyph": false
             }
