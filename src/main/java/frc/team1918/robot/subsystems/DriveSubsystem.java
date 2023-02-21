@@ -33,6 +33,7 @@ public class DriveSubsystem extends SubsystemBase {
 	//private double lastTime;
 	//private final Timer timer;
 	private static double yawOffset = 0.0; //offset to account for different starting positions
+	public boolean inCommunity = false;
 	public boolean visionTargeting = false;
 
 	//initialize 4 swerve modules
@@ -116,6 +117,7 @@ public class DriveSubsystem extends SubsystemBase {
 		Dashboard.DriveTrain.setY(getPose().getY());
 		Dashboard.DriveTrain.setCurrentAngle(getPose().getRotation().getDegrees());
 		Dashboard.DriveTrain.setDesiredAngle(desiredAngle);
+		Dashboard.DriveTrain.setCommunity(inCommunity);
 		Dashboard.Gyro.setGyroPitch(getGyroPitch());
 		// Dashboard.DriveTrain.setTargetAngle(m_targetPose.getRotation().getRadians());
 	}
