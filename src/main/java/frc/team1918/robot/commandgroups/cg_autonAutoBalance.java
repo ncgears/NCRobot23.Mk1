@@ -37,11 +37,12 @@ public class cg_autonAutoBalance extends SequentialCommandGroup {
         new WaitCommand(0.5),
         new RepeatCommand(
           new SequentialCommandGroup(
-            new helpers_debugMessage("autoBalance for .5s"),
             new ParallelDeadlineGroup(
               new WaitCommand(0.5),
+              new helpers_debugMessage("autoBalance for .5s"),
               new drive_autoBalance(m_drive)
             ),
+            new helpers_debugMessage("waiting for .5s"),
             new WaitCommand(0.5)
           )
         ),
