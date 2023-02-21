@@ -1,6 +1,11 @@
 //OI = Operator Interface
 package frc.team1918.robot;
 
+import edu.wpi.first.networktables.GenericEntry;
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * This class reads and writes values to/from the SmartDashboard
@@ -60,5 +65,11 @@ public class Dashboard {
         public static final void setRotationPidOut(double value) { SmartDashboard.putNumber("Rotation PID Out", value); }
         public static final void setDesiredAngle(double value) { SmartDashboard.putNumber("Desired Angle", value); }
         public static final void setCorrectionAngle(double value) { SmartDashboard.putNumber("Correction Omega", value); }
+        // public static final void setCommunity(boolean value) { SmartDashboard.putBoolean("In Community", value); }
+        public static final void setCommunity(boolean value) { SmartDashboard.putBoolean("In Community", value); test_CommunityEntry.setBoolean(value); }
     }
+
+    // Define on-the-fly tabs
+    private static ShuffleboardTab tabTest = Shuffleboard.getTab("Driver");
+    private static GenericEntry test_CommunityEntry = tabTest.add("Community",false).withPosition(0,3).withSize(2,1).withWidget(BuiltInWidgets.kBooleanBox).getEntry();
 }
