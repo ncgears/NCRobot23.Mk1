@@ -39,6 +39,7 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
+import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
 //Commands imports
 // import frc.team1918.robot.commands.helpers.helpers_debugMessage;
 import frc.team1918.robot.commands.fivesecondrule.*;
@@ -48,6 +49,7 @@ import frc.team1918.robot.commands.vision.*;
 import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
 import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
+import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
 // import frc.team1918.robot.commandgroups.cg_drive_initOdometry;
@@ -116,6 +118,9 @@ public class RobotContainer {
       private JoystickButton btn_HotPlateDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_A);
 
       private JoystickButton btn_AutoBalance = new JoystickButton(dj, Constants.OI.Stadia.BTN_X);
+
+      private JoystickButton btn_RSpatUp = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
+      private JoystickButton btn_RSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
 
       private JoystickButton btn_BurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
       private JoystickButton btn_BurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
@@ -193,9 +198,12 @@ public class RobotContainer {
     btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
+    //Spatula testing
+    btn_RSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.GRIDDLE));
+    btn_RSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.FLOOR));
     //Burner testing
-    btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
-    btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
+    // btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
+    // btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
 
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
 

@@ -66,10 +66,10 @@ public class Dashboard {
         public static final void setDesiredAngle(double value) { SmartDashboard.putNumber("Desired Angle", value); }
         public static final void setCorrectionAngle(double value) { SmartDashboard.putNumber("Correction Omega", value); }
         // public static final void setCommunity(boolean value) { SmartDashboard.putBoolean("In Community", value); }
-        public static final void setCommunity(boolean value) { SmartDashboard.putBoolean("In Community", value); test_CommunityEntry.setBoolean(value); }
+        public static final void setCommunity(boolean value) { SmartDashboard.putBoolean("In Community", value); driver_CommunityEntry.setBoolean(value); }
     }
 
     // Define on-the-fly tabs
-    private static ShuffleboardTab tabTest = Shuffleboard.getTab("Driver");
-    private static GenericEntry test_CommunityEntry = tabTest.add("Community",false).withPosition(0,3).withSize(2,1).withWidget(BuiltInWidgets.kBooleanBox).getEntry();
+    private static ShuffleboardTab tabDriver = Shuffleboard.getTab("Driver");
+    private static GenericEntry driver_CommunityEntry = tabDriver.add("Community",false).withPosition(0,3).withSize(2,1).withWidget(BuiltInWidgets.kBooleanBox).getEntry();
 }

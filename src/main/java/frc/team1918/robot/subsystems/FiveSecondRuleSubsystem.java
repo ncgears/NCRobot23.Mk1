@@ -38,7 +38,8 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 		// moveSpatulaTo(spatulas.BOTH, SpatulaPositions.HOME); //Make sure all spatulas are initialized to their stowed position
 
 		//for testing, init spatulas to GRIDDLE
-		moveSpatulaTo(spatulas.BOTH, SpatulaPositions.GRIDDLE);
+		// moveSpatulaTo(spatulas.BOTH, SpatulaPositions.GRIDDLE);
+		moveSpatulaTo(spatulas.RIGHT, SpatulaPositions.FLOOR);
 	}
 
 	/**

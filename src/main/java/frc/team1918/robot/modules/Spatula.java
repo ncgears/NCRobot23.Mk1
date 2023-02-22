@@ -77,8 +77,10 @@ public class Spatula {
 
         /* Configure limit switches */
         // NormallyOpen is default, so we really only need to change this when we have connected NC switches
+        m_motor.configForwardSoftLimitEnable(true);
+        m_motor.configForwardSoftLimitThreshold(modulePositions.limit);
         // m_motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
-        m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, Constants.Global.kTimeoutMs);
+        m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
@@ -97,13 +99,6 @@ public class Spatula {
     }
 
     /**
-     * Moves the spatula to it's home position (starting configuration)
-     */
-    public void stowSpatula() {
-        m_motor.set(ControlMode.Position, 0.0);
-    }
-
-    /**
      * Sets the percent output of the controller to a given speed
      * @param speed (double) speed of motor controller
      */
@@ -119,16 +114,16 @@ public class Spatula {
         currentPosition = position;
         switch (position) {
             case HOME:
-                m_motor.set(ControlMode.Position, m_Positions.home);
+                m_motor.set(ControlMode.MotionMagic, m_Positions.home);
                 break;
             case GRIDDLE:
-                m_motor.set(ControlMode.Position, m_Positions.griddle);
+                m_motor.set(ControlMode.MotionMagic, m_Positions.griddle);
                 break;
             case CLEAR:
-                m_motor.set(ControlMode.Position, m_Positions.clear);
+                m_motor.set(ControlMode.MotionMagic, m_Positions.clear);
                 break;
             case FLOOR:
-                m_motor.set(ControlMode.Position, m_Positions.floor);
+                m_motor.set(ControlMode.MotionMagic, m_Positions.floor);
                 break;
             default:
         }
@@ -170,8 +165,8 @@ public class Spatula {
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {
-        // Dashboard.Spatula.setPosition(m_moduleName, (int) getPositionAbsolute() & 0x3FF);
         Dashboard.Spatula.setPositionName(m_moduleName, currentPosition.toString());
+        Dashboard.Spatula.setPosition(m_moduleName, m_motor.getSelectedSensorPosition(0));
         Dashboard.Spatula.setSpeed(m_moduleName, m_motor.getMotorOutputPercent());
     }
 

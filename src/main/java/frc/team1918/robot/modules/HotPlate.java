@@ -74,7 +74,7 @@ public class HotPlate {
         /* Configure limit switches */
         // NormallyOpen is default, so we really only need to change this when we have connected NC switches
         // m_motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
-        m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, Constants.Global.kTimeoutMs);
+        m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
@@ -136,10 +136,13 @@ public class HotPlate {
         currentPosition = position;
         switch (position) {
             case HOME:
-                m_motor.set(ControlMode.Position, Constants.Stove.HotPlate.Positions.home);
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.HotPlate.Positions.home);
                 break;
             case LEVEL:
-                m_motor.set(ControlMode.Position, Constants.Stove.HotPlate.Positions.level);
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.HotPlate.Positions.level);
+                break;
+            case DOWN:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.HotPlate.Positions.down);
                 break;
             default:
                 Dashboard.HotPlate.setPositionName("Unknown");

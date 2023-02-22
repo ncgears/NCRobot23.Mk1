@@ -2,7 +2,7 @@ package frc.team1918.robot.modules;
 
 public class SpatulaNamedPositions {
     //control
-    public final double home, griddle, clear, floor;
+    public final double home, griddle, clear, floor, limit;
 
     /**
      * Creates a new positions object for storing named positions
@@ -13,10 +13,11 @@ public class SpatulaNamedPositions {
      * @param IsInverted - (bool) true to invert the motor control
      * @param AllowedError - (int) maximum allowable error
      */
-    public SpatulaNamedPositions(double home, double griddle, double clear, double floor) {
+    public SpatulaNamedPositions(double home, double griddle, double clear, double floor, double limit) {
         this.home = home;
         this.griddle = griddle;
         this.clear = clear;
         this.floor = floor;
+        this.limit = limit;
     }
 }
