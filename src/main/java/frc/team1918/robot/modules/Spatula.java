@@ -21,7 +21,7 @@ public class Spatula {
     private String m_moduleName;
     private SpatulaNamedPositions m_Positions;
     public enum SpatulaPositions {ZERO, HOME, GRIDDLE, CLEAR, FLOOR};
-    public SpatulaPositions currentPosition = SpatulaPositions.HOME;
+    public SpatulaPositions currentPosition = SpatulaPositions.GRIDDLE;
 
     /**
 	 * 1918 Spatula Module v2023.1 - This spatula module uses a TalonSRX with 775, 550, or Bag motor on a Versa Planetary to pick up game pieces.

@@ -122,8 +122,8 @@ public class RobotContainer {
       private JoystickButton btn_RSpatUp = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
       private JoystickButton btn_RSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
 
-      private JoystickButton btn_BurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
-      private JoystickButton btn_BurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
+      private JoystickButton btn_BurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_LB);
+      private JoystickButton btn_BurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_LT);
 
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
       private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
@@ -199,11 +199,11 @@ public class RobotContainer {
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
     //Spatula testing
-    btn_RSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.GRIDDLE));
-    btn_RSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.FLOOR));
+    btn_RSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.GRIDDLE));
+    btn_RSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
     //Burner testing
-    // btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
-    // btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
+    btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.TOP));
+    btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.BOTTOM));
 
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
 

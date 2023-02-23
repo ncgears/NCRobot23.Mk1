@@ -116,7 +116,7 @@ public class Constants {
     public static final class Stove {
         public static final class Burner {
             public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.0; //speed for zeroing operations
+            public static final double kZeroSpeed = 0.25; //speed for zeroing operations
             //Controller Setup
             public static final int kMotorID = ID.Talon.stove_burner; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -133,14 +133,14 @@ public class Constants {
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = 1.0;
             public static final double kNeutralDeadband = 0.001; //0.04 default
-            public static final double kCruise = 3500; //MotionMagic Cruise
-            public static final double kAccel = 4500; //MotionMagic Acceleration
+            public static final double kCruise = 2800; //MotionMagic Cruise
+            public static final double kAccel = 4000; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
                 public static final double bottom = 512.0; //position for bottom scoring
-                public static final double top = 1024.0; //position for top scoring
+                public static final double top = 22000.0; //position for top scoring
             }
         }
         public static final class Griddle {
@@ -234,12 +234,12 @@ public class Constants {
         public static final double default_kP = 0.45; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
-        public static final double default_kF = 0.3; //PID F
+        public static final double default_kF = 0.25; //PID F
         public static final int default_kIZone = 0; //PID IZone
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 3000; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 3200; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
@@ -251,13 +251,13 @@ public class Constants {
 
         public static final class Left {
             public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.0; //default_kZeroSpeed;
+            public static final double kZeroSpeed = default_kZeroSpeed;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_left; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final int kSensorTicks = 4096;
             public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
@@ -273,10 +273,10 @@ public class Constants {
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
             public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
-                0.0,
+                66000.0,
                 66000.0,
                 65500.0,
-                0.0,
+                -10.0,
                 66700.0
             );
 /*  SAVE for later reference on how to store additional data here
