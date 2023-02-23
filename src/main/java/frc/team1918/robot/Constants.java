@@ -150,7 +150,7 @@ public class Constants {
             public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final int kSensorTicks = 4096;
             public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
