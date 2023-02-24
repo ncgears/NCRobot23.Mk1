@@ -119,7 +119,7 @@ public class Constants {
             public static final double kZeroSpeed = 0.25; //speed for zeroing operations
             //Controller Setup
             public static final int kMotorID = ID.Talon.stove_burner; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final int kSensorTicks = 4096;
             public static final boolean kSensorNotContinuous = false;
             public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
@@ -139,8 +139,8 @@ public class Constants {
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
-                public static final double bottom = 512.0; //position for bottom scoring
-                public static final double top = 22000.0; //position for top scoring
+                public static final double bottom = 6400; //position for bottom scoring
+                public static final double top = 16600.0; //position for top scoring
             }
         }
         public static final class Griddle {
@@ -152,6 +152,7 @@ public class Constants {
             public static final boolean kSensorNotContinuous = false;
             public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final int kAllowedError = 5; //PID Allowed error
+            public static final double kSpeed = 0.65;
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
             public static final double kP = 2.8; //PID P 
@@ -191,6 +192,7 @@ public class Constants {
             public static final class Positions {
                 public static final double home = 0.0; //home/stow/starting config
                 public static final double flip = 0.0; //position to goto for flipping pancakes
+                public static final double clear = 800.0; //clear of spatula
                 public static final double level = 4200.0; //level
                 public static final double down = 5700.0; //down
             }
@@ -220,6 +222,7 @@ public class Constants {
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //home position
+                public static final double clear = 800.0; //clear of spatula
                 public static final double level = 4200.0; //level position
                 public static final double down = 5400.0; //down position
             }
@@ -276,8 +279,11 @@ public class Constants {
                 66000.0,
                 66000.0,
                 65500.0,
-                -10.0,
-                66700.0
+                0.0,
+                66700.0,
+                38500.0,
+                38500.0,
+                51300.0
             );
 /*  SAVE for later reference on how to store additional data here
 //https://www.baeldung.com/java-enum-values
@@ -296,7 +302,7 @@ public class Constants {
         }
         public static final class Right {
             public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = default_kZeroSpeed;
+            public static final double kZeroSpeed = 0.45;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_right; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -318,11 +324,14 @@ public class Constants {
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
             public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
-                0.0,
-                66000.0,
+                65500.0,
+                65500.0,
                 65500.0,
                 0.0,
-                66700.0
+                66700.0,
+                37750,
+                37750,
+                50300
             );
         }
     }

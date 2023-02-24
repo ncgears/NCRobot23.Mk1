@@ -2,6 +2,7 @@ package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.StoveSubsystem;
+import frc.team1918.robot.Constants;
 import frc.team1918.robot.modules.Griddle.GriddleDirections;
 public class stove_setGriddleDirectionTo extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
@@ -29,7 +30,7 @@ public class stove_setGriddleDirectionTo extends CommandBase {
   @Override
   public void initialize() {
     //Helpers.Debug.debug("Vision: Ringlight " + status);
-    m_stove.setGriddleDirectionAndSpeed(m_direction, 0.0);
+    m_stove.setGriddleDirectionAndSpeed(m_direction, Constants.Stove.Griddle.kSpeed);
   }
 
   // Called once the command ends or is interrupted.

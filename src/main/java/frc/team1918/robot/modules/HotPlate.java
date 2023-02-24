@@ -19,7 +19,7 @@ import frc.team1918.robot.utils.TalonConstants;
 public class HotPlate {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
-    public enum HotPlatePositions {ZERO, HOME, LEVEL, DOWN};
+    public enum HotPlatePositions {ZERO, HOME, CLEAR, LEVEL, DOWN};
     public HotPlatePositions currentPosition = HotPlatePositions.HOME;
 
  	/**
@@ -137,6 +137,9 @@ public class HotPlate {
         switch (position) {
             case HOME:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.HotPlate.Positions.home);
+                break;
+            case CLEAR:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.HotPlate.Positions.clear);
                 break;
             case LEVEL:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.HotPlate.Positions.level);

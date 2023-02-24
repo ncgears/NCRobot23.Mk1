@@ -5,6 +5,8 @@ import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
 import frc.team1918.robot.modules.Burner.BurnerPositions;
+import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 public class fsr_moveSpatulaTo extends CommandBase {
   private final FiveSecondRuleSubsystem m_fsr;
@@ -37,6 +39,8 @@ public class fsr_moveSpatulaTo extends CommandBase {
   public void initialize() {
     if (m_position==SpatulaPositions.GRIDDLE) { //Griddle position is requested, so make sure Burner is home!
       m_stove.moveBurnerTo(BurnerPositions.HOME);
+      if(m_stove.getGreaseTrapPosition()==GreaseTrapPositions.HOME) m_stove.moveGreaseTrapTo(GreaseTrapPositions.CLEAR);
+      if(m_stove.getHotPlatePosition()==HotPlatePositions.HOME) m_stove.moveHotPlateTo(HotPlatePositions.CLEAR);
     }
     m_fsr.moveSpatulaTo(m_spatula, m_position);
   }

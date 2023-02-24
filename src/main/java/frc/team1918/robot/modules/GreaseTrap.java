@@ -19,7 +19,7 @@ import frc.team1918.robot.utils.TalonConstants;
 public class GreaseTrap {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
-    public enum GreaseTrapPositions {ZERO, HOME, FLIP, LEVEL, DOWN};
+    public enum GreaseTrapPositions {ZERO, HOME, CLEAR, FLIP, LEVEL, DOWN};
     public GreaseTrapPositions currentPosition = GreaseTrapPositions.HOME;
 
  	/**
@@ -116,6 +116,9 @@ public class GreaseTrap {
         switch (position) {
             case HOME:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.home);
+                break;
+            case CLEAR:
+                m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.clear);
                 break;
             case FLIP:
                 m_motor.set(ControlMode.MotionMagic, Constants.Stove.GreaseTrap.Positions.flip);

@@ -20,7 +20,7 @@ public class Spatula {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
     private SpatulaNamedPositions m_Positions;
-    public enum SpatulaPositions {ZERO, HOME, GRIDDLE, CLEAR, FLOOR};
+    public enum SpatulaPositions {ZERO, HOME, GRIDDLE, CLEAR, FLOOR, STORE, MIDUP, MIDDOWN};
     public SpatulaPositions currentPosition = SpatulaPositions.GRIDDLE;
 
     /**

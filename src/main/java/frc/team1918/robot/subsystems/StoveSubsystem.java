@@ -96,6 +96,14 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Returns the current GreaseTrap Position
+	 * @return (GreaseTrapPositions) position of greasetrap
+	 */
+	public GreaseTrapPositions getGreaseTrapPosition() {
+		return m_GreaseTrap.currentPosition;
+	}
+
+	/**
 	 * Moves the GreaseTrap to a designated position
 	 * @param position - This is a GreaseTrapPositions enum of {@GreaseTrapPositions}
 	 */
@@ -127,6 +135,14 @@ public class StoveSubsystem extends SubsystemBase {
 	 */
 	public void moveHotPlateTo(HotPlatePositions position) {
 		m_HotPlate.moveTo(position);
+	}
+
+	/**
+	 * Returns the current HotPlate Position
+	 * @return (HotPlatePositions) position of greasetrap
+	 */
+	public HotPlatePositions getHotPlatePosition() {
+		return m_HotPlate.currentPosition;
 	}
 
 	/**
