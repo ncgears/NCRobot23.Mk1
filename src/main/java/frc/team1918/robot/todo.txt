@@ -1,3 +1,3 @@
 init to Home position
 aimer code
-Spatula middle position
+tune spatula current limiting
