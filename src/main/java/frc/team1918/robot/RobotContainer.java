@@ -55,6 +55,7 @@ import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
+import frc.team1918.robot.commandgroups.autoncommands.cg_AutoBalance;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -241,7 +242,8 @@ public class RobotContainer {
     // btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
     // btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
     
-    btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
+    // btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
+    btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
 
     //Testing buttons
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));
