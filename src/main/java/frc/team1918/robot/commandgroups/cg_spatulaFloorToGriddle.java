@@ -14,10 +14,6 @@ import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.commands.fivesecondrule.fsr_moveSpatulaTo;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
-import frc.team1918.robot.commands.stove.stove_moveGreaseTrapTo;
-import frc.team1918.robot.commands.stove.stove_moveHotPlateTo;
-import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
-import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 
 public class cg_spatulaFloorToGriddle extends SequentialCommandGroup {

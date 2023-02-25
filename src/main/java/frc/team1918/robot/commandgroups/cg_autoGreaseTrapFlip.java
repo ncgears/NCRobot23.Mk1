@@ -8,19 +8,11 @@
 package frc.team1918.robot.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.StoveSubsystem;
-import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
-import frc.team1918.robot.commands.fivesecondrule.fsr_zeroLeftSpatula;
-import frc.team1918.robot.commands.fivesecondrule.fsr_zeroRightSpatula;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
-import frc.team1918.robot.commands.stove.stove_moveGreaseTrapHome;
 import frc.team1918.robot.commands.stove.stove_moveGreaseTrapTo;
 import frc.team1918.robot.commands.stove.stove_setGriddleDirectionTo;
-import frc.team1918.robot.commands.stove.stove_zeroBurner;
-import frc.team1918.robot.commands.stove.stove_zeroGreaseTrap;
-import frc.team1918.robot.commands.stove.stove_zeroHotPlate;
 import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
 import frc.team1918.robot.modules.Griddle.GriddleDirections;
 

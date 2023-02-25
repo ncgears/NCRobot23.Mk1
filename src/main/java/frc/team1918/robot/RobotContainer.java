@@ -14,6 +14,8 @@ import edu.wpi.first.cscore.AxisCamera;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
 
 import java.util.Map;
 
@@ -53,7 +55,6 @@ import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
-// import frc.team1918.robot.commandgroups.cg_drive_initOdometry;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -243,7 +244,7 @@ public class RobotContainer {
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
 
     //Testing buttons
-    btn_ResetGyro.onTrue(new drive_resetGyro(m_drive));
+    btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_ZeroGriddleParts.onTrue(new cg_zeroGriddleParts(m_stove));
@@ -278,8 +279,18 @@ public class RobotContainer {
         return new cg_resetRobot(m_stove, m_fsr, m_vision);
       case "rumbleNotify":
         return new cg_djRumble();
-      case "auton_AutoBalance":
-        return new cg_autonAutoBalance(m_drive);
+      case "auton_DoNothing":
+        return new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHigh":
+        return new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHighDriveForward":
+        return new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHighDriveForwardBalance":
+        return new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_DriveForward":
+        return new cg_autonDriveForward(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_DriveFowardBalance":
+        return new cg_autonDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
       default:
         return null;
     }
@@ -319,12 +330,12 @@ public class RobotContainer {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
-      m_auto_chooser.addOption("[TEST] AutoBalance", getRobotCommand("auton_AutoBalance"));
-      // m_auto_chooser.addOption("AC1 1 Ball", getRobotCommand("auton_ac1OneBall"));
-      // m_auto_chooser.addOption("AL1 2 Ball", getRobotCommand("auton_al1TwoBall"));
-      // m_auto_chooser.addOption("AL2 2 Ball #2", getRobotCommand("auton_al2TwoBall"));
-      // m_auto_chooser.addOption("AL3 2 Ball #3", getRobotCommand("auton_al3TwoBall"));
-      // m_auto_chooser.addOption("Basic Shooting", getRobotCommand("auton_BasicShootingAuto"));
+      m_auto_chooser.addOption("[TEST] SHigh", getRobotCommand("auton_ScoreHigh"));
+      m_auto_chooser.addOption("[TEST] SHigh DFwd", getRobotCommand("auton_ScoreHighDriveForward"));
+      m_auto_chooser.addOption("[TEST] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
+      m_auto_chooser.addOption("[TEST] DFwd", getRobotCommand("auton_DriveForward"));
+      m_auto_chooser.addOption("[TEST] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
+
     }
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
   }
