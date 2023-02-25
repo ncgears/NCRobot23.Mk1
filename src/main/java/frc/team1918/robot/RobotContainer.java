@@ -143,9 +143,9 @@ public class RobotContainer {
     //Operator Controller
       private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
       private POVButton btn_GreaseTrapHome = new POVButton(oj, Constants.OI.Stadia.DPAD_UP);
-      private POVButton btn_GreaseTrapLevel = new POVButton(oj, Constants.OI.Stadia.DPAD_RIGHT);
+      private POVButton btn_GreaseTrapLevel = new POVButton(oj, Constants.OI.Stadia.DPAD_LEFT);
       private POVButton btn_GreaseTrapDown = new POVButton(oj, Constants.OI.Stadia.DPAD_DN);
-      private POVButton btn_GreaseTrapFlip = new POVButton(oj, Constants.OI.Stadia.DPAD_LEFT);
+      private POVButton btn_GreaseTrapFlip = new POVButton(oj, Constants.OI.Stadia.DPAD_RIGHT);
 
       private JoystickButton btn_HotPlateHome = new JoystickButton(oj, Constants.OI.Stadia.BTN_Y);
       private JoystickButton btn_HotPlateLevel = new JoystickButton(oj, Constants.OI.Stadia.BTN_X);
@@ -242,8 +242,8 @@ public class RobotContainer {
     // btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
     // btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
     
-    // btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
-    btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
+    btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
+    // btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
 
     //Testing buttons
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));

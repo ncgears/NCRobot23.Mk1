@@ -61,7 +61,8 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
         ),
         new cg_Wait(1.5),
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
-        new cg_Wait(1.0),
+        new cg_Wait(2.5),
+        new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }
