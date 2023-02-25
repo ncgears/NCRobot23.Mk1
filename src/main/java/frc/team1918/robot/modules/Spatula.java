@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 //import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 
 //Team 1918
 import frc.team1918.robot.Constants;
@@ -84,10 +85,18 @@ public class Spatula {
 
         /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
-        m_motor.configClearPositionOnLimitR(true, Constants.Global.kTimeoutMs);
+        m_motor.configClearPositionOnLimitR(false, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
         // m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
+        m_motor.setSelectedSensorPosition(modulePositions.home); //reset the encoder counter to home position where the spatulas should start
+
+        // SupplyCurrentLimitConfiguration(enabled,peak,trigger threshold current,trigger threshold time(s))
+        m_motor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(
+            Constants.Spatula.isCurrentLimitEnabled,
+            Constants.Spatula.kCurrentLimitAmps,
+            Constants.Spatula.kCurrentThresholdAmps,
+            Constants.Spatula.kCurrentThresholdSecs));
     }
 
     /**

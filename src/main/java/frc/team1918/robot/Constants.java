@@ -247,7 +247,7 @@ public class Constants {
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
         // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
-        public static final boolean isCurrentLimitEnabled = false;
+        public static final boolean isCurrentLimitEnabled = true;
         public static final int kCurrentLimitAmps = 25;
         public static final int kCurrentThresholdAmps = 40;
         public static final double kCurrentThresholdSecs = 0.1;
