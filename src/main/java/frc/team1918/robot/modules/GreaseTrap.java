@@ -77,10 +77,10 @@ public class GreaseTrap {
 
         /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
-        m_motor.configClearPositionOnLimitR(true, Constants.Global.kTimeoutMs);
+        m_motor.configClearPositionOnLimitR(false, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
-        // m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
+        m_motor.setSelectedSensorPosition(0); //reset the talon encoder counter to 0 so we dont carry over a large error from a previous testing
     }
 
     /**
