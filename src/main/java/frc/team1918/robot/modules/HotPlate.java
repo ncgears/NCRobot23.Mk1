@@ -132,6 +132,13 @@ public class HotPlate {
         return m_motor.getSensorCollection().isFwdLimitSwitchClosed();
     }
 
+        /**
+     * This function sets the sensor position to zero
+     */
+    public void setZeroPos() {
+        m_motor.setSelectedSensorPosition(0);
+    }
+
     public void moveTo(HotPlatePositions position) {
         currentPosition = position;
         switch (position) {

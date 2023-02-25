@@ -155,6 +155,13 @@ public class GreaseTrap {
     }
 
     /**
+     * This function sets the sensor position to zero
+     */
+    public void setZeroPos() {
+        m_motor.setSelectedSensorPosition(0);
+    }
+
+    /**
      * This function is used to output data to the dashboard for debugging the module, typically done in the periodic method.
      */
     public void updateDashboard() {

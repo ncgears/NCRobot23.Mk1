@@ -104,6 +104,13 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Sets the GreaseTrap current position to zero
+	 */
+	public void setGreaseTrapZeroPos() {
+		m_GreaseTrap.setZeroPos();
+	}
+
+	/**
 	 * Moves the GreaseTrap to a designated position
 	 * @param position - This is a GreaseTrapPositions enum of {@GreaseTrapPositions}
 	 */
@@ -135,6 +142,13 @@ public class StoveSubsystem extends SubsystemBase {
 	 */
 	public void moveHotPlateTo(HotPlatePositions position) {
 		m_HotPlate.moveTo(position);
+	}
+
+	/**
+	 * Sets the GreaseTrap current position to zero
+	 */
+	public void setHotPlateZeroPos() {
+		m_HotPlate.setZeroPos();
 	}
 
 	/**

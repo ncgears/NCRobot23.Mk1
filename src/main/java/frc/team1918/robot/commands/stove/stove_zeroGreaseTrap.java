@@ -34,6 +34,7 @@ public class stove_zeroGreaseTrap extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // m_stove.setGreaseTrapZeroSpeed(0.0);
+    m_stove.setGreaseTrapZeroPos();
     m_stove.moveGreaseTrapTo(GreaseTrapPositions.HOME);
   }
 
