@@ -45,106 +45,20 @@ def main():
 
     # generator.generate(
     #     [[0,0,0],
-    #     [3.2,0,0]],
+    #     [2.0,0,0]],
     #     "TwoMetersForward"
     # )
 
     # generator.generate(
     #     [[0,0,0],
-    #     [-3.2,0,0]],
+    #     [-2.0,0,0]],
     #     "TwoMetersBackward"
-    # )
-
-    # generator.generate(
-    #     [[-1.0,0,-0.15],
-    #     [0,2,-math.pi/2],
-    #     [-0.42,6.121,-1]],
-    #     "CollectBall3AndBall4"
     # )
 
     # generator.generate(
     #     [[-0.42,6.121,-1],
     #     [-0.2,0.5,-0.575]],
     #     "GoHome"
-    # )
-
-    # ## This is validated on 2022-03-21, do not update.
-    # generator.generate(
-    #     [
-    #         [0,0,0],
-    #         [-0.6,0.6,0],
-    #         [-0.6,1.8,0],
-    #     ],
-    #     "ar1BallOne"
-    # )
-
-    # ## This is validated on 2022-03-23, do not update.
-    # generator.generate(
-    #     [
-    #         [-0.6,1.8,0],
-    #         [-0.9,0.6,-1.0],
-    #         [-4.6,0.6,-1.0],
-    #     ],
-    #     "ar1BallTwo"
-    # )
-
-    # ## This is validated on 2022-03-23, do not update.
-    # generator.generate(
-    #     [
-    #         [-4.6,0.6,-1.0],
-    #         [-4.5,0.5,-0.55],
-    #     ],
-    #     "ar1B2ShootingPosition"
-    # )
-
-    # ## This is validated on 2022-03-23, do not update.
-    # generator.generate(
-    #     [
-    #         [-3.7,0.4,-0.4],
-    #         [-9.1,0.8,-0.4],
-    #     ],
-    #     "ar3BallThree"
-    # )
-
-    # ## This is validated on 2022-03-23, do not update.
-    # generator.generate(
-    #     [
-    #         [-9.1,0.8,-0.4],
-    #         [-3.7,0.4,-0.4],
-    #     ],
-    #     "ar3B4ShootingPosition"
-    # )
-
-    # ## This is validated on 2022-03-23, do not update.
-    # generator.generate(
-    #     [
-    #         [0,0,0],
-    #         [-2.2,-0.6,0.2],
-    #     ],
-    #     "al1BallOne"
-    # )
-
-    # ## This is validated on 2022-04-06, do not update.
-    generator.generate(
-        [
-            [0.0,0.0,0.0],
-            [-2.5,-0.3,0.5],
-            [-1.4,-1.3,-0.05],
-        ],
-        "al2BallOne"
-    )
-
-    # generator.generate(
-    #     [
-    #         [0,0,0],
-    #         [0.3, 1.1, -1.4],
-    #         [0.3, 1.3, -1.4],
-    #         [-1.2, 1.4, -1.5],
-    #         [-1.8, -0.7, -1.5],
-    #         [-4.4, -0.7, -1.5],
-    #         [-4.1, -0.8, -0.80],
-    #     ],
-    #     "ar4BallOneAndTwo"
     # )
 
 main()
