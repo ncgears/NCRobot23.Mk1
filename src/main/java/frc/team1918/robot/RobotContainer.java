@@ -55,7 +55,6 @@ import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
-// import frc.team1918.robot.commandgroups.cg_drive_initOdometry;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -271,10 +270,16 @@ public class RobotContainer {
         return new cg_djRumble();
       case "auton_DoNothing":
         return new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHigh":
+        return new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHighDriveForward":
+        return new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHighDriveForwardBalance":
+        return new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
       case "auton_DriveForward":
-        return new cg_autonDriveFoward(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_DriveFowardAndBalance":
-        return new cg_autonDriveFowardAndBalance(m_drive, m_stove, m_fsr, m_vision);
+        return new cg_autonDriveForward(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_DriveFowardBalance":
+        return new cg_autonDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
       default:
         return null;
     }
@@ -314,8 +319,12 @@ public class RobotContainer {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
-      m_auto_chooser.addOption("[TEST] Drive Fwd", getRobotCommand("auton_DriveForward"));
-      m_auto_chooser.addOption("[TEST] Drive Fwd AutoBalance", getRobotCommand("auton_DriveForwardAndBalance"));
+      m_auto_chooser.addOption("[TEST] SHigh", getRobotCommand("auton_ScoreHigh"));
+      m_auto_chooser.addOption("[TEST] SHigh DFwd", getRobotCommand("auton_ScoreHighDriveForward"));
+      m_auto_chooser.addOption("[TEST] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
+      m_auto_chooser.addOption("[TEST] DFwd", getRobotCommand("auton_DriveForward"));
+      m_auto_chooser.addOption("[TEST] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
+
     }
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
   }

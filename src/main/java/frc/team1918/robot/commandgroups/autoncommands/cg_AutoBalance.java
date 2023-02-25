@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1918.robot.commandgroups;
+package frc.team1918.robot.commandgroups.autoncommands;
 
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
@@ -15,14 +15,14 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.commands.drive.drive_autoBalance;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
 
-public class cg_autonAutoBalance extends SequentialCommandGroup {
+public class cg_AutoBalance extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
 
   
   /**
    * This command groups balances the robot during auton
   */
-  public cg_autonAutoBalance(DriveSubsystem drive) {
+  public cg_AutoBalance(DriveSubsystem drive) {
     m_drive = drive;
     addRequirements(m_drive);
 
@@ -33,8 +33,6 @@ public class cg_autonAutoBalance extends SequentialCommandGroup {
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
         new helpers_debugMessage("Start robot auto balance sequence"),
-        new helpers_debugMessage("simulate drive to charge station"),
-        new WaitCommand(0.5),
         new RepeatCommand(
           new SequentialCommandGroup(
             new ParallelDeadlineGroup(

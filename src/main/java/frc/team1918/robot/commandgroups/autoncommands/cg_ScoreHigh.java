@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1918.robot.commandgroups;
+package frc.team1918.robot.commandgroups.autoncommands;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -18,21 +18,28 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1918.paths.*;
 import frc.team1918.robot.Constants;
+import frc.team1918.robot.commands.drive.drive_followTrajectory;
+import frc.team1918.robot.commands.drive.drive_resetOdometry;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
+import frc.team1918.robot.commands.stove.stove_moveBurnerTo;
+import frc.team1918.robot.commands.stove.stove_moveHotPlateTo;
+import frc.team1918.robot.commands.stove.stove_setGriddleDirectionTo;
+import frc.team1918.robot.modules.Burner.BurnerPositions;
+import frc.team1918.robot.modules.Griddle.GriddleDirections;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
-import frc.team1918.robot.commandgroups.autoncommands.*;
 
 @SuppressWarnings("unused")
-public class cg_autonDoNothing extends SequentialCommandGroup {
+public class cg_ScoreHigh extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonDoNothing(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_ScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -43,9 +50,21 @@ public class cg_autonDoNothing extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Do Nothing"), //move to ball1
-        new cg_SetOdom180(m_drive, m_vision),
-        new cg_Wait(0.5),
+        new helpers_debugMessage("Auton: Do Nothing"),
+        new helpers_debugMessage("Auton: Set odometry -180 degrees"),
+        new drive_resetOdometry(drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0))),
+        new helpers_debugMessage("Auton: Wait 0.5"),
+        new WaitCommand(0.5),
+        new ParallelCommandGroup(
+          new helpers_debugMessage("Auton: Burner to Hot and HotPlate to Level"),
+          new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT),
+          new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL)
+        ),
+        new helpers_debugMessage("Auton: Wait 0.5"),
+        new WaitCommand(0.5),
+        new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
+        new helpers_debugMessage("Auton: Wait 1.0"),
+        new WaitCommand(1.0),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }
