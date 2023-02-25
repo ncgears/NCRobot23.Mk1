@@ -114,14 +114,14 @@ public class RobotContainer {
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
       private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
-      private JoystickButton btn_DRSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
-      private JoystickButton btn_DLSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_LT);
+      // private JoystickButton btn_DRSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
+      // private JoystickButton btn_DLSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_LT);
 
-      private JoystickButton btn_DBurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_Y);
-      private JoystickButton btn_DBurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_A);
+      // private JoystickButton btn_DBurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_Y);
+      // private JoystickButton btn_DBurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_A);
 
-      private JoystickButton btn_DHotPlateLevel = new JoystickButton(dj, Constants.OI.Stadia.BTN_B);
-      private JoystickButton btn_DGreaseTrapLevel = new JoystickButton(dj, Constants.OI.Stadia.BTN_X);
+      // private JoystickButton btn_DHotPlateLevel = new JoystickButton(dj, Constants.OI.Stadia.BTN_B);
+      // private JoystickButton btn_DGreaseTrapLevel = new JoystickButton(dj, Constants.OI.Stadia.BTN_X);
 
 
       // private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
@@ -141,23 +141,29 @@ public class RobotContainer {
     //Operator Controller
       private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
       private POVButton btn_GreaseTrapHome = new POVButton(oj, Constants.OI.Stadia.DPAD_UP);
-      private POVButton btn_GreaseTrapLevel = new POVButton(dj, Constants.OI.Stadia.DPAD_RIGHT);
+      private POVButton btn_GreaseTrapLevel = new POVButton(oj, Constants.OI.Stadia.DPAD_RIGHT);
       private POVButton btn_GreaseTrapDown = new POVButton(oj, Constants.OI.Stadia.DPAD_DN);
-      private POVButton btn_GreaseTrapFlip = new POVButton(dj, Constants.OI.Stadia.DPAD_LEFT);
+      private POVButton btn_GreaseTrapFlip = new POVButton(oj, Constants.OI.Stadia.DPAD_LEFT);
 
       private JoystickButton btn_HotPlateHome = new JoystickButton(oj, Constants.OI.Stadia.BTN_Y);
       private JoystickButton btn_HotPlateLevel = new JoystickButton(oj, Constants.OI.Stadia.BTN_X);
 
-      private JoystickButton btn_RSpatUp = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
-      private JoystickButton btn_RSpatDown = new JoystickButton(oj, Constants.OI.Stadia.BTN_RT);
-      private JoystickButton btn_LSpatUp = new JoystickButton(dj, Constants.OI.Stadia.BTN_LB);
-      private JoystickButton btn_LSpatDown = new JoystickButton(oj, Constants.OI.Stadia.BTN_LT);
+      private JoystickButton btn_GriddleForward = new JoystickButton(oj, Constants.OI.Stadia.BTN_A);
 
-      private JoystickButton btn_BurnerHot = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
-      private JoystickButton btn_BurnerCold = new JoystickButton(oj, Constants.OI.Stadia.BTN_A);
+      private JoystickButton btn_RSpatUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_LB);
+      private JoystickButton btn_RSpatDown = new JoystickButton(oj, Constants.OI.Stadia.BTN_LT);
+      private JoystickButton btn_RspatMidUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_L);
+      private JoystickButton btn_LSpatUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_RB);
+      private JoystickButton btn_LSpatDown = new JoystickButton(oj, Constants.OI.Stadia.BTN_RT);
+      private JoystickButton btn_LSpatMidUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_R);
+
+      private JoystickButton btn_BurnerHot = new JoystickButton(oj, Constants.OI.Stadia.BTN_ELLIPSES);
+      private JoystickButton btn_BurnerCold = new JoystickButton(oj, Constants.OI.Stadia.BTN_GOOGLE);
       private JoystickButton btn_BurnerHome = new JoystickButton (oj, Constants.OI.Stadia.BTN_STADIA);
 
+      private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
+
       // //Whirly
       // private JoystickButton btn_WhirlyUp = new JoystickButton(oj, Constants.OI.Logitech.BTN_START);
       // //private JoystickButton btn_LockHooks = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
@@ -201,34 +207,38 @@ public class RobotContainer {
     //onFalse (replaces whenReleased and whenInactive): schedule on falling edge
     //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
-
+    //Griddle
+    btn_GriddleForward.onTrue(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
     //GreaseTrap testing
     btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.DOWN));
     // btn_GreaseTrapLevel.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
     btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME));
-    btn_GreaseTrapLevel.onTrue(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
+    btn_GreaseTrapLevel.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
     btn_GreaseTrapFlip.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.FLIP).andThen(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP)));
-    btn_DGreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
-
+    // btn_DGreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
+    
     //HotPlate testing
     // btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
-    btn_DHotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
+    // btn_DHotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
 
     //Spatula testing
     btn_RSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.RIGHT));
     btn_RSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
+    btn_RspatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.MIDUP));
     btn_LSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.LEFT));
     btn_LSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
-    btn_DRSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
-    btn_DLSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
+    btn_LSpatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.MIDUP));
+
+    // btn_DRSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
+    // btn_DLSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
     //Burner testing
     btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
     btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
     btn_BurnerHome.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME));
-    btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
-    btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
+    // btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
+    // btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
     
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
 
@@ -236,6 +246,7 @@ public class RobotContainer {
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
+    btn_ZeroGriddleParts.onTrue(new cg_zeroGriddleParts(m_stove));
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     btn_Community.onTrue(new drive_toggleCommunity(m_drive));
 

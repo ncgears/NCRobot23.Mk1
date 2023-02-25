@@ -122,6 +122,9 @@ public class Spatula {
             case CLEAR:
                 m_motor.set(ControlMode.MotionMagic, m_Positions.clear);
                 break;
+            case MIDUP:
+                m_motor.set(ControlMode.MotionMagic, m_Positions.midUp);
+                break;
             case FLOOR:
                 m_motor.set(ControlMode.MotionMagic, m_Positions.floor);
                 break;
