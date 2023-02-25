@@ -53,18 +53,15 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
         new helpers_debugMessage("Auton: Do Nothing"),
         new helpers_debugMessage("Auton: Set odometry -180 degrees"),
         new drive_resetOdometry(drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0))),
-        new helpers_debugMessage("Auton: Wait 0.5"),
-        new WaitCommand(0.5),
+        new cg_Wait(0.5),
         new ParallelCommandGroup(
           new helpers_debugMessage("Auton: Burner to Hot and HotPlate to Level"),
           new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT),
           new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL)
         ),
-        new helpers_debugMessage("Auton: Wait 0.5"),
-        new WaitCommand(0.5),
+        new cg_Wait(1.5),
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
-        new helpers_debugMessage("Auton: Wait 1.0"),
-        new WaitCommand(1.0),
+        new cg_Wait(1.0),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }
