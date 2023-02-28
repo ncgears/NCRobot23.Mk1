@@ -136,6 +136,13 @@ public class Burner {
     }
 
     /**
+     * This function sets the sensor position to zero
+     */
+    public void setZeroPos() {
+        m_motor.setSelectedSensorPosition(0);
+    }
+
+    /**
      * This function is used to return the state of the reverse limit switch
      * @return (boolean) state of the limit switch
      */

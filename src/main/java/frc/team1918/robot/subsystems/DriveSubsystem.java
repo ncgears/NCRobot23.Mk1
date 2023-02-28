@@ -346,6 +346,10 @@ public class DriveSubsystem extends SubsystemBase {
 		return correction;
 	}
 
+	public boolean getCommunity() {
+		return inCommunity;
+	}
+
 	public Field2d getField() {
 		return m_2dField;
 	}

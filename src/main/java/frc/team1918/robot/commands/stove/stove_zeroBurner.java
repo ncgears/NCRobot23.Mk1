@@ -34,6 +34,7 @@ public class stove_zeroBurner extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // m_stove.setBurnerZeroSpeed(0.0);
+    if(m_stove.getBurnerRevLimit()) m_stove.setBurnerZeroPos();
     m_stove.moveBurnerTo(BurnerPositions.HOME);
   }
 

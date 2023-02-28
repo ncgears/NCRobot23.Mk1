@@ -33,7 +33,7 @@ public class stove_zeroHotPlate extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_stove.setHotPlateZeroPos();
+    if(m_stove.getHotPlateRevLimit()) m_stove.setHotPlateZeroPos();
     m_stove.moveHotPlateTo(HotPlatePositions.HOME);
   }
 

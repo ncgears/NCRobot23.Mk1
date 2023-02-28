@@ -128,13 +128,6 @@ public class RobotContainer {
 
       // private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
-      //Music Control
-      // private POVButton btn_THROTUP_UP = new POVButton(dj, Constants.OI.Driver.DPAD_THROTUP_UP);
-      //   private POVButton btn_THROTUP_UL = new POVButton(dj, Constants.OI.Driver.DPAD_THROTUP_UL);
-      //   private POVButton btn_THROTUP_UR = new POVButton(dj, Constants.OI.Driver.DPAD_THROTUP_UR);
-      // private POVButton btn_THROTDN_DN = new POVButton(dj, Constants.OI.Driver.DPAD_THROTDN_DN);
-      //   private POVButton btn_THROTDN_DL = new POVButton(dj, Constants.OI.Driver.DPAD_THROTDN_DL);
-      //   private POVButton btn_THROTDN_DR = new POVButton(dj, Constants.OI.Driver.DPAD_THROTDN_DR);
       //OrPOVButtons are a custom button type to bind 3 DPAD directions to a single command. See utils/OrPOVButton
       // private OrPOVButton orbtn_THROTUP = new OrPOVButton(btn_THROTUP_UP, btn_THROTUP_UL, btn_THROTUP_UR);
       // private OrPOVButton orbtn_THROTDN = new OrPOVButton(btn_THROTDN_DN, btn_THROTDN_DL, btn_THROTDN_DR);
@@ -166,37 +159,10 @@ public class RobotContainer {
       private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
 
-      // //Whirly
-      // private JoystickButton btn_WhirlyUp = new JoystickButton(oj, Constants.OI.Logitech.BTN_START);
-      // //private JoystickButton btn_LockHooks = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
-      // private POVButton btn_WhirlyRev = new POVButton(oj, Constants.OI.Logitech.DPAD_LEFT);
-      // private POVButton btn_WhirlyFwd = new POVButton(oj, Constants.OI.Logitech.DPAD_RIGHT);
-      // private JoystickButton btn_ReleaseHook1 = new JoystickButton(oj, Constants.OI.Logitech.BTN_L);
-      // private JoystickButton btn_ReleaseHook2 = new JoystickButton(oj, Constants.OI.Logitech.BTN_R);
-      // //Intake
-      // // private JoystickButton btn_IntakeReverse = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
-      // // private JoystickButton btn_IntakeForward = new JoystickButton(oj, Constants.OI.Logitech.BTN_RB);
-      // //Shooting
-      // private JoystickButton btn_ShootLow = new JoystickButton(oj, Constants.OI.Logitech.BTN_RB);
-      // // private JoystickButton btn_ShootDashboard = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
-      // private JoystickButton btn_ShootProtected = new JoystickButton(oj, Constants.OI.Logitech.BTN_X);
-      // private JoystickButton btn_ShootDefault = new JoystickButton(oj, Constants.OI.Logitech.BTN_Y);
-      // private JoystickButton btn_ShootLine = new JoystickButton(oj, Constants.OI.Logitech.BTN_A);
-      // private JoystickButton btn_ShootStop = new JoystickButton(oj, Constants.OI.Logitech.BTN_LB);
-      // private JoystickButton btn_ShootWall = new JoystickButton(oj, Constants.OI.Logitech.BTN_B);
-      // private Trigger t_IntakeForward = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_RT)>0.3);
-      // private Trigger t_IntakeRetractor = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_LT)>0.3);
-      // private JoystickButton btn_IntakeReverse = new JoystickButton(oj, Constants.OI.Logitech.BTN_BACK);
-      // private Trigger t_IntakeReverse = new Trigger(() -> oj.getRawAxis(Constants.OI.Logitech.AXIS_LT)>0.3);
-      // private POVButton btn_COLLECTOR_UP = new POVButton(oj, Constants.OI.Operator.DPAD_COLLECTOR_UP);
-      // private POVButton btn_COLLECTOR_DOWN = new POVButton(oj, Constants.OI.Operator.DPAD_COLLECTOR_DOWN);
-      // private JoystickButton btn_COLLECTOR_TOGGLE = new JoystickButton(oj, Constants.OI.Operator.BTN_TOG_MIDDOWN);
-
     //Special Bindings (AndButtons)
       // private JoystickButton btn_MECHZERO_KEY1 = new JoystickButton(dj, Constants.OI.Operator.BTN_MECHZERO);
       // private JoystickButton btn_MECHZERO_KEY2 = new JoystickButton(oj, Constants.OI.Operator.BTN_MECHZERO);
       // private AndButton andbtn_MECHZERO = new AndButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2); //AndButton requires both to be true
-
 
   // public static void setAirDisabled(boolean disabled) {
   //   if(disabled) { m_air.disable(); } else { m_air.enabled(); }
@@ -236,9 +202,9 @@ public class RobotContainer {
     // btn_DRSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
     // btn_DLSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
     //Burner testing
-    btn_BurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
-    btn_BurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
-    btn_BurnerHome.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME));
+    btn_BurnerHot.onTrue(new drive_setCommunity(m_drive, m_stove, m_fsr, true).andThen(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL))));
+    btn_BurnerCold.onTrue(new drive_setCommunity(m_drive, m_stove, m_fsr, true).andThen(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL))));
+    btn_BurnerHome.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME)));
     // btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
     // btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
     
@@ -251,7 +217,7 @@ public class RobotContainer {
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
-    btn_Community.onTrue(new drive_toggleCommunity(m_drive));
+    btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
 
     //bind all 3 up and all 3 down for shooter throttle up/down
     // orbtn_THROTUP.onTrue(new shooter_increaseThrottle(m_shooter));

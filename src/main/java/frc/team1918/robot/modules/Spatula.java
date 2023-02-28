@@ -115,6 +115,10 @@ public class Spatula {
         m_motor.set(ControlMode.PercentOutput, speed);
     }
 
+    public void setZeroPos() {
+        m_motor.setSelectedSensorPosition(0);
+    }
+
     /**
      * Sets the percent output of the controller to a given speed
      * @param speed (double) speed of motor controller

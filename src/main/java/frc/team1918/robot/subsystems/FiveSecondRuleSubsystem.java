@@ -82,6 +82,22 @@ public class FiveSecondRuleSubsystem extends SubsystemBase {
 	}
 
 	/**
+	 * Sets the Burner position to zero
+	 * @param spatula
+	 */
+	public void setSpatulaZeroPos(spatulas spatula) {
+		switch (spatula) {
+			case LEFT:
+				m_SpatulaLeft.setZeroPos();
+				break;
+			case RIGHT:
+				m_SpatulaRight.setZeroPos();
+				break;
+			default:
+		}
+	}
+
+	/**
 	 * Moves the Spatula to a designated position
 	 * @param position - This is a SpatulaPositions enum of {@SpatulaPositions}
 	 */

@@ -145,7 +145,7 @@ public class StoveSubsystem extends SubsystemBase {
 	}
 
 	/**
-	 * Sets the GreaseTrap current position to zero
+	 * Sets the HotPlate current position to zero
 	 */
 	public void setHotPlateZeroPos() {
 		m_HotPlate.setZeroPos();
@@ -175,6 +175,29 @@ public class StoveSubsystem extends SubsystemBase {
 	 */
 	public boolean getBurnerRevLimit() {
 		return m_Burner.isRevLimit();
+	}
+
+	/**
+	 * Returns whether the module is at its forward limit
+	 * @return (boolean) limit switch state for reverse limit
+	 */
+	public boolean getBurnerFwdLimit() {
+		return m_Burner.isFwdLimit();
+	}
+
+	/**
+	 * Returns the current Burner Position
+	 * @return (BurnerPositions) position of greasetrap
+	 */
+	public BurnerPositions getBurnerPosition() {
+		return m_Burner.currentPosition;
+	}
+
+	/**
+	 * Sets the Burner current position to zero
+	 */
+	public void setBurnerZeroPos() {
+		m_Burner.setZeroPos();
 	}
 
 	/**
