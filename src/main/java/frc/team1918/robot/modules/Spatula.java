@@ -183,6 +183,7 @@ public class Spatula {
     public void updateDashboard() {
         Dashboard.Spatula.setPositionName(m_moduleName, currentPosition.toString());
         Dashboard.Spatula.setPosition(m_moduleName, m_motor.getSelectedSensorPosition(0));
+        Dashboard.Spatula.setTarget(m_moduleName, m_motor.getClosedLoopTarget());
         Dashboard.Spatula.setSpeed(m_moduleName, m_motor.getMotorOutputPercent());
     }
 

@@ -233,7 +233,7 @@ public class Constants {
      * Constants for the Spatula Modules
      */
     public static final class Spatula {
-        public static final double default_kZeroSpeed = 0.25; //speed for zeroing operations
+        public static final double default_kZeroSpeed = 0.4; //speed for zeroing operations
         public static final double default_kP = 0.45; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
@@ -242,7 +242,7 @@ public class Constants {
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 3200; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 3600; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example

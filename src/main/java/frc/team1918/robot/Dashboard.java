@@ -13,6 +13,7 @@ public class Dashboard {
     public static final class Spatula {
         public static final void setPositionName(String module, String value) { SmartDashboard.putString("Spatula/"+module+"/PosName", value); }
         public static final void setPosition(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/Position", value); }
+        public static final void setTarget(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/Target",value); }
         public static final void setSpeed(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/Speed",value); }
     }
     public static final class Griddle {
