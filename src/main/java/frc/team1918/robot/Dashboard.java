@@ -25,6 +25,8 @@ public class Dashboard {
         public static final void setTarget(double value) { SmartDashboard.putNumber("Burner/Target",value); }
         public static final void setError(double value) { SmartDashboard.putNumber("Burner/Error", value); }
         public static final void setSpeed(double value) { SmartDashboard.putNumber("Burner/Speed",value); }
+        public static final void setFLimit(boolean value) { SmartDashboard.putBoolean("Burner/FLimit", value); }
+        public static final void setRLimit(boolean value) { SmartDashboard.putBoolean("Burner/RLimit", value); }
     }
     public static final class GreaseTrap {
         public static final void setPositionName(String value) { SmartDashboard.putString("GreaseTrap/PosName", value); }
@@ -32,6 +34,7 @@ public class Dashboard {
         public static final void setTarget(double value) { SmartDashboard.putNumber("GreaseTrap/Target",value); }
         public static final void setError(double value) { SmartDashboard.putNumber("GreaseTrap/Error", value); }
         public static final void setSpeed(double value) { SmartDashboard.putNumber("GreaseTrap/Speed",value); }
+        public static final void setLimit(boolean value) { SmartDashboard.putBoolean("GreaseTrap/Limit", value); }
     }
     public static final class HotPlate {
         public static final void setPositionName(String value) { SmartDashboard.putString("HotPlate/PosName", value); }
@@ -39,6 +42,7 @@ public class Dashboard {
         public static final void setTarget(double value) { SmartDashboard.putNumber("HotPlate/Target",value); }
         public static final void setError(double value) { SmartDashboard.putNumber("HotPlate/Error", value); }
         public static final void setSpeed(double value) { SmartDashboard.putNumber("HotPlate/Speed",value); }
+        public static final void setLimit(boolean value) { SmartDashboard.putBoolean("HotPlate/Limit", value); }
     }
     public static final class Vision {
         public static final void setVisionRinglight(boolean value) { SmartDashboard.putBoolean("Vision/Ring Light", value); }

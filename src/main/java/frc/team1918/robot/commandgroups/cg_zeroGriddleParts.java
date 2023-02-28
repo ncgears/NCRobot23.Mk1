@@ -31,7 +31,7 @@ public class cg_zeroGriddleParts extends ParallelCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
-        new helpers_debugMessage("Running cg_zeroMovingParts"),
+        new helpers_debugMessage("Running cg_zeroGriddleParts"),
         new stove_zeroGreaseTrap(m_stove),
         new stove_zeroHotPlate(m_stove)
     );

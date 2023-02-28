@@ -170,6 +170,7 @@ public class GreaseTrap {
             Dashboard.GreaseTrap.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
             Dashboard.GreaseTrap.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
             Dashboard.GreaseTrap.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+            Dashboard.GreaseTrap.setLimit((boolean) isRevLimit());
         }
         Dashboard.GreaseTrap.setSpeed(m_motor.getMotorOutputPercent());
     }

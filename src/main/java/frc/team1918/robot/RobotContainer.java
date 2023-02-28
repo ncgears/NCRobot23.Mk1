@@ -249,7 +249,7 @@ public class RobotContainer {
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
-    btn_ZeroGriddleParts.onTrue(new cg_zeroGriddleParts(m_stove));
+    btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     btn_Community.onTrue(new drive_toggleCommunity(m_drive));
 
