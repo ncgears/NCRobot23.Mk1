@@ -170,6 +170,10 @@ public class Helpers {
             return (useDeadband) ? applyDeadband(dj.getRawAxis(Constants.OI.Driver.AXIS_TURN)) : dj.getRawAxis(Constants.OI.Driver.AXIS_TURN);
         }
 
+        public final static double getAimerValue(boolean useDeadband) {
+            return (useDeadband) ? applyDeadband(oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER)) : oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER);
+        }
+
         public static void rumble(boolean rumble, String stick) {
             Joystick joy = (stick=="oj") ? oj : dj;
             joy.setRumble(RumbleType.kLeftRumble, (rumble)?1.0:0.0);

@@ -16,6 +16,12 @@ public class Dashboard {
         public static final void setTarget(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/Target",value); }
         public static final void setSpeed(String module, double value) { SmartDashboard.putNumber("Spatula/"+module+"/Speed",value); }
     }
+    public static final class Aimer {
+        public static final void setPosition(double value) { SmartDashboard.putNumber("Aimer/Position",value); }
+        public static final void setTarget(double value) { SmartDashboard.putNumber("Aimer/Target",value); }
+        public static final void setError(double value) { SmartDashboard.putNumber("Aimer/Error", value); }
+        public static final void setSpeed(double value) { SmartDashboard.putNumber("Aimer/Speed",value); }
+    }
     public static final class Griddle {
         public static final void setSpeed(double value) { SmartDashboard.putNumber("Griddle/Speed", value); }
         public static final void setDirection(String value) { SmartDashboard.putString("Griddle/Direction", value); }

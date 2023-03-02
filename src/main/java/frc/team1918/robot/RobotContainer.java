@@ -10,7 +10,7 @@ package frc.team1918.robot;
 //Global imports
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.cscore.AxisCamera;
+// import edu.wpi.first.cscore.AxisCamera;
 import edu.wpi.first.cscore.HttpCamera;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -20,7 +20,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import java.util.Map;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
+// import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
@@ -67,7 +67,7 @@ import frc.team1918.robot.commandgroups.autoncommands.cg_AutoBalance;
 public class RobotContainer {
   //subsystems definitions
     //private final PowerDistribution m_pdp = new PowerDistribution();
-    private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
+    // private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
     private final FiveSecondRuleSubsystem m_fsr = new FiveSecondRuleSubsystem();
     private final StoveSubsystem m_stove = new StoveSubsystem();
     private final DriveSubsystem m_drive = new DriveSubsystem();
@@ -83,7 +83,7 @@ public class RobotContainer {
     buildShuffleboard();
 
     // Enable closed loop control of compressor and enable it
-    if(Constants.Air.isDisabled) m_air.disable();
+    // if(Constants.Air.isDisabled) m_air.disable();
 
     // Enable the camera server and start capture
     if(Constants.Global.CAMERA_ENABLED) {
@@ -105,6 +105,14 @@ public class RobotContainer {
         // new drive_defaultDrive2(m_drive, dj)
       );
     }
+    // if(!Constants.Stove.Aimer.isDisabled) {
+    //   m_stove.setDefaultCommand(
+    //     new stove_moveAimer(
+    //       m_stove,
+    //       () -> Helpers.OI.getAimerValue(true)
+    //     )
+    //   );
+    // }
   }
 
   //button definitions
@@ -175,9 +183,11 @@ public class RobotContainer {
     //onFalse (replaces whenReleased and whenInactive): schedule on falling edge
     //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
+
     //Griddle
     btn_GriddleForward.onTrue(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
-    //GreaseTrap testing
+
+    //GreaseTrap
     btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.DOWN));
     // btn_GreaseTrapLevel.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
     btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME));
@@ -185,23 +195,28 @@ public class RobotContainer {
     btn_GreaseTrapFlip.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.FLIP).andThen(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP)));
     // btn_DGreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
     
-    //HotPlate testing
+    //HotPlate
     // btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
     btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
     btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
     // btn_DHotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
 
-    //Spatula testing
+    //Spatula
     btn_RSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.RIGHT));
     btn_RSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
+    // btn_RSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.GRIDDLE));
+    // btn_RSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
     btn_RspatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.MIDUP));
     btn_LSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.LEFT));
+    // btn_LSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.GRIDDLE));
     btn_LSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
+    // btn_LSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
     btn_LSpatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.MIDUP));
 
     // btn_DRSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
     // btn_DLSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
-    //Burner testing
+
+    //Burner
     btn_BurnerHot.onTrue(new drive_setCommunity(m_drive, m_stove, m_fsr, true).andThen(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL))));
     btn_BurnerCold.onTrue(new drive_setCommunity(m_drive, m_stove, m_fsr, true).andThen(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL))));
     btn_BurnerHome.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME)));
@@ -211,13 +226,16 @@ public class RobotContainer {
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
     // btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
 
-    //Testing buttons
+    //Maintenance buttons
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
+
+    //Not sure how event loops work, want to bind a move command to the axis...
+    // oj.axisGreaterThan(Constants.OI.Operator.AXIS_AIMER, Constants.OI.OI_JOY_MIN_DEADBAND, new stove_moveAimer(m_stove, Helpers.OI.getAimerValue(true)));
 
     //bind all 3 up and all 3 down for shooter throttle up/down
     // orbtn_THROTUP.onTrue(new shooter_increaseThrottle(m_shooter));

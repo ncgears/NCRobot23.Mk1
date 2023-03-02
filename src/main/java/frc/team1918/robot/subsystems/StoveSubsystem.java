@@ -3,6 +3,7 @@ package frc.team1918.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1918.robot.Constants;
+import frc.team1918.robot.modules.Aimer;
 import frc.team1918.robot.modules.Burner;
 import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Griddle;
@@ -25,6 +26,7 @@ public class StoveSubsystem extends SubsystemBase {
 	private GreaseTrap m_GreaseTrap; //flip ramp module
 	private HotPlate m_HotPlate; //scoring ramp controller
 	private Burner m_Burner; //elevator controller
+	private Aimer m_Aimer; //aimer controller
 	
 	/**
 	 * Returns the instance of the subsystem.
@@ -45,12 +47,14 @@ public class StoveSubsystem extends SubsystemBase {
 		m_HotPlate = new HotPlate("HotPlate", Constants.Stove.HotPlate.constants, Constants.Stove.HotPlate.gains);
 		m_Burner = new Burner("Burner", Constants.Stove.Burner.constants, Constants.Stove.Burner.gains);
 		m_Griddle = new Griddle("Griddle", Constants.Stove.Griddle.constants, Constants.Stove.Griddle.gains);
+		m_Aimer = new Aimer("Aimer", Constants.Stove.Aimer.constants, Constants.Stove.Aimer.gains);
 
 		//make sure we reset things on init
 		m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
 		m_HotPlate.moveTo(HotPlatePositions.HOME);
 		m_Burner.moveTo(BurnerPositions.HOME);
 		m_Griddle.setDirectionAndSpeed(GriddleDirections.STOP, 0.0);
+		m_Aimer.moveTo(0.0);
 	}
 
 	/**
@@ -66,6 +70,7 @@ public class StoveSubsystem extends SubsystemBase {
 		m_Burner.updateDashboard();
 		m_Griddle.updateDashboard();
 		m_GreaseTrap.updateDashboard();
+		m_Aimer.updateDashboard();
 	}
 
 	/**
@@ -206,6 +211,10 @@ public class StoveSubsystem extends SubsystemBase {
 	 */
 	public void moveBurnerTo(BurnerPositions position) {
 		m_Burner.moveTo(position);
+	}
+
+	public void moveAimer(double speed) {
+		m_Aimer.setSpeed(speed);
 	}
 
 }

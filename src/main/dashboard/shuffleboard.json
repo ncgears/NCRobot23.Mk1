@@ -469,6 +469,55 @@
               "_source0": "network_table:///SmartDashboard/Spatula/SpatulaRight/Target",
               "_title": "Spatula/SpatulaRight/Target"
             }
+          },
+          "2,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Aimer/Position",
+              "_title": "Aimer/Position"
+            }
+          },
+          "2,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Aimer/Target",
+              "_title": "Aimer/Target"
+            }
+          },
+          "2,4": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Aimer/Error",
+              "_title": "Aimer/Error"
+            }
+          },
+          "2,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Number Bar",
+              "_source0": "network_table:///SmartDashboard/Aimer/Speed",
+              "_title": "Aimer/Speed",
+              "Range/Min": -1.0,
+              "Range/Max": 1.0,
+              "Range/Center": 0.0,
+              "Visuals/Num tick marks": 5,
+              "Visuals/Show text": true
+            }
           }
         }
       }

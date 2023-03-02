@@ -35,6 +35,8 @@ public class fsr_zeroRightSpatula extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     // m_fsr.setSpatulaZeroSpeed(0.0, spatulas.RIGHT);
+    // m_fsr.moveSpatulaTo(spatulas.RIGHT,SpatulaPositions.HOME);
+    if(m_fsr.getSpatulaRevLimit(spatulas.RIGHT)) m_fsr.setSpatulaZeroPos(spatulas.RIGHT);
     m_fsr.moveSpatulaTo(spatulas.RIGHT,SpatulaPositions.HOME);
   }
 

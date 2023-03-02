@@ -114,7 +114,30 @@ public class Constants {
      * Constants for the Stove Subsystem
      */
     public static final class Stove {
-        public static final class Burner {
+            public static final class Aimer {
+                public static final boolean isDisabled = false;
+                public static final double kZeroSpeed = 0.35; //speed for zeroing operations
+                //Controller Setup
+                public static final int kMotorID = ID.Talon.stove_aimer; //TalonSRX Motor Controller ID
+                public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+                public static final int kSensorTicks = 4096;
+                public static final boolean kSensorNotContinuous = false;
+                public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+                public static final int kAllowedError = 5; //PID Allowed error
+                public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
+                //PID Setup
+                public static final double kP = 0.45; //PID P 
+                public static final double kI = 0.0; //PID I
+                public static final double kD = 0.0; //PID D
+                public static final double kF = 0.32; //PID F
+                public static final int kIZone = 0; //PID IZONE
+                public static final double kPeakOutput = 1.0;
+                public static final double kNeutralDeadband = 0.001; //0.04 default
+                public static final double kCruise = 3200; //MotionMagic Cruise
+                public static final double kAccel = 4400; //MotionMagic Acceleration
+                public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            }
+            public static final class Burner {
             public static final boolean isDisabled = false;
             public static final double kZeroSpeed = 0.25; //speed for zeroing operations
             //Controller Setup
@@ -139,7 +162,7 @@ public class Constants {
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
-                public static final double bottom = 3200.0; //position for bottom scoring
+                public static final double bottom = 4100.0; //position for bottom scoring
                 public static final double top = 18300.0; //position for top scoring
             }
         }
@@ -302,7 +325,7 @@ public class Constants {
         }
         public static final class Right {
             public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.45;
+            public static final double kZeroSpeed = 0.6;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_right; //TalonSRX Motor Controller ID
             public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -330,7 +353,7 @@ public class Constants {
                 0.0,
                 66700.0,
                 37750,
-                37750,
+                36000,
                 50300
             );
         }
@@ -522,6 +545,10 @@ public class Constants {
             public final static int AXIS_STRAFE = Stadia.AXIS_LH; //Axis that moves the robot side to side on the field
             public final static int AXIS_FWD = Stadia.AXIS_LV; //Axis that moves the robot up and down the field
             public final static int AXIS_TURN = Stadia.AXIS_RH; //Axis that controls the rotation of the robot
+        }
+
+        public static final class Operator {
+            public final static int AXIS_AIMER = Stadia.AXIS_LH;
         }
 
         /**
