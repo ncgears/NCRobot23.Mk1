@@ -117,6 +117,10 @@ public class Constants {
             public static final class Aimer {
                 public static final boolean isDisabled = false;
                 public static final double kZeroSpeed = 0.35; //speed for zeroing operations
+                public static final double kSpeed = 0.35;
+                public static final boolean kSoftLimitEnable = true;
+                public static final double kSoftLimitMax = 20000.0;
+                public static final double kSoftLimitMin = -20000.0;
                 //Controller Setup
                 public static final int kMotorID = ID.Talon.stove_aimer; //TalonSRX Motor Controller ID
                 public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
