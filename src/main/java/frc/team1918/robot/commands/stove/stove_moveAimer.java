@@ -9,18 +9,12 @@ import frc.team1918.robot.Constants;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 
 
-/**
- * A command that runs the drive actions. This passes the OI inputs on to the appropriate drive system (fieldCentricDrive or humanDrive).
- * fieldCentricDrive is simply a call to humanDrive after gyro corrections are made.
- */
 @SuppressWarnings("unused")
 public class stove_moveAimer extends CommandBase {
   private final StoveSubsystem m_stove;
   private final DoubleSupplier m_aim;
 
   /**
-   * Creates a new drive_defaultDrive.
-   *
    * @param subsystem The stove subsystem this command wil run on.
    * @param aim The amount of aim speed (from -1.0 to 1.0)
    */
