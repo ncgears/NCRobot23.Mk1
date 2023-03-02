@@ -2,7 +2,6 @@
 package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import java.util.function.DoubleSupplier;
 //import constants and subsystem
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.subsystems.StoveSubsystem;
@@ -12,6 +11,7 @@ import frc.team1918.robot.subsystems.StoveSubsystem;
  * A command that runs the drive actions. This passes the OI inputs on to the appropriate drive system (fieldCentricDrive or humanDrive).
  * fieldCentricDrive is simply a call to humanDrive after gyro corrections are made.
  */
+@SuppressWarnings("unused")
 public class stove_moveAimer extends CommandBase {
   private final StoveSubsystem m_stove;
   private final double m_aim;
