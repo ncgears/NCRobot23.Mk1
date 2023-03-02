@@ -14,7 +14,7 @@ import frc.team1918.robot.subsystems.StoveSubsystem;
  */
 public class stove_moveAimer extends CommandBase {
   private final StoveSubsystem m_stove;
-  private final DoubleSupplier m_aim;
+  private final double m_aim;
 
   /**
    * Creates a new drive_defaultDrive.
@@ -24,16 +24,16 @@ public class stove_moveAimer extends CommandBase {
    * @param strafe The control input for driving sideways
    * @param rotation The control input for turning
    */
-  public stove_moveAimer(StoveSubsystem subsystem, double d) {
+  public stove_moveAimer(StoveSubsystem subsystem, double aim) {
     m_stove = subsystem;
-    m_aim = d;
+    m_aim = aim;
     // addRequirements(m_stove);
   }
 
   @Override
   public void execute() {
-    if (m_aim.getAsDouble() != 0) {
-      m_stove.moveAimer(m_aim.getAsDouble());
+    if (m_aim != 0) {
+      m_stove.moveAimer(m_aim);
     } else {
       m_stove.moveAimer(0.0);
     }
