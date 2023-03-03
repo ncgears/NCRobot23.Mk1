@@ -272,10 +272,10 @@ public class DriveSubsystem extends SubsystemBase {
 	//Stops all modules
 	public void brake(boolean withDefensiveLock) {
 		if(withDefensiveLock) {
-			m_dtFL.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(315.0)));
-			m_dtFR.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45.0)));
-			m_dtRL.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(225.0)));
-			m_dtRR.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(135.0)));
+			m_dtFL.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(45.0)));
+			m_dtFR.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(315.0)));
+			m_dtRL.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(135.0)));
+			m_dtRR.setDesiredState(new SwerveModuleState(0, Rotation2d.fromDegrees(225.0)));
 		} else {
 			for (SwerveModule module: modules) {
 				module.setDesiredState(new SwerveModuleState(0, module.getState().angle));

@@ -124,15 +124,7 @@ public class RobotContainer {
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
       private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
-      // private JoystickButton btn_DRSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
-      // private JoystickButton btn_DLSpatDown = new JoystickButton(dj, Constants.OI.Stadia.BTN_LT);
-
-      // private JoystickButton btn_DBurnerHot = new JoystickButton(dj, Constants.OI.Stadia.BTN_Y);
-      // private JoystickButton btn_DBurnerCold = new JoystickButton(dj, Constants.OI.Stadia.BTN_A);
-
-      // private JoystickButton btn_DHotPlateLevel = new JoystickButton(dj, Constants.OI.Stadia.BTN_B);
-      // private JoystickButton btn_DGreaseTrapLevel = new JoystickButton(dj, Constants.OI.Stadia.BTN_X);
-
+      private JoystickButton btn_DefLock = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
 
       // private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
@@ -228,6 +220,9 @@ public class RobotContainer {
     
     btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
     // btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
+
+    //Drive Buttons
+    btn_DefLock.whileTrue(new drive_defLock(m_drive));
 
     //Maintenance buttons
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));
