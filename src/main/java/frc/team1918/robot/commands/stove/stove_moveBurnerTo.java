@@ -33,6 +33,7 @@ public class stove_moveBurnerTo extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_stove.moveAimerTo(0.0);
     if (m_fsr.getSpatulaPosition(spatulas.LEFT)==SpatulaPositions.GRIDDLE) { //if the spatula is at griddle, we have to move it to clear!
       m_fsr.moveSpatulaTo(spatulas.LEFT, SpatulaPositions.CLEAR);
     }

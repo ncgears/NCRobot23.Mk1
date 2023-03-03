@@ -44,6 +44,7 @@ public class drive_setCommunity extends CommandBase {
       Helpers.Debug.debug("Drive: Entering community");
     } else {
       Helpers.Debug.debug("Drive: Leaving community");
+      m_stove.moveAimerTo(0.0);
       if(m_stove.getHotPlatePosition()!=HotPlatePositions.HOME) m_stove.moveHotPlateTo(HotPlatePositions.HOME);
       if(m_stove.getGreaseTrapPosition()!=GreaseTrapPositions.HOME) m_stove.moveGreaseTrapTo(GreaseTrapPositions.HOME);
       if(m_stove.getBurnerPosition()!=BurnerPositions.HOME) m_stove.moveBurnerTo(BurnerPositions.HOME);
