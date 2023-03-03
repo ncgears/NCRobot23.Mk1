@@ -165,6 +165,7 @@ public class RobotContainer {
       private JoystickButton btn_BurnerHome = new JoystickButton (oj, Constants.OI.Stadia.BTN_STADIA);
 
       private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
+      private JoystickButton btn_ZeroAimer = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
       private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
 
       private Trigger t_MoveAimer = new Trigger(() -> Math.abs(oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))>0.5);
@@ -235,6 +236,7 @@ public class RobotContainer {
     btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
+    btn_ZeroAimer.onTrue(new stove_zeroAimer(m_stove));
 
     t_MoveAimer.onTrue(new stove_moveAimer(m_stove, () -> oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))).onFalse(new stove_moveAimer(m_stove, () -> 0.0));
 

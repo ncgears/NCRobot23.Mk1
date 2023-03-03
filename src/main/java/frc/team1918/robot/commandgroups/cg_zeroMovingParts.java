@@ -42,7 +42,7 @@ public class cg_zeroMovingParts extends ParallelCommandGroup {
         new helpers_debugMessage("Running cg_zeroMovingParts"),
         new fsr_zeroLeftSpatula(m_fsr),
         new fsr_zeroRightSpatula(m_fsr),
-        new stove_zeroAimer(m_stove),
+        // new stove_zeroAimer(m_stove),
         new stove_zeroGreaseTrap(m_stove),
         new stove_zeroHotPlate(m_stove),
         new stove_zeroBurner(m_stove)
