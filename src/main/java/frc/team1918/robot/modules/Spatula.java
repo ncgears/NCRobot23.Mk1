@@ -81,7 +81,7 @@ public class Spatula {
         m_motor.configForwardSoftLimitEnable(true);
         m_motor.configForwardSoftLimitThreshold(modulePositions.limit);
         // m_motor.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
-        m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
+        m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyClosed, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
