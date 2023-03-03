@@ -269,15 +269,15 @@ public class Constants {
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 3600; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 4100; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
         // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
         public static final boolean isCurrentLimitEnabled = true;
-        public static final int kCurrentLimitAmps = 25;
-        public static final int kCurrentThresholdAmps = 40;
-        public static final double kCurrentThresholdSecs = 0.1;
+        public static final int kCurrentLimitAmps = 1;
+        public static final int kCurrentThresholdAmps = 18;
+        public static final double kCurrentThresholdSecs = 0.5;
 
         public static final class Left {
             public static final boolean isDisabled = false;
