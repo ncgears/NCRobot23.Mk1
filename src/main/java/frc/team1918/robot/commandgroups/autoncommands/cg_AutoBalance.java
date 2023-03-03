@@ -36,12 +36,12 @@ public class cg_AutoBalance extends SequentialCommandGroup {
         new RepeatCommand(
           new SequentialCommandGroup(
             new ParallelDeadlineGroup(
-              new WaitCommand(0.5),
-              new helpers_debugMessage("autoBalance for .5s"),
+              new WaitCommand(1.0),
+              new helpers_debugMessage("autoBalance for 1s"),
               new drive_autoBalance(m_drive)
             ),
-            new helpers_debugMessage("waiting for .5s"),
-            new WaitCommand(0.5)
+            new helpers_debugMessage("waiting for .75s"),
+            new WaitCommand(0.75)
           )
         ),
         new helpers_debugMessage("Finish robot auto balance sequence")

@@ -38,6 +38,7 @@
       "/Shuffleboard/Driver/Field": "Field2d",
       "/Shuffleboard/Driver/Gyro": "Gyro",
       "/Shuffleboard/Maintenance/Reset Robot": "Command",
+      "/Shuffleboard/Maintenance/Zero Robot": "Command",
       "/Shuffleboard/Primary Display/Autonomous Chooser": "String Chooser",
       "/Shuffleboard/Primary Display/Field": "Field2d",
       "/Shuffleboard/Primary Display/Gyro": "Gyro",

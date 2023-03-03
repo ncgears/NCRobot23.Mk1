@@ -167,6 +167,8 @@ public class RobotContainer {
       private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
 
+      private Trigger t_MoveAimer = new Trigger(() -> Math.abs(oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))>0.5);
+
     //Special Bindings (AndButtons)
       // private JoystickButton btn_MECHZERO_KEY1 = new JoystickButton(dj, Constants.OI.Operator.BTN_MECHZERO);
       // private JoystickButton btn_MECHZERO_KEY2 = new JoystickButton(oj, Constants.OI.Operator.BTN_MECHZERO);
@@ -234,8 +236,7 @@ public class RobotContainer {
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
 
-    //Not sure how event loops work, want to bind a move command to the axis...
-    // oj.axisGreaterThan(Constants.OI.Operator.AXIS_AIMER, Constants.OI.OI_JOY_MIN_DEADBAND, new stove_moveAimer(m_stove, Helpers.OI.getAimerValue(true)));
+    t_MoveAimer.onTrue(new stove_moveAimer(m_stove, () -> oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))).onFalse(new stove_moveAimer(m_stove, () -> 0.0));
 
     //bind all 3 up and all 3 down for shooter throttle up/down
     // orbtn_THROTUP.onTrue(new shooter_increaseThrottle(m_shooter));

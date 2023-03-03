@@ -73,10 +73,10 @@ public class Aimer {
         // m_motor.configReverseLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, Constants.Global.kTimeoutMs);
 
         /* Configure soft limits */
-        // m_motor.configForwardSoftLimitEnable(true);
-        // m_motor.configReverseSoftLimitEnable(true);
-        m_motor.configForwardSoftLimitThreshold(20000);
-        m_motor.configReverseSoftLimitThreshold(-20000);
+        m_motor.configForwardSoftLimitEnable(Constants.Stove.Aimer.kSoftLimitEnable);
+        m_motor.configReverseSoftLimitEnable(Constants.Stove.Aimer.kSoftLimitEnable);
+        m_motor.configForwardSoftLimitThreshold(Constants.Stove.Aimer.kSoftLimitMax);
+        m_motor.configReverseSoftLimitThreshold(Constants.Stove.Aimer.kSoftLimitMin);
 
         /* Zero the sensor when reverse limit triggered */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);
