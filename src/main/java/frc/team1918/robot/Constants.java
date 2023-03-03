@@ -261,7 +261,7 @@ public class Constants {
      */
     public static final class Spatula {
         public static final double default_kZeroSpeed = 0.4; //speed for zeroing operations
-        public static final double default_kP = 0.45; //PID P
+        public static final double default_kP = 0.5; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
         public static final double default_kF = 0.25; //PID F
@@ -269,14 +269,14 @@ public class Constants {
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 4100; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 4500; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
         // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
         public static final boolean isCurrentLimitEnabled = true;
         public static final int kCurrentLimitAmps = 1;
-        public static final int kCurrentThresholdAmps = 18;
+        public static final int kCurrentThresholdAmps = 15;
         public static final double kCurrentThresholdSecs = 0.5;
 
         public static final class Left {
