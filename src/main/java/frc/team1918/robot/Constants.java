@@ -167,7 +167,7 @@ public class Constants {
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
                 public static final double bottom = 4100.0; //position for bottom scoring
-                public static final double top = 18300.0; //position for top scoring
+                public static final double top = 20200.0; //position for top scoring
             }
         }
         public static final class Griddle {
