@@ -38,6 +38,7 @@ public class fsr_moveSpatulaTo extends CommandBase {
   @Override
   public void initialize() {
     if (m_position==SpatulaPositions.GRIDDLE) { //Griddle position is requested, so make sure Burner is home!
+      m_stove.moveAimerTo(0.0);
       m_stove.moveBurnerTo(BurnerPositions.HOME);
       if(m_stove.getGreaseTrapPosition()==GreaseTrapPositions.HOME) m_stove.moveGreaseTrapTo(GreaseTrapPositions.CLEAR);
       if(m_stove.getHotPlatePosition()==HotPlatePositions.HOME) m_stove.moveHotPlateTo(HotPlatePositions.CLEAR);

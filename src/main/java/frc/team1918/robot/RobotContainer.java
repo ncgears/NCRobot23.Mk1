@@ -218,7 +218,7 @@ public class RobotContainer {
     // btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
     // btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
     
-    btn_AutoBalance.whileTrue(new drive_autoBalance(m_drive));
+    btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
     // btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
 
     //Drive Buttons
@@ -314,8 +314,8 @@ public class RobotContainer {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
-      m_auto_chooser.addOption("[TEST] SHigh", getRobotCommand("auton_ScoreHigh"));
-      m_auto_chooser.addOption("[TEST] SHigh DFwd", getRobotCommand("auton_ScoreHighDriveForward"));
+      m_auto_chooser.addOption("[GOOD] SHigh", getRobotCommand("auton_ScoreHigh"));
+      m_auto_chooser.addOption("[GOOD] SHigh DFwd", getRobotCommand("auton_ScoreHighDriveForward"));
       m_auto_chooser.addOption("[TEST] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
       m_auto_chooser.addOption("[TEST] DFwd", getRobotCommand("auton_DriveForward"));
       m_auto_chooser.addOption("[TEST] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));

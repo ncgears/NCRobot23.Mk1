@@ -104,7 +104,7 @@ public class Constants {
         public static final class Balance {
             public static final boolean kUseDefensiveLock = true; //lock the drive train into defensive position when finished balancing
             public static final double kToleranceDegrees = 3.5; //degrees of tolerance for balancing
-            public static final double kP = 0.015;
+            public static final double kP = 0.011;
             public static final double kI = 0.0;
             public static final double kD = 0.0;
         }
@@ -153,21 +153,21 @@ public class Constants {
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
-            public static final double kP = 0.45; //PID P 
+            public static final double kP = 0.525; //PID P 
             public static final double kI = 0.0; //PID I
             public static final double kD = 0.0; //PID D
             public static final double kF = 0.32; //PID F
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = 1.0;
             public static final double kNeutralDeadband = 0.001; //0.04 default
-            public static final double kCruise = 3200; //MotionMagic Cruise
+            public static final double kCruise = 3500; //MotionMagic Cruise
             public static final double kAccel = 4400; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
                 public static final double bottom = 4100.0; //position for bottom scoring
-                public static final double top = 19000.0; //position for top scoring
+                public static final double top = 19500.0; //position for top scoring
             }
         }
         public static final class Griddle {

@@ -2,11 +2,14 @@ package frc.team1918.robot.commands.fivesecondrule;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
+import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
+import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 public class fsr_moveSpatulaHome extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final FiveSecondRuleSubsystem m_fsr;
+  private final StoveSubsystem m_stove;
   private final spatulas m_spatula;
 
   /**
@@ -14,11 +17,12 @@ public class fsr_moveSpatulaHome extends CommandBase {
    * While disabled, this simply sets the position to home so that the robot doesn't attempt to go to other positions when enabled
    * @param subsystem The FiveSecondRule subsystem required by this command
    */
-  public fsr_moveSpatulaHome(FiveSecondRuleSubsystem subsystem, spatulas spatula) {
+  public fsr_moveSpatulaHome(FiveSecondRuleSubsystem subsystem, StoveSubsystem stove, spatulas spatula) {
     m_fsr = subsystem;
+    m_stove = stove;
     m_spatula = spatula;
     // Use addRequirements() here to declare subsystem dependencies.
-    // addRequirements(fsr);
+    addRequirements(m_stove);
   }
 
   // Allow the command to run while disabled
@@ -30,6 +34,7 @@ public class fsr_moveSpatulaHome extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    m_stove.moveAimerTo(0.0);
     m_fsr.moveSpatulaTo(m_spatula, SpatulaPositions.HOME);
   }
 

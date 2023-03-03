@@ -54,7 +54,7 @@ public class cg_resetRobot extends SequentialCommandGroup {
         new stove_stopGriddle(m_stove),
         new vision_setRinglight(m_vision, false),
         new SequentialCommandGroup(
-          new fsr_moveSpatulaHome(m_fsr, spatulas.BOTH),
+          new fsr_moveSpatulaHome(m_fsr, m_stove, spatulas.BOTH),
           new WaitCommand(1),
           new stove_moveBurnerHome(m_stove, m_fsr)
         ),

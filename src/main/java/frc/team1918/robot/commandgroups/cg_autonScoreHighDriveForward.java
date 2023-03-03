@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1918.paths.*;
 import frc.team1918.robot.Constants;
+import frc.team1918.robot.commands.drive.drive_defLock;
 import frc.team1918.robot.commands.drive.drive_followTrajectory;
 import frc.team1918.robot.commands.drive.drive_resetOdometry;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
@@ -53,7 +54,11 @@ public class cg_autonScoreHighDriveForward extends SequentialCommandGroup {
         new stove_moveHotPlateHome(m_stove),
         new stove_moveBurnerHome(m_stove, m_fsr),
         new cg_Wait(0.5),
-        new cg_DriveForward4m(m_drive, m_vision), 
+        new cg_DriveForward3p2m(m_drive, m_vision),
+        new ParallelDeadlineGroup(
+          new WaitCommand(1),
+          new drive_defLock(m_drive)
+        ),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }
