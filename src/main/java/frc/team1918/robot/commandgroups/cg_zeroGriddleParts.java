@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
+import frc.team1918.robot.commands.stove.stove_zeroAimer;
 import frc.team1918.robot.commands.stove.stove_zeroGreaseTrap;
 import frc.team1918.robot.commands.stove.stove_zeroHotPlate;
 
@@ -32,6 +33,7 @@ public class cg_zeroGriddleParts extends ParallelCommandGroup {
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
         new helpers_debugMessage("Running cg_zeroGriddleParts"),
+        new stove_zeroAimer(m_stove),
         new stove_zeroGreaseTrap(m_stove),
         new stove_zeroHotPlate(m_stove)
     );

@@ -150,8 +150,8 @@ public class Aimer {
      */
     public void updateDashboard() {
         Dashboard.Aimer.setPosition((int) m_motor.getSelectedSensorPosition(Constants.Global.kPidIndex));
-        Dashboard.Aimer.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
-        Dashboard.Aimer.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
+        // Dashboard.Aimer.setTarget((int) m_motor.getClosedLoopTarget(Constants.Global.kPidIndex));
+        // Dashboard.Aimer.setError((int) m_motor.getClosedLoopError(Constants.Global.kPidIndex));
         Dashboard.Aimer.setSpeed(m_motor.getMotorOutputPercent());
     }
 

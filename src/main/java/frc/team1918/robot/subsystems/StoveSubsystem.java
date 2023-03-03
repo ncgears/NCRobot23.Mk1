@@ -217,4 +217,8 @@ public class StoveSubsystem extends SubsystemBase {
 		m_Aimer.setSpeed(speed);
 	}
 
+	public void moveAimerTo(double position) {
+		m_Aimer.moveTo(0.0);
+	}
+
 }

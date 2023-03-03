@@ -553,19 +553,6 @@
               "_showGlyph": false
             }
           },
-          "2,3": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Aimer/Position",
-              "_title": "Aimer/Position",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
           "2,1": {
             "size": [
               1,
@@ -575,19 +562,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Aimer/Target",
               "_title": "Aimer/Target",
-              "_glyph": 148,
-              "_showGlyph": false
-            }
-          },
-          "2,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Aimer/Error",
-              "_title": "Aimer/Error",
               "_glyph": 148,
               "_showGlyph": false
             }
