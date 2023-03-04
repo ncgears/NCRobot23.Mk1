@@ -3,15 +3,8 @@ package frc.team1918.robot.commands.drive;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.Helpers;
-import frc.team1918.robot.modules.Burner.BurnerPositions;
-import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
-import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
-import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 //import subsystem
 import frc.team1918.robot.subsystems.DriveSubsystem;
-import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
-import frc.team1918.robot.subsystems.StoveSubsystem;
-import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
 
 /**
  * A command to reset the gyro to 0.
