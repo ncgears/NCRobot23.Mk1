@@ -317,12 +317,12 @@ public class RobotContainer {
       // m_auto_chooser.addOption("[+] SHigh", getRobotCommand("auton_ScoreHigh"));
       m_auto_chooser.addOption("[+] SHigh DFwd On CS", getRobotCommand("auton_ScoreHighDriveForwardCS"));
       m_auto_chooser.addOption("[+] SHigh DFwd Not CS", getRobotCommand("auton_ScoreHighDriveForwardSide"));
-      m_auto_chooser.addOption("[-] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
-      m_auto_chooser.addOption("[-] SHigh DFwd 2Pt Bal", getRobotCommand("auton_ScoreHighDriveForwardExitBalance"));
+      m_auto_chooser.addOption("[+] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
+      m_auto_chooser.addOption("[+] SHigh DFwd 2Pt Bal", getRobotCommand("auton_ScoreHighDriveForwardExitBalance"));
       // m_auto_chooser.addOption("[-] DFwd 4m", getRobotCommand("auton_DriveForward"));
       // m_auto_chooser.addOption("[-] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
-      m_auto_chooser.addOption("[TEST] CS AutoBal", new cg_AutoBalance(m_drive));
-      m_auto_chooser.addOption("[TEST] CS Exit CS Bal", new cg_testCSExitCS(m_drive, m_stove, m_fsr, m_vision));
+      // m_auto_chooser.addOption("[TEST] CS AutoBal", new cg_AutoBalance(m_drive));
+      // m_auto_chooser.addOption("[TEST] CS Exit CS Bal", new cg_testCSExitCS(m_drive, m_stove, m_fsr, m_vision));
     }
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
   }
