@@ -1,3 +1,5 @@
-init to Home position
-aimer code
-tune spatula current limiting
+Test cg_AutoBalance
+Adjust timing for cg_AutoBalance
+
+Test cg_testCSExitCS
+Adjust distances for exit
