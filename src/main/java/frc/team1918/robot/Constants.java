@@ -103,7 +103,7 @@ public class Constants {
         public static final double kPThetaController = 0.0;
         public static final class Balance {
             public static final boolean kUseDefensiveLock = true; //lock the drive train into defensive position when finished balancing
-            public static final double kToleranceDegrees = 3.5; //degrees of tolerance for balancing
+            public static final double kToleranceDegrees = 3.25; //degrees of tolerance for balancing
             public static final double kP = 0.014;
             public static final double kI = 0.0;
             public static final double kD = 0.0;
@@ -295,7 +295,7 @@ public class Constants {
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
-            public static final double kP = Spatula.default_kP; //PID P 
+            public static final double kP = 0.55; //PID P 
             public static final double kI = Spatula.default_kI; //PID I
             public static final double kD = Spatula.default_kD; //PID D
             public static final double kF = Spatula.default_kF; //PID F
