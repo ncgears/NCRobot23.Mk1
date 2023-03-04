@@ -55,7 +55,7 @@ public class cg_autonScoreHighDriveFowardExitBalance extends SequentialCommandGr
         new cg_Wait(0.5),
         new cg_DriveForward3p6m(m_drive, m_vision), 
         new cg_Wait(0.5),
-        new cg_DriveForward3m(m_drive, m_vision), 
+        new cg_DriveForward2m(m_drive, m_vision), 
         new cg_Wait(0.25),
         new cg_DriveBackward3m(m_drive, m_vision), 
         new cg_AutoBalance(m_drive),

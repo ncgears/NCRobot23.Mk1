@@ -49,7 +49,7 @@ public class cg_testCSExitCS extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Test: CS Drive Forward Drive Backward"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_DriveForward3m(m_drive, m_vision), 
+        new cg_DriveForward2m(m_drive, m_vision), 
         new cg_Wait(0.25),
         new cg_DriveBackward3m(m_drive, m_vision), 
         new helpers_debugMessage("Test: Done with auton")

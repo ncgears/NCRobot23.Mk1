@@ -49,17 +49,17 @@ def main():
     #     "TwoMetersForward"
     # )
 
-    # generator.generate(
-    #     [[0,0,0],
-    #     [3.0,0,0]],
-    #     "ThreeMetersForward"
-    # )
-
     generator.generate(
         [[0,0,0],
-        [-3.0,0,0]],
-        "ThreeMetersBackward"
+        [3.0,0,0]],
+        "ThreeMetersForward"
     )
+
+    # generator.generate(
+    #     [[0,0,0],
+    #     [-3.0,0,0]],
+    #     "ThreeMetersBackward"
+    # )
 
     # generator.generate(
     #     [[0,0,0],
