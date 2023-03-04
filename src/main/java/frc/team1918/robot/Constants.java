@@ -104,7 +104,7 @@ public class Constants {
         public static final class Balance {
             public static final boolean kUseDefensiveLock = true; //lock the drive train into defensive position when finished balancing
             public static final double kToleranceDegrees = 3.5; //degrees of tolerance for balancing
-            public static final double kP = 0.011;
+            public static final double kP = 0.014;
             public static final double kI = 0.0;
             public static final double kD = 0.0;
         }
