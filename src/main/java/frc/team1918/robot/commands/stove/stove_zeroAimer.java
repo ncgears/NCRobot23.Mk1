@@ -2,7 +2,6 @@ package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.Constants;
-import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 public class stove_zeroAimer extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
