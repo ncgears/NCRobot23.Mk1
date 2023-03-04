@@ -38,7 +38,7 @@ public class cg_SetOdom180 extends SequentialCommandGroup {
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Set odometry -180 degrees"),
-        new drive_resetOdometry(drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))
+        new drive_resetOdometry(drive, new Pose2d(new Translation2d(2.0, 2.2), Rotation2d.fromDegrees(-180.0)))
     );
   }
 }

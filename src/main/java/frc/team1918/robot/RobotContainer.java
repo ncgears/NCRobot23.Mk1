@@ -267,14 +267,14 @@ public class RobotContainer {
         return new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision);
       case "auton_ScoreHigh":
         return new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_ScoreHighDriveForward":
+      case "auton_ScoreHighDriveForwardCS":
         return new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHighDriveForwardSide":
+        return new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision);
       case "auton_ScoreHighDriveForwardBalance":
         return new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_DriveForward":
-        return new cg_autonDriveForward(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_DriveFowardBalance":
-        return new cg_autonDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
+      case "auton_ScoreHighDriveForwardExitBalance":
+        return new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision);
       default:
         return null;
     }
@@ -314,12 +314,15 @@ public class RobotContainer {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
-      m_auto_chooser.addOption("[GOOD] SHigh", getRobotCommand("auton_ScoreHigh"));
-      m_auto_chooser.addOption("[GOOD] SHigh DFwd", getRobotCommand("auton_ScoreHighDriveForward"));
-      m_auto_chooser.addOption("[TEST] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
-      m_auto_chooser.addOption("[TEST] DFwd", getRobotCommand("auton_DriveForward"));
-      m_auto_chooser.addOption("[TEST] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
-
+      // m_auto_chooser.addOption("[+] SHigh", getRobotCommand("auton_ScoreHigh"));
+      m_auto_chooser.addOption("[+] SHigh DFwd On CS", getRobotCommand("auton_ScoreHighDriveForwardCS"));
+      m_auto_chooser.addOption("[+] SHigh DFwd Not CS", getRobotCommand("auton_ScoreHighDriveForwardSide"));
+      m_auto_chooser.addOption("[-] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
+      m_auto_chooser.addOption("[-] SHigh DFwd 2Pt Bal", getRobotCommand("auton_ScoreHighDriveForwardExitBalance"));
+      // m_auto_chooser.addOption("[-] DFwd 4m", getRobotCommand("auton_DriveForward"));
+      // m_auto_chooser.addOption("[-] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
+      m_auto_chooser.addOption("[TEST] CS AutoBal", new cg_AutoBalance(m_drive));
+      m_auto_chooser.addOption("[TEST] CS Exit CS Bal", new cg_testCSExitCS(m_drive, m_stove, m_fsr, m_vision));
     }
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
   }
@@ -356,7 +359,7 @@ public class RobotContainer {
     driveTab.add("Field", m_drive.getField())
         .withPosition(6, 0)
         .withSize(3, 2)
-        .withProperties(Map.of("Glyph","CODEPEN","Show Glyph",true))
+        .withProperties(Map.of("Glyph","CODEPEN","Robot Icon Size",30,"Show Glyph",true))
         .withWidget(BuiltInWidgets.kField);
     
     //FMS Info -- not possible here?

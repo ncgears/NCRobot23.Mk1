@@ -108,6 +108,10 @@ public class Constants {
             public static final double kI = 0.0;
             public static final double kD = 0.0;
         }
+        public static final class AutoBalance {
+            public static final double onTime = 1.0;
+            public static final double offTime = 1.0;
+        }
     }
 
     /**

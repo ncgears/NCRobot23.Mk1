@@ -43,7 +43,7 @@ public class cg_autonDriveForward extends SequentialCommandGroup {
         new helpers_debugMessage("Auton: Drive Forward"),
         new cg_SetOdom180(m_drive, m_vision),
         new cg_Wait(0.5),
-        new cg_DriveForward1m(m_drive, m_vision), 
+        new cg_DriveForward4m(m_drive, m_vision), 
         new helpers_debugMessage("Auton: Done with auton")
     );
   }

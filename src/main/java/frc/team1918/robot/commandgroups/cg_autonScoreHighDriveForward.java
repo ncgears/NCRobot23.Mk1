@@ -54,7 +54,7 @@ public class cg_autonScoreHighDriveForward extends SequentialCommandGroup {
         new stove_moveHotPlateHome(m_stove),
         new stove_moveBurnerHome(m_stove, m_fsr),
         new cg_Wait(0.5),
-        new cg_DriveForward3p2m(m_drive, m_vision),
+        new cg_DriveForward3p6m(m_drive, m_vision),
         new ParallelDeadlineGroup(
           new WaitCommand(1),
           new drive_defLock(m_drive)

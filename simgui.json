@@ -1,7 +1,7 @@
 {
   "HALProvider": {
     "Other Devices": {
-      "Talon SRX[13]/Rev Limit": {
+      "Talon FX[31]": {
         "header": {
           "open": true
         }

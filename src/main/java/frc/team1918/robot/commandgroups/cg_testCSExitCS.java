@@ -21,6 +21,8 @@ import frc.team1918.robot.Constants;
 import frc.team1918.robot.commands.drive.drive_followTrajectory;
 import frc.team1918.robot.commands.drive.drive_resetOdometry;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
+import frc.team1918.robot.commands.stove.stove_moveBurnerHome;
+import frc.team1918.robot.commands.stove.stove_moveHotPlateHome;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
@@ -28,13 +30,13 @@ import frc.team1918.robot.subsystems.VisionSubsystem;
 import frc.team1918.robot.commandgroups.autoncommands.*;
 
 @SuppressWarnings("unused")
-public class cg_autonDriveFowardBalance extends SequentialCommandGroup {
+public class cg_testCSExitCS extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonDriveFowardBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_testCSExitCS(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -45,12 +47,12 @@ public class cg_autonDriveFowardBalance extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Drive Forward And Balance"),
+        new helpers_debugMessage("Test: CS Drive Forward Drive Backward"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_Wait(0.5),
-        new cg_DriveForward3p6m(m_drive, m_vision), 
-        new cg_AutoBalance(m_drive),
-        new helpers_debugMessage("Auton: Done with auton")
+        new cg_DriveForward3m(m_drive, m_vision), 
+        new cg_Wait(0.25),
+        new cg_DriveBackward3m(m_drive, m_vision), 
+        new helpers_debugMessage("Test: Done with auton")
     );
   }
 }

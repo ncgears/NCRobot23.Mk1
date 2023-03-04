@@ -57,9 +57,21 @@ def main():
 
     generator.generate(
         [[0,0,0],
-        [3.6,0,0]],
-        "ThreeTwoMetersForward"
+        [-3.0,0,0]],
+        "ThreeMetersBackward"
     )
+
+    # generator.generate(
+    #     [[0,0,0],
+    #     [3.6,0,0]],
+    #     "ThreeSixMetersForward"
+    # )
+
+    # generator.generate(
+    #     [[0,0,0],
+    #     [3.2,0,0]],
+    #     "ThreeTwoMetersForward"
+    # )
 
     # generator.generate(
     #     [[0,0,0],

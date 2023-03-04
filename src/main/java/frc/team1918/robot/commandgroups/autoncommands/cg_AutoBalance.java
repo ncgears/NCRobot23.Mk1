@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj2.command.RepeatCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1918.robot.subsystems.DriveSubsystem;
+import frc.team1918.robot.Constants;
 import frc.team1918.robot.commands.drive.drive_autoBalance;
+import frc.team1918.robot.commands.drive.drive_stop;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
 
 public class cg_AutoBalance extends SequentialCommandGroup {
@@ -24,7 +26,7 @@ public class cg_AutoBalance extends SequentialCommandGroup {
   */
   public cg_AutoBalance(DriveSubsystem drive) {
     m_drive = drive;
-    addRequirements(m_drive);
+    // addRequirements(m_drive);
 
     /**
      * Creates a sequential command group with the objects to run in sequence.
@@ -36,12 +38,16 @@ public class cg_AutoBalance extends SequentialCommandGroup {
         new RepeatCommand(
           new SequentialCommandGroup(
             new ParallelDeadlineGroup(
-              new WaitCommand(0.3),
-              new helpers_debugMessage("autoBalance for 0.5s"),
+              new WaitCommand(Constants.Auton.AutoBalance.onTime),
+              new helpers_debugMessage("autoBalance for "+Constants.Auton.AutoBalance.onTime+"s"),
               new drive_autoBalance(m_drive)
             ),
-            new helpers_debugMessage("waiting for .75s"),
-            new WaitCommand(1)
+            new ParallelDeadlineGroup(
+              new WaitCommand(Constants.Auton.AutoBalance.offTime),
+              new drive_stop(m_drive),
+              new helpers_debugMessage("waiting for "+Constants.Auton.AutoBalance.onTime+"s")
+            ),
+            new helpers_debugMessage("Loop auto balance sequence")
           )
         ),
         new helpers_debugMessage("Finish robot auto balance sequence")

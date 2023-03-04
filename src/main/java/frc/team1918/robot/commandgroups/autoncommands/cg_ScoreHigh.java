@@ -56,9 +56,9 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
           new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT),
           new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL)
         ),
-        new cg_Wait(1.5),
+        new cg_Wait(1.0), //known good 1.5
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
-        new cg_Wait(2.5),
+        new cg_Wait(2.0), //known good 2.5
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP),
         new helpers_debugMessage("Auton: Done with auton")
     );

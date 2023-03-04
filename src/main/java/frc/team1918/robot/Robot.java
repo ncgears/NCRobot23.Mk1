@@ -166,7 +166,10 @@ public class Robot extends TimedRobot {
   public void simulationPeriodic() {
     int m_simgyro = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
     SimDouble angle = new SimDouble(SimDeviceDataJNI.getSimValueHandle(m_simgyro,"Yaw"));
-    angle.set(angle.get()+0.05);
+    SimDouble pitch = new SimDouble(SimDeviceDataJNI.getSimValueHandle(m_simgyro,"Pitch"));
+    // angle.set(angle.get()+0.05);
+    angle.set(0.5);
+    pitch.set(4.5);
   }
 
 }
