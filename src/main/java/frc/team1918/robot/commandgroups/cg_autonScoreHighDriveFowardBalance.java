@@ -50,9 +50,6 @@ public class cg_autonScoreHighDriveFowardBalance extends SequentialCommandGroup 
         new helpers_debugMessage("Auton: Drive Forward And Balance"),
         new cg_SetOdom180(m_drive, m_vision),
         new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision),
-        new stove_moveHotPlateHome(m_stove),
-        new stove_moveBurnerHome(m_stove, m_fsr),
-        new cg_Wait(0.5),
         new cg_DriveForward3p6m(m_drive, m_vision), 
         new cg_AutoBalance(m_drive),
         new helpers_debugMessage("Auton: Done with auton")

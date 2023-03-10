@@ -33,13 +33,13 @@ import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
 
 @SuppressWarnings("unused")
-public class cg_ScoreHigh extends SequentialCommandGroup {
+public class cg_ScoreMid extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_ScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_ScoreMid(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -50,17 +50,17 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Score High"),
+        new helpers_debugMessage("Auton: Score Mid"),
         new ParallelCommandGroup(
-          new helpers_debugMessage("Auton (Score High): Burner to Hot and HotPlate to Level"),
-          new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT),
+          new helpers_debugMessage("Auton (Score Mid): Burner to Cold and HotPlate to Level"),
+          new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD),
           new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL)
         ),
-        new cg_Wait(1.0), //known good 1.5
+        new cg_Wait(0.5), 
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
         new cg_Wait(2.0), //known good 2.5
         new ParallelCommandGroup(
-          new helpers_debugMessage("Auton (Score High): Burner to Home and HotPlate to Home"),
+          new helpers_debugMessage("Auton (Score Mid): Burner to Home and HotPlate to Home"),
           new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP),
           new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME),
           new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME)
