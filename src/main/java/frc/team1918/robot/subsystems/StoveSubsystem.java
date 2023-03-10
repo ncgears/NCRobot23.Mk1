@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.team1918.robot.Constants;
 import frc.team1918.robot.modules.Aimer;
+import frc.team1918.robot.modules.ConvectionFan;
 import frc.team1918.robot.modules.Burner;
 import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Griddle;
@@ -27,6 +28,7 @@ public class StoveSubsystem extends SubsystemBase {
 	private HotPlate m_HotPlate; //scoring ramp controller
 	private Burner m_Burner; //elevator controller
 	private Aimer m_Aimer; //aimer controller
+	private ConvectionFan m_ConvectionFan; //thumper spike
 	
 	/**
 	 * Returns the instance of the subsystem.
@@ -48,6 +50,7 @@ public class StoveSubsystem extends SubsystemBase {
 		m_Burner = new Burner("Burner", Constants.Stove.Burner.constants, Constants.Stove.Burner.gains);
 		m_Griddle = new Griddle("Griddle", Constants.Stove.Griddle.constants, Constants.Stove.Griddle.gains);
 		m_Aimer = new Aimer("Aimer", Constants.Stove.Aimer.constants, Constants.Stove.Aimer.gains);
+		m_ConvectionFan = new ConvectionFan();
 
 		//make sure we reset things on init
 		m_GreaseTrap.moveTo(GreaseTrapPositions.HOME);
@@ -55,6 +58,7 @@ public class StoveSubsystem extends SubsystemBase {
 		m_Burner.moveTo(BurnerPositions.HOME);
 		m_Griddle.setDirectionAndSpeed(GriddleDirections.STOP, 0.0);
 		m_Aimer.moveTo(0.0);
+		m_ConvectionFan.setConvectionFan(false);
 	}
 
 	/**
@@ -71,6 +75,7 @@ public class StoveSubsystem extends SubsystemBase {
 		m_Griddle.updateDashboard();
 		m_GreaseTrap.updateDashboard();
 		m_Aimer.updateDashboard();
+		m_ConvectionFan.updateDashboard();
 	}
 
 	/**
@@ -219,6 +224,10 @@ public class StoveSubsystem extends SubsystemBase {
 
 	public void moveAimerTo(double position) {
 		m_Aimer.moveTo(0.0);
+	}
+
+	public void setConvectionFan(boolean enabled) {
+		m_ConvectionFan.setConvectionFan(enabled);
 	}
 
 }

@@ -26,6 +26,9 @@ public class Dashboard {
         public static final void setSpeed(double value) { SmartDashboard.putNumber("Griddle/Speed", value); }
         public static final void setDirection(String value) { SmartDashboard.putString("Griddle/Direction", value); }
     }
+    public static final class ConvectionFan {
+        public static final void setEnabled(boolean value) { SmartDashboard.putBoolean("Convection Fan", value); }
+    }
     public static final class Burner {
         public static final void setPositionName(String value) { SmartDashboard.putString("Burner/PosName", value); }
         public static final void setPosition(double value) { SmartDashboard.putNumber("Burner/Position",value); }

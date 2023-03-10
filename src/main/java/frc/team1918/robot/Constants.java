@@ -35,7 +35,8 @@ public class Constants {
          * IDs of RoboRio Relays
          */
         public static final class Relay {
-            public static int ringlight = 0;
+            public static int stove_convectionfan = 0;
+            public static int ringlight = 1;
         }
         /**
          * IDs of Talons
@@ -118,6 +119,9 @@ public class Constants {
      * Constants for the Stove Subsystem
      */
     public static final class Stove {
+            public static final class ConvectionFan {
+                public static final int kRelayID = ID.Relay.stove_convectionfan;
+            }
             public static final class Aimer {
                 public static final boolean isDisabled = false;
                 public static final double kZeroSpeed = 0.35; //speed for zeroing operations

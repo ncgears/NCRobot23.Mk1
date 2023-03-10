@@ -19,6 +19,7 @@ import frc.team1918.robot.commands.helpers.helpers_debugMessage;
 import frc.team1918.robot.commands.stove.stove_moveBurnerHome;
 import frc.team1918.robot.commands.stove.stove_moveGreaseTrapHome;
 import frc.team1918.robot.commands.stove.stove_moveHotPlateHome;
+import frc.team1918.robot.commands.stove.stove_stopConvectionFan;
 import frc.team1918.robot.commands.stove.stove_stopGriddle;
 import frc.team1918.robot.commands.vision.vision_setRinglight;
 
@@ -60,6 +61,7 @@ public class cg_resetRobot extends SequentialCommandGroup {
         ),
         new stove_moveGreaseTrapHome(m_stove),
         new stove_moveHotPlateHome(m_stove),
+        new stove_stopConvectionFan(m_stove),
         new helpers_debugMessage("Finish robot reset sequence")
     );
   }

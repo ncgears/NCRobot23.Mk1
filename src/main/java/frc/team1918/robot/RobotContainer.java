@@ -158,7 +158,8 @@ public class RobotContainer {
 
       private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_ZeroAimer = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
-      private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
+      // private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
+      private JoystickButton btn_ConvectionFan = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
 
       private Trigger t_MoveAimer = new Trigger(() -> Math.abs(oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))>0.5);
 
@@ -230,7 +231,8 @@ public class RobotContainer {
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
     // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
-    btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
+    // btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
+    btn_ConvectionFan.onTrue(new stove_setConvectionFan(m_stove, true)).onFalse(new stove_setConvectionFan(m_stove, false));
     btn_ZeroAimer.onTrue(new stove_zeroAimer(m_stove));
 
     t_MoveAimer.onTrue(new stove_moveAimer(m_stove, () -> oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))).onFalse(new stove_moveAimer(m_stove, () -> 0.0));
@@ -315,9 +317,13 @@ public class RobotContainer {
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
       // m_auto_chooser.addOption("[+] SHigh", getRobotCommand("auton_ScoreHigh"));
+      m_auto_chooser.addOption("[+] SMid DFwd On CS", getRobotCommand("auton_ScoreMidDriveForwardCS"));
       m_auto_chooser.addOption("[+] SHigh DFwd On CS", getRobotCommand("auton_ScoreHighDriveForwardCS"));
+      m_auto_chooser.addOption("[+] SMid DFwd Not CS", getRobotCommand("auton_ScoreMidDriveForwardSide"));
       m_auto_chooser.addOption("[+] SHigh DFwd Not CS", getRobotCommand("auton_ScoreHighDriveForwardSide"));
+      m_auto_chooser.addOption("[+] SMid DFwd Bal", getRobotCommand("auton_ScoreMidDriveForwardBalance"));
       m_auto_chooser.addOption("[+] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
+      m_auto_chooser.addOption("[+] SMid DFwd 2Pt Bal", getRobotCommand("auton_ScoreMidDriveForwardExitBalance"));
       m_auto_chooser.addOption("[+] SHigh DFwd 2Pt Bal", getRobotCommand("auton_ScoreHighDriveForwardExitBalance"));
       // m_auto_chooser.addOption("[-] DFwd 4m", getRobotCommand("auton_DriveForward"));
       // m_auto_chooser.addOption("[-] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
