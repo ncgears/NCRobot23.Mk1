@@ -269,15 +269,15 @@ public class Constants {
      */
     public static final class Spatula {
         public static final double default_kZeroSpeed = 0.4; //speed for zeroing operations
-        public static final double default_kP = 0.5; //PID P
+        public static final double default_kP = 0.2; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
-        public static final double default_kF = 0.25; //PID F
+        public static final double default_kF = 0.2; //PID F
         public static final int default_kIZone = 0; //PID IZone
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 4500; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 3500; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
@@ -292,21 +292,21 @@ public class Constants {
             public static final double kZeroSpeed = default_kZeroSpeed;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_left; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final int kSensorTicks = 4096;
             public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
-            public static final double kP = 0.55; //PID P 
+            public static final double kP = 0.50; //PID P 
             public static final double kI = Spatula.default_kI; //PID I
             public static final double kD = Spatula.default_kD; //PID D
-            public static final double kF = Spatula.default_kF; //PID F
+            public static final double kF = 0.35; //Spatula.default_kF; //PID F
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = Spatula.default_kPeakOutput;
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
+            public static final double kCruise = 5900; //Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions

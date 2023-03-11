@@ -32,7 +32,7 @@ public class ConvectionFan {
      */
     public void setConvectionFan(boolean enable) {
         enabled=enable;
-        m_relay.set((enabled)?Relay.Value.kOn:Relay.Value.kOff);
+        m_relay.set((enabled)?Relay.Value.kForward:Relay.Value.kOff);
     }
 
     /**
