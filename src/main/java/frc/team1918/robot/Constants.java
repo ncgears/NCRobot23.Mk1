@@ -277,7 +277,7 @@ public class Constants {
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 3500; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 6300; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
@@ -306,7 +306,7 @@ public class Constants {
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = Spatula.default_kPeakOutput;
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = 6300; //5900 //Spatula.default_kCruise; //MotionMagic Cruise
+            public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
@@ -354,7 +354,7 @@ public class Constants {
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = Spatula.default_kPeakOutput;
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = 6300; //5900 //MotionMagic Cruise
+            public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
