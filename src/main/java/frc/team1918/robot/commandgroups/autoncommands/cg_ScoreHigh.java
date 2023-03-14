@@ -39,12 +39,15 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_ScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_ScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
     m_vision = vision;
     addRequirements(m_drive, m_stove, m_fsr, m_vision);
+
+    HotPlatePositions hp_position = (withBlueberries) ? HotPlatePositions.DOWN : HotPlatePositions.LEVEL;
+    String stackType = (withBlueberries) ? "Pancake" : "Waffle";
 
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
@@ -52,9 +55,9 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Score High"),
         new ParallelCommandGroup(
-          new helpers_debugMessage("Auton (Score High): Burner to Hot and HotPlate to Level"),
+          new helpers_debugMessage("Auton (Score "+stackType+" High): Burner to Hot and HotPlate to "+ hp_position.toString()),
           new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT),
-          new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL)
+          new stove_moveHotPlateTo(m_stove, hp_position)
         ),
         new cg_Wait(1.0), //known good 1.5
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
