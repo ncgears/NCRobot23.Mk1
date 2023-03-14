@@ -37,7 +37,7 @@ public class cg_spatulaGriddleToFloor extends SequentialCommandGroup {
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
         new helpers_debugMessage("Running cg_spatulaFloorToGriddle"),
-        new fsr_moveSpatulaTo(m_fsr, m_stove, spatula, SpatulaPositions.MIDDOWN),
+        // new fsr_moveSpatulaTo(m_fsr, m_stove, spatula, SpatulaPositions.MIDDOWN),
         new fsr_moveSpatulaTo(m_fsr, m_stove, spatula, SpatulaPositions.FLOOR)
     );
   }
