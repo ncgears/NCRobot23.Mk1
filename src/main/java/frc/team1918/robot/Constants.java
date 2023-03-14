@@ -229,7 +229,7 @@ public class Constants {
                 public static final double flip = 0.0; //position to goto for flipping pancakes
                 public static final double clear = 800.0; //clear of spatula
                 public static final double level = 4500.0; //level
-                public static final double down = 5700.0; //down
+                public static final double down = 5000.0; //down
             }
         }
         public static final class HotPlate {
@@ -259,7 +259,7 @@ public class Constants {
                 public static final double home = 0.0; //home position
                 public static final double clear = 800.0; //clear of spatula
                 public static final double level = 4500.0; //level position
-                public static final double down = 5400.0; //down position
+                public static final double down = 5000.0; //down position
             }
         }
     }
@@ -299,14 +299,14 @@ public class Constants {
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
-            public static final double kP = 0.50; //PID P 
+            public static final double kP = 0.60; //PID P 
             public static final double kI = Spatula.default_kI; //PID I
             public static final double kD = Spatula.default_kD; //PID D
-            public static final double kF = 0.35; //Spatula.default_kF; //PID F
+            public static final double kF = Spatula.default_kF; // 0.35; //Spatula.default_kF; //PID F
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = Spatula.default_kPeakOutput;
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = 5900; //Spatula.default_kCruise; //MotionMagic Cruise
+            public static final double kCruise = 6300; //5900 //Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
@@ -337,24 +337,24 @@ public class Constants {
         }
         public static final class Right {
             public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.6;
+            public static final double kZeroSpeed = default_kZeroSpeed;
             //Controller Setup
             public static final int kMotorID = ID.Talon.spatula_right; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
+            public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final int kSensorTicks = 4096;
             public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
+            public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
             public static final int kAllowedError = 5; //PID Allowed error
             public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
             //PID Setup
-            public static final double kP = Spatula.default_kP; //PID P 
+            public static final double kP = 0.50; //PID P 
             public static final double kI = Spatula.default_kI; //PID I
             public static final double kD = Spatula.default_kD; //PID D
-            public static final double kF = Spatula.default_kF; //PID F
+            public static final double kF = 0.35; //PID F
             public static final int kIZone = 0; //PID IZONE
             public static final double kPeakOutput = Spatula.default_kPeakOutput;
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
+            public static final double kCruise = 6300; //5900 //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
             public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
             //Named positions
