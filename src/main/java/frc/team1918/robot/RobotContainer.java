@@ -254,7 +254,7 @@ public class RobotContainer {
   }
 
   /**
-   * This function returns the robot commands used in the auto_chooser. The purpose is to make it easier to build the possible commands
+   * This function returns the robot commands used in Robot.java. The purpose is to make it easier to build the possible commands
    * and handle requests for commands that don't exist rather than crashing
    * @return command
    */
@@ -265,18 +265,6 @@ public class RobotContainer {
         return new cg_resetRobot(m_stove, m_fsr, m_vision);
       case "rumbleNotify":
         return new cg_djRumble();
-      case "auton_DoNothing":
-        return new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_ScoreHigh":
-        return new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_ScoreHighDriveForwardCS":
-        return new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_ScoreHighDriveForwardSide":
-        return new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_ScoreHighDriveForwardBalance":
-        return new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision);
-      case "auton_ScoreHighDriveForwardExitBalance":
-        return new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision);
       default:
         return null;
     }
@@ -315,16 +303,16 @@ public class RobotContainer {
     if(Constants.Auton.isDisabled) {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
-      m_auto_chooser.setDefaultOption("Do Nothing", getRobotCommand("auton_DoNothing"));
-      // m_auto_chooser.addOption("[+] SHigh", getRobotCommand("auton_ScoreHigh"));
-      m_auto_chooser.addOption("[+] SMid DFwd On CS", getRobotCommand("auton_ScoreMidDriveForwardCS"));
-      m_auto_chooser.addOption("[+] SHigh DFwd On CS", getRobotCommand("auton_ScoreHighDriveForwardCS"));
-      m_auto_chooser.addOption("[+] SMid DFwd Not CS", getRobotCommand("auton_ScoreMidDriveForwardSide"));
-      m_auto_chooser.addOption("[+] SHigh DFwd Not CS", getRobotCommand("auton_ScoreHighDriveForwardSide"));
-      m_auto_chooser.addOption("[+] SMid DFwd Bal", getRobotCommand("auton_ScoreMidDriveForwardBalance"));
-      m_auto_chooser.addOption("[+] SHigh DFwd Bal", getRobotCommand("auton_ScoreHighDriveForwardBalance"));
-      m_auto_chooser.addOption("[+] SMid DFwd 2Pt Bal", getRobotCommand("auton_ScoreMidDriveForwardExitBalance"));
-      m_auto_chooser.addOption("[+] SHigh DFwd 2Pt Bal", getRobotCommand("auton_ScoreHighDriveForwardExitBalance"));
+      m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision));
+      // m_auto_chooser.addOption("[+] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SHigh DFwd Bal", new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SMid DFwd 2Pt Bal", new cg_autonScoreMidDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[+] SHigh DFwd 2Pt Bal", new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
       // m_auto_chooser.addOption("[-] DFwd 4m", getRobotCommand("auton_DriveForward"));
       // m_auto_chooser.addOption("[-] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
       // m_auto_chooser.addOption("[TEST] CS AutoBal", new cg_AutoBalance(m_drive));
