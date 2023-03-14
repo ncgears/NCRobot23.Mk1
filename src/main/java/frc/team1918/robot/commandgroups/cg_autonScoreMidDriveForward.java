@@ -37,7 +37,7 @@ public class cg_autonScoreMidDriveForward extends SequentialCommandGroup {
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreMidDriveForward(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_autonScoreMidDriveForward(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -50,7 +50,7 @@ public class cg_autonScoreMidDriveForward extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Score High Drive Forward"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, false),
+        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
         new stove_moveHotPlateHome(m_stove),
         new stove_moveBurnerHome(m_stove, m_fsr),
         new cg_Wait(0.5),

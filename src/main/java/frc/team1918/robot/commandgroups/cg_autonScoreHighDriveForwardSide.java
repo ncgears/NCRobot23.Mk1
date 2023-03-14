@@ -37,7 +37,7 @@ public class cg_autonScoreHighDriveForwardSide extends SequentialCommandGroup {
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreHighDriveForwardSide(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_autonScoreHighDriveForwardSide(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -50,7 +50,7 @@ public class cg_autonScoreHighDriveForwardSide extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Score High Drive Forward Side of CS"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, false),
+        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
         new cg_DriveForward4m(m_drive, m_vision),
         new helpers_debugMessage("Auton: Done with auton")
     );

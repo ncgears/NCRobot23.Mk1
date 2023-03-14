@@ -305,14 +305,23 @@ public class RobotContainer {
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision));
       // m_auto_chooser.addOption("[+] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SHigh DFwd Bal", new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SMid DFwd 2Pt Bal", new cg_autonScoreMidDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[+] SHigh DFwd 2Pt Bal", new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[Cone] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SHigh DFwd Bal", new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SMid DFwd 2Pt Bal", new cg_autonScoreMidDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, false));
+      m_auto_chooser.addOption("[Cone] SHigh DFwd 2Pt Bal", new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, false));
+
+      m_auto_chooser.addOption("[Cube] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SHigh DFwd Bal", new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SMid DFwd 2Pt Bal", new cg_autonScoreMidDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, true));
+      m_auto_chooser.addOption("[Cube] SHigh DFwd 2Pt Bal", new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, true));
       // m_auto_chooser.addOption("[-] DFwd 4m", getRobotCommand("auton_DriveForward"));
       // m_auto_chooser.addOption("[-] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
       // m_auto_chooser.addOption("[TEST] CS AutoBal", new cg_AutoBalance(m_drive));

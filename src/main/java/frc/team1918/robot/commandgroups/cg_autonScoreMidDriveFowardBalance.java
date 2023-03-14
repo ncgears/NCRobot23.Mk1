@@ -36,7 +36,7 @@ public class cg_autonScoreMidDriveFowardBalance extends SequentialCommandGroup {
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreMidDriveFowardBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_autonScoreMidDriveFowardBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -49,7 +49,7 @@ public class cg_autonScoreMidDriveFowardBalance extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Drive Forward And Balance"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, false),
+        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
         new cg_DriveForward3p6m(m_drive, m_vision), 
         new cg_AutoBalance(m_drive),
         new helpers_debugMessage("Auton: Done with auton")

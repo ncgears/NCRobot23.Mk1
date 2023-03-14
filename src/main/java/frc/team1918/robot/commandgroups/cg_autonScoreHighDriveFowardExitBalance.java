@@ -36,7 +36,7 @@ public class cg_autonScoreHighDriveFowardExitBalance extends SequentialCommandGr
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreHighDriveFowardExitBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_autonScoreHighDriveFowardExitBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -49,7 +49,7 @@ public class cg_autonScoreHighDriveFowardExitBalance extends SequentialCommandGr
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Drive Forward And Balance"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, false),
+        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
         new cg_DriveForward3p6m(m_drive, m_vision), 
         new cg_Wait(0.6),
         new cg_DriveForward2m(m_drive, m_vision), 
