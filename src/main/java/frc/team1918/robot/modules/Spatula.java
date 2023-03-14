@@ -21,7 +21,7 @@ public class Spatula {
     private WPI_TalonSRX m_motor;
     private String m_moduleName;
     private SpatulaNamedPositions m_Positions;
-    public enum SpatulaPositions {ZERO, HOME, GRIDDLE, CLEAR, FLOOR, STORE, MIDUP, MIDDOWN};
+    public enum SpatulaPositions {ZERO, HOME, GRIDDLE, CLEAR, FLOOR, BUMP, STORE, MIDUP, MIDDOWN};
     public SpatulaPositions currentPosition = SpatulaPositions.GRIDDLE;
 
     /**
@@ -140,6 +140,9 @@ public class Spatula {
                 break;
             case FLOOR:
                 m_motor.set(ControlMode.MotionMagic, m_Positions.floor);
+                break;
+            case BUMP:
+                m_motor.set(ControlMode.MotionMagic, m_Positions.bump);
                 break;
             default:
         }

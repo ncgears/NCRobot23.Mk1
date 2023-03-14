@@ -259,7 +259,7 @@ public class Constants {
                 public static final double home = 0.0; //home position
                 public static final double clear = 800.0; //clear of spatula
                 public static final double level = 4500.0; //level position
-                public static final double down = 5000.0; //down position
+                public static final double down = 5400.0; //down position
             }
         }
     }
@@ -315,6 +315,7 @@ public class Constants {
                 66000.0,
                 65500.0,
                 0.0,
+                500.0,
                 66700.0,
                 38500.0,
                 38500.0,
@@ -363,6 +364,7 @@ public class Constants {
                 65500.0,
                 65500.0,
                 0.0,
+                500.0,
                 66700.0,
                 37750,
                 36000,

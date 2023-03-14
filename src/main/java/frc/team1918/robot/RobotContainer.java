@@ -120,6 +120,8 @@ public class RobotContainer {
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_DefLock = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
 
+      private JoystickButton btn_RSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_LT);
+      private JoystickButton btn_LSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
       // private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
       //OrPOVButtons are a custom button type to bind 3 DPAD directions to a single command. See utils/OrPOVButton
@@ -197,12 +199,14 @@ public class RobotContainer {
     // btn_RSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.GRIDDLE));
     // btn_RSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
     btn_RspatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.MIDUP));
+    btn_RSpatBump.whileTrue(new fsr_bumpSpatula(m_fsr, spatulas.RIGHT));
     btn_LSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.LEFT));
     // btn_LSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.GRIDDLE));
     btn_LSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
     // btn_LSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
     btn_LSpatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.MIDUP));
-
+    btn_LSpatBump.whileTrue(new fsr_bumpSpatula(m_fsr, spatulas.LEFT));
+    
     // btn_DRSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
     // btn_DLSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
 
