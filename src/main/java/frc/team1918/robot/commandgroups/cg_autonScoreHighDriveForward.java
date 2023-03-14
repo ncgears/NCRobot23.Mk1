@@ -50,7 +50,7 @@ public class cg_autonScoreHighDriveForward extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Score High Drive Forward"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision),
+        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, false),
         new stove_moveHotPlateHome(m_stove),
         new stove_moveBurnerHome(m_stove, m_fsr),
         new cg_Wait(0.5),

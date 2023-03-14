@@ -49,7 +49,7 @@ public class cg_autonScoreHighDriveFowardBalance extends SequentialCommandGroup 
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Drive Forward And Balance"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision),
+        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, false),
         new cg_DriveForward3p6m(m_drive, m_vision), 
         new cg_AutoBalance(m_drive),
         new helpers_debugMessage("Auton: Done with auton")

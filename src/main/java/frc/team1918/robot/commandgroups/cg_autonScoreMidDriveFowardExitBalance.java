@@ -21,6 +21,8 @@ import frc.team1918.robot.Constants;
 import frc.team1918.robot.commands.drive.drive_followTrajectory;
 import frc.team1918.robot.commands.drive.drive_resetOdometry;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
+import frc.team1918.robot.commands.stove.stove_moveBurnerHome;
+import frc.team1918.robot.commands.stove.stove_moveHotPlateHome;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
@@ -28,13 +30,13 @@ import frc.team1918.robot.subsystems.VisionSubsystem;
 import frc.team1918.robot.commandgroups.autoncommands.*;
 
 @SuppressWarnings("unused")
-public class cg_autonScoreHigh extends SequentialCommandGroup {
+public class cg_autonScoreMidDriveFowardExitBalance extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_autonScoreMidDriveFowardExitBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -47,7 +49,13 @@ public class cg_autonScoreHigh extends SequentialCommandGroup {
         //rotation is the initial rotation of the robot from the downstream direction
         new helpers_debugMessage("Auton: Drive Forward And Balance"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, true),
+        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, false),
+        new cg_DriveForward3p6m(m_drive, m_vision), 
+        new cg_Wait(0.6),
+        new cg_DriveForward2m(m_drive, m_vision), 
+        new cg_Wait(0.1),
+        new cg_DriveBackward3m(m_drive, m_vision), 
+        new cg_AutoBalance(m_drive),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }
