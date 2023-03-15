@@ -339,6 +339,7 @@ public class DriveSubsystem extends SubsystemBase {
 	 * @param kP [double] proportional multiplier for straight angle correction
 	 * @return [double] Degrees of correction using kP multiplier (to control how quickly we correct back to straight)
 	 */
+	// TODO: Build actual pid controller for this
 	public double calcAngleStraight(double targetAngle, double currentAngle, double kP) {
 		double errorAngle = (targetAngle - currentAngle) % 360.0;
 		double correction = errorAngle * kP;
