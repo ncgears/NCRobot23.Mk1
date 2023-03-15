@@ -315,7 +315,7 @@ public class Constants {
                 66000.0,
                 65500.0,
                 0.0,
-                500.0,
+                2000.0,
                 66700.0,
                 38500.0,
                 38500.0,
@@ -364,7 +364,7 @@ public class Constants {
                 65500.0,
                 65500.0,
                 0.0,
-                500.0,
+                2000.0,
                 66700.0,
                 37750,
                 36000,
@@ -427,8 +427,8 @@ public class Constants {
         public static final class FL {
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_fl_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
-            public static final boolean DRIVE_isInverted = false;
+            public static final double DRIVE_wheelDiamMM = 98.9; //actual diameter of larger wheel in mm
+            public static final boolean DRIVE_isInverted = true;
             public static final int TURN_MC_ID = ID.Talon.swerve_fl_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean TURN_isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
@@ -445,7 +445,7 @@ public class Constants {
         public static final class FR {
             public static final boolean isDisabled = false; 
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_fr_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
+            public static final double DRIVE_wheelDiamMM = 97.8; //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_fr_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -463,8 +463,8 @@ public class Constants {
         public static final class RL {
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_rl_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
-            public static final boolean DRIVE_isInverted = false;
+            public static final double DRIVE_wheelDiamMM = 98.7; //actual diameter of larger wheel in mm
+            public static final boolean DRIVE_isInverted = true;
             public static final int TURN_MC_ID = ID.Talon.swerve_rl_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
             public static final boolean TURN_isInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
@@ -481,7 +481,7 @@ public class Constants {
         public static final class RR { //Rear Right
             public static final boolean isDisabled = false;
             public static final int DRIVE_MC_ID = ID.Falcon.swerve_rr_drive; //Falcon500 Motor Controller ID
-            public static final double DRIVE_wheelDiamMM = DEFAULT_WHEEL_DIAM_MM; //actual diameter of larger wheel in mm
+            public static final double DRIVE_wheelDiamMM = 98.6;  //actual diameter of larger wheel in mm
             public static final boolean DRIVE_isInverted = false;
             public static final int TURN_MC_ID = ID.Talon.swerve_rr_turn; //TalonSRX Motor Controller ID
             public static final boolean TURN_sensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
@@ -504,7 +504,7 @@ public class Constants {
         public static final boolean useDriveStraight = true; //enable driveStraight functionality in drive() method
         public static final boolean useFieldCentric = true; //use field-centric drive. This should always be true except for testing?
         public static final boolean useDefensiveLock = false; //use defensiveLock strategy when braking putting swerve into X pattern
-        public static final double kDriveStraight_P = 0.065; //kP for driveStraight correction
+        public static final double kDriveStraight_P = 0.0075; //kP for driveStraight correction
         public static final double kMaxMetersPerSecond = 4.115; //limit full stick speed meters to 13.5fps
         public static final double kMaxRotationRadiansPerSecond = 3.4; //Multiplier for omega of turning the robot
         ////Turn Tuning

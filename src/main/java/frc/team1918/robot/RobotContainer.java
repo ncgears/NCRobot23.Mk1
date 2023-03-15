@@ -120,8 +120,8 @@ public class RobotContainer {
       private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_DefLock = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
 
-      private JoystickButton btn_RSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_LT);
-      private JoystickButton btn_LSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
+      private JoystickButton btn_RSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_LB);
+      private JoystickButton btn_LSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
       // private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
       //OrPOVButtons are a custom button type to bind 3 DPAD directions to a single command. See utils/OrPOVButton

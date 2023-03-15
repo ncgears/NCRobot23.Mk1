@@ -342,7 +342,7 @@ public class DriveSubsystem extends SubsystemBase {
 	public double calcAngleStraight(double targetAngle, double currentAngle, double kP) {
 		double errorAngle = (targetAngle - currentAngle) % 360.0;
 		double correction = errorAngle * kP;
-		if (Math.abs(correction) > .5) return Math.signum(correction) * 0.01;
+		// if (Math.abs(correction) > .5) return Math.signum(correction) * 0.01;
 		return correction;
 	}
 
