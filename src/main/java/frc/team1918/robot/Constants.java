@@ -174,7 +174,7 @@ public class Constants {
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
-                public static final double bottom = 4100.0; //position for bottom scoring
+                public static final double bottom = 4700.0; //position for bottom scoring
                 public static final double top = 19500.0; //position for top scoring
             }
         }
@@ -501,7 +501,12 @@ public class Constants {
     public static final class DriveTrain {
         public static final boolean isDisabled = false; 
         ////Global Tuning
-        public static final boolean useDriveStraight = true; //enable driveStraight functionality in drive() method
+        public static final class DriveStraight {
+            public static final boolean isDisabled = false; //disable drivestraight function
+            public static final double kP = 0.0075;
+            public static final double kI = 0.0;
+            public static final double kD = 0.0;
+        }
         public static final boolean useFieldCentric = true; //use field-centric drive. This should always be true except for testing?
         public static final boolean useDefensiveLock = false; //use defensiveLock strategy when braking putting swerve into X pattern
         public static final double kDriveStraight_P = 0.0075; //kP for driveStraight correction

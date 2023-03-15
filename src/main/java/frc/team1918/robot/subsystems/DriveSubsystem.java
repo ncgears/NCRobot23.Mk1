@@ -10,6 +10,7 @@ import frc.team1918.robot.Dashboard;
 import frc.team1918.robot.Helpers;
 import frc.team1918.robot.Robot;
 import frc.team1918.robot.modules.SwerveModule;
+import edu.wpi.first.math.controller.PIDController;
 //kinematics and odometry
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -35,6 +36,7 @@ public class DriveSubsystem extends SubsystemBase {
 	private static double yawOffset = 0.0; //offset to account for different starting positions
 	public boolean inCommunity = false;
 	public boolean visionTargeting = false;
+	private PIDController driveStraightPID = new PIDController(Constants.DriveTrain.DriveStraight.kP, Constants.DriveTrain.DriveStraight.kI, Constants.DriveTrain.DriveStraight.kD);
 
 	//initialize 4 swerve modules
 	private static SwerveModule m_dtFL = new SwerveModule("dtFL", Constants.Swerve.FL.constants); // Front Left
@@ -59,6 +61,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 	public DriveSubsystem() { //initialize the class
 		m_gyro.calibrate();
+		driveStraightPID.enableContinuousInput(0,360);
 		m_2dField = new Field2d();
 		for (SwerveModule module: modules) {
 			module.resetDistance();
@@ -223,14 +226,17 @@ public class DriveSubsystem extends SubsystemBase {
 	 */
 	@SuppressWarnings("ParameterName")
 	public void drive(double fwd, double str, double rot, boolean fieldRelative) {
-		if(Constants.DriveTrain.useDriveStraight) {
+		if(!Constants.DriveTrain.DriveStraight.isDisabled) {
 			if(rot == 0) { //We are not applying rotation
 				if(!angleLocked) { //We havent locked an angle, so lets save the desiredAngle and lock it
 					lockAngle();
 				} else {
 					if (Math.abs(fwd) > 0 || Math.abs(str) > 0) { //Only do angle correction while moving, for safety reasons
-						Dashboard.DriveTrain.setCorrectionAngle(calcAngleStraight(desiredAngle,getHeading().getDegrees(),Constants.DriveTrain.kDriveStraight_P));
-						rot += calcAngleStraight(desiredAngle,getHeading().getDegrees(),Constants.DriveTrain.kDriveStraight_P); //Add some correction to the rotation to account for angle drive
+						double pidVal = driveStraightPID.calculate(getHeading().getDegrees(),desiredAngle);
+						Dashboard.DriveTrain.setCorrectionAngle(pidVal);
+						rot += pidVal;
+						// Dashboard.DriveTrain.setCorrectionAngle(calcAngleStraight(desiredAngle,getHeading().getDegrees(),Constants.DriveTrain.kDriveStraight_P));
+						// rot += calcAngleStraight(desiredAngle,getHeading().getDegrees(),Constants.DriveTrain.kDriveStraight_P); //Add some correction to the rotation to account for angle drive
 					}
 				}
 			}
