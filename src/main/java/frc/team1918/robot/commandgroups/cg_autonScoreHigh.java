@@ -34,7 +34,7 @@ public class cg_autonScoreHigh extends SequentialCommandGroup {
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
+  public cg_autonScoreHigh(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
