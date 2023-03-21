@@ -7,6 +7,9 @@
 
 package frc.team1918.robot;
 
+import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.cscore.VideoMode.PixelFormat;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.hal.simulation.SimDeviceDataJNI;
 import edu.wpi.first.net.PortForwarder;
@@ -31,6 +34,7 @@ public class Robot extends TimedRobot {
   public Alliance m_alliance;
   private Command m_autonomousCommand;
   private Command m_disableCommand;
+  public UsbCamera camera;
   // private Command m_initOdom;
   // private Command m_resetGyro;
   
@@ -45,6 +49,13 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     //Disable LiveWindow
     LiveWindow.disableAllTelemetry();
+
+    //Setup camera
+    camera = CameraServer.startAutomaticCapture();
+    // camera.setResolution(640, 480);
+    // camera.setFPS(20);
+    camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
+
     //Create forwarder for photonvision
     //pi4
     PortForwarder.add(5800,"photonvision.local",5800);

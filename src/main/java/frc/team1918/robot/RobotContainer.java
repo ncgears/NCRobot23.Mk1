@@ -9,7 +9,9 @@ package frc.team1918.robot;
 
 //Global imports
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.HttpCamera;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -274,6 +276,7 @@ public class RobotContainer {
   public void buildShuffleboard(){
     buildAutonChooser();
     buildDriverTab();
+    // buildCameraTab();
     buildMaintenanceTab();
     // buildDriverTestTab();
     // buildShooterTab();
@@ -467,18 +470,14 @@ public class RobotContainer {
     // driveMMTab.add("Turn MM Test", new TurnToAngleTest(m_drive, 0))     .withPosition(4, 4).withSize(2, 1);
   }
 
-  public void buildShooterTab(){
-    ShuffleboardTab shooterTab = Shuffleboard.getTab("Shooter");
-    // shooterTab.add("SetShotDistanceCloseShot", new SetShooterDistance(m_shooter, ShotDistance.ClosestShot)).withPosition(0, 0).withSize(2, 1);
-    // shooterTab.add("StarShooterWheel", new StartShooterWheel(m_shooter, m_ledsubsystem)).withPosition(2, 0).withSize(2, 1);
-    // shooterTab.add("WaitUntilCommand", new WaitUntilCommand(m_shooter::isUpToSpeed)).withPosition(4, 0).withSize(2, 1);
-    // shooterTab.add("ShootBallsUntilEmpty", new ShootBallsTilEmptyOrThreeSeconds(m_indexer, m_shooter, m_ledsubsystem)).withPosition(6, 0).withSize(2, 1);
-    // shooterTab.add("StopShooter", new StopShooterAndIndexerMotors(m_shooter, m_indexer, m_ledsubsystem)).withPosition(8, 0).withSize(2, 1);
-
-    // shooterTab.addBoolean("Is Up To Speed", m_shooter::isUpToSpeed).withPosition(0, 2).withSize(1, 1);
-    // shooterTab.addNumber("Closed Loop Error", m_shooter::getClosedLoopError).withPosition(1, 2).withSize(1, 1);
-    // shooterTab.add("At Speed", false).withPosition(2, 2).withSize(1, 1).withWidget(BuiltInWidgets.kBooleanBox);
-    // shooterTab.addNumber("Shooter Loop Count", m_shooter::getLoopCount).withPosition(3, 2).withSize(1, 1);
+  public void buildCameraTab(){
+    ShuffleboardTab cameraTab = Shuffleboard.getTab("Camera");
+    // PhotonCamera
+    cameraTab.add("Node Cam", CameraServer.startAutomaticCapture())
+        .withPosition(2,0)
+        .withSize(3,3)
+        .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#333333","Show controls",false))
+        .withWidget(BuiltInWidgets.kCameraStream);
   }
 
   private void buildIntakeTestTab(){
