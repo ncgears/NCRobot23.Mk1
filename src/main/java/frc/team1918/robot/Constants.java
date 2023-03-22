@@ -105,13 +105,13 @@ public class Constants {
         public static final class Balance {
             public static final boolean kUseDefensiveLock = true; //lock the drive train into defensive position when finished balancing
             public static final double kToleranceDegrees = 3.25; //degrees of tolerance for balancing
-            public static final double kP = 0.014;
+            public static final double kP = 0.011;
             public static final double kI = 0.0;
             public static final double kD = 0.0;
         }
         public static final class AutoBalance {
             public static final double onTime = 0.70; //0.8 tested
-            public static final double offTime = 0.50; //0.6 tested
+            public static final double offTime = 0.60; //0.6 tested
         }
     }
 
@@ -269,7 +269,7 @@ public class Constants {
      */
     public static final class Spatula {
         public static final double default_kZeroSpeed = 0.4; //speed for zeroing operations
-        public static final double default_kP = 0.2; //PID P
+        public static final double default_kP = 0.21; //PID P
         public static final double default_kI = 0.0; //PID I
         public static final double default_kD = 0.0; //PID D
         public static final double default_kF = 0.2; //PID F
@@ -277,7 +277,7 @@ public class Constants {
         public static final int default_positionAllowedError = 5; //PID Allowed Error
         public static final double default_kPeakOutput = 1.0; //Peak Controller Output
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 6300; //Cruise Speed for Motion Magic
+        public static final double default_kCruise = 6500; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5000; //Accel for Motion Magic
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example

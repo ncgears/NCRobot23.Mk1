@@ -11,6 +11,11 @@
           "open": true
         }
       }
+    },
+    "Relays": {
+      "window": {
+        "visible": true
+      }
     }
   },
   "NTProvider": {
