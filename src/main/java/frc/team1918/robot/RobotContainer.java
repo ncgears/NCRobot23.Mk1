@@ -124,7 +124,7 @@ public class RobotContainer {
 
       private JoystickButton btn_RSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_LB);
       private JoystickButton btn_LSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
-      // private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
+      private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
       
       //OrPOVButtons are a custom button type to bind 3 DPAD directions to a single command. See utils/OrPOVButton
       // private OrPOVButton orbtn_THROTUP = new OrPOVButton(btn_THROTUP_UP, btn_THROTUP_UL, btn_THROTUP_UR);
@@ -230,7 +230,7 @@ public class RobotContainer {
     btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
     btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
     btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
-    // btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
+    btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     // btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
     btn_ConvectionFan.onTrue(new stove_setConvectionFan(m_stove, true)).onFalse(new stove_setConvectionFan(m_stove, false));
     btn_ZeroAimer.onTrue(new stove_zeroAimer(m_stove));
