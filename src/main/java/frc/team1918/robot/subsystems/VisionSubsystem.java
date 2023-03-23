@@ -89,7 +89,7 @@ public class VisionSubsystem extends SubsystemBase {
   }
 
   public void updateDashboard() {
-    Dashboard.Vision.setVisionRinglight(m_ringlight.get()==Value.kForward);
+    Dashboard.Vision.setVisionRinglight(m_ringlight.get()==Value.kReverse);
   }
 
   public void lockAngle() {
@@ -128,7 +128,7 @@ public class VisionSubsystem extends SubsystemBase {
    * @param enabled - true to turn on light, false to turn it off
    */
   public void setRinglight(boolean enabled) {
-    m_ringlight.set((enabled) ? Value.kForward : Value.kOff);
+    m_ringlight.set((enabled) ? Value.kReverse : Value.kOff);
     // m_camera.setLED((enabled) ? VisionLEDMode.kOn : VisionLEDMode.kOff);
   }
 
