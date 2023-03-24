@@ -53,7 +53,7 @@ public class cg_autonScoreMidDriveFowardExitBalance extends SequentialCommandGro
         new cg_DriveForward3p6m(m_drive, m_vision), 
         new cg_Wait(0.6),
         new cg_DriveForward2m(m_drive, m_vision), 
-        new cg_Wait(0.1),
+        new cg_Wait(0.25),
         new cg_DriveBackward3m(m_drive, m_vision), 
         new cg_AutoBalance(m_drive),
         new helpers_debugMessage("Auton: Done with auton")
