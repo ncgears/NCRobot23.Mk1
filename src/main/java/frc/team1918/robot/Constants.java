@@ -318,7 +318,7 @@ public class Constants {
                 2000.0,
                 66700.0,
                 38500.0,
-                38500.0,
+                34000.0,
                 51300.0
             );
 /*  SAVE for later reference on how to store additional data here
@@ -367,7 +367,7 @@ public class Constants {
                 2000.0,
                 66700.0,
                 37750,
-                36000,
+                34000,
                 50300
             );
         }
