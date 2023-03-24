@@ -155,7 +155,8 @@ public class RobotContainer {
       private JoystickButton btn_BurnerHome = new JoystickButton (oj, Constants.OI.Stadia.BTN_STADIA);
 
       private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
-      private JoystickButton btn_ZeroAimer = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
+      // private JoystickButton btn_ZeroAimer = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
+      private JoystickButton btn_ZeroBurner = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
       // private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
       private JoystickButton btn_ConvectionFan = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
 
@@ -233,7 +234,8 @@ public class RobotContainer {
     btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
     // btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
     btn_ConvectionFan.onTrue(new stove_setConvectionFan(m_stove, true)).onFalse(new stove_setConvectionFan(m_stove, false));
-    btn_ZeroAimer.onTrue(new stove_zeroAimer(m_stove));
+    // btn_ZeroAimer.onTrue(new stove_zeroAimer(m_stove));
+    btn_ZeroBurner.whileTrue(new stove_zeroBurner(m_stove));
 
     t_MoveAimer.onTrue(new stove_moveAimer(m_stove, () -> oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))).onFalse(new stove_moveAimer(m_stove, () -> 0.0));
 
