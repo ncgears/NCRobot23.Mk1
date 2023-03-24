@@ -61,7 +61,7 @@ public class cg_ScoreHigh extends SequentialCommandGroup {
         ),
         new cg_Wait(1.0), //known good 1.5
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
-        new cg_Wait(1.0), //known good 2.5
+        new cg_Wait(1.5), //known good 2.5
         new ParallelCommandGroup(
           new helpers_debugMessage("Auton (Score High): Burner to Home and HotPlate to Home"),
           new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP),

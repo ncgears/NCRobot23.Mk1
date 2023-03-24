@@ -61,7 +61,7 @@ public class cg_ScoreMid extends SequentialCommandGroup {
         ),
         new cg_Wait(0.6), 
         new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
-        new cg_Wait(1.0),
+        new cg_Wait(1.5),
         new ParallelCommandGroup(
           new helpers_debugMessage("Auton (Score Mid): Burner to Home and HotPlate to Home"),
           new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP),
