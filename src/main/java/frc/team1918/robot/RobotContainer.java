@@ -307,8 +307,8 @@ public class RobotContainer {
       m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision));
       m_auto_chooser.addOption("[Cone] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision, false));
       m_auto_chooser.addOption("[Cone] SMid", new cg_autonScoreMid(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
+      // m_auto_chooser.addOption("[Cone] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
+      // m_auto_chooser.addOption("[Cone] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
       m_auto_chooser.addOption("[Cone] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, false));
       m_auto_chooser.addOption("[Cone] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, false));
       m_auto_chooser.addOption("[Cone] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, false));
@@ -318,8 +318,8 @@ public class RobotContainer {
 
       m_auto_chooser.addOption("[Cube] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision, true));
       m_auto_chooser.addOption("[Cube] SMid", new cg_autonScoreMid(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
+      // m_auto_chooser.addOption("[Cube] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
+      // m_auto_chooser.addOption("[Cube] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
       m_auto_chooser.addOption("[Cube] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, true));
       m_auto_chooser.addOption("[Cube] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, true));
       m_auto_chooser.addOption("[Cube] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, true));
