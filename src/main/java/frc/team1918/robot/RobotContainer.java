@@ -307,6 +307,9 @@ public class RobotContainer {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[Test] RedOverBump", new cg_autonRedOverBump(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("[Test] BlueOverBump", new cg_autonBlueOverBump(m_drive, m_stove, m_fsr, m_vision));
+
       m_auto_chooser.addOption("[Cone] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision, false));
       m_auto_chooser.addOption("[Cone] SMid", new cg_autonScoreMid(m_drive, m_stove, m_fsr, m_vision, false));
       // m_auto_chooser.addOption("[Cone] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, false));

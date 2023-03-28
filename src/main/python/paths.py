@@ -49,11 +49,11 @@ def main():
     #     "TwoMetersForward"
     # )
 
-    generator.generate(
-        [[0,0,0],
-        [3.0,0,0]],
-        "ThreeMetersForward"
-    )
+    # generator.generate(
+    #     [[0,0,0],
+    #     [3.0,0,0]],
+    #     "ThreeMetersForward"
+    # )
 
     # generator.generate(
     #     [[0,0,0],
@@ -77,6 +77,19 @@ def main():
     #     [[0,0,0],
     #     [4.0,0,0]],
     #     "FourMetersForward"
+    # )
+
+    generator.generate(
+        [[0,0,0],
+        [1.0,0.5,-0.5],
+        [4.25,0.75,-0.65]],
+        "RedOverBump"
+    )
+
+    # generator.generate(
+    #     [[0,0,0],
+    #     [4.25,-1.5,0]],
+    #     "BlueOverBump"
     # )
 
     # generator.generate(
