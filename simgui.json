@@ -39,6 +39,7 @@
       "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
       "/Shuffleboard/Drive/Autonomous Chooser": "String Chooser",
       "/Shuffleboard/Driver/Autonomous Chooser": "String Chooser",
+      "/Shuffleboard/Driver/Cone": "String Chooser",
       "/Shuffleboard/Driver/DJ Rumble": "Command",
       "/Shuffleboard/Driver/Field": "Field2d",
       "/Shuffleboard/Driver/Gyro": "Gyro",
@@ -56,6 +57,12 @@
         "open": true
       },
       "Shuffleboard": {
+        "Driver": {
+          "Cone": {
+            "open": true
+          },
+          "open": true
+        },
         "Primary Display": {
           "Autonomous Chooser": {
             "open": true

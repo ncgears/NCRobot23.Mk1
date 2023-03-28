@@ -69,6 +69,7 @@ public class RobotContainer {
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
     private SendableChooser<Command> m_auto_chooser = new SendableChooser<>();
+    private SendableChooser<Boolean> m_auto_cone = new SendableChooser<>();
 
    /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -255,6 +256,10 @@ public class RobotContainer {
     return m_auto_chooser.getSelected();
   }
 
+  public Boolean getAutonCone() {
+    return m_auto_cone.getSelected().booleanValue();
+  }
+
   /**
    * This function returns the robot commands used in Robot.java. The purpose is to make it easier to build the possible commands
    * and handle requests for commands that don't exist rather than crashing
@@ -337,6 +342,8 @@ public class RobotContainer {
       // m_auto_chooser.addOption("[TEST] CS Exit CS Bal", new cg_testCSExitCS(m_drive, m_stove, m_fsr, m_vision));
     }
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
+    m_auto_cone.setDefaultOption("Cone",false);
+    m_auto_cone.addOption("Cube",true);
   }
 
   private void buildDriverTab(){
@@ -354,25 +361,31 @@ public class RobotContainer {
         .withSize(2, 1)
         .withWidget(BuiltInWidgets.kComboBoxChooser);
 
+    // Cone Indicator
+    driveTab.add("Cone", m_auto_cone)
+        .withPosition(0, 1)
+        .withSize(2, 1)
+        .withWidget(BuiltInWidgets.kSplitButtonChooser);
+
     // Gyro
     driveTab.add("Gyro", m_drive.getGyro())
-        .withPosition(0, 1)
+        .withPosition(0, 2)
         .withSize(2,2)
         .withWidget(BuiltInWidgets.kGyro);
 
     // PhotonCamera
     driveTab.add("Node Cam", new HttpCamera("photonvision_Port_1182_MJPEG_Server", "http://10.19.18.11:1182/stream.mjpg"))
-        .withPosition(2,0)
+        .withPosition(7,0)
         .withSize(3,3)
         .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#333333","Show controls",false))
         .withWidget(BuiltInWidgets.kCameraStream);
 
     // Field
-    driveTab.add("Field", m_drive.getField())
-        .withPosition(6, 0)
-        .withSize(3, 2)
-        .withProperties(Map.of("Glyph","CODEPEN","Robot Icon Size",30,"Show Glyph",true))
-        .withWidget(BuiltInWidgets.kField);
+    // driveTab.add("Field", m_drive.getField())
+    //     .withPosition(6, 0)
+    //     .withSize(3, 2)
+    //     .withProperties(Map.of("Glyph","CODEPEN","Robot Icon Size",30,"Show Glyph",true))
+    //     .withWidget(BuiltInWidgets.kField);
     
     //FMS Info -- not possible here?
     // driveTab.add("FMS Info","sdfsdf")
