@@ -84,5 +84,5 @@ public class Dashboard {
 
     // Define on-the-fly tabs
     private static ShuffleboardTab tabDriver = Shuffleboard.getTab("Driver");
-    private static GenericEntry driver_CommunityEntry = tabDriver.add("Community",false).withPosition(0,3).withSize(2,1).withWidget(BuiltInWidgets.kBooleanBox).getEntry();
+    private static GenericEntry driver_CommunityEntry = tabDriver.add("Community",false).withPosition(9,0).withSize(1,2).withWidget(BuiltInWidgets.kBooleanBox).getEntry();
 }

@@ -33,9 +33,8 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   public Alliance m_alliance;
   private Command m_autonomousCommand;
-  public static Boolean m_autonCone;
   private Command m_disableCommand;
-  public UsbCamera camera;
+  public static UsbCamera camera;
   // private Command m_initOdom;
   // private Command m_resetGyro;
   
@@ -117,9 +116,6 @@ public class Robot extends TimedRobot {
     // m_initOdom = m_robotContainer.getInitOdomCommand(); 
     // if (m_initOdom != null) m_initOdom.schedule();
 
-    // Helpers.Debug.debug("Getting Auton Command for "+Constants.Auton.autonToRun);
-    // m_autonomousCommand = m_robotContainer.getRobotCommand(Constants.Auton.autonToRun);
-    m_autonCone = m_robotContainer.getAutonCone();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if (m_autonomousCommand != null && !Constants.Auton.isDisabled) m_autonomousCommand.schedule();
   }

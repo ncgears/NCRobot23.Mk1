@@ -69,7 +69,8 @@ public class RobotContainer {
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
     private SendableChooser<Command> m_auto_chooser = new SendableChooser<>();
-    private SendableChooser<Boolean> m_auto_cone = new SendableChooser<>();
+    private static SendableChooser<String> m_auto_cone = new SendableChooser<>();
+    private static SendableChooser<String> m_auto_burner = new SendableChooser<>();
 
    /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -253,11 +254,18 @@ public class RobotContainer {
    * @return command
    */
   public Command getAutonomousCommand() {
+    System.out.println("Shuffle: Selected auton routine is "+m_auto_chooser.getSelected().getName());
     return m_auto_chooser.getSelected();
   }
 
-  public Boolean getAutonCone() {
-    return m_auto_cone.getSelected().booleanValue();
+  public static Boolean getAutonCone() {
+    System.out.println("Shuffle: Selected auton game piece is "+m_auto_cone.getSelected());
+    return (m_auto_cone.getSelected()=="Waffle") ? true : false;
+  }
+
+  public static Boolean getAutonBurnerHot() {
+    System.out.println("Shuffle: Selected burner position is "+m_auto_burner.getSelected());
+    return (m_auto_burner.getSelected()=="Cold") ? false : true;
   }
 
   /**
@@ -307,47 +315,35 @@ public class RobotContainer {
   }
 
   public void buildAutonChooser() {
+    //This builds the cone/cube selector
+    m_auto_cone.setDefaultOption("Pancake","Pancake");
+    m_auto_cone.addOption("Waffle","Waffle");
+
+    //This builds the high/mid selector
+    m_auto_burner.setDefaultOption("Hot","Hot");
+    m_auto_burner.addOption("Cold","Cold");
+
     //This builds the auton chooser, giving driver friendly names to the commands from above
     if(Constants.Auton.isDisabled) {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
       m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision));
+      // m_auto_chooser.addOption("[Test] Get Cone Selector Value", new cg_reportCone());
+      m_auto_chooser.addOption("Score and Wait", new cg_autonScoreOnly(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("Score, Drive Fwd, Side of CS", new cg_autonScoreDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("Score, Drive Fwd, Bal", new cg_autonScoreDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("Score, Drive Fwd, 2Pt, Bal", new cg_autonScoreDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
+
+      //Testing Autons
       m_auto_chooser.addOption("[Test] RedOverBump", new cg_autonRedOverBump(m_drive, m_stove, m_fsr, m_vision));
       m_auto_chooser.addOption("[Test] BlueOverBump", new cg_autonBlueOverBump(m_drive, m_stove, m_fsr, m_vision));
-
-      m_auto_chooser.addOption("[Cone] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SMid", new cg_autonScoreMid(m_drive, m_stove, m_fsr, m_vision, false));
-      // m_auto_chooser.addOption("[Cone] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
-      // m_auto_chooser.addOption("[Cone] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SHigh DFwd Bal", new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SMid DFwd 2Pt Bal", new cg_autonScoreMidDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, false));
-      m_auto_chooser.addOption("[Cone] SHigh DFwd 2Pt Bal", new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, false));
-
-      m_auto_chooser.addOption("[Cube] SHigh", new cg_autonScoreHigh(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SMid", new cg_autonScoreMid(m_drive, m_stove, m_fsr, m_vision, true));
-      // m_auto_chooser.addOption("[Cube] SMid DFwd On CS", new cg_autonScoreMidDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
-      // m_auto_chooser.addOption("[Cube] SHigh DFwd On CS", new cg_autonScoreHighDriveForward(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SMid DFwd Not CS", new cg_autonScoreMidDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SHigh DFwd Not CS", new cg_autonScoreHighDriveForwardSide(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SMid DFwd Bal", new cg_autonScoreMidDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SHigh DFwd Bal", new cg_autonScoreHighDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SMid DFwd 2Pt Bal", new cg_autonScoreMidDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, true));
-      m_auto_chooser.addOption("[Cube] SHigh DFwd 2Pt Bal", new cg_autonScoreHighDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision, true));
-      // m_auto_chooser.addOption("[-] DFwd 4m", getRobotCommand("auton_DriveForward"));
-      // m_auto_chooser.addOption("[-] DFwd Bal", getRobotCommand("auton_DriveForwardBalance"));
-      // m_auto_chooser.addOption("[TEST] CS AutoBal", new cg_AutoBalance(m_drive));
-      // m_auto_chooser.addOption("[TEST] CS Exit CS Bal", new cg_testCSExitCS(m_drive, m_stove, m_fsr, m_vision));
     }
     //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
-    m_auto_cone.setDefaultOption("Cone",false);
-    m_auto_cone.addOption("Cube",true);
   }
 
   private void buildDriverTab(){
     ShuffleboardTab driveTab = Shuffleboard.getTab("Driver");
+    // .withProperties(Map.of("Show grid",false,"Widget titles","Minimal"));  //doesn't work...
 
     // The drive tab is roughly 9 x 5 (columns x rows)
     // Camera can be 4 x 4, gyro 
@@ -362,23 +358,36 @@ public class RobotContainer {
         .withWidget(BuiltInWidgets.kComboBoxChooser);
 
     // Cone Indicator
-    driveTab.add("Cone", m_auto_cone)
+    driveTab.add("Auton Part Type", m_auto_cone)
         .withPosition(0, 1)
         .withSize(2, 1)
         .withWidget(BuiltInWidgets.kSplitButtonChooser);
 
+    // Cone Indicator
+    driveTab.add("Auton Burner Temp", m_auto_burner)
+    .withPosition(0, 2)
+    .withSize(2, 1)
+    .withWidget(BuiltInWidgets.kSplitButtonChooser);
+
     // Gyro
     driveTab.add("Gyro", m_drive.getGyro())
-        .withPosition(0, 2)
+        .withPosition(7, 0)
         .withSize(2,2)
         .withWidget(BuiltInWidgets.kGyro);
 
     // PhotonCamera
-    driveTab.add("Node Cam", new HttpCamera("photonvision_Port_1182_MJPEG_Server", "http://10.19.18.11:1182/stream.mjpg"))
-        .withPosition(7,0)
-        .withSize(3,3)
-        .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#333333","Show controls",false))
+    driveTab.add("Griddle Cam", Robot.camera)
+        .withPosition(2,0)
+        .withSize(5,4)
+        .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#CCCCCC","Show controls",false))
         .withWidget(BuiltInWidgets.kCameraStream);
+
+    // // PhotonCamera
+    // driveTab.add("Photon Cam", new HttpCamera("photonvision_Port_1182_MJPEG_Server", "http://10.19.18.11:1182/stream.mjpg"))
+    // .withPosition(7,2)
+    // .withSize(3,3)
+    // .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#333333","Show controls",false))
+    // .withWidget(BuiltInWidgets.kCameraStream);
 
     // Field
     // driveTab.add("Field", m_drive.getField())

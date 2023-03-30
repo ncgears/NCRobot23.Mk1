@@ -1,6 +1,7 @@
 package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.team1918.robot.Helpers;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 public class stove_stopConvectionFan extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
@@ -26,7 +27,7 @@ public class stove_stopConvectionFan extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    //Helpers.Debug.debug("Vision: Ringlight " + status);
+    Helpers.Debug.debug("Stove: Convection Fan off");
     m_stove.setConvectionFan(false);
   }
 

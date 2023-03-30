@@ -1,23 +1,26 @@
 package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team1918.robot.Helpers;
 import frc.team1918.robot.subsystems.StoveSubsystem;
-public class stove_setConvectionFan extends CommandBase {
+import frc.team1918.robot.Helpers;
+import frc.team1918.robot.RobotContainer;
+import frc.team1918.robot.modules.Burner.BurnerPositions;
+
+public class stove_moveBurnerTo_Conditional extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final StoveSubsystem m_stove;
-  private final boolean m_enabled;
+  private BurnerPositions m_position = BurnerPositions.HOT;
+  private Boolean m_highHeat = true;
+  private String m_scoreType = "Pancake";
 
   /**
-   * This command stops the griddle.
-   * While disabled, this simply sets the speed to stopped so that the robot doesn't attempt to do things when enabled
    * @param subsystem The subsystem used by this command.
+   * @param position The BurnerPosition to move to.
    */
-  public stove_setConvectionFan(StoveSubsystem subsystem, boolean enabled) {
+  public stove_moveBurnerTo_Conditional(StoveSubsystem subsystem) {
     m_stove = subsystem;
-    m_enabled = enabled;
     // Use addRequirements() here to declare subsystem dependencies.
-    //   addRequirements(subsystem);
+    //addRequirements(fsr);
   }
 
   // Allow the command to run while disabled
@@ -29,8 +32,12 @@ public class stove_setConvectionFan extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Helpers.Debug.debug("Stove: Convection Fan on");
-    m_stove.setConvectionFan(m_enabled);
+    m_highHeat = RobotContainer.getAutonBurnerHot();
+    m_position = (m_highHeat) ? BurnerPositions.HOT : BurnerPositions.COLD;
+    m_scoreType = (m_highHeat) ? "High" : "Mid";
+    Helpers.Debug.debug("Stove: ("+m_scoreType+"): Burner to "+ m_position.toString());
+    m_stove.moveAimerTo(0.0);
+    m_stove.moveBurnerTo(m_position);
   }
 
   // Called once the command ends or is interrupted.

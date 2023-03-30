@@ -2,6 +2,7 @@ package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.StoveSubsystem;
+import frc.team1918.robot.Helpers;
 import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 public class stove_moveHotPlateTo extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
@@ -28,6 +29,7 @@ public class stove_moveHotPlateTo extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Helpers.Debug.debug("Stove: HotPlate position to "+m_position.toString());
     m_stove.moveHotPlateTo(m_position);
   }
 

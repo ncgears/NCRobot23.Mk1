@@ -38,6 +38,8 @@
       "/LiveWindow/Ungrouped/Talon SRX [4]": "Motor Controller",
       "/LiveWindow/Ungrouped/navX-Sensor[4]": "Gyro",
       "/Shuffleboard/Drive/Autonomous Chooser": "String Chooser",
+      "/Shuffleboard/Driver/Auton Burner Temp": "String Chooser",
+      "/Shuffleboard/Driver/Auton Part Type": "String Chooser",
       "/Shuffleboard/Driver/Autonomous Chooser": "String Chooser",
       "/Shuffleboard/Driver/Cone": "String Chooser",
       "/Shuffleboard/Driver/DJ Rumble": "Command",
@@ -74,6 +76,12 @@
     },
     "transitory": {
       "Shuffleboard": {
+        "Driver": {
+          "Cone": {
+            "open": true
+          },
+          "open": true
+        },
         "Primary Display": {
           "Autonomous Chooser": {
             "open": true
@@ -91,7 +99,8 @@
         },
         "Vision": {
           "open": true
-        }
+        },
+        "open": true
       },
       "photonvision": {
         "open": true

@@ -21,6 +21,8 @@ import frc.team1918.robot.Constants;
 import frc.team1918.robot.commands.drive.drive_followTrajectory;
 import frc.team1918.robot.commands.drive.drive_resetOdometry;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
+import frc.team1918.robot.commands.stove.stove_moveBurnerHome;
+import frc.team1918.robot.commands.stove.stove_moveHotPlateHome;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
@@ -28,13 +30,13 @@ import frc.team1918.robot.subsystems.VisionSubsystem;
 import frc.team1918.robot.commandgroups.autoncommands.*;
 
 @SuppressWarnings("unused")
-public class cg_autonScoreMid extends SequentialCommandGroup {
+public class cg_autonScoreDriveFowardBalance extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreMid(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
+  public cg_autonScoreDriveFowardBalance(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -45,9 +47,11 @@ public class cg_autonScoreMid extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Drive Forward And Balance"),
+        new helpers_debugMessage("Auton: ### Score, Drive Forward, Balance ###"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
+        new cg_ScoreConditional(m_drive, m_stove, m_fsr, m_vision),
+        new cg_DriveForward3p6m(m_drive, m_vision), 
+        new cg_AutoBalance(m_drive),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }

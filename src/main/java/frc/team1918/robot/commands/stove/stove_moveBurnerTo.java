@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
+import frc.team1918.robot.Helpers;
 import frc.team1918.robot.modules.Burner.BurnerPositions;
 import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 public class stove_moveBurnerTo extends CommandBase {
@@ -40,6 +41,7 @@ public class stove_moveBurnerTo extends CommandBase {
     if (m_fsr.getSpatulaPosition(spatulas.RIGHT)==SpatulaPositions.GRIDDLE) { //if the spatula is at griddle, we have to move it to clear!
       m_fsr.moveSpatulaTo(spatulas.RIGHT, SpatulaPositions.CLEAR);
     }
+    Helpers.Debug.debug("Stove: Burner position to "+m_position.toString());
     m_stove.moveBurnerTo(m_position);
   }
 

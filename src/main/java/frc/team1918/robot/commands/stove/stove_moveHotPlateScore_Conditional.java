@@ -1,23 +1,26 @@
 package frc.team1918.robot.commands.stove;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.team1918.robot.Helpers;
 import frc.team1918.robot.subsystems.StoveSubsystem;
-public class stove_setConvectionFan extends CommandBase {
+import frc.team1918.robot.Helpers;
+import frc.team1918.robot.RobotContainer;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
+
+public class stove_moveHotPlateScore_Conditional extends CommandBase {
   // @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"}) //Dont add "unused" under normal operation
   private final StoveSubsystem m_stove;
-  private final boolean m_enabled;
+  private HotPlatePositions m_position;
+  private Boolean m_withBlueberries;
+  private String m_stackType;
 
   /**
-   * This command stops the griddle.
-   * While disabled, this simply sets the speed to stopped so that the robot doesn't attempt to do things when enabled
    * @param subsystem The subsystem used by this command.
+   * @param position The BurnerPosition to move to.
    */
-  public stove_setConvectionFan(StoveSubsystem subsystem, boolean enabled) {
+  public stove_moveHotPlateScore_Conditional(StoveSubsystem subsystem) {
     m_stove = subsystem;
-    m_enabled = enabled;
     // Use addRequirements() here to declare subsystem dependencies.
-    //   addRequirements(subsystem);
+    // addRequirements(fsr);
   }
 
   // Allow the command to run while disabled
@@ -29,8 +32,12 @@ public class stove_setConvectionFan extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Helpers.Debug.debug("Stove: Convection Fan on");
-    m_stove.setConvectionFan(m_enabled);
+    m_withBlueberries = RobotContainer.getAutonCone();
+    m_position = (m_withBlueberries) ? HotPlatePositions.DOWN : HotPlatePositions.LEVEL;
+    m_stackType = (m_withBlueberries) ? "Waffle" : "Pancake";
+    Helpers.Debug.debug("Stove: ("+m_stackType+"): HotPlate to "+ m_position.toString());
+    m_stove.moveAimerTo(0.0);
+    m_stove.moveHotPlateTo(m_position);
   }
 
   // Called once the command ends or is interrupted.

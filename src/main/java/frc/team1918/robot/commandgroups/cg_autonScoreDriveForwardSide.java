@@ -31,13 +31,13 @@ import frc.team1918.robot.subsystems.VisionSubsystem;
 import frc.team1918.robot.commandgroups.autoncommands.*;
 
 @SuppressWarnings("unused")
-public class cg_autonScoreHighDriveForward extends SequentialCommandGroup {
+public class cg_autonScoreDriveForwardSide extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreHighDriveForward(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
+  public cg_autonScoreDriveForwardSide(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -48,17 +48,10 @@ public class cg_autonScoreHighDriveForward extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Score High Drive Forward"),
+        new helpers_debugMessage("Auton: ### Score, Drive Forward on Side of CS ###"),
         new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreHigh(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
-        new stove_moveHotPlateHome(m_stove),
-        new stove_moveBurnerHome(m_stove, m_fsr),
-        new cg_Wait(0.5),
-        new cg_DriveForward3p6m(m_drive, m_vision),
-        new ParallelDeadlineGroup(
-          new WaitCommand(1),
-          new drive_defLock(m_drive)
-        ),
+        new cg_ScoreConditional(m_drive, m_stove, m_fsr, m_vision),
+        new cg_DriveForward4m(m_drive, m_vision),
         new helpers_debugMessage("Auton: Done with auton")
     );
   }

@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.team1918.robot.commandgroups;
+package frc.team1918.robot.commandgroups.autoncommands;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -18,26 +18,31 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.team1918.paths.*;
 import frc.team1918.robot.Constants;
-import frc.team1918.robot.commands.drive.drive_defLock;
+import frc.team1918.robot.RobotContainer;
 import frc.team1918.robot.commands.drive.drive_followTrajectory;
 import frc.team1918.robot.commands.drive.drive_resetOdometry;
 import frc.team1918.robot.commands.helpers.helpers_debugMessage;
-import frc.team1918.robot.commands.stove.stove_moveBurnerHome;
-import frc.team1918.robot.commands.stove.stove_moveHotPlateHome;
+import frc.team1918.robot.commands.stove.stove_moveBurnerTo;
+import frc.team1918.robot.commands.stove.stove_moveBurnerTo_Conditional;
+import frc.team1918.robot.commands.stove.stove_moveHotPlateScore_Conditional;
+import frc.team1918.robot.commands.stove.stove_moveHotPlateTo;
+import frc.team1918.robot.commands.stove.stove_setGriddleDirectionTo;
+import frc.team1918.robot.modules.Burner.BurnerPositions;
+import frc.team1918.robot.modules.Griddle.GriddleDirections;
+import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
 import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
 import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
-import frc.team1918.robot.commandgroups.autoncommands.*;
 
 @SuppressWarnings("unused")
-public class cg_autonScoreMidDriveForward extends SequentialCommandGroup {
+public class cg_ScoreConditional extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final StoveSubsystem m_stove;
   private final FiveSecondRuleSubsystem m_fsr;
   private final VisionSubsystem m_vision;
 
-  public cg_autonScoreMidDriveForward(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision, boolean withBlueberries) {
+  public cg_ScoreConditional(DriveSubsystem drive, StoveSubsystem stove, FiveSecondRuleSubsystem fsr, VisionSubsystem vision) {
     m_drive = drive;
     m_stove = stove;
     m_fsr = fsr;
@@ -48,18 +53,20 @@ public class cg_autonScoreMidDriveForward extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Score High Drive Forward"),
-        new cg_SetOdom180(m_drive, m_vision),
-        new cg_ScoreMid(m_drive, m_stove, m_fsr, m_vision, withBlueberries),
-        new stove_moveHotPlateHome(m_stove),
-        new stove_moveBurnerHome(m_stove, m_fsr),
-        new cg_Wait(0.5),
-        new cg_DriveForward3p6m(m_drive, m_vision),
-        new ParallelDeadlineGroup(
-          new WaitCommand(1),
-          new drive_defLock(m_drive)
+        new helpers_debugMessage("Auton: Score High"),
+        new ParallelCommandGroup(
+          new stove_moveHotPlateScore_Conditional(m_stove),
+          new stove_moveBurnerTo_Conditional(m_stove)
         ),
-        new helpers_debugMessage("Auton: Done with auton")
+        new cg_Wait(1.0), //known good 1.5
+        new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD),
+        new cg_Wait(1.5), //known good 2.5
+        new ParallelCommandGroup(
+          new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP),
+          new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME),
+          new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME)
+        ),
+        new cg_Wait(0.5)
     );
   }
 }
