@@ -159,6 +159,7 @@ public class Robot extends TimedRobot {
   public void testPeriodic() {
   }
 
+  @SuppressWarnings("unused")
   @Override
   public void simulationInit() {
     // NetworkTableInstance nt = NetworkTableInstance.getDefault();
@@ -171,6 +172,7 @@ public class Robot extends TimedRobot {
     // angle.set(0.0);
   }
 
+  @SuppressWarnings("unused")
   @Override
   public void simulationPeriodic() {
     int m_simgyro = SimDeviceDataJNI.getSimDeviceHandle("navX-Sensor[0]");
