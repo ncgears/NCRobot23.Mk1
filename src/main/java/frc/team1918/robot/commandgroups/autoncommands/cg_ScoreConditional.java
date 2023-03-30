@@ -53,7 +53,6 @@ public class cg_ScoreConditional extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Auton: Score High"),
         new ParallelCommandGroup(
           new stove_moveHotPlateScore_Conditional(m_stove),
           new stove_moveBurnerTo_Conditional(m_stove)

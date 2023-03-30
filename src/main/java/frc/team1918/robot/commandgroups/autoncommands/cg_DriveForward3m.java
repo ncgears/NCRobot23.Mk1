@@ -34,8 +34,9 @@ public class cg_DriveForward3m extends SequentialCommandGroup {
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
+        new helpers_debugMessage("Drive: Follow trajectory 'ThreeMetersForward'"),
         new drive_followTrajectory(m_drive, new ThreeMetersForward()), 
-        new helpers_debugMessage("Auton: Done with auton")
+        new helpers_debugMessage("Drive: Done with trajectory")
     );
   }
 }

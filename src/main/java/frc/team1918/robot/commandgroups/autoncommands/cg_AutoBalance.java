@@ -34,23 +34,23 @@ public class cg_AutoBalance extends SequentialCommandGroup {
      */
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
-        new helpers_debugMessage("Start robot auto balance sequence"),
+        new helpers_debugMessage("Auton: Start robot auto balance sequence"),
         new RepeatCommand(
           new SequentialCommandGroup(
             new ParallelDeadlineGroup(
               new WaitCommand(Constants.Auton.AutoBalance.onTime),
-              new helpers_debugMessage("autoBalance for "+Constants.Auton.AutoBalance.onTime+"s"),
+              new helpers_debugMessage("Balance: AutoBalance for "+Constants.Auton.AutoBalance.onTime+"s"),
               new drive_autoBalance(m_drive)
             ),
             new ParallelDeadlineGroup(
               new WaitCommand(Constants.Auton.AutoBalance.offTime),
               new drive_stop(m_drive),
-              new helpers_debugMessage("waiting for "+Constants.Auton.AutoBalance.onTime+"s")
+              new helpers_debugMessage("Balance: Waiting for "+Constants.Auton.AutoBalance.onTime+"s")
             ),
             new helpers_debugMessage("Loop auto balance sequence")
           )
         ),
-        new helpers_debugMessage("Finish robot auto balance sequence")
+        new helpers_debugMessage("Auton: Finish robot auto balance sequence")
     );
   }
 }
