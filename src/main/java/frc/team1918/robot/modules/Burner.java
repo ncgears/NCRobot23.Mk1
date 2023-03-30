@@ -70,6 +70,7 @@ public class Burner {
         /* Set acceleration and cruise velocity */
         m_motor.configMotionCruiseVelocity(moduleGains.kCruise, Constants.Global.kTimeoutMs);
         m_motor.configMotionAcceleration(moduleGains.kAccel, Constants.Global.kTimeoutMs);
+        m_motor.configMotionSCurveStrength(moduleGains.kSCurve, Constants.Global.kTimeoutMs);
 
         /* Configure limit switches */
         // NormallyOpen is default, so we really only need to change this when we have connected NC switches

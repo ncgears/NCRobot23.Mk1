@@ -68,6 +68,7 @@ public class Griddle {
         /* Set acceleration and cruise velocity */
         m_motor.configMotionCruiseVelocity(moduleGains.kCruise, Constants.Global.kTimeoutMs);
         m_motor.configMotionAcceleration(moduleGains.kAccel, Constants.Global.kTimeoutMs);
+        m_motor.configMotionSCurveStrength(moduleGains.kSCurve, Constants.Global.kTimeoutMs);
 
         /* Zero the sensor on robot boot */
         m_motor.configClearPositionOnLimitF(false, Constants.Global.kTimeoutMs);

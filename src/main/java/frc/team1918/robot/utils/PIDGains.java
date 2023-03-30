@@ -13,6 +13,7 @@ public class PIDGains {
     public final double kNeutralDeadband;
     public final double kCruise;
     public final double kAccel;
+    public final int kSCurve;
 	
     /**
      * Creates a new constants object for initializing a TalonSRX Motor Controller
@@ -25,8 +26,9 @@ public class PIDGains {
      * @param NeutralDeadband - (double) Neutral Deadband (0.04 default)
      * @param kCruise - (double) Cruise constant for motionmagic
      * @param kAccel - (double) Accelleration constant for motionmagic
+     * @param kSCurve - (int) SCurve Strength constant for motionmagic [0 none - 8 strong]
      */
-	public PIDGains(double _kP, double _kI, double _kD, double _kF, int _kIzone, double _kPeakOutput, double _kNeutralDeadband, double _kCruise, double _kAccel){
+	public PIDGains(double _kP, double _kI, double _kD, double _kF, int _kIzone, double _kPeakOutput, double _kNeutralDeadband, double _kCruise, double _kAccel, int _kSCurve){
 		kP = _kP;
 		kI = _kI;
 		kD = _kD;
@@ -36,5 +38,6 @@ public class PIDGains {
         kNeutralDeadband = _kNeutralDeadband;
         kCruise = _kCruise;
         kAccel = _kAccel;
+        kSCurve = _kSCurve;
 	}
 }
