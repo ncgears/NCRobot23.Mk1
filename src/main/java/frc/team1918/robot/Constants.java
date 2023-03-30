@@ -147,7 +147,8 @@ public class Constants {
                 public static final double kNeutralDeadband = 0.001; //0.04 default
                 public static final double kCruise = 3200; //MotionMagic Cruise
                 public static final double kAccel = 4400; //MotionMagic Acceleration
-                public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+                public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
+                public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
             }
             public static final class Burner {
             public static final boolean isDisabled = false;
@@ -170,7 +171,8 @@ public class Constants {
             public static final double kNeutralDeadband = 0.001; //0.04 default
             public static final double kCruise = 3500; //MotionMagic Cruise
             public static final double kAccel = 4400; //MotionMagic Acceleration
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
+            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //postion for home
@@ -199,7 +201,8 @@ public class Constants {
             public static final double kNeutralDeadband = 0.001; //0.04 default
             public static final double kCruise = 3500; //MotionMagic Cruise
             public static final double kAccel = 4500; //MotionMagic Acceleration
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
+            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
         }
         public static final class GreaseTrap {
             public static final boolean isDisabled = false;
@@ -222,7 +225,8 @@ public class Constants {
             public static final double kNeutralDeadband = 0.001; //0.04 default
             public static final double kCruise = 4000; //MotionMagic Cruise
             public static final double kAccel = 5000; //MotionMagic Acceleration
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
+            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //home/stow/starting config
@@ -253,7 +257,8 @@ public class Constants {
             public static final double kNeutralDeadband = 0.001; //0.04 default
             public static final double kCruise = 4000; //MotionMagic Cruise
             public static final double kAccel = 5000; //MotionMagic Acceleration
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
+            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
             //Named positions
             public static final class Positions {
                 public static final double home = 0.0; //home position
@@ -279,6 +284,7 @@ public class Constants {
         public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
         public static final double default_kCruise = 6500; //Cruise Speed for Motion Magic
         public static final double default_kAccel = 5500; //Accel for Motion Magic
+        public static final int default_kSCurve = 0; //MotionMagic SCurve
         // current limits
         // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
         // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
@@ -308,7 +314,8 @@ public class Constants {
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
             public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel  = Spatula.default_kAccel; //MotionMagic Acceleration
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise, kAccel);
+            public static final int kSCurve = Spatula.default_kSCurve; //MotionMagic SCurve
+            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
             //Named positions
             public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
                 66500.0,
@@ -357,7 +364,8 @@ public class Constants {
             public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
             public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
             public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband, kCruise,kAccel);
+            public static final int kSCurve = Spatula.default_kSCurve; //MotionMagic SCurve
+            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
             //Named positions
             public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
                 66500.0,
