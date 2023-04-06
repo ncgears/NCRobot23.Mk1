@@ -21,24 +21,21 @@ import frc.team1918.robot.subsystems.DriveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
 
 @SuppressWarnings("unused")
-public class cg_OverBump extends SequentialCommandGroup {
+public class cg_DriveForward5m extends SequentialCommandGroup {
   private final DriveSubsystem m_drive;
   private final VisionSubsystem m_vision;
-  private final boolean m_isRed;
 
-  public cg_OverBump(DriveSubsystem drive, VisionSubsystem vision, boolean isRed) {
+  public cg_DriveForward5m(DriveSubsystem drive, VisionSubsystem vision) {
     m_drive = drive;
     m_vision = vision;
-    m_isRed = isRed;
     addRequirements(m_drive, m_vision);
 
     addCommands(
         //this is a comma separated list of commands, thus, the last one should not have a comma
         //setup the odometry in a starting position from the center of the field (negative is right/back)
         //rotation is the initial rotation of the robot from the downstream direction
-        new helpers_debugMessage("Drive: Follow trajectory '{Red|Blue}OverBump'"),
-        // new drive_followTrajectory(m_drive, (m_isRed) ? new RedOverBump() : new BlueOverBump()), 
-        new drive_followTrajectory(m_drive, new FiveMetersForward()),
+        new helpers_debugMessage("Drive: Follow trajectory 'FiveMetersForward'"),
+        new drive_followTrajectory(m_drive, new FiveMetersForward()), 
         new helpers_debugMessage("Drive: Done with trajectory")
     );
   }

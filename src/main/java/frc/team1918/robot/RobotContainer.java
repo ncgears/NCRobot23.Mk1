@@ -331,6 +331,7 @@ public class RobotContainer {
       // m_auto_chooser.addOption("[Test] Get Cone Selector Value", new cg_reportCone());
       m_auto_chooser.addOption("Score and Wait", new cg_autonScoreOnly(m_drive, m_stove, m_fsr, m_vision));
       m_auto_chooser.addOption("Score, Drive Fwd, Side of CS", new cg_autonScoreDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.addOption("Score, Drive Fwd, Bump Side", new cg_autonScoreDriveForwardBump(m_drive, m_stove, m_fsr, m_vision));
       m_auto_chooser.addOption("Score, Drive Fwd, Bal", new cg_autonScoreDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
       m_auto_chooser.addOption("Score, Drive Fwd, 2Pt, Bal", new cg_autonScoreDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
 

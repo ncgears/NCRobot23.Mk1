@@ -81,10 +81,16 @@ def main():
 
     generator.generate(
         [[0,0,0],
-        [1.0,0.5,-0.5],
-        [4.25,0.75,-0.65]],
-        "RedOverBump"
+        [4.0,0,0]],
+        "FiveMetersForward"
     )
+
+    # generator.generate(
+    #     [[0,0,0],
+    #     [1.0,0.5,-0.5],
+    #     [4.25,0.75,-0.65]],
+    #     "RedOverBump"
+    # )
 
     # generator.generate(
     #     [[0,0,0],
