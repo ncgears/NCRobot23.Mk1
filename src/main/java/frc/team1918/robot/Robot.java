@@ -57,16 +57,16 @@ public class Robot extends TimedRobot {
     LiveWindow.disableAllTelemetry();
 
     //Setup camera
-    camera = CameraServer.startAutomaticCapture();
+    // camera = CameraServer.startAutomaticCapture();
     // camera.setResolution(640, 480);
     // camera.setFPS(20);
-    camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
+    // camera.setVideoMode(PixelFormat.kMJPEG, 320, 240, 30);
 
     //Create forwarder for photonvision
     //pi4
-    PortForwarder.add(5800,"photonvision.local",5800);
-    PortForwarder.add(1181,"photonvision.local",1181);
-    PortForwarder.add(1182,"photonvision.local",1182);
+    // PortForwarder.add(5800,"photonvision.local",5800);
+    // PortForwarder.add(1181,"photonvision.local",1181);
+    // PortForwarder.add(1182,"photonvision.local",1182);
     //limelight
     // PortForwarder.add(5800,"gloworm.local",5800);
     // PortForwarder.add(1181,"gloworm.local",1181);

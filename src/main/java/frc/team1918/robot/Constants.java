@@ -231,13 +231,12 @@ public class Constants {
         ////Global Tuning
         public static final class DriveStraight {
             public static final boolean isDisabled = false; //disable drivestraight function
-            public static final double kP = 0.0075;
-            public static final double kI = 0.0;
-            public static final double kD = 0.0;
+            public static final double kP = 0.05;
+            public static final double kI = 0.0001;
+            public static final double kD = 0.002;
         }
         public static final boolean useFieldCentric = true; //use field-centric drive. This should always be true except for testing?
         public static final boolean useDefensiveLock = false; //use defensiveLock strategy when braking putting swerve into X pattern
-        public static final double kDriveStraight_P = 0.0075; //kP for driveStraight correction
         public static final double kMaxMetersPerSecond = 4.115; //limit full stick speed meters to 13.5fps
         public static final double kMaxRotationRadiansPerSecond = 3.4; //Multiplier for omega of turning the robot
         ////Turn Tuning
