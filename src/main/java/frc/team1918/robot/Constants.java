@@ -1,9 +1,8 @@
 
 package frc.team1918.robot;
-import frc.team1918.robot.utils.PIDGains;
+// import frc.team1918.robot.utils.PIDGains;
 import frc.team1918.robot.modules.SwerveModuleConstants;
-import frc.team1918.robot.modules.SpatulaNamedPositions;
-import frc.team1918.robot.utils.TalonConstants;
+// import frc.team1918.robot.utils.TalonConstants;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.util.Units;
@@ -35,8 +34,7 @@ public class Constants {
          * IDs of RoboRio Relays
          */
         public static final class Relay {
-            public static int stove_convectionfan = 0;
-            public static int ringlight = 1;
+            // public static int ringlight = 1;
         }
         /**
          * IDs of Talons
@@ -46,12 +44,6 @@ public class Constants {
             public static int swerve_fr_turn = 2;
             public static int swerve_rl_turn = 3;
             public static int swerve_rr_turn = 4;
-            public static int spatula_left = 11;
-            public static int spatula_right = 12; 
-            public static int stove_hotplate = 13; //hotplate is the scoring ramp
-            public static int stove_greasetrap = 14; //greasetrap is the flip ramp
-            public static int stove_burner = 15; //burner is the main conveyor
-            public static int stove_aimer = 16; //thing to move hotplate left and right
         }
         /**
          * IDs of Falcons
@@ -61,7 +53,6 @@ public class Constants {
             public static int swerve_fr_drive = 32;
             public static int swerve_rr_drive = 34;
             public static int swerve_rl_drive = 33;
-            public static int stove_griddle = 41; //griddle is the primary conveyor
         }
     }
 
@@ -94,7 +85,7 @@ public class Constants {
      * Constants for the Autonomous subsystem
      */
     public static final class Auton {
-        public static final boolean isDisabled = false; //Disable autonomous
+        public static final boolean isDisabled = true; //Disable autonomous
         // Auton is defined in robot.java
         // public static final String autonToRun = "auton_BasicShootingAuto"; //4BallAuto, BasicDriveAuto, BasicShootingAuto, None //Name of the auton to run (these are in the bottom of RobotContainer)
         public static final double kMaxSpeedMetersPerSecond = 0.5;
@@ -108,276 +99,6 @@ public class Constants {
             public static final double kP = 0.011;
             public static final double kI = 0.0;
             public static final double kD = 0.0;
-        }
-        public static final class AutoBalance {
-            public static final double onTime = 0.70; //0.8 tested
-            public static final double offTime = 0.60; //0.6 tested
-        }
-    }
-
-    /**
-     * Constants for the Stove Subsystem
-     */
-    public static final class Stove {
-            public static final class ConvectionFan {
-                public static final int kRelayID = ID.Relay.stove_convectionfan;
-            }
-            public static final class Aimer {
-                public static final boolean isDisabled = false;
-                public static final double kZeroSpeed = 0.35; //speed for zeroing operations
-                public static final double kSpeed = 0.35;
-                public static final boolean kSoftLimitEnable = true;
-                public static final double kSoftLimitMax = 20000.0;
-                public static final double kSoftLimitMin = -20000.0;
-                //Controller Setup
-                public static final int kMotorID = ID.Talon.stove_aimer; //TalonSRX Motor Controller ID
-                public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-                public static final int kSensorTicks = 4096;
-                public static final boolean kSensorNotContinuous = false;
-                public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-                public static final int kAllowedError = 5; //PID Allowed error
-                public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-                //PID Setup
-                public static final double kP = 0.45; //PID P 
-                public static final double kI = 0.0; //PID I
-                public static final double kD = 0.0; //PID D
-                public static final double kF = 0.32; //PID F
-                public static final int kIZone = 0; //PID IZONE
-                public static final double kPeakOutput = 1.0;
-                public static final double kNeutralDeadband = 0.001; //0.04 default
-                public static final double kCruise = 3200; //MotionMagic Cruise
-                public static final double kAccel = 4400; //MotionMagic Acceleration
-                public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
-                public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-            }
-            public static final class Burner {
-            public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.25; //speed for zeroing operations
-            //Controller Setup
-            public static final int kMotorID = ID.Talon.stove_burner; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-            public static final int kSensorTicks = 4096;
-            public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final int kAllowedError = 5; //PID Allowed error
-            public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-            //PID Setup
-            public static final double kP = 0.525; //PID P 
-            public static final double kI = 0.0; //PID I
-            public static final double kD = 0.0; //PID D
-            public static final double kF = 0.32; //PID F
-            public static final int kIZone = 0; //PID IZONE
-            public static final double kPeakOutput = 1.0;
-            public static final double kNeutralDeadband = 0.001; //0.04 default
-            public static final double kCruise = 3500; //MotionMagic Cruise
-            public static final double kAccel = 4400; //MotionMagic Acceleration
-            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-            //Named positions
-            public static final class Positions {
-                public static final double home = 0.0; //postion for home
-                public static final double bottom = 4700.0; //position for bottom scoring
-                public static final double top = 19500.0; //position for top scoring
-            }
-        }
-        public static final class Griddle {
-            public static final boolean kIsDisabled = false;
-            //Controller Setup
-            public static final int kMotorID = ID.Falcon.stove_griddle; //TalonFX Motor Controller ID
-            public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-            public static final int kSensorTicks = 4096;
-            public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final int kAllowedError = 5; //PID Allowed error
-            public static final double kSpeed = 0.65;
-            public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-            //PID Setup
-            public static final double kP = 2.8; //PID P 
-            public static final double kI = 0.0; //PID I
-            public static final double kD = 0.0; //PID D
-            public static final double kF = 0.2; //PID F
-            public static final int kIZone = 0; //PID IZONE
-            public static final double kPeakOutput = 1.0;
-            public static final double kNeutralDeadband = 0.001; //0.04 default
-            public static final double kCruise = 3500; //MotionMagic Cruise
-            public static final double kAccel = 4500; //MotionMagic Acceleration
-            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-        }
-        public static final class GreaseTrap {
-            public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.75; //speed for zeroing operations
-            //Controller Setup
-            public static final int kMotorID = ID.Talon.stove_greasetrap; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-            public static final int kSensorTicks = 4096;
-            public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final int kAllowedError = 5; //PID Allowed error
-            public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-            //PID Setup
-            public static final double kP = 0.5; //PID P 
-            public static final double kI = 0.0; //PID I
-            public static final double kD = 0.0; //PID D
-            public static final double kF = 0.25; //PID F
-            public static final int kIZone = 0; //PID IZONE
-            public static final double kPeakOutput = 1.0;
-            public static final double kNeutralDeadband = 0.001; //0.04 default
-            public static final double kCruise = 4000; //MotionMagic Cruise
-            public static final double kAccel = 5000; //MotionMagic Acceleration
-            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-            //Named positions
-            public static final class Positions {
-                public static final double home = 0.0; //home/stow/starting config
-                public static final double flip = 0.0; //position to goto for flipping pancakes
-                public static final double clear = 800.0; //clear of spatula
-                public static final double level = 4500.0; //level
-                public static final double down = 5000.0; //down
-            }
-        }
-        public static final class HotPlate {
-            public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = 0.75; //speed for zeroing operations
-            //Controller Setup
-            public static final int kMotorID = ID.Talon.stove_hotplate; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = false; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-            public static final int kSensorTicks = 4096;
-            public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final int kAllowedError = 5; //PID Allowed error
-            public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-            //PID Setup
-            public static final double kP = 0.5; //PID P 
-            public static final double kI = 0.0; //PID I
-            public static final double kD = 0.0; //PID D
-            public static final double kF = 0.25; //PID F
-            public static final int kIZone = 0; //PID IZONE
-            public static final double kPeakOutput = 1.0;
-            public static final double kNeutralDeadband = 0.001; //0.04 default
-            public static final double kCruise = 4000; //MotionMagic Cruise
-            public static final double kAccel = 5000; //MotionMagic Acceleration
-            public static final int kSCurve = 0; //MotionMagic SCurve Smoothing [0=none - 8=strong]
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-            //Named positions
-            public static final class Positions {
-                public static final double home = 0.0; //home position
-                public static final double clear = 800.0; //clear of spatula
-                public static final double level = 4500.0; //level position
-                public static final double down = 5400.0; //down position
-            }
-        }
-    }
-
-    /**
-     * Constants for the Spatula Modules
-     */
-    public static final class Spatula {
-        public static final double default_kZeroSpeed = 0.4; //speed for zeroing operations
-        public static final double default_kP = 0.21; //PID P
-        public static final double default_kI = 0.0; //PID I
-        public static final double default_kD = 0.0; //PID D
-        public static final double default_kF = 0.2; //PID F
-        public static final int default_kIZone = 0; //PID IZone
-        public static final int default_positionAllowedError = 5; //PID Allowed Error
-        public static final double default_kPeakOutput = 1.0; //Peak Controller Output
-        public static final double default_kNeutralDeadband = 0.001; //Neutral Deadband
-        public static final double default_kCruise = 6500; //Cruise Speed for Motion Magic
-        public static final double default_kAccel = 5500; //Accel for Motion Magic
-        public static final int default_kSCurve = 0; //MotionMagic SCurve
-        // current limits
-        // current limiting //TODO: Needs tuning, this was borrowed from Team364 example
-        // See {@link https://github.com/Team364/BaseFalconSwerve/blob/main/src/main/java/frc/robot/CTREConfigs.java}
-        public static final boolean isCurrentLimitEnabled = true;
-        public static final double kCurrentLimitAmps = 1.75;
-        public static final double kCurrentThresholdAmps = 18;
-        public static final double kCurrentThresholdSecs = 1.5;
-
-        public static final class Left {
-            public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = default_kZeroSpeed;
-            //Controller Setup
-            public static final int kMotorID = ID.Talon.spatula_left; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-            public static final int kSensorTicks = 4096;
-            public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = true; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final int kAllowedError = 5; //PID Allowed error
-            public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-            //PID Setup
-            public static final double kP = 0.60; //PID P 
-            public static final double kI = Spatula.default_kI; //PID I
-            public static final double kD = Spatula.default_kD; //PID D
-            public static final double kF = Spatula.default_kF; // 0.35; //Spatula.default_kF; //PID F
-            public static final int kIZone = 0; //PID IZONE
-            public static final double kPeakOutput = Spatula.default_kPeakOutput;
-            public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
-            public static final double kAccel  = Spatula.default_kAccel; //MotionMagic Acceleration
-            public static final int kSCurve = Spatula.default_kSCurve; //MotionMagic SCurve
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-            //Named positions
-            public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
-                66500.0,
-                66500.0,
-                65500.0,
-                0.0,
-                2000.0,
-                66700.0,
-                38500.0,
-                34000.0,
-                51300.0
-            );
-/*  SAVE for later reference on how to store additional data here
-//https://www.baeldung.com/java-enum-values
-            public static enum Pos {
-                HOME(0.0),
-                GRIDDLE(512.0),
-                CLEAR(768.0),
-                FLOOR(1024.0);
-                public final double position;
-                private Pos(double position) {
-                    this.position = position;
-                }
-                public double getPosition() { return this.position;}
-            }
-*/
-        }
-        public static final class Right {
-            public static final boolean isDisabled = false;
-            public static final double kZeroSpeed = default_kZeroSpeed;
-            //Controller Setup
-            public static final int kMotorID = ID.Talon.spatula_right; //TalonSRX Motor Controller ID
-            public static final boolean kSensorPhase = true; //When forward/reverse of controller doesn't match forward/reverse of sensor, set to true
-            public static final int kSensorTicks = 4096;
-            public static final boolean kSensorNotContinuous = false;
-            public static final boolean kIsInverted = false; //Once sensor phase is correct, we can invert these so fwd always is green, reverse is always is red
-            public static final int kAllowedError = 5; //PID Allowed error
-            public static final TalonConstants constants = new TalonConstants(kMotorID, kSensorPhase, kSensorTicks, kSensorNotContinuous, kIsInverted, kAllowedError);
-            //PID Setup
-            public static final double kP = 0.50; //PID P 
-            public static final double kI = Spatula.default_kI; //PID I
-            public static final double kD = Spatula.default_kD; //PID D
-            public static final double kF = 0.35; //PID F
-            public static final int kIZone = 0; //PID IZONE
-            public static final double kPeakOutput = Spatula.default_kPeakOutput;
-            public static final double kNeutralDeadband = Spatula.default_kNeutralDeadband; //0.04 default
-            public static final double kCruise = Spatula.default_kCruise; //MotionMagic Cruise
-            public static final double kAccel = Spatula.default_kAccel; //MotionMagic Acceleration
-            public static final int kSCurve = Spatula.default_kSCurve; //MotionMagic SCurve
-            public static final PIDGains gains = new PIDGains(kP,kI,kD,kF,kIZone,kPeakOutput,kNeutralDeadband,kCruise,kAccel,kSCurve);
-            //Named positions
-            public static final SpatulaNamedPositions positions = new SpatulaNamedPositions(
-                66500.0,
-                66500.0,
-                65500.0,
-                0.0,
-                2000.0,
-                66700.0,
-                37750,
-                34000,
-                50300
-            );
         }
     }
 
@@ -422,7 +143,6 @@ public class Constants {
 
         //Forward Positive, Left Positive, Up Positive (NWU Convention)
         public static final SwerveDriveKinematics kDriveKinematics =
-        //TODO 2023: Is the left and right incorrect? should by ++,+-,-+,-- (FL,FR,RL,RR)
         new SwerveDriveKinematics(
             new Translation2d(Units.inchesToMeters(Global.ROBOT_LENGTH / 2), Units.inchesToMeters(-Global.ROBOT_WIDTH / 2)),
             new Translation2d(Units.inchesToMeters(Global.ROBOT_LENGTH / 2), Units.inchesToMeters(Global.ROBOT_WIDTH / 2)),
@@ -543,9 +263,7 @@ public class Constants {
     }
     
     public static final class Vision {
-        public static final boolean isDisabled = false;
-        public static final boolean stateLightOn = true;
-        public static final int id_RingLight = ID.Relay.ringlight; //Relay ID of Ringlight SS Relay
+        public static final boolean isDisabled = true;
         public static final double kErrorCorrection_P = 0.65; //Proportional value for multiplying vision angle correction
         public static final double kTurnP = 0.17;
         public static final double kTurnD = 0.0;
@@ -614,7 +332,9 @@ public class Constants {
         /**
          * This class defines the hardware button and axis IDs for a Stadia Controller.
          * The buttons array is 1-based, but the axis array is 0-based
+         * @deprecated since WPILib 2024.1.1-beta5, use {@link StadiaController} class instead
          */
+        @Deprecated(since = "WPILib 2024.1.1-beta5")
         public static final class Stadia {
             //DO NOT EDIT THESE
             static final int BTN_A = 1; //A Button

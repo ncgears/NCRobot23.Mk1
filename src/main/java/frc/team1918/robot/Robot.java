@@ -21,8 +21,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.team1918.lib.statefactory.state.StateMachine;
-import frc.team1918.lib.statefactory.state.StateMachineBuilder;
-import frc.team1918.robot.Helpers.Debug;
 
 // import frc.team1918.robot.subsystems.ClimberSubsystem;
 // import frc.team1918.robot.subsystems.CollectorSubsystem;
@@ -74,29 +72,6 @@ public class Robot extends TimedRobot {
     // PortForwarder.add(1181,"gloworm.local",1181);
     // PortForwarder.add(1182,"gloworm.local",1182);
 
-    //build a finite state machine
-    fsm = new StateMachineBuilder()
-      .state(States.WAIT)
-      .onEnter( () -> {
-        //do this when entering the state
-      })
-      .loop( () -> {
-        //repeatedly do this
-      })
-      .onExit( () -> {
-        //do this when leaving the state
-      })
-      .transition( () -> (true))
-      .transitionWithPointerState( () -> (false), States.DONE)
-      .state(States.DONE)
-      .onEnter( () -> {
-        //do this when entering the state
-      })
-      .loop( () -> {
-        Debug.debug("FSM Done");
-      })
-      .build();
-
       // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -138,6 +113,7 @@ public class Robot extends TimedRobot {
   /**
    * This autonomous runs the autonomous command selected by your {@link RobotContainer} class.
    */
+  @SuppressWarnings("unused")
   @Override
   public void autonomousInit() {
     m_alliance = DriverStation.getAlliance(); //Put Alliance.Red or Alliance.Blue in Robot.m_alliance
@@ -149,9 +125,6 @@ public class Robot extends TimedRobot {
 
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
     if (m_autonomousCommand != null && !Constants.Auton.isDisabled) m_autonomousCommand.schedule();
-
-    //start the fsm
-    fsm.start();
   }
 
   /**
@@ -159,8 +132,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
-    //update the fsm
-    fsm.update();
   }
 
   @Override

@@ -39,7 +39,7 @@ public class VisionSubsystem extends SubsystemBase {
   boolean angleLocked = false;
   double totalPixel =500;
   double FOV = 60;
-  Relay m_ringlight = new Relay(Constants.Vision.id_RingLight);
+  // Relay m_ringlight = new Relay(Constants.Vision.id_RingLight);
   PhotonCamera m_camera = new PhotonCamera("OV5647");
   double photonLatency = 0.0;
   double m_pitch = -100.0;
@@ -89,7 +89,7 @@ public class VisionSubsystem extends SubsystemBase {
   }
 
   public void updateDashboard() {
-    Dashboard.Vision.setVisionRinglight(m_ringlight.get()==Value.kReverse);
+    // Dashboard.Vision.setVisionRinglight(m_ringlight.get()==Value.kReverse);
   }
 
   public void lockAngle() {
@@ -128,7 +128,7 @@ public class VisionSubsystem extends SubsystemBase {
    * @param enabled - true to turn on light, false to turn it off
    */
   public void setRinglight(boolean enabled) {
-    m_ringlight.set((enabled) ? Value.kReverse : Value.kOff);
+    // m_ringlight.set((enabled) ? Value.kReverse : Value.kOff);
     // m_camera.setLED((enabled) ? VisionLEDMode.kOn : VisionLEDMode.kOff);
   }
 

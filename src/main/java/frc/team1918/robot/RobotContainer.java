@@ -34,24 +34,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 //Subsystems imports
 import frc.team1918.robot.subsystems.DriveSubsystem;
-import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem;
-import frc.team1918.robot.subsystems.StoveSubsystem;
 import frc.team1918.robot.subsystems.VisionSubsystem;
-import frc.team1918.robot.subsystems.FiveSecondRuleSubsystem.spatulas;
 //Commands imports
 // import frc.team1918.robot.commands.helpers.helpers_debugMessage;
-import frc.team1918.robot.commands.fivesecondrule.*;
 import frc.team1918.robot.commands.drive.*;
-import frc.team1918.robot.commands.stove.*;
 import frc.team1918.robot.commands.vision.*;
-import frc.team1918.robot.modules.Burner.BurnerPositions;
-import frc.team1918.robot.modules.GreaseTrap.GreaseTrapPositions;
-import frc.team1918.robot.modules.Griddle.GriddleDirections;
-import frc.team1918.robot.modules.HotPlate.HotPlatePositions;
-import frc.team1918.robot.modules.Spatula.SpatulaPositions;
 //CommandGroup imports
 import frc.team1918.robot.commandgroups.*;
-import frc.team1918.robot.commandgroups.autoncommands.cg_AutoBalance;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -64,8 +53,6 @@ public class RobotContainer {
   //subsystems definitions
     //private final PowerDistribution m_pdp = new PowerDistribution();
     // private final Compressor m_air = new Compressor(PneumaticsModuleType.CTREPCM);
-    private final FiveSecondRuleSubsystem m_fsr = new FiveSecondRuleSubsystem();
-    private final StoveSubsystem m_stove = new StoveSubsystem();
     private final DriveSubsystem m_drive = new DriveSubsystem();
     private final VisionSubsystem m_vision = new VisionSubsystem();
     private SendableChooser<Command> m_auto_chooser = new SendableChooser<>();
@@ -117,135 +104,24 @@ public class RobotContainer {
     //Driver Controller
       private Joystick dj = new Joystick(Constants.OI.OI_JOY_DRIVER);
 
-      private JoystickButton btn_AutoBalance = new JoystickButton(dj, Constants.OI.Stadia.BTN_X);
-
       private JoystickButton btn_ResetGyro = new JoystickButton(dj, Constants.OI.Stadia.BTN_HAMBURGER);
-      private JoystickButton btn_MoveTowardHome = new JoystickButton(dj, Constants.OI.Stadia.BTN_GOOGLE);
-      private JoystickButton btn_ResetRobot = new JoystickButton(dj, Constants.OI.Stadia.BTN_FRAME);
       private JoystickButton btn_DefLock = new JoystickButton(dj, Constants.OI.Stadia.BTN_RT);
-
-      private JoystickButton btn_RSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_LB);
-      private JoystickButton btn_LSpatBump = new JoystickButton(dj, Constants.OI.Stadia.BTN_RB);
-      private JoystickButton btn_LED = new JoystickButton(dj, Constants.OI.Stadia.BTN_ELLIPSES);
-      
-      //OrPOVButtons are a custom button type to bind 3 DPAD directions to a single command. See utils/OrPOVButton
-      // private OrPOVButton orbtn_THROTUP = new OrPOVButton(btn_THROTUP_UP, btn_THROTUP_UL, btn_THROTUP_UR);
-      // private OrPOVButton orbtn_THROTDN = new OrPOVButton(btn_THROTDN_DN, btn_THROTDN_DL, btn_THROTDN_DR);
-
 
     //Operator Controller
       private Joystick oj = new Joystick(Constants.OI.OI_JOY_OPER);
-      private POVButton btn_GreaseTrapHome = new POVButton(oj, Constants.OI.Stadia.DPAD_UP);
-      private POVButton btn_GreaseTrapLevel = new POVButton(oj, Constants.OI.Stadia.DPAD_LEFT);
-      private POVButton btn_GreaseTrapDown = new POVButton(oj, Constants.OI.Stadia.DPAD_DN);
-      private POVButton btn_GreaseTrapFlip = new POVButton(oj, Constants.OI.Stadia.DPAD_RIGHT);
 
-      private JoystickButton btn_HotPlateHome = new JoystickButton(oj, Constants.OI.Stadia.BTN_Y);
-      private JoystickButton btn_HotPlateLevel = new JoystickButton(oj, Constants.OI.Stadia.BTN_X);
-
-      private JoystickButton btn_GriddleForward = new JoystickButton(oj, Constants.OI.Stadia.BTN_A);
-
-      private JoystickButton btn_RSpatUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_LB);
-      private JoystickButton btn_RSpatDown = new JoystickButton(oj, Constants.OI.Stadia.BTN_LT);
-      private JoystickButton btn_RspatMidUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_L);
-      private JoystickButton btn_LSpatUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_RB);
-      private JoystickButton btn_LSpatDown = new JoystickButton(oj, Constants.OI.Stadia.BTN_RT);
-      private JoystickButton btn_LSpatMidUp = new JoystickButton(oj, Constants.OI.Stadia.BTN_R);
-
-      private JoystickButton btn_BurnerHot = new JoystickButton(oj, Constants.OI.Stadia.BTN_ELLIPSES);
-      private JoystickButton btn_BurnerCold = new JoystickButton(oj, Constants.OI.Stadia.BTN_GOOGLE);
-      private JoystickButton btn_BurnerHome = new JoystickButton (oj, Constants.OI.Stadia.BTN_STADIA);
-
-      private JoystickButton btn_ZeroGriddleParts = new JoystickButton(oj, Constants.OI.Stadia.BTN_FRAME);
-      // private JoystickButton btn_ZeroAimer = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
-      private JoystickButton btn_ZeroBurner = new JoystickButton(oj, Constants.OI.Stadia.BTN_B);
-      // private JoystickButton btn_Community = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
-      private JoystickButton btn_ConvectionFan = new JoystickButton(oj, Constants.OI.Stadia.BTN_HAMBURGER);
-
-      private Trigger t_MoveAimer = new Trigger(() -> Math.abs(oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))>0.5);
-
-    //Special Bindings (AndButtons)
-      // private JoystickButton btn_MECHZERO_KEY1 = new JoystickButton(dj, Constants.OI.Operator.BTN_MECHZERO);
-      // private JoystickButton btn_MECHZERO_KEY2 = new JoystickButton(oj, Constants.OI.Operator.BTN_MECHZERO);
-      // private AndButton andbtn_MECHZERO = new AndButton(btn_MECHZERO_KEY1,btn_MECHZERO_KEY2); //AndButton requires both to be true
-
-  // public static void setAirDisabled(boolean disabled) {
-  //   if(disabled) { m_air.disable(); } else { m_air.enabled(); }
-  // }
-    
   private void configureButtonBindings() {
     //The buttons here are named based on their functional purpose. This abstracts the purpose from which controller it is attached to.
-    //New for 2023: 
     //onTrue (replaces whenPressed and whenActive): schedule on rising edge
     //onFalse (replaces whenReleased and whenInactive): schedule on falling edge
     //whileTrue (replaces whileActiveOnce): schedule on rising edge, cancel on falling edge
     //toggleOnTrue (replaces toggleWhenActive): on rising edge, schedule if unscheduled and cancel if scheduled
-
-    //Griddle
-    btn_GriddleForward.onTrue(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.FORWARD)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
-
-    //GreaseTrap
-    btn_GreaseTrapDown.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.DOWN));
-    // btn_GreaseTrapLevel.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
-    btn_GreaseTrapHome.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.HOME));
-    btn_GreaseTrapLevel.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP));
-    btn_GreaseTrapFlip.onTrue(new cg_autoGreaseTrapFlip(m_stove)).onFalse(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.FLIP).andThen(new stove_setGriddleDirectionTo(m_stove, GriddleDirections.STOP)));
-    // btn_DGreaseTrapLevel.onTrue(new stove_moveGreaseTrapTo(m_stove, GreaseTrapPositions.LEVEL));
-    
-    //HotPlate
-    // btn_HotPlateDown.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN));
-    btn_HotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.DOWN)).onFalse(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
-    btn_HotPlateHome.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME));
-    // btn_DHotPlateLevel.onTrue(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL));
-
-    //Spatula
-    btn_RSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.RIGHT));
-    btn_RSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
-    // btn_RSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.GRIDDLE));
-    // btn_RSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
-    btn_RspatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.RIGHT, SpatulaPositions.MIDUP));
-    btn_RSpatBump.whileTrue(new fsr_bumpSpatula(m_fsr, spatulas.RIGHT));
-    btn_LSpatUp.onTrue(new cg_spatulaFloorToGriddle(m_stove, m_fsr, spatulas.LEFT));
-    // btn_LSpatUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.GRIDDLE));
-    btn_LSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
-    // btn_LSpatDown.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.FLOOR));
-    btn_LSpatMidUp.onTrue(new fsr_moveSpatulaTo(m_fsr, m_stove, spatulas.LEFT, SpatulaPositions.MIDUP));
-    btn_LSpatBump.whileTrue(new fsr_bumpSpatula(m_fsr, spatulas.LEFT));
-    
-    // btn_DRSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.RIGHT));
-    // btn_DLSpatDown.onTrue(new cg_spatulaGriddleToFloor(m_stove, m_fsr, spatulas.LEFT));
-
-    //Burner
-    btn_BurnerHot.onTrue(new drive_setCommunity(m_drive, m_stove, m_fsr, true).andThen(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL))));
-    btn_BurnerCold.onTrue(new drive_setCommunity(m_drive, m_stove, m_fsr, true).andThen(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.LEVEL))));
-    btn_BurnerHome.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOME).alongWith(new stove_moveHotPlateTo(m_stove, HotPlatePositions.HOME)));
-    // btn_DBurnerHot.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.HOT));
-    // btn_DBurnerCold.onTrue(new stove_moveBurnerTo(m_stove, m_fsr, BurnerPositions.COLD));
-    
-    btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
-    // btn_AutoBalance.whileTrue(new cg_AutoBalance(m_drive));
 
     //Drive Buttons
     btn_DefLock.whileTrue(new drive_defLock(m_drive));
 
     //Maintenance buttons
     btn_ResetGyro.onTrue(new drive_resetGyro(m_drive).andThen(new drive_resetOdometry(m_drive, new Pose2d(new Translation2d(0, 0), Rotation2d.fromDegrees(-180.0)))));
-    btn_MoveTowardHome.whileTrue(new cg_zeroMovingParts(m_stove, m_fsr)); 
-    btn_ResetRobot.onTrue(new cg_resetRobot(m_stove, m_fsr, m_vision));
-    btn_ZeroGriddleParts.whileTrue(new cg_zeroGriddleParts(m_stove));
-    btn_LED.onTrue(new vision_setRinglight(m_vision, Constants.Vision.stateLightOn)).onFalse(new vision_setRinglight(m_vision, !Constants.Vision.stateLightOn));
-    // btn_Community.onTrue(new drive_toggleCommunity(m_drive, m_stove, m_fsr));
-    btn_ConvectionFan.onTrue(new stove_setConvectionFan(m_stove, true)).onFalse(new stove_setConvectionFan(m_stove, false));
-    // btn_ZeroAimer.onTrue(new stove_zeroAimer(m_stove));
-    btn_ZeroBurner.whileTrue(new stove_zeroBurner(m_stove));
-
-    t_MoveAimer.onTrue(new stove_moveAimer(m_stove, () -> oj.getRawAxis(Constants.OI.Operator.AXIS_AIMER))).onFalse(new stove_moveAimer(m_stove, () -> 0.0));
-
-    //bind all 3 up and all 3 down for shooter throttle up/down
-    // orbtn_THROTUP.onTrue(new shooter_increaseThrottle(m_shooter));
-    // orbtn_THROTDN.onTrue(new shooter_decreaseThrottle(m_shooter));
-    //bind both buttons requirement
-    // andbtn_MECHZERO.onTrue(new drive_moveAllToMechZero(m_drive));
   }
 
 
@@ -258,16 +134,6 @@ public class RobotContainer {
     return m_auto_chooser.getSelected();
   }
 
-  public static Boolean getAutonCone() {
-    System.out.println("Shuffle: Selected auton game piece is "+m_auto_cone.getSelected());
-    return (m_auto_cone.getSelected()=="Waffle") ? true : false;
-  }
-
-  public static Boolean getAutonBurnerHot() {
-    System.out.println("Shuffle: Selected burner position is "+m_auto_burner.getSelected());
-    return (m_auto_burner.getSelected()=="Cold") ? false : true;
-  }
-
   /**
    * This function returns the robot commands used in Robot.java. The purpose is to make it easier to build the possible commands
    * and handle requests for commands that don't exist rather than crashing
@@ -276,8 +142,6 @@ public class RobotContainer {
   public Command getRobotCommand(String name) {
     //This selects a command (or command group) to return
     switch (name) {
-      case "resetRobot":
-        return new cg_resetRobot(m_stove, m_fsr, m_vision);
       case "rumbleNotify":
         return new cg_djRumble();
       default:
@@ -315,30 +179,12 @@ public class RobotContainer {
   }
 
   public void buildAutonChooser() {
-    //This builds the cone/cube selector
-    m_auto_cone.setDefaultOption("Pancake","Pancake");
-    m_auto_cone.addOption("Waffle","Waffle");
-
-    //This builds the high/mid selector
-    m_auto_burner.setDefaultOption("Hot","Hot");
-    m_auto_burner.addOption("Cold","Cold");
-
     //This builds the auton chooser, giving driver friendly names to the commands from above
     if(Constants.Auton.isDisabled) {
       m_auto_chooser.setDefaultOption("Auton Disabled", getRobotCommand("auton_disabled"));
     } else {
-      m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_stove, m_fsr, m_vision));
-      // m_auto_chooser.addOption("[Test] Get Cone Selector Value", new cg_reportCone());
-      m_auto_chooser.addOption("Score and Wait", new cg_autonScoreOnly(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("Score, Drive Fwd, Side of CS", new cg_autonScoreDriveForwardSide(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("Score, Drive Fwd, Bal", new cg_autonScoreDriveFowardBalance(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("Score, Drive Fwd, 2Pt, Bal", new cg_autonScoreDriveFowardExitBalance(m_drive, m_stove, m_fsr, m_vision));
-
-      //Testing Autons
-      m_auto_chooser.addOption("[Test] RedOverBump", new cg_autonRedOverBump(m_drive, m_stove, m_fsr, m_vision));
-      m_auto_chooser.addOption("[Test] BlueOverBump", new cg_autonBlueOverBump(m_drive, m_stove, m_fsr, m_vision));
+      m_auto_chooser.setDefaultOption("Do Nothing", new cg_autonDoNothing(m_drive, m_vision));
     }
-    //SmartDashboard.putData(m_auto_chooser); //put in the smartdash
   }
 
   private void buildDriverTab(){
@@ -357,30 +203,11 @@ public class RobotContainer {
         .withSize(2, 1)
         .withWidget(BuiltInWidgets.kComboBoxChooser);
 
-    // Cone Indicator
-    driveTab.add("Auton Part Type", m_auto_cone)
-        .withPosition(0, 1)
-        .withSize(2, 1)
-        .withWidget(BuiltInWidgets.kSplitButtonChooser);
-
-    // Cone Indicator
-    driveTab.add("Auton Burner Temp", m_auto_burner)
-    .withPosition(0, 2)
-    .withSize(2, 1)
-    .withWidget(BuiltInWidgets.kSplitButtonChooser);
-
     // Gyro
     driveTab.add("Gyro", m_drive.getGyro())
         .withPosition(7, 0)
         .withSize(2,2)
         .withWidget(BuiltInWidgets.kGyro);
-
-    // PhotonCamera
-    driveTab.add("Griddle Cam", Robot.camera)
-        .withPosition(2,0)
-        .withSize(5,4)
-        .withProperties(Map.of("Glyph","CAMERA_RETRO","Show Glyph",true,"Show crosshair",true,"Crosshair color","#CCCCCC","Show controls",false))
-        .withWidget(BuiltInWidgets.kCameraStream);
 
     // // PhotonCamera
     // driveTab.add("Photon Cam", new HttpCamera("photonvision_Port_1182_MJPEG_Server", "http://10.19.18.11:1182/stream.mjpg"))
@@ -434,30 +261,12 @@ public class RobotContainer {
 
   private void buildMaintenanceTab(){
     ShuffleboardTab maintTab = Shuffleboard.getTab("Maintenance");
-    maintTab.add("Reset Robot", new cg_resetRobot(m_stove, m_fsr, m_vision))
-        .withPosition(0, 0)
-        .withSize(1, 1);
-    maintTab.add("Zero Robot", new cg_zeroMovingParts(m_stove, m_fsr))
-        .withPosition(1, 0)
-        .withSize(1, 1);
-    maintTab.add("Spat Left Speed", 0)
-        .withPosition(0, 1)
-        .withSize(1,1);
-    maintTab.add("Spat Right Speed",0)
-        .withPosition(1,1)
-        .withSize(1,1);
-    maintTab.add("Burner Speed",0)
-        .withPosition(2,1)
-        .withSize(1,1);
-    maintTab.add("HotPlate Speed",0)
-        .withPosition(3,1)
-        .withSize(1,1);
-    maintTab.add("GreaseTrap Speed",0)
-        .withPosition(4,1)
-        .withSize(1,1);
-    maintTab.add("Griddle Speed",0)
-        .withPosition(5,1)
-        .withSize(1,1);
+    // maintTab.add("Reset Robot", new cg_resetRobot(m_stove, m_fsr, m_vision))
+    //     .withPosition(0, 0)
+    //     .withSize(1, 1);
+    // maintTab.add("Zero Robot", new cg_zeroMovingParts(m_stove, m_fsr))
+    //     .withPosition(1, 0)
+    //     .withSize(1, 1);
 }
 
   public void buildDriverTestTab(){
